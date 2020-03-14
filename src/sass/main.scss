@@ -1,0 +1,36 @@
+@import "./welcome.scss";
+@import "./signin.scss";
+@import "./explanations.scss";
+@import "./solution.scss";
+@import "./animation.scss";
+
+// body {
+//   margin: auto;
+//   max-width: 800px;
+// }
+
+// h1, h2, h3, h4, h5, h6 {
+//   margin: 0;
+// }
+
+.username {
+  display: inline;
+  font-weight: bold;
+}
+
+.p {
+  margin: 0;
+  padding: 10px 0;
+  line-height: 145%;
+}
+
+.infinity {
+  font: normal bolder 110% 'Georgia' 'Times New Roman';
+}
+
+.row {
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+  padding: 0 1em;
+}

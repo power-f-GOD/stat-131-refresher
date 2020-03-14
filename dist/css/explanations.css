@@ -1,0 +1,238 @@
+* {
+  border: 1px solid yellow;
+  border: none;
+}
+
+#formulae-container,
+#further-discussion {
+  font: normal 115% 'Trebuchet MS', 'Times New Roman';
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  padding-bottom: 120px;
+  position: absolute;
+  background: black;
+  line-height: 145%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+}
+
+#mean,
+#median,
+#mode {
+  width: 100%;
+}
+
+.quick-links {
+  background: rgba(70, 70, 70, 0.7);
+}
+
+.quick-links a {
+  color: tomato;
+}
+
+.quick-links a:hover {
+  text-decoration: underline;
+}
+
+.formula-wrapper {
+  width: 100%;
+  height: 130px;
+  overflow-x: auto;
+  margin: 25px 0 15px 0;
+  text-align: center;
+  background: skyblue;
+  color: black;
+  border-radius: 5px;
+  font-size: 125%;
+  font-style: italic;
+  padding: auto;
+  font-family: 'Times New Roman';
+}
+
+.formula-wrapper-first-child {
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+.formula-wrapper-second-child {
+  width: 100%;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+
+.white-bg {
+  background: rgba(70, 70, 70, 0.7);
+  color: lightgrey;
+}
+
+#mean,
+#quartiles {
+  line-height: 145%;
+}
+
+.median {
+  background: orange;
+}
+
+.mode {
+  background: springgreen;
+}
+
+.div1,
+.div2,
+.div3 {
+  display: inline-table;
+  vertical-align: middle;
+}
+
+span {
+  display: inline-block;
+}
+
+.padded {
+  padding: 5px 0;
+  width: 100%;
+  line-height: 180%;
+  font-family: 'Trebuchet MS';
+}
+
+a {
+  text-decoration: none;
+  color: #3e62ff;
+}
+
+.align-vertical {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.div2-childDiv {
+  display: table;
+  vertical-align: middle;
+}
+
+.brace-open,
+.brace-close {
+  font-size: 330%;
+  font-style: normal;
+  font-weight: lighter;
+  font-family: 'Arial Narrow';
+  display: inline-table;
+  padding: 0 1px;
+  height: 100%;
+  margin-bottom: 8%;
+  line-height: 120%;
+  float: left;
+}
+
+.fraction-wrapper {
+  display: inline-table;
+  float: left;
+  vertical-align: middle;
+  padding-top: 7%;
+}
+
+#mean .fraction-wrapper,
+#quartiles .fraction-wrapper {
+  padding-top: 14%;
+}
+
+.numerator,
+.denominator {
+  display: block;
+  padding: 5px 2px 0px 2px;
+  text-align: center;
+}
+
+.numerator {
+  border-bottom: 1px solid black;
+}
+
+.denominator {
+  padding-top: 2px;
+}
+
+.formula-explanation {
+  font-style: normal;
+  font-size: 110%;
+  margin-bottom: 20px;
+}
+
+.variable-names {
+  font-style: normal;
+  display: block;
+  padding: 8px 0;
+  background: #cd4c4c;
+  color: white;
+  border-radius: 3px 3px 0 0;
+  font-family: 'Times New Roman';
+}
+
+.variable-definitions {
+  display: block;
+  width: 100%;
+  text-align: justify;
+  font-style: italic;
+  background: lightpink;
+  color: #111;
+  line-height: 2rem;
+  font-size: 1.15rem;
+}
+
+.variable-definitions .row:first-child {
+  padding-top: 1em;
+  padding-left: 3.5em;
+  padding-bottom: 2.5em;
+  font-family: 'Trebuchet MS' !important;
+}
+
+.variable-definitions .variable-U {
+  font-family: 'Trebuchet MS';
+  background: none;
+  color: black;
+  font-size: 105%;
+}
+
+.variable-definitions .variable-U .numerator {
+  border-bottom-color: black;
+}
+
+.variable-U {
+  display: table;
+  font-style: italic;
+  width: 100%;
+}
+
+.variable-U > .div1 {
+  display: table-cell;
+  float: none;
+  vertical-align: middle;
+  width: 50px;
+}
+
+.variable-U .fraction-wrapper {
+  padding: 0 5px;
+}
+
+.variable-U .numerator {
+  border-bottom-color: white;
+}
+/*# sourceMappingURL=explanations.css.map */

@@ -1,0 +1,134 @@
+#sign-in-page {
+  overflow-y: auto;
+  background: black;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  padding: 3rem 1rem;
+  top: 0;
+  left: 0;
+}
+
+#input-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5rem 0;
+  width: 100%;
+}
+
+#username {
+  width: 75%;
+  max-width: 300px;
+  height: 3rem;
+  margin: 10px;
+  padding: 10px 12px;
+  border: none;
+  background: royalblue;
+  color: white;
+  outline: none;
+  font-size: 110%;
+  border-radius: 3px;
+}
+
+#username::-webkit-input-placeholder {
+  color: white;
+}
+
+#username:-ms-input-placeholder {
+  color: white;
+}
+
+#username::-ms-input-placeholder {
+  color: white;
+}
+
+#username::placeholder {
+  color: white;
+}
+
+#username:hover {
+  background-color: #1f54f3;
+  -webkit-box-shadow: 0 0 15px rgba(31, 84, 243, 0.8);
+          box-shadow: 0 0 15px rgba(31, 84, 243, 0.8);
+}
+
+#sign-in,
+#sign-out {
+  width: 40%;
+  max-width: 200px;
+  height: 45px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 30px;
+  border: none;
+  background: tomato;
+  color: white;
+  font-size: 105%;
+}
+
+#sign-in:hover,
+#sign-out:hover {
+  background-color: #ff4d2d;
+  -webkit-box-shadow: 0 0 15px rgba(255, 77, 45, 0.6);
+          box-shadow: 0 0 15px rgba(255, 77, 45, 0.6);
+}
+
+#sign-out-wrapper {
+  text-align: center;
+  margin: 40px 0;
+}
+
+#sign-in-success {
+  font-weight: bold;
+  color: limegreen;
+  padding: 10px 15px;
+  text-align: center;
+  font-style: italic;
+}
+
+#sign-in-page-footer {
+  padding: 2rem;
+  min-height: 200px;
+  width: 100%;
+  text-align: center;
+  background: black;
+}
+
+#sign-in-page-footer span {
+  color: #555;
+  font: normal 85% 'Trebuchet MS';
+  display: block;
+  margin: 5px;
+}
+
+#sign-in-page-footer a {
+  color: #888;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#sign-in-page-footer a:hover {
+  color: #ccc;
+}
+/*# sourceMappingURL=signin.css.map */
