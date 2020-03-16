@@ -6,7 +6,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   position: absolute;
   padding: 3rem 1rem;
@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5rem 0;
+  padding: 4rem 0;
   width: 100%;
 }
 
@@ -32,8 +32,9 @@
   background: royalblue;
   color: white;
   outline: none;
-  font-size: 110%;
+  font-size: 1.1rem;
   border-radius: 3px;
+  transition: background-color 0.3s, box-shadow 0.3s;
 
   &::placeholder {
     color: white;
@@ -48,7 +49,7 @@
 #sign-in,
 #sign-out {
   width: 40%;
-  max-width: 200px;
+  max-width: 10rem;
   height: 45px;
   margin: 10px;
   padding: 10px;
@@ -56,7 +57,7 @@
   border: none;
   background: tomato;
   color: white;
-  font-size: 105%;
+  transition: background-color 0.3s, box-shadow 0.3s;
 
   &:hover {
     background-color: rgb(255, 77, 45);
@@ -79,14 +80,12 @@
 
 #sign-in-page-footer {
   padding: 2rem;
-  min-height: 200px;
   width: 100%;
   text-align: center;
   background: black;
 
   span {
     color: #555;
-    font: normal 85% 'Trebuchet MS';
     display: block;
     margin: 5px;
   }

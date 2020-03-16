@@ -375,16 +375,16 @@
 }
 
 .tableFadeIn {
-  -webkit-animation: tableFadeIn 0.7s forwards ease-in-out;
-  -moz-animation: tableFadeIn 0.7s forwards ease-in-out;
-  -ms-animation: tableFadeIn 0.7s forwards ease-in-out;
-  -o-animation: tableFadeIn 0.7s forwards ease-in-out;
-  animation: tableFadeIn 0.7s forwards ease-in-out;
+  -webkit-animation: tableFadeIn 0.35s forwards ease-in-out;
+  -moz-animation: tableFadeIn 0.35s forwards ease-in-out;
+  -ms-animation: tableFadeIn 0.35s forwards ease-in-out;
+  -o-animation: tableFadeIn 0.35s forwards ease-in-out;
+  animation: tableFadeIn 0.35s forwards ease-in-out;
 }
 
 @-webkit-keyframes tableFadeIn {
   from {
-    -webkit-transform: scale(0);
+    -webkit-transform: scale(0.5);
     opacity: 0;
   }
   to {
@@ -394,7 +394,7 @@
 }
 @-moz-keyframes tableFadeIn {
   from {
-    -moz-transform: scale(0);
+    -moz-transform: scale(0.5);
     opacity: 0;
   }
   to {
@@ -404,7 +404,7 @@
 }
 @-o-keyframes tableFadeIn {
   from {
-    -o-transform: scale(0);
+    -o-transform: scale(0.5);
     opacity: 0;
   }
   to {
@@ -414,7 +414,7 @@
 }
 @keyframes tableFadeIn {
   from {
-    transform: scale(0);
+    transform: scale(0.5);
     opacity: 0;
   }
   to {
@@ -437,7 +437,7 @@
     opacity: 1;
   }
   to {
-    -webkit-transform: scale(0);
+    -webkit-transform: scale(0.5);
     opacity: 0;
   }
 }
@@ -447,7 +447,7 @@
     opacity: 1;
   }
   to {
-    -moz-transform: scale(0);
+    -moz-transform: scale(0.5);
     opacity: 0;
   }
 }
@@ -457,7 +457,7 @@
     opacity: 1;
   }
   to {
-    -o-transform: scale(0);
+    -o-transform: scale(0.5);
     opacity: 0;
   }
 }
@@ -467,7 +467,7 @@
     opacity: 1;
   }
   to {
-    transform: scale(0);
+    transform: scale(0.5);
     opacity: 0;
   }
 }

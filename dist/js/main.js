@@ -273,7 +273,7 @@ this.addEventListener('load', function () {
                 nextButton.className = 'scaleUp';
                 previousButton.className = 'scaleUp';
             }
-            previousButton.style.display = 'inline-block';
+            previousButton.style.display = 'inline-flex';
             pageNumber.textContent = j + 1 + " / " + numOfPages;
             if (j == 0)
                 for (var n = 1; n < fixedTops.length; n++) {

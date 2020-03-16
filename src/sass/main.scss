@@ -13,6 +13,13 @@
 //   margin: 0;
 // }
 
+#welcome-page,
+#formulae-container,
+#question-solutions,
+#further-discussion {
+  line-height: 1.8rem;
+}
+
 .username {
   display: inline;
   font-weight: bold;
@@ -20,16 +27,35 @@
 
 .p {
   margin: 0;
-  padding: 10px 0;
-  line-height: 145%;
+  padding: 1rem 0;
 }
 
 .infinity {
-  font: normal bolder 110% 'Georgia' 'Times New Roman';
+  font: normal bolder 1.1rem 'Cambria', 'Times New Roman';
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 1.5rem;
+}
+
+i {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.slant,
+sup,
+sub {
+  font-family: "Cambria", "Times New Roman";
+}
+
+.unslant {
+  font-style: normal !important;
 }
 
 .row {
-  max-width: 600px;
+  max-width: 41rem;
   width: 100%;
   margin: auto;
   padding: 0 1em;

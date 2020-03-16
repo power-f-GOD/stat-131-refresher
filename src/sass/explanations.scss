@@ -1,25 +1,52 @@
-* {
-  border: 1px solid yellow;
-  border: none;
-}
+
 
 #formulae-container,
 #further-discussion {
-  font: normal 115% 'Trebuchet MS', 'Times New Roman';
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   flex-basis: 100%;
   padding-bottom: 120px;
   position: absolute;
   background: black;
-  line-height: 145%;
+  line-height: 1.5rem;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   overflow: auto;
+}
+
+#further-discussion .align-vertical {
+  display: table-cell;
+  white-space: nowrap;
+}
+
+#further-discussion .div1 {
+  display: inline-table;
+  white-space: nowrap;
+}
+
+#further-discussion .variable-names {
+  background: #207420;
+}
+
+#further-discussion .variable-definitions {
+  background: rgb(170, 205, 170);
+}
+
+#further-discussion .fraction-wrapper {
+  padding-top: 0;
+}
+
+#further-discussion #quartile-range {
+  width: 100%;
+  text-align: center;
+  font-family: "Trebuchet MS";
+  border-radius: 5px;
+  margin: 15px 0;
+  background: rgba(60, 60, 60, 0.5);
 }
 
 #mean,
@@ -30,6 +57,7 @@
 
 .quick-links {
   background: rgba(70, 70, 70, 0.7);
+  padding: 0.5rem 0;
 
   a {
     color: tomato;
@@ -43,7 +71,7 @@
 .formula-wrapper {
   width: 100%;
   height: 130px;
-  overflow-x: auto;
+  // overflow-x: auto;
   margin: 25px 0 15px 0;
   text-align: center;
   background: skyblue;
@@ -52,7 +80,7 @@
   font-size: 125%;
   font-style: italic;
   padding: auto;
-  font-family: 'Times New Roman';
+  font-family: 'Cambria', 'Times New Roman';
 }
 
 .formula-wrapper-first-child {
@@ -67,7 +95,7 @@
   display: table-cell;
   vertical-align: middle;
   white-space: nowrap;
-  padding: 0 10px;
+  // padding: 0 10px;
 }
 
 .white-bg {
@@ -75,10 +103,11 @@
   color: lightgrey;
 }
 
-#mean,
-#quartiles {
-  line-height: 145%;
-}
+// #mean,
+// #quartiles,
+// #deciles {
+//   line-height: 1.5rem;
+// }
 
 .median {
   background: orange;
@@ -102,8 +131,7 @@ span {
 .padded {
   padding: 5px 0;
   width: 100%;
-  line-height: 180%;
-  font-family: 'Trebuchet MS';
+  // line-height: 1.8rem;
 }
 
 a {
@@ -117,21 +145,19 @@ a {
 }
 
 .div2-childDiv {
-  display: table;
-  vertical-align: middle;
+  display: flex;
+  align-items: center;
 }
 
 .brace-open,
 .brace-close {
-  font-size: 330%;
+  font-size: 3.4rem;
   font-style: normal;
   font-weight: lighter;
   font-family: 'Arial Narrow';
   display: inline-table;
   padding: 0 1px;
   height: 100%;
-  margin-bottom: 8%;
-  line-height: 120%;
   float: left;
 }
 
@@ -139,13 +165,14 @@ a {
   display: inline-table;
   float: left;
   vertical-align: middle;
-  padding-top: 7%;
+  // padding-top: 7%;
 }
 
-#mean .fraction-wrapper,
-#quartiles .fraction-wrapper {
-  padding-top: 14%;
-}
+// #mean .fraction-wrapper,
+// #quartiles .fraction-wrapper,
+// #deciles .fraction-wrapper {
+//   padding-top: 14%;
+// }
 
 .numerator,
 .denominator {
@@ -164,7 +191,6 @@ a {
 
 .formula-explanation {
   font-style: normal;
-  font-size: 110%;
   margin-bottom: 20px;
 }
 
@@ -175,7 +201,7 @@ a {
   background: #cd4c4c;
   color: white;
   border-radius: 3px 3px 0 0;
-  font-family: 'Times New Roman';
+  font-family: 'Cambria', 'Times New Roman';
 }
 
 .variable-definitions {
@@ -185,22 +211,19 @@ a {
   font-style: italic;
   background: lightpink;
   color: #111;
-  line-height: 2rem;
-  font-size: 1.15rem;
+  // line-height: 1.5rem;
 
   .row:first-child {
     padding-top: 1em;
     padding-left: 3.5em;
     padding-bottom: 2.5em;
-    font-family: 'Trebuchet MS' !important;
   }
 }
 
 .variable-definitions .variable-U {
-  font-family: 'Trebuchet MS';
   background: none;
   color: black;
-  font-size: 105%;
+  font-size: 1.075rem;
 }
 
 .variable-definitions .variable-U .numerator {

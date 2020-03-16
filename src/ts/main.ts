@@ -279,7 +279,7 @@ this.addEventListener('load', () => {
         previousButton.className = 'scaleUp';
       }
 
-      previousButton.style.display = 'inline-block';
+      previousButton.style.display = 'inline-flex';
 
       //displays current page number
       pageNumber.textContent = `${j + 1} / ${numOfPages}`;

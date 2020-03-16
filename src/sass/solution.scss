@@ -1,87 +1,150 @@
-#question-solutions #container {
-  height: 180px;
-  overflow-y: auto;
-  margin: 20px 0;
-  text-align: center;
-}
+$theme-bg-orange: rgb(255, 74, 42);
 
-#question-solutions input {
-  width: 96%;
-  height: 43px;
-  margin: 5px 2%;
-  padding: 5px 10px;
-  border: 2px solid #333;
-  background: black;
-  color: lightgrey;
-  outline: none;
-  font-size: 75%;
-  font-family: 'Trebuchet MS';
-  border-radius: 4px;
-  -webkit-transition: border 0.35s;
-  -moz-transition: border 0.35s;
-  -ms-transition: border 0.35s;
-  -o-transition: border 0.35s;
-  transition: border 0.35s;
-}
-
-#question-solutions input:hover {
-  border: 2px solid skyblue;
-}
-
-#question-solutions button {
-  width: 40%;
-  height: 40px;
-  background: seagreen;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 85%;
+* {
+  border: 1px solid yellow;
   border: none;
-  margin: 8px 0;
-  border-radius: 35px;
-  box-shadow: 0 4px 0 #005400;
-  font-family: 'Trebuchet MS';
 }
 
-#question-solutions button:hover {
-  box-shadow: 0 2px 0 darkgreen;
-  margin-top: 10px;
-}
-
-#result {
-  margin: 10px 0;
-  overflow-x: auto;
-  padding: 15px 10px;
-  color: deepskyblue;
-  text-align: center;
-  font-size: 90%;
-  font-family: 'Trebuchet MS';
-}
-
-#result2 {
-  padding-top: 25px;
-}
-
-#table-wrapper {
+#question-solutions {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   width: 100%;
   overflow-y: auto;
-  -webkit-transition: opacity 0.8s;
-  -moz-transition: opacity 0.8s;
-  -ms-transition: opacity 0.8s;
-  -o-transition: opacity 0.8s;
-  transition: opacity 0.8s;
+  // line-height: 145%;
+  background: black;
+  padding: 0;
+  padding-bottom: 4rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  #container {
+    // height: 180px;
+    // margin: 20px 0;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    display: block;
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 0.35rem 0.7rem;
+    border: 0.15rem solid #666;
+    background: black;
+    color: lightgrey;
+    outline: none;
+    border-radius: 4px;
+    transition: 0.3s;
+
+    &:hover {
+      color: white;
+      border-color: deepskyblue;
+      box-shadow: 0 0 16px rgba(0, 139, 185, 0.5);
+    }
+
+    &:focus {
+      background-color: rgba(0, 98, 131, 0.5);
+    }
+  }
+
+  button#compute {
+    width: 40%;
+    max-width: 12rem;
+    background: seagreen;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    margin: 0.5rem 0;
+    border-radius: 2rem;
+    box-shadow: 0 0.35rem 0 #005400;
+
+    &:hover {
+      background: rgb(35, 116, 70);
+    }
+
+    &:focus {
+      box-shadow: 0 0.2rem 0 darkgreen;
+      margin-top: 0.7rem;
+      margin-bottom: 0.3rem;
+    }
+  }
+
+  #result {
+    margin: 2rem 0;
+    color: deepskyblue;
+    text-align: center;
+  }
+
+  #result2 {
+    padding-top: 25px;
+  }
+
+  #table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-transition: opacity 0.8s;
+    -moz-transition: opacity 0.8s;
+    -ms-transition: opacity 0.8s;
+    -o-transition: opacity 0.8s;
+    transition: opacity 0.8s;
+  }
+
+  table {
+    width: 100%;
+    border: 2px solid #333;
+    border-collapse: collapse;
+    text-align: left;
+    background: rgba(60, 60, 60, 0.6);
+    color: white;
+    font-family: 'Cambria', 'Times New Roman';
+  }
+
+  tfoot {
+    font-weight: bold;
+    padding: 5px 0;
+    text-align: left;
+  }
+
+  p {
+    margin: 8px 0;
+  }
+
+  td,
+  th {
+    border-collapse: collapse;
+    border: 2px solid #333;
+    padding: 5px 11px;
+
+    p {
+      text-align: center;
+    }
+  }
+
+
+
+  .brace-open,
+  .brace-close {
+    font-size: 3.25rem;
+    // margin-bottom: 10%;
+  }
+
+  // .fraction-wrapper {
+  //   padding-top: 4%;
+  // }
+
+  // #mean-solution .fraction-wrapper {
+  //   padding-top: 9%;
+  // }
 }
 
-#question-solutions table {
-  width: 100%;
-  margin: 0 0 5px 0;
-  border: 2px solid #333;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 110%;
-  background: rgba(60, 60, 60, 0.6);
-  color: white;
-  font-family: 'Times New Roman', 'Georgia';
+.formula-wrapper {
+  overflow-x: auto;
+  padding: 1rem;
+  font-size: 1.2rem !important;
+  line-height: 100% !important;
 }
 
 th {
@@ -103,65 +166,15 @@ tfoot {
   white-space: nowrap;
 }
 
-#question-solutions tfoot {
-  font-weight: bold;
-  padding: 5px 0;
-  text-align: left;
-}
-
-#question-solutions p {
-  margin: 8px 0;
-}
-
-#question-solutions td,
-th {
-  border-collapse: collapse;
-  border: 2px solid #333;
-  padding: 5px 11px;
-}
-
 //explanation of question solutions
-
-#question-solutions {
-  font-size: 125%;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-  line-height: 145%;
-  background: black;
-  padding: 0;
-  padding-bottom: 120px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
 .page-name {
-  font-family: 'Trebuchet MS';
   text-align: center;
-  margin: 45px auto 35px auto;
+  margin: 2.5rem auto;
 }
 
 #solutions-wrapper {
   display: none;
-}
-
-#question-solutions .formula-wrapper {
-  font-size: 120%;
-}
-
-#question-solutions .brace-open,
-#question-solutions .brace-close {
-  font-size: 350%;
-  margin-bottom: 10%;
-}
-
-#question-solutions .fraction-wrapper {
-  padding-top: 4%;
-}
-
-#question-solutions #mean-solution .fraction-wrapper {
-  padding-top: 9%;
+  flex-direction: column;
 }
 
 #mean-solution .variable-definitions {
@@ -179,13 +192,13 @@ th {
 #mean-solution .variable-definitions,
 #median-solution .variable-definitions,
 #mode-solution .variable-definitions {
-  padding-left: 15px;
+  padding: 1rem;
   color: black;
   font-style: normal;
-  font-size: 0.9em;
-  font-family: 'Times New Roman';
+  // font-size: 0.9em;
+  font-family: 'Cambria', 'Times New Roman';
   border-radius: 7px;
-  margin: 30px 0 40px 0;
+  margin: 1rem 0;
 }
 
 #mean-solution .variable-definitions b,
@@ -196,16 +209,16 @@ th {
 
 #mean-solution .formula-wrapper:nth-of-type(1) {
   background: #77bedb;
-  padding-left: 10px;
+  // padding-left: 10px;
 }
 
 #median-solution .formula-wrapper:nth-of-type(1) {
   background: #eda55f;
-  padding-left: 10px;
+  // padding-left: 10px;
 }
 #mode-solution .formula-wrapper:nth-of-type(1) {
   background: #5ebb87;
-  padding-left: 10px;
+  // padding-left: 10px;
 }
 
 #mean-solution .formula-wrapper:nth-of-type(2),
@@ -213,7 +226,7 @@ th {
 #mode-solution .formula-wrapper:nth-of-type(2) {
   background: none;
   margin-top: 0;
-  padding-left: 0;
+  // padding-left: 0;
   text-align: left;
   height: 105px;
   font-style: normal;
@@ -224,7 +237,7 @@ th {
 #mode-solution .formula-wrapper:nth-of-type(3) {
   background: none;
   margin-top: 0;
-  padding-left: 0;
+  // padding-left: 0;
   text-align: left;
   height: 65px;
   font-style: normal;
@@ -235,5 +248,5 @@ th {
 #computed-median,
 #computed-mode {
   font-style: normal;
-  font-size: 130%;
+  font-size: 1.3rem;
 }
