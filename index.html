@@ -1,12 +1,13 @@
 <!doctype html>
 <html>
 
-<head>
+<head lang="en-US">
   <title>STAT 131</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+  <meta  />
+  <meta name="description" content="Author: Power I. Sunday, Desc: A STATS 131 Web App (refresher) for 100 Level Physical Sciences students University of Nigeria Nsukka Nigeria." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preload" as="style" href="dist/css/main.min.css" onload="this.onload=null;this.rel='stylesheet';" />
-  <link rel="preload" as="style" href="./dist/css/welcome.min.css" onload="this.onload=null;this.rel='stylesheet';" />
+  <!-- <link rel="preload" as="style" href="./dist/css/welcome.min.css" onload="this.onload=null;this.rel='stylesheet';" /> -->
   <script src='dist/js/main.js' async></script>
   <!-- sign in page style included here to prevent FOUC (Flash Of Unstyled Content) -->
   <style>
@@ -53,7 +54,7 @@
       padding: 0.625rem;
       border-radius: 2rem;
       border: none;
-      background: tomato;
+      background: rgb(255, 76, 44);
       color: white;
       transition: background-color 0.3s, box-shadow 0.3s;
     }
@@ -102,6 +103,16 @@
       font-family: inherit;
       min-height: 2.8rem;
     }
+
+    input:focus,
+    button:focus {
+      outline: 0.125rem solid rgb(255, 76, 44);
+    }
+
+    label {
+      width: 100%;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -109,7 +120,10 @@
   <!-- Sign in page - START -->
   <div id="sign-in-page" style="display: flex;" class="custom-scroll-bar">
     <div id="input-wrapper" class="row">
-      <input type="text" id="username" placeholder="Enter first name to sign in " /> <br />
+        <label>
+        <input type="text" id="username" placeholder="Enter first name to sign in " />
+      </label>
+      <br /> 
       <button id="sign-in"> Sign in</button>
       <div id="sign-in-success"></div>
     </div>
@@ -118,7 +132,8 @@
       <span>MEASURES OF CENTRAL TENDENCY</span>
       <span>STAT131 Refresher for Upcoming Test</span><br />
       <span>Written &amp; Developed By</span>
-      <span><a href="https://m.facebook.com/power.sunday3?refid=8" target="_blank" id="myName" rel="noreferrer">Sunday Power Inemesit</a>
+      <span><a href="https://m.facebook.com/power.sunday3?refid=8" target="_blank" id="myName" rel="noreferrer">Sunday
+          Power Inemesit</a>
       </span>
       <span>Computer Science Dept. <b>&frac34;</b></span>
       <br />
@@ -595,12 +610,15 @@
     <!-- Input for calculations -->
     <div class="row">
       <div id="container" class="padded">
-        <input id="interval" value="45 50" placeholder="Input limits of only 1st class e.g. 45 50" type="text" />
-        <input id="frequencies" value="3 4 5 6 7 8 9"
+        <label>
+          <input id="interval" value="45 50" placeholder="Input limits of only 1st class e.g. 45 50" type="text" />
+        </label>
+        <label>
+          <input id="frequencies" value="3 4 5 6 7 8 9"
           placeholder="Input respective frequencies of all classes e.g. 3 2 5 6 4..." />
+        </label>
         <button id="compute">Compute</button>
       </div>
-
       <div id="result" class="prevent-swipe">
         In the input boxes above, for the first, input the class limits of
         only the first class. You don't have to input the limits for all the classes. And for the
@@ -1012,7 +1030,7 @@
       <!-- Formula explanation for 'first-quartile' - START -->
       <div class="formula-explanation">
         <div class="p">
-          <div id="Lmed-ref" class="row">Where;</div><br />
+          <div class="row">Where;</div><br />
           <!-- Lower boundary of median class -->
           <div class="variable-names">
             <div class="row">
@@ -1173,7 +1191,7 @@
       <!-- Formula explain for 'decile' - START -->
       <div class="formula-explanation">
         <div class="p">
-          <div id="Lmed-ref" class="row">Where;</div><br />
+          <div class="row">Where;</div><br />
           <!-- Lower boundary of median class -->
           <div class="variable-names">
             <div class="row">
