@@ -1,5 +1,6 @@
 * {
   border: 1px solid yellow;
+  border: none;
 }
 
 #welcome-page {
@@ -27,14 +28,15 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 #intro-text-wrapper #intro-text {
   text-align: center;
   width: 94%;
   color: #969696;
-  border: 5px solid rgba(170, 170, 170, 0.5);
-  padding: 20px 20px;
+  border: 0.25rem solid rgba(170, 170, 170, 0.5);
+  padding: 1.25rem;
 }
 
 header {
@@ -44,7 +46,7 @@ header {
 
 h2 {
   color: rgba(170, 170, 170, 0.9);
-  padding: 17px;
+  padding: 1rem;
   margin: 0;
 }
 
@@ -59,14 +61,14 @@ h2 {
   background: #1f54f3;
   width: 100%;
   text-align: center;
-  -webkit-box-shadow: 0 2px 25px rgba(0, 0, 0, 0.3), 0 2px 25px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 2px 25px rgba(0, 0, 0, 0.3), 0 2px 25px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3), 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3), 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
 }
 
 .sub-heading {
   background: #ff4a2a;
   color: #eee;
-  padding: 12px;
+  padding: 0.75rem;
   margin: 0;
 }
 
@@ -84,14 +86,14 @@ h2 {
 
 .rider {
   color: white;
-  padding: 10px;
+  padding: 0.55rem;
   margin: 0;
 }
 
 #formulae-container header,
 #question-solutions header,
 #further-discussion header {
-  background: tomato;
+  background: #ff4a2a;
   margin-top: 3.5rem;
   margin-bottom: 0;
   position: relative;
@@ -101,7 +103,7 @@ h2 {
 #formulae-container .rider,
 #question-solutions .rider,
 #further-discussion .rider {
-  padding: 8px;
+  padding: 0.5rem;
   text-shadow: 1px 0 0 dimgrey, -1px 0 0 dimgrey, 0 1px 0 dimgrey, 0 -1px -0.5px dimgrey;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
@@ -140,8 +142,8 @@ h2 {
   font-weight: bolder;
   text-align: center;
   border-radius: 50%;
-  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.5);
   position: absolute;
   cursor: pointer;
 }
@@ -158,14 +160,22 @@ h2 {
   left: 1rem;
   bottom: 1rem;
   -webkit-transform: scale(0);
-  transform: scale(0);
+          transform: scale(0);
+}
+
+#previous:hover {
+  background-color: royalblue;
 }
 
 #next {
   right: 1rem;
   bottom: 1rem;
   -webkit-transform: scale(0);
-  transform: scale(0);
+          transform: scale(0);
+}
+
+#next:hover {
+  background-color: royalblue;
 }
 
 #pageUp1,
@@ -178,7 +188,7 @@ h2 {
   height: 2.5rem;
   width: 2.5rem;
   -webkit-transform: scale(0);
-  transform: scale(0);
+          transform: scale(0);
 }
 
 #buttons-wrapper a {
@@ -186,72 +196,17 @@ h2 {
 }
 
 #pageNum {
-  width: 80px;
-  height: 35px;
-  padding: 5px;
+  width: 5rem;
+  padding: 0.3rem;
   background: rgba(50, 130, 50, 0.8);
   font-weight: bold;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 0.4rem;
   line-height: normal;
-  border: 2px solid lightgrey;
+  border: 0.16rem solid lightgrey;
   opacity: 0.9;
   color: white;
   display: inline-block;
-}
-
-#sign-in-page {
-  overflow-y: auto;
-  background: black;
-  height: 100%;
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: absolute;
-  padding: 3rem 1rem;
-  top: 0;
-  left: 0;
-}
-
-#input-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 4rem 0;
-  width: 100%;
-}
-
-#username {
-  width: 75%;
-  max-width: 300px;
-  height: 3rem;
-  margin: 10px;
-  padding: 10px 12px;
-  border: none;
-  background: royalblue;
-  color: white;
-  outline: none;
-  font-size: 1.1rem;
-  border-radius: 3px;
-  -webkit-transition: background-color 0.3s, -webkit-box-shadow 0.3s;
-  transition: background-color 0.3s, -webkit-box-shadow 0.3s;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  transition: background-color 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s;
 }
 
 #username::-webkit-input-placeholder {
@@ -272,58 +227,34 @@ h2 {
 
 #username:hover {
   background-color: #1f54f3;
-  -webkit-box-shadow: 0 0 15px rgba(31, 84, 243, 0.8);
-          box-shadow: 0 0 15px rgba(31, 84, 243, 0.8);
-}
-
-#sign-in,
-#sign-out {
-  width: 40%;
-  max-width: 10rem;
-  height: 45px;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 30px;
-  border: none;
-  background: tomato;
-  color: white;
-  -webkit-transition: background-color 0.3s, -webkit-box-shadow 0.3s;
-  transition: background-color 0.3s, -webkit-box-shadow 0.3s;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  transition: background-color 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s;
+  -webkit-box-shadow: 0 0 1rem rgba(31, 84, 243, 0.8);
+          box-shadow: 0 0 1rem rgba(31, 84, 243, 0.8);
 }
 
 #sign-in:hover,
 #sign-out:hover {
   background-color: #ff4d2d;
-  -webkit-box-shadow: 0 0 15px rgba(255, 77, 45, 0.6);
-          box-shadow: 0 0 15px rgba(255, 77, 45, 0.6);
+  -webkit-box-shadow: 0 0 1rem rgba(255, 77, 45, 0.6);
+          box-shadow: 0 0 1rem rgba(255, 77, 45, 0.6);
 }
 
 #sign-out-wrapper {
   text-align: center;
-  margin: 40px 0;
+  margin: 2.5rem 0;
 }
 
 #sign-in-success {
   font-weight: bold;
   color: limegreen;
-  padding: 10px 15px;
+  padding: 0.625rem 1rem;
   text-align: center;
   font-style: italic;
 }
 
-#sign-in-page-footer {
-  padding: 2rem;
-  width: 100%;
-  text-align: center;
-  background: black;
-}
-
 #sign-in-page-footer span {
-  color: #555;
+  color: #444;
   display: block;
-  margin: 5px;
+  margin: 0.25rem;
 }
 
 #sign-in-page-footer a {
@@ -348,7 +279,7 @@ h2 {
           flex-direction: column;
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
-  padding-bottom: 120px;
+  padding-bottom: 7.5rem;
   position: absolute;
   background: black;
   line-height: 1.5rem;
@@ -384,9 +315,9 @@ h2 {
 #further-discussion #quartile-range {
   width: 100%;
   text-align: center;
-  font-family: "Trebuchet MS";
-  border-radius: 5px;
-  margin: 15px 0;
+  font-family: 'Trebuchet MS';
+  border-radius: 0.25rem;
+  margin: 1rem 0;
   background: rgba(60, 60, 60, 0.5);
 }
 
@@ -411,13 +342,12 @@ h2 {
 
 .formula-wrapper {
   width: 100%;
-  height: 130px;
-  margin: 25px 0 15px 0;
+  height: 8.125rem;
+  margin: 1.5rem 0 1rem 0;
   text-align: center;
   background: skyblue;
   color: black;
-  border-radius: 5px;
-  font-size: 125%;
+  border-radius: 0.35rem;
   font-style: italic;
   padding: auto;
   font-family: 'Cambria', 'Times New Roman';
@@ -462,7 +392,7 @@ span {
 }
 
 .padded {
-  padding: 5px 0;
+  padding: 0.25rem 0;
   width: 100%;
 }
 
@@ -492,7 +422,7 @@ a {
   font-weight: lighter;
   font-family: 'Arial Narrow';
   display: inline-table;
-  padding: 0 1px;
+  padding: 0 0.125rem;
   height: 100%;
   float: left;
 }
@@ -511,25 +441,25 @@ a {
 }
 
 .numerator {
-  border-bottom: 1px solid black;
+  border-bottom: 0.0625rem solid black;
 }
 
 .denominator {
-  padding-top: 2px;
+  padding-top: 0.125rem;
 }
 
 .formula-explanation {
   font-style: normal;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .variable-names {
   font-style: normal;
   display: block;
-  padding: 8px 0;
+  padding: 0.5rem 0;
   background: #cd4c4c;
   color: white;
-  border-radius: 3px 3px 0 0;
+  border-radius: 0.25rem 0.25rem 0 0;
   font-family: 'Cambria', 'Times New Roman';
 }
 
@@ -568,11 +498,11 @@ a {
   display: table-cell;
   float: none;
   vertical-align: middle;
-  width: 50px;
+  width: 3.125rem;
 }
 
 .variable-U .fraction-wrapper {
-  padding: 0 5px;
+  padding: 0 0.25rem;
 }
 
 .variable-U .numerator {
@@ -597,7 +527,7 @@ a {
   overflow-y: auto;
   background: black;
   padding: 0;
-  padding-bottom: 4rem;
+  padding-bottom: 10rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -617,7 +547,7 @@ a {
   background: black;
   color: lightgrey;
   outline: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -625,8 +555,8 @@ a {
 #question-solutions input:hover {
   color: white;
   border-color: deepskyblue;
-  -webkit-box-shadow: 0 0 16px rgba(0, 139, 185, 0.5);
-          box-shadow: 0 0 16px rgba(0, 139, 185, 0.5);
+  -webkit-box-shadow: 0 0 1rem rgba(0, 139, 185, 0.5);
+          box-shadow: 0 0 1rem rgba(0, 139, 185, 0.5);
 }
 
 #question-solutions input:focus {
@@ -662,22 +592,22 @@ a {
   margin: 2rem 0;
   color: deepskyblue;
   text-align: center;
+  overflow-x: auto;
 }
 
 #question-solutions #result2 {
-  padding-top: 25px;
+  padding-top: 2rem;
 }
 
 #question-solutions #table-wrapper {
   width: 100%;
-  overflow-x: auto;
   -webkit-transition: opacity 0.8s;
   transition: opacity 0.8s;
 }
 
 #question-solutions table {
   width: 100%;
-  border: 2px solid #333;
+  border: 0.125rem solid #333;
   border-collapse: collapse;
   text-align: left;
   background: rgba(60, 60, 60, 0.6);
@@ -687,19 +617,19 @@ a {
 
 #question-solutions tfoot {
   font-weight: bold;
-  padding: 5px 0;
+  padding: 0.325rem 0;
   text-align: left;
 }
 
 #question-solutions p {
-  margin: 8px 0;
+  margin: 0.5rem 0;
 }
 
 #question-solutions td,
 #question-solutions th {
   border-collapse: collapse;
-  border: 2px solid #333;
-  padding: 5px 11px;
+  border: 0.125rem solid #333;
+  padding: 0.25rem 0.75rem;
 }
 
 #question-solutions td p,
@@ -715,13 +645,13 @@ a {
 .formula-wrapper {
   overflow-x: auto;
   padding: 1rem;
-  font-size: 1.2rem !important;
-  line-height: 100% !important;
+  font-size: 1.25rem !important;
+  line-height: 1rem !important;
 }
 
 th {
   text-align: center;
-  padding: 10px 11px;
+  padding: 0.75rem;
 }
 
 th:first-child,
@@ -770,7 +700,7 @@ tfoot {
   color: black;
   font-style: normal;
   font-family: 'Cambria', 'Times New Roman';
-  border-radius: 7px;
+  border-radius: 0.5rem;
   margin: 1rem 0;
 }
 
@@ -798,7 +728,7 @@ tfoot {
   background: none;
   margin-top: 0;
   text-align: left;
-  height: 105px;
+  height: 6.5rem;
   font-style: normal;
 }
 
@@ -808,7 +738,7 @@ tfoot {
   background: none;
   margin-top: 0;
   text-align: left;
-  height: 65px;
+  height: 4rem;
   font-style: normal;
   white-space: nowrap;
 }
@@ -822,7 +752,7 @@ tfoot {
 
 .translate {
   -webkit-animation: translate 0.7s forwards ease;
-  animation: translate 0.7s forwards ease;
+          animation: translate 0.7s forwards ease;
 }
 
 @-webkit-keyframes translate {
@@ -849,7 +779,7 @@ tfoot {
 
 .fadeIn {
   -webkit-animation: fadeIn 0.6s forwards ease;
-  animation: fadeIn 0.6s forwards ease;
+          animation: fadeIn 0.6s forwards ease;
 }
 
 @-webkit-keyframes fadeIn {
@@ -878,7 +808,7 @@ tfoot {
 
 .translateBack {
   -webkit-animation: translateBack 0.6s forwards ease;
-  animation: translateBack 0.6s forwards ease;
+          animation: translateBack 0.6s forwards ease;
 }
 
 @-webkit-keyframes translateBack {
@@ -905,7 +835,7 @@ tfoot {
 
 .fadeOut {
   -webkit-animation: fadeOut 0.5s forwards ease;
-  animation: fadeOut 0.5s forwards ease;
+          animation: fadeOut 0.5s forwards ease;
 }
 
 @-webkit-keyframes fadeOut {
@@ -934,7 +864,7 @@ tfoot {
 
 .scaleUp {
   -webkit-animation: scaleUp 0.35s forwards ease;
-  animation: scaleUp 0.35s forwards ease;
+          animation: scaleUp 0.35s forwards ease;
 }
 
 @-webkit-keyframes scaleUp {
@@ -963,7 +893,7 @@ tfoot {
 
 .scaleDown {
   -webkit-animation: scaleDown 0.25s forwards ease;
-  animation: scaleDown 0.25s forwards ease;
+          animation: scaleDown 0.25s forwards ease;
 }
 
 @-webkit-keyframes scaleDown {
@@ -992,7 +922,7 @@ tfoot {
 
 .slideDown {
   -webkit-animation: slideDown 1s forwards ease;
-  animation: slideDown 1s forwards ease;
+          animation: slideDown 1s forwards ease;
 }
 
 @-webkit-keyframes slideDown {
@@ -1015,7 +945,7 @@ tfoot {
 
 .slideUp {
   -webkit-animation: slideUp 1s forwards ease;
-  animation: slideUp 1s forwards ease;
+          animation: slideUp 1s forwards ease;
 }
 
 @-webkit-keyframes slideUp {
@@ -1038,7 +968,7 @@ tfoot {
 
 .tableFadeIn {
   -webkit-animation: tableFadeIn 0.35s forwards ease-in-out;
-  animation: tableFadeIn 0.35s forwards ease-in-out;
+          animation: tableFadeIn 0.35s forwards ease-in-out;
 }
 
 @-webkit-keyframes tableFadeIn {
@@ -1067,7 +997,7 @@ tfoot {
 
 .tableFadeOut {
   -webkit-animation: tableFadeOut 0.8s forwards ease-in-out;
-  animation: tableFadeOut 0.8s forwards ease-in-out;
+          animation: tableFadeOut 0.8s forwards ease-in-out;
 }
 
 @-webkit-keyframes tableFadeOut {
@@ -1096,7 +1026,7 @@ tfoot {
 
 .slideUpControls {
   -webkit-animation: slideUpControls 1s forwards ease;
-  animation: slideUpControls 1s forwards ease;
+          animation: slideUpControls 1s forwards ease;
 }
 
 @-webkit-keyframes slideUpControls {
@@ -1118,8 +1048,8 @@ tfoot {
 }
 
 .slideDownControls {
-  -webkit-animation: slideDownControls 4s forwards ease;
-  animation: slideDown ontrols 4s forwards ease;
+  -webkit-animation: slideDown ontrols 4s forwards ease;
+          animation: slideDown ontrols 4s forwards ease;
 }
 
 @-webkit-keyframes slideDownControls {
@@ -1141,8 +1071,8 @@ tfoot {
 }
 
 .welcomePageFadeIn {
-  -webkit-animation: welcomePageFadeIn 1s forwards ease;
-  animation: welcomePageFadeIn 1s forwards ease;
+  -webkit-animation: welcomePageFadeIn 0.75s forwards ease;
+          animation: welcomePageFadeIn 0.75s forwards ease;
 }
 
 @-webkit-keyframes welcomePageFadeIn {
@@ -1173,7 +1103,8 @@ tfoot {
 #formulae-container,
 #question-solutions,
 #further-discussion {
-  line-height: 1.8rem;
+  line-height: 1.75rem;
+  overflow-x: hidden;
 }
 
 .username {
@@ -1190,9 +1121,9 @@ tfoot {
   font: normal bolder 1.1rem 'Cambria', 'Times New Roman';
 }
 
-ol, ul {
+ol,
+ul {
   margin: 0;
-  padding: 0;
   padding-left: 1.5rem;
 }
 
@@ -1203,7 +1134,7 @@ i {
 .slant,
 sup,
 sub {
-  font-family: "Cambria", "Times New Roman";
+  font-family: 'Cambria', 'Times New Roman';
 }
 
 .unslant {
@@ -1215,4 +1146,17 @@ sub {
   width: 100%;
   margin: auto;
   padding: 0 1em;
+}
+
+.desktop .custom-scroll-bar::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+.desktop .custom-scroll-bar::-webkit-scrollbar-track {
+  background: rgba(70, 70, 70, 0.7);
+}
+
+.desktop .custom-scroll-bar::-webkit-scrollbar-thumb {
+  background: #ff4a2a;
+  border-radius: 0.5rem;
 }

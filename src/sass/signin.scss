@@ -1,93 +1,43 @@
 
-#sign-in-page {
-  overflow-y: auto;
-  background: black;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  // justify-content: center;
-  align-items: center;
-  position: absolute;
-  padding: 3rem 1rem;
-  top: 0;
-  left: 0;
-}
-
-#input-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem 0;
-  width: 100%;
-}
-
 #username {
-  width: 75%;
-  max-width: 300px;
-  height: 3rem;
-  margin: 10px;
-  padding: 10px 12px;
-  border: none;
-  background: royalblue;
-  color: white;
-  outline: none;
-  font-size: 1.1rem;
-  border-radius: 3px;
-  transition: background-color 0.3s, box-shadow 0.3s;
-
   &::placeholder {
     color: white;
   }
 
   &:hover {
     background-color: rgb(31, 84, 243);
-    box-shadow: 0 0 15px rgba(31, 84, 243, 0.8);
+    box-shadow: 0 0 1rem rgba(31, 84, 243, 0.8);
   }
 }
 
 #sign-in,
 #sign-out {
-  width: 40%;
-  max-width: 10rem;
-  height: 45px;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 30px;
-  border: none;
-  background: tomato;
-  color: white;
-  transition: background-color 0.3s, box-shadow 0.3s;
 
   &:hover {
     background-color: rgb(255, 77, 45);
-    box-shadow: 0 0 15px rgba(255, 77, 45, 0.6);
+    box-shadow: 0 0 1rem rgba(255, 77, 45, 0.6);
   }
 }
 
 #sign-out-wrapper {
   text-align: center;
-  margin: 40px 0;
+  margin: 2.5rem 0;
 }
 
 #sign-in-success {
   font-weight: bold;
   color: limegreen;
-  padding: 10px 15px;
+  padding: 0.625rem 1rem;
   text-align: center;
   font-style: italic;
 }
 
 #sign-in-page-footer {
-  padding: 2rem;
-  width: 100%;
-  text-align: center;
-  background: black;
 
   span {
-    color: #555;
+    color: #444;
     display: block;
-    margin: 5px;
+    margin: 0.25rem;
   }
 
   a {

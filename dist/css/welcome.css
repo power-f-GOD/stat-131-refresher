@@ -28,14 +28,15 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 #intro-text-wrapper #intro-text {
   text-align: center;
   width: 94%;
   color: #969696;
-  border: 5px solid rgba(170, 170, 170, 0.5);
-  padding: 20px 20px;
+  border: 0.25rem solid rgba(170, 170, 170, 0.5);
+  padding: 1.25rem;
 }
 
 header {
@@ -45,7 +46,7 @@ header {
 
 h2 {
   color: rgba(170, 170, 170, 0.9);
-  padding: 17px;
+  padding: 1rem;
   margin: 0;
 }
 
@@ -60,14 +61,14 @@ h2 {
   background: #1f54f3;
   width: 100%;
   text-align: center;
-  -webkit-box-shadow: 0 2px 25px rgba(0, 0, 0, 0.3), 0 2px 25px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 2px 25px rgba(0, 0, 0, 0.3), 0 2px 25px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3), 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3), 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
 }
 
 .sub-heading {
   background: #ff4a2a;
   color: #eee;
-  padding: 12px;
+  padding: 0.75rem;
   margin: 0;
 }
 
@@ -85,14 +86,14 @@ h2 {
 
 .rider {
   color: white;
-  padding: 10px;
+  padding: 0.55rem;
   margin: 0;
 }
 
 #formulae-container header,
 #question-solutions header,
 #further-discussion header {
-  background: tomato;
+  background: #ff4a2a;
   margin-top: 3.5rem;
   margin-bottom: 0;
   position: relative;
@@ -102,7 +103,7 @@ h2 {
 #formulae-container .rider,
 #question-solutions .rider,
 #further-discussion .rider {
-  padding: 8px;
+  padding: 0.5rem;
   text-shadow: 1px 0 0 dimgrey, -1px 0 0 dimgrey, 0 1px 0 dimgrey, 0 -1px -0.5px dimgrey;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
@@ -141,8 +142,8 @@ h2 {
   font-weight: bolder;
   text-align: center;
   border-radius: 50%;
-  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.5);
   position: absolute;
   cursor: pointer;
 }
@@ -159,14 +160,22 @@ h2 {
   left: 1rem;
   bottom: 1rem;
   -webkit-transform: scale(0);
-  transform: scale(0);
+          transform: scale(0);
+}
+
+#previous:hover {
+  background-color: royalblue;
 }
 
 #next {
   right: 1rem;
   bottom: 1rem;
   -webkit-transform: scale(0);
-  transform: scale(0);
+          transform: scale(0);
+}
+
+#next:hover {
+  background-color: royalblue;
 }
 
 #pageUp1,
@@ -179,7 +188,7 @@ h2 {
   height: 2.5rem;
   width: 2.5rem;
   -webkit-transform: scale(0);
-  transform: scale(0);
+          transform: scale(0);
 }
 
 #buttons-wrapper a {
@@ -187,15 +196,14 @@ h2 {
 }
 
 #pageNum {
-  width: 80px;
-  height: 35px;
-  padding: 5px;
+  width: 5rem;
+  padding: 0.3rem;
   background: rgba(50, 130, 50, 0.8);
   font-weight: bold;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 0.4rem;
   line-height: normal;
-  border: 2px solid lightgrey;
+  border: 0.16rem solid lightgrey;
   opacity: 0.9;
   color: white;
   display: inline-block;

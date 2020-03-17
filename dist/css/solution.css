@@ -16,7 +16,7 @@
   overflow-y: auto;
   background: black;
   padding: 0;
-  padding-bottom: 4rem;
+  padding-bottom: 10rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -36,7 +36,7 @@
   background: black;
   color: lightgrey;
   outline: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -44,8 +44,8 @@
 #question-solutions input:hover {
   color: white;
   border-color: deepskyblue;
-  -webkit-box-shadow: 0 0 16px rgba(0, 139, 185, 0.5);
-          box-shadow: 0 0 16px rgba(0, 139, 185, 0.5);
+  -webkit-box-shadow: 0 0 1rem rgba(0, 139, 185, 0.5);
+          box-shadow: 0 0 1rem rgba(0, 139, 185, 0.5);
 }
 
 #question-solutions input:focus {
@@ -81,22 +81,22 @@
   margin: 2rem 0;
   color: deepskyblue;
   text-align: center;
+  overflow-x: auto;
 }
 
 #question-solutions #result2 {
-  padding-top: 25px;
+  padding-top: 2rem;
 }
 
 #question-solutions #table-wrapper {
   width: 100%;
-  overflow-x: auto;
   -webkit-transition: opacity 0.8s;
   transition: opacity 0.8s;
 }
 
 #question-solutions table {
   width: 100%;
-  border: 2px solid #333;
+  border: 0.125rem solid #333;
   border-collapse: collapse;
   text-align: left;
   background: rgba(60, 60, 60, 0.6);
@@ -106,19 +106,19 @@
 
 #question-solutions tfoot {
   font-weight: bold;
-  padding: 5px 0;
+  padding: 0.325rem 0;
   text-align: left;
 }
 
 #question-solutions p {
-  margin: 8px 0;
+  margin: 0.5rem 0;
 }
 
 #question-solutions td,
 #question-solutions th {
   border-collapse: collapse;
-  border: 2px solid #333;
-  padding: 5px 11px;
+  border: 0.125rem solid #333;
+  padding: 0.25rem 0.75rem;
 }
 
 #question-solutions td p,
@@ -134,13 +134,13 @@
 .formula-wrapper {
   overflow-x: auto;
   padding: 1rem;
-  font-size: 1.2rem !important;
-  line-height: 100% !important;
+  font-size: 1.25rem !important;
+  line-height: 1rem !important;
 }
 
 th {
   text-align: center;
-  padding: 10px 11px;
+  padding: 0.75rem;
 }
 
 th:first-child,
@@ -189,7 +189,7 @@ tfoot {
   color: black;
   font-style: normal;
   font-family: 'Cambria', 'Times New Roman';
-  border-radius: 7px;
+  border-radius: 0.5rem;
   margin: 1rem 0;
 }
 
@@ -217,7 +217,7 @@ tfoot {
   background: none;
   margin-top: 0;
   text-align: left;
-  height: 105px;
+  height: 6.5rem;
   font-style: normal;
 }
 
@@ -227,7 +227,7 @@ tfoot {
   background: none;
   margin-top: 0;
   text-align: left;
-  height: 65px;
+  height: 4rem;
   font-style: normal;
   white-space: nowrap;
 }

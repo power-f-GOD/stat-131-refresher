@@ -1,8 +1,4 @@
 .translate {
-  -webkit-animation: translate 0.7s forwards ease;
-  -moz-animation: translate 0.7s forwards ease;
-  -ms-animation: translate 0.7s forwards ease;
-  -o-animation: translate 0.7s forwards ease;
   animation: translate 0.7s forwards ease;
 }
 
@@ -48,10 +44,6 @@
 }
 
 .fadeIn {
-  -webkit-animation: fadeIn 0.6s forwards ease;
-  -moz-animation: fadeIn 0.6s forwards ease;
-  -ms-animation: fadeIn 0.6s forwards ease;
-  -o-animation: fadeIn 0.6s forwards ease;
   animation: fadeIn 0.6s forwards ease;
 }
 
@@ -97,10 +89,6 @@
 }
 
 .translateBack {
-  -webkit-animation: translateBack 0.6s forwards ease;
-  -moz-animation: translateBack 0.6s forwards ease;
-  -ms-animation: translateBack 0.6s forwards ease;
-  -o-animation: translateBack 0.6s forwards ease;
   animation: translateBack 0.6s forwards ease;
 }
 
@@ -146,10 +134,6 @@
 }
 
 .fadeOut {
-  -webkit-animation: fadeOut 0.5s forwards ease;
-  -moz-animation: fadeOut 0.5s forwards ease;
-  -ms-animation: fadeOut 0.5s forwards ease;
-  -o-animation: fadeOut 0.5s forwards ease;
   animation: fadeOut 0.5s forwards ease;
 }
 
@@ -195,10 +179,6 @@
 }
 
 .scaleUp {
-  -webkit-animation: scaleUp 0.35s forwards ease;
-  -moz-animation: scaleUp 0.35s forwards ease;
-  -ms-animation: scaleUp 0.35s forwards ease;
-  -o-animation: scaleUp 0.35s forwards ease;
   animation: scaleUp 0.35s forwards ease;
 }
 
@@ -244,10 +224,6 @@
 }
 
 .scaleDown {
-  -webkit-animation: scaleDown 0.25s forwards ease;
-  -moz-animation: scaleDown 0.25s forwards ease;
-  -ms-animation: scaleDown 0.25s forwards ease;
-  -o-animation: scaleDown 0.25s forwards ease;
   animation: scaleDown 0.25s forwards ease;
 }
 
@@ -293,10 +269,6 @@
 }
 
 .slideDown {
-  -webkit-animation: slideDown 1s forwards ease;
-  -moz-animation: slideDown 1s forwards ease;
-  -ms-animation: slideDown 1s forwards ease;
-  -o-animation: slideDown 1s forwards ease;
   animation: slideDown 1s forwards ease;
 }
 
@@ -334,10 +306,6 @@
 }
 
 .slideUp {
-  -webkit-animation: slideUp 1s forwards ease;
-  -moz-animation: slideUp 1s forwards ease;
-  -ms-animation: slideUp 1s forwards ease;
-  -o-animation: slideUp 1s forwards ease;
   animation: slideUp 1s forwards ease;
 }
 
@@ -375,10 +343,6 @@
 }
 
 .tableFadeIn {
-  -webkit-animation: tableFadeIn 0.35s forwards ease-in-out;
-  -moz-animation: tableFadeIn 0.35s forwards ease-in-out;
-  -ms-animation: tableFadeIn 0.35s forwards ease-in-out;
-  -o-animation: tableFadeIn 0.35s forwards ease-in-out;
   animation: tableFadeIn 0.35s forwards ease-in-out;
 }
 
@@ -424,10 +388,6 @@
 }
 
 .tableFadeOut {
-  -webkit-animation: tableFadeOut 0.8s forwards ease-in-out;
-  -moz-animation: tableFadeOut 0.8s forwards ease-in-out;
-  -ms-animation: tableFadeOut 0.8s forwards ease-in-out;
-  -o-animation: tableFadeOut 0.8s forwards ease-in-out;
   animation: tableFadeOut 0.8s forwards ease-in-out;
 }
 
@@ -473,10 +433,6 @@
 }
 
 .slideUpControls {
-  -webkit-animation: slideUpControls 1s forwards ease;
-  -moz-animation: slideUpControls 1s forwards ease;
-  -ms-animation: slideUpControls 1s forwards ease;
-  -o-animation: slideUpControls 1s forwards ease;
   animation: slideUpControls 1s forwards ease;
 }
 
@@ -514,10 +470,6 @@
 }
 
 .slideDownControls {
-  -webkit-animation: slideDownControls 4s forwards ease;
-  -moz-animation: slideDownControls 4s forwards ease;
-  -ms-animation: slideDownControls 4s forwards ease;
-  -o-animation: slideDownControls 4s forwards ease;
   animation: slideDown ontrols 4s forwards ease;
 }
 
@@ -555,11 +507,7 @@
 }
 
 .welcomePageFadeIn {
-  -webkit-animation: welcomePageFadeIn 1s forwards ease;
-  -moz-animation: welcomePageFadeIn 1s forwards ease;
-  -ms-animation: welcomePageFadeIn 1s forwards ease;
-  -o-animation: welcomePageFadeIn 1s forwards ease;
-  animation: welcomePageFadeIn 1s forwards ease;
+  animation: welcomePageFadeIn 0.75s forwards ease;
 }
 
 @-webkit-keyframes welcomePageFadeIn {

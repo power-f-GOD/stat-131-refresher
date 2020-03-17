@@ -3,6 +3,14 @@ const Q = document.querySelector.bind(document);
 const QAll = document.querySelectorAll.bind(document);
 
 this.addEventListener('load', () => {
+  if (
+    !/(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(
+      window.navigator.userAgent
+    )
+  )
+    document.body.classList.add('desktop');
+  else document.body.classList.remove('desktop');
+
   const signInPage = Q('#sign-in-page') as HTMLElement;
   const signInButton = Q('#sign-in') as HTMLButtonElement;
   const username = Q('#username') as HTMLInputElement;
@@ -73,22 +81,27 @@ this.addEventListener('load', () => {
         .toLowerCase()}, you are now signed in. Welcome.`;
 
       //page slide
+      
+
       setTimeout(() => {
+        welcomePage.style.overflowY = 'hidden';
+        signInPage.style.overflowY = 'hidden';
         signInPage.className = 'translate';
         signInStatus.textContent = '';
         username.value = '';
         setTimeout(() => {
           signInPage.style.display = 'none';
           welcomePage.style.display = 'flex';
-          welcomePage.className = 'welcomePageFadeIn';
+          welcomePage.style.overflowY = 'auto';
+          welcomePage.className = 'welcomePageFadeIn custom-scroll-bar';
           setTimeout(() => {
             Q('#buttons-wrapper')!.className = 'slideUpControls';
             setTimeout(() => {
               nextButton.className = 'scaleUp';
-            }, 2500);
-          }, 500);
+            }, 1200);
+          }, 300);
         }, 400);
-      }, 2000);
+      }, 1200);
 
       //sets username to kin'a personalize UX
       for (let i = 0; i < QAll('.username').length; i++)
@@ -98,13 +111,45 @@ this.addEventListener('load', () => {
     }
   };
 
+  let start = 2000;
+  let id = requestAnimationFrame(step);
+  
+  function step(timestamp: any) {
+    if (!start) start = timestamp;
+    let progress = timestamp - start;
+// console.log('progress', progress)
+    if (progress < 2100 && progress > 2000) {
+      console.log('something just happened!', progress)
+      requestAnimationFrame(step);
+    }
+    
+    if (progress > 2500) {
+      console.log('something just cancelled!', progress)
+      cancelAnimationFrame(id);
+    }
+  }
+
   if (localStorage.userId) username.value = localStorage.userId;
 
   //This code block handles the display, slide effects etc. of the whole app and...
   /*This is an anonymous function to check that the variables i and j are not 
       available outside of its scope for the app to function appropriately */
+  //array for respective page ID's
+
   (function(i, j) {
+    const pageNames = [
+      'welcome-page',
+      'formulae-container',
+      'question-solutions',
+      'further-discussion'
+    ];
+    const numOfPages = pageNames.length;
+    //ID arrays for fixed-positioned top div elements and page-up buttons respectively
+    const fixedTops = [null, 'fixedTop1', 'fixedTop2', 'fixedTop3'];
+    const pageUpButtons = [null, 'pageUp1', 'pageUp2', 'pageUp3'];
+
     //Sign-out script event handler
+
     signOutButton.onclick = () => {
       signOutButton.textContent = 'Signing out...';
       signOutButton.style.width = 'auto';
@@ -121,28 +166,19 @@ this.addEventListener('load', () => {
         Q('#buttons-wrapper')!.className = 'slideDownControls';
         Q('#fixedTop3')!.className = 'slideUp';
         previousButton.className = 'scaleDown';
+        signInPage.style.overflowY = 'hidden';
+        furtherDiscussion.style.overflowY = 'hidden';
         setTimeout(() => {
           furtherDiscussion.className = 'translate';
           setTimeout(() => {
-            signInPage.className = 'fadeIn';
+            signInPage.className = 'fadeIn custom-scroll-bar';
             signInPage.style.display = 'flex';
+            signInPage.style.overflowY = 'auto';
             signOutButton.textContent = 'Sign Out';
           }, 500);
         }, 1300);
       }, 1700);
     };
-
-    //array for respective page ID's
-    const pageNames = [
-      'welcome-page',
-      'formulae-container',
-      'question-solutions',
-      'further-discussion'
-    ];
-    const numOfPages = pageNames.length;
-    //ID arrays for fixed-positioned top div elements and page-up buttons respectively
-    const fixedTops = [null, 'fixedTop1', 'fixedTop2', 'fixedTop3'];
-    const pageUpButtons = [null, 'pageUp1', 'pageUp2', 'pageUp3'];
 
     //displays page number on page load
     pageNumber.textContent = '1 / ' + numOfPages;
@@ -174,12 +210,16 @@ this.addEventListener('load', () => {
       const nextPage = Q(`#${pageNames[j]}`) as HTMLElement;
 
       //cycles through pages: page slide
+
+      nextPage.style.overflowY = 'hidden';
+      nextPage.style.zIndex = '1';
+      currentPage.style.overflowY = 'hidden';
       currentPage.className = 'translate';
       currentPage.style.zIndex = '2';
-      nextPage.style.zIndex = '1';
       setTimeout(() => {
         nextPage.style.display = 'flex';
-        nextPage.className = 'fadeIn';
+        nextPage.className = 'fadeIn custom-scroll-bar';
+        nextPage.style.overflowY = 'auto';
         setTimeout(() => {
           currentPage.style.display = 'none';
           currentPage.className = '';
@@ -212,7 +252,7 @@ this.addEventListener('load', () => {
           Q(`#${fixedTops[j]}`)!.className = 'slideDown';
           Q(`#${fixedTops.slice(-1)}`)!.className = '';
         }, 100);
-      } else if (j - i == 1 && j != 1) {
+      } else if (j - i == 1 && true) {
         Q(`#${fixedTops[i]}`)!.className = 'slideUp';
         setTimeout(() => {
           Q(`#${fixedTops[j]}`)!.className = 'slideDown';
@@ -225,6 +265,8 @@ this.addEventListener('load', () => {
           Q(`#${fixedTops[i]}`)!.className = '';
         }, 100);
       }
+
+      setTimeout(displayPageUpButton, 200);
     };
 
     //previous button click event handler
@@ -259,13 +301,17 @@ this.addEventListener('load', () => {
       //cycles through pages: page slide
       currentPage.className = 'fadeOut';
       currentPage.style.zIndex = '1';
+      currentPage.style.overflowY = 'hidden';
+      previousPage.style.overflowY = 'hidden';
       previousPage.style.display = 'flex';
-      previousPage.className = 'translateBack';
+      previousPage.className = 'translateBack custom-scroll-bar';
       previousPage.style.zIndex = '2';
+
       setTimeout(() => {
         currentPage.style.display = 'none';
         currentPage.className = '';
-        previousPage.className = '';
+        previousPage.style.overflowY = 'auto';
+        previousPage.className = 'custom-scroll-bar';
       }, 500);
 
       if (j == numOfPages - 1) {
@@ -309,6 +355,8 @@ this.addEventListener('load', () => {
           Q(`#${fixedTops[i]}`)!.className = '';
         }, 100);
       }
+
+      setTimeout(displayPageUpButton, 200);
     };
 
     //setting variables for swipe event
@@ -316,9 +364,28 @@ this.addEventListener('load', () => {
     let swipeCoord = 0;
 
     //attaching events to respective pages for swipe event
-    for (let k = 0; k < numOfPages; k++) {
-      Q(`#${pageNames[k]}`)!.addEventListener('touchstart', touch);
-      Q(`#${pageNames[k]}`)!.addEventListener('touchend', swipe);
+    addSwipeListeners();
+
+    //remove swipe listeners for elements that have horizontal scrollable content
+    QAll('.prevent-swipe').forEach(el => {
+      el.addEventListener('scroll', removeSwipeListeners);
+      el.addEventListener('touchend', () => {
+        setTimeout(addSwipeListeners, 100);
+      });
+    });
+
+    function addSwipeListeners() {
+      pageNames.forEach(name => {
+        Q(`#${name}`)!.addEventListener('touchstart', touch);
+        Q(`#${name}`)!.addEventListener('touchend', swipe);
+      });
+    }
+
+    function removeSwipeListeners() {
+      pageNames.forEach(name => {
+        Q(`#${name}`)!.removeEventListener('touchstart', touch);
+        Q(`#${name}`)!.removeEventListener('touchend', swipe);
+      });
     }
 
     //touchstart event handler
@@ -330,6 +397,8 @@ this.addEventListener('load', () => {
     function swipe(event: any) {
       swipeCoord = event.changedTouches[0].clientX - startSwipe;
 
+      if (event.changedTouches.length > 1) return;
+
       //checks to prevent from sliding to next page on page-scroll-Y
       if (swipeCoord < -105 && j != numOfPages - 1) nextButton.click();
       if (swipeCoord > 105 && j != 0) previousButton.click();
@@ -337,75 +406,46 @@ this.addEventListener('load', () => {
 
     //attaching onscroll event to respective pages
     for (let p = 1; p < numOfPages; p++)
-      Q(`#${pageNames[p]}`)!.addEventListener('scroll', scroll);
+      Q(`#${pageNames[p]}`)!.addEventListener('scroll', displayPageUpButton);
 
     //onscroll event handler
-    function scroll() {
-      var scrollPosition = Q(`#${pageNames[j]}`)!.scrollTop;
+    function displayPageUpButton() {
+      let scrollPosition = Q(`#${pageNames[j]}`)!.scrollTop;
+      let currentPageUpButton = Q(`#${pageUpButtons[j]}`)!;
+      let nextOrPrevPageUpButton = Q(`#${pageUpButtons[i]}`)!;
 
       if (j == 0) return;
 
       //ensures page-up buttons don't pop-up unexpectedly before re-appearing
-      if (scrollPosition <= 1000 && Q(`#${pageUpButtons[j]}`)!.className == '')
-        return;
+      if (scrollPosition <= 1000 && currentPageUpButton.className == '') return;
 
       //displays page-up buttons on scroll
       if (scrollPosition > 1000) {
-        if (j == pageUpButtons.length - 1 && i == 0) {
-          Q(`#${pageUpButtons[i + 1]}`)!.style.zIndex = '1';
-          Q(`#${pageUpButtons[j]}`)!.className = 'scaleUp';
-          Q(`#${pageUpButtons[j]}`)!.style.zIndex = '0';
+        if (i == 0 && j == 1) {
+          Q(`#${pageUpButtons.slice(-1)}`)!.className = 'scaleDown';
           setTimeout(() => {
-            Q(`#${pageUpButtons[j]}`)!.style.zIndex = '1';
-            Q(`#${pageUpButtons[i + 1]}`)!.className = 'scaleDown';
-            Q(`#${pageUpButtons[i + 1]}`)!.style.zIndex = '0';
-          }, 300);
-        } else if (j == 1 && i == 0) {
-          (Q(`#${pageUpButtons[pageUpButtons.length - 1]}`)!.style.zIndex =
-            '1'),
-            (Q(`#${pageUpButtons[j]}`)!.className = 'scaleUp');
-          Q(`#${pageUpButtons[j]}`)!.style.zIndex = '0';
-          setTimeout(() => {
-            Q(`#${pageUpButtons[j]}`)!.style.zIndex = '1';
-            Q(`#${pageUpButtons[pageUpButtons.length - 1]}`)!.className =
-              'scaleDown';
-            Q(`#${pageUpButtons[pageUpButtons.length - 1]}`)!.style.zIndex =
-              '0';
-          }, 300);
+            currentPageUpButton.className = 'scaleUp';
+          }, 100);
         } else if (j - i < 1) {
-          Q(`#${pageUpButtons[j + 1]}`)!.style.zIndex = '1';
-          Q(`#${pageUpButtons[j]}`)!.className = 'scaleUp';
-          Q(`#${pageUpButtons[j]}`)!.style.zIndex = '0';
+          nextOrPrevPageUpButton.className = 'scaleDown';
           setTimeout(() => {
-            Q(`#${pageUpButtons[j]}`)!.style.zIndex = '1';
-            Q(`#${pageUpButtons[j + 1]}`)!.className = 'scaleDown';
-            Q(`#${pageUpButtons[j + 1]}`)!.style.zIndex = '0';
-          }, 300);
+            currentPageUpButton.className = 'scaleUp';
+          }, 100);
         } else if (j - i == 1) {
-          Q(`#${pageUpButtons[i]}`)!.style.zIndex = '1';
-          Q(`#${pageUpButtons[j]}`)!.className = 'scaleUp';
-          Q(`#${pageUpButtons[j]}`)!.style.zIndex = '0';
+          nextOrPrevPageUpButton.className = 'scaleDown';
           setTimeout(() => {
-            Q(`#${pageUpButtons[j]}`)!.style.zIndex = '1';
-            Q(`#${pageUpButtons[i]}`)!.className = 'scaleDown';
-            Q(`#${pageUpButtons[i]}`)!.style.zIndex = '0';
-          }, 300);
+            currentPageUpButton.className = 'scaleUp';
+          }, 100);
         } else if (j == pageUpButtons.length - 1 && i != 0) {
-          Q(`#${pageUpButtons[j]}`)!.style.zIndex = '1';
-          Q(`#${pageUpButtons[i]}`)!.className = 'scaleUp';
-          Q(`#${pageUpButtons[i]}`)!.style.zIndex = '0';
+          currentPageUpButton.className = 'scaleDown';
           setTimeout(() => {
-            Q(`#${pageUpButtons[i]}`)!.style.zIndex = '1';
-            Q(`#${pageUpButtons[j]}`)!.className = 'scaleDown';
-            Q(`#${pageUpButtons[j]}`)!.style.zIndex = '0';
-          }, 300);
-          // console.log(
-          //   i + ' else if ' + j + Q(`#${pageUpButtons[j]}`)!.className
-          // );
+            nextOrPrevPageUpButton.className = 'scaleUp';
+          }, 100);
         }
-      } else
+      } else {
         for (let n = 1; n < pageUpButtons.length; n++)
           Q(`#${pageUpButtons[n]}`)!.className = 'scaleDown';
+      }
     }
 
     //class size ref onclick event handler
@@ -449,7 +489,7 @@ this.addEventListener('load', () => {
     Q('#the-percentiles-ref')!.onclick = classSizeRef;
     Q('#quartiles-median-ref')!.onclick = classSizeRef;
     Q('#link-to-median')!.onclick = classSizeRef;
-    Q('#myName')!.textContent = '@Power\'f-GOD ⚡⚡';
+    Q('#myName')!.textContent = "@Power'f-GOD ⚡⚡";
 
     //'take-example-ref' onclick event handler on page 2
     const takeExampleRef = () => {
@@ -557,7 +597,7 @@ this.addEventListener('load', () => {
   const STAT131 = {
     // Max function --- improvision ;) -------------------->
     MAX: function(numbers: number[]): number {
-      var max = -Infinity;
+      let max = -Infinity;
 
       for (let i = 0; i < numbers.length; i++)
         if (numbers[i] >= max) max = numbers[i];
@@ -644,7 +684,8 @@ this.addEventListener('load', () => {
         Q('#summation-fU')!.innerHTML =
           '<i>&Sigma;f<sub>i</sub>U<sub>i</sub></i> = ' + EfU;
 
-        var sumEfUperEf = (EfU / Ef).toFixed(2);
+        const sumEfUperEf = (EfU / Ef).toFixed(2);
+
         QAll('.A').forEach(_A => (_A.textContent = String(A)));
         QAll('.C').forEach(_C => (_C.textContent = String(C)));
         QAll('.EfU').forEach(_EfU => (_EfU.textContent = String(EfU)));
@@ -753,9 +794,6 @@ this.addEventListener('load', () => {
       if (tableIsReadyForPopulation) {
         const boundaries: number[][] = [];
 
-        //   if (Number(classIntervals[0][0]) == Number(classIntervals[0][0]).toFixed(1))
-        //	alert("what");
-
         for (let i = 0; i < numFrequencies; i++) {
           let classBoundaries = [
             classIntervals[i][0] - 0.5,
@@ -773,18 +811,14 @@ this.addEventListener('load', () => {
       }
 
       if (Q('#result')) {
-        var modalFraction = (D1 / (D1 + D2)).toFixed(2);
+        let modalFraction = (D1 / (D1 + D2)).toFixed(2);
 
         QAll('.Lmod').forEach(_Lmod => (_Lmod.textContent = String(Lmod)));
-
         QAll('.D1').forEach(_D1 => (_D1.textContent = String(D1)));
-
         QAll('.D2').forEach(_D2 => (_D2.textContent = String(D2)));
-
         QAll('.mode-fraction').forEach(
           _mF => (_mF.textContent = String(modalFraction))
         );
-
         Q('#computed-mode')!.textContent = mode.toFixed(2);
       }
 
@@ -797,23 +831,34 @@ this.addEventListener('load', () => {
   //Calling functions to carry out arithmetic and output results
 
   Q('#compute')!.onclick = () => {
-    const frequencies: number[] | null = TABLE.FREQUENCY(
-      Q('#frequencies')!.value
-    );
+    const intervalInputVals = Q('#interval')!.value.trim();
+    const frequencyInputVals = Q('#frequencies')!.value.trim();
+    const frequencies: number[] | null = TABLE.FREQUENCY(frequencyInputVals);
     const numFrequencies: number | null = frequencies
       ? frequencies.length
       : null;
     const classIntervals: number[][] | null = TABLE.INTERVAL(
-      Q('#interval')!.value,
+      intervalInputVals,
       numFrequencies
-    );
+    )!;
     const resultEl = Q('#result') as HTMLElement;
 
     Q('#container')!.style.height = 'auto';
     resultEl.className = 'fadeIn';
 
+    // Input check for frequencies
+    if (!frequencies) {
+      alert('Frequencies not set. Input frequencies.');
+      Q('#frequencies')!.focus();
+      return;
+    }
+    if (frequencies.length < 2) {
+      alert('Length of frequency ought not be less than 2.');
+      return;
+    }
+
     // Input check for interval input box
-    if (!Q('#interval')!.value.trim()) {
+    if (!intervalInputVals) {
       alert('Class intervals not set. Input class limits.');
       return;
     }
@@ -823,36 +868,26 @@ this.addEventListener('load', () => {
       alert('Input upper class limit.');
       return;
     }
-    if (classIntervals[0][0] > classIntervals[0][1]) {
+    if (classIntervals[0][0] >= classIntervals[0][1]) {
       resultEl.innerHTML =
-        "<b style='color:red;'>Error! Class limits: Invalid input. Lower class limit should not be greater than upper class limit.</b>";
+        "<b style='color:red;'>Error: Invalid class limits input. Lower class limit cannot be greater than or equal to upper class limit.</b>";
       return;
     }
     if (isNaN(classIntervals[0][0]) || isNaN(classIntervals[0][1])) {
       resultEl.innerHTML =
-        "<b style='color:red;'>Error! Class limits: Invalid input. Delete extra decimal points.</b>";
-      return;
-    }
-
-    // Input check for frequencies
-    if (!frequencies) {
-      alert('Frequencies not set. Input frequencies.');
-      return;
-    }
-    if (frequencies.length < 2) {
-      alert('Length of frequency cannot be less than 2.');
+        "<b style='color:red;'>Error: Invalid class limits input. Delete extra decimal points.</b>";
       return;
     }
 
     // Outputs result
-    if (Q('#frequencies')!.value.trim() && frequencies.length > 1) {
+    if (frequencyInputVals && frequencies.length > 1) {
       // Just for neat/clean joining of class intervals on output/display
       const classIntervalsPrettyJoined = classIntervals.map(interval =>
         interval.join(' - ')
       );
 
       resultEl.innerHTML = `
-        <div id='table-wrapper'>
+        <div id='table-wrapper' class="custom-scroll-bar">
           <table id='table-data'>
             <thead>
               <th> Class Interval </th>

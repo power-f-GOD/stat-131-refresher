@@ -11,17 +11,15 @@ $theme-bg-orange: rgb(255, 74, 42);
   height: 100%;
   width: 100%;
   overflow-y: auto;
-  // line-height: 145%;
+
   background: black;
   padding: 0;
-  padding-bottom: 4rem;
+  padding-bottom: 10rem;
   position: absolute;
   top: 0;
   left: 0;
 
   #container {
-    // height: 180px;
-    // margin: 20px 0;
     text-align: center;
   }
 
@@ -35,13 +33,13 @@ $theme-bg-orange: rgb(255, 74, 42);
     background: black;
     color: lightgrey;
     outline: none;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     transition: 0.3s;
 
     &:hover {
       color: white;
       border-color: deepskyblue;
-      box-shadow: 0 0 16px rgba(0, 139, 185, 0.5);
+      box-shadow: 0 0 1rem rgba(0, 139, 185, 0.5);
     }
 
     &:focus {
@@ -76,15 +74,16 @@ $theme-bg-orange: rgb(255, 74, 42);
     margin: 2rem 0;
     color: deepskyblue;
     text-align: center;
+    overflow-x: auto;
   }
 
   #result2 {
-    padding-top: 25px;
+    padding-top: 2rem;
   }
 
   #table-wrapper {
     width: 100%;
-    overflow-x: auto;
+    // overflow-x: auto;
     -webkit-transition: opacity 0.8s;
     -moz-transition: opacity 0.8s;
     -ms-transition: opacity 0.8s;
@@ -94,7 +93,7 @@ $theme-bg-orange: rgb(255, 74, 42);
 
   table {
     width: 100%;
-    border: 2px solid #333;
+    border: 0.125rem solid #333;
     border-collapse: collapse;
     text-align: left;
     background: rgba(60, 60, 60, 0.6);
@@ -104,52 +103,41 @@ $theme-bg-orange: rgb(255, 74, 42);
 
   tfoot {
     font-weight: bold;
-    padding: 5px 0;
+    padding: 0.325rem 0;
     text-align: left;
   }
 
   p {
-    margin: 8px 0;
+    margin: 0.5rem 0;
   }
 
   td,
   th {
     border-collapse: collapse;
-    border: 2px solid #333;
-    padding: 5px 11px;
+    border: 0.125rem solid #333;
+    padding: 0.25rem 0.75rem;
 
     p {
       text-align: center;
     }
   }
 
-
-
   .brace-open,
   .brace-close {
     font-size: 3.25rem;
-    // margin-bottom: 10%;
   }
-
-  // .fraction-wrapper {
-  //   padding-top: 4%;
-  // }
-
-  // #mean-solution .fraction-wrapper {
-  //   padding-top: 9%;
-  // }
 }
 
 .formula-wrapper {
   overflow-x: auto;
   padding: 1rem;
-  font-size: 1.2rem !important;
-  line-height: 100% !important;
+  font-size: 1.25rem !important;
+  line-height: 1rem !important;
 }
 
 th {
   text-align: center;
-  padding: 10px 11px;
+  padding: 0.75rem;
 }
 
 th:first-child,
@@ -166,7 +154,6 @@ tfoot {
   white-space: nowrap;
 }
 
-//explanation of question solutions
 .page-name {
   text-align: center;
   margin: 2.5rem auto;
@@ -195,9 +182,9 @@ tfoot {
   padding: 1rem;
   color: black;
   font-style: normal;
-  // font-size: 0.9em;
+
   font-family: 'Cambria', 'Times New Roman';
-  border-radius: 7px;
+  border-radius: 0.5rem;
   margin: 1rem 0;
 }
 
@@ -209,16 +196,13 @@ tfoot {
 
 #mean-solution .formula-wrapper:nth-of-type(1) {
   background: #77bedb;
-  // padding-left: 10px;
 }
 
 #median-solution .formula-wrapper:nth-of-type(1) {
   background: #eda55f;
-  // padding-left: 10px;
 }
 #mode-solution .formula-wrapper:nth-of-type(1) {
   background: #5ebb87;
-  // padding-left: 10px;
 }
 
 #mean-solution .formula-wrapper:nth-of-type(2),
@@ -226,9 +210,9 @@ tfoot {
 #mode-solution .formula-wrapper:nth-of-type(2) {
   background: none;
   margin-top: 0;
-  // padding-left: 0;
+
   text-align: left;
-  height: 105px;
+  height: 6.5rem;
   font-style: normal;
 }
 
@@ -237,9 +221,9 @@ tfoot {
 #mode-solution .formula-wrapper:nth-of-type(3) {
   background: none;
   margin-top: 0;
-  // padding-left: 0;
+
   text-align: left;
-  height: 65px;
+  height: 4rem;
   font-style: normal;
   white-space: nowrap;
 }

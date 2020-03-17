@@ -1,23 +1,21 @@
-@import "./welcome.scss";
-@import "./signin.scss";
-@import "./explanations.scss";
-@import "./solution.scss";
-@import "./animation.scss";
 
-// body {
-//   margin: auto;
-//   max-width: 800px;
-// }
 
-// h1, h2, h3, h4, h5, h6 {
-//   margin: 0;
-// }
+
+
+
+
+@import './welcome.scss';
+@import './signin.scss';
+@import './explanations.scss';
+@import './solution.scss';
+@import './animation.scss';
 
 #welcome-page,
 #formulae-container,
 #question-solutions,
 #further-discussion {
-  line-height: 1.8rem;
+  line-height: 1.75rem;
+  overflow-x: hidden;
 }
 
 .username {
@@ -34,9 +32,9 @@
   font: normal bolder 1.1rem 'Cambria', 'Times New Roman';
 }
 
-ol, ul {
+ol,
+ul {
   margin: 0;
-  padding: 0;
   padding-left: 1.5rem;
 }
 
@@ -47,7 +45,7 @@ i {
 .slant,
 sup,
 sub {
-  font-family: "Cambria", "Times New Roman";
+  font-family: 'Cambria', 'Times New Roman';
 }
 
 .unslant {
@@ -60,3 +58,20 @@ sub {
   margin: auto;
   padding: 0 1em;
 }
+
+.desktop .custom-scroll-bar {
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(70, 70, 70, 0.7);
+    
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(255, 74, 42);
+    border-radius: 0.5rem;
+  }
+}
+

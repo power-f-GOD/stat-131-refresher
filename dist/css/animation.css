@@ -1,6 +1,6 @@
 .translate {
   -webkit-animation: translate 0.7s forwards ease;
-  animation: translate 0.7s forwards ease;
+          animation: translate 0.7s forwards ease;
 }
 
 @-webkit-keyframes translate {
@@ -27,7 +27,7 @@
 
 .fadeIn {
   -webkit-animation: fadeIn 0.6s forwards ease;
-  animation: fadeIn 0.6s forwards ease;
+          animation: fadeIn 0.6s forwards ease;
 }
 
 @-webkit-keyframes fadeIn {
@@ -56,7 +56,7 @@
 
 .translateBack {
   -webkit-animation: translateBack 0.6s forwards ease;
-  animation: translateBack 0.6s forwards ease;
+          animation: translateBack 0.6s forwards ease;
 }
 
 @-webkit-keyframes translateBack {
@@ -83,7 +83,7 @@
 
 .fadeOut {
   -webkit-animation: fadeOut 0.5s forwards ease;
-  animation: fadeOut 0.5s forwards ease;
+          animation: fadeOut 0.5s forwards ease;
 }
 
 @-webkit-keyframes fadeOut {
@@ -112,7 +112,7 @@
 
 .scaleUp {
   -webkit-animation: scaleUp 0.35s forwards ease;
-  animation: scaleUp 0.35s forwards ease;
+          animation: scaleUp 0.35s forwards ease;
 }
 
 @-webkit-keyframes scaleUp {
@@ -141,7 +141,7 @@
 
 .scaleDown {
   -webkit-animation: scaleDown 0.25s forwards ease;
-  animation: scaleDown 0.25s forwards ease;
+          animation: scaleDown 0.25s forwards ease;
 }
 
 @-webkit-keyframes scaleDown {
@@ -170,7 +170,7 @@
 
 .slideDown {
   -webkit-animation: slideDown 1s forwards ease;
-  animation: slideDown 1s forwards ease;
+          animation: slideDown 1s forwards ease;
 }
 
 @-webkit-keyframes slideDown {
@@ -193,7 +193,7 @@
 
 .slideUp {
   -webkit-animation: slideUp 1s forwards ease;
-  animation: slideUp 1s forwards ease;
+          animation: slideUp 1s forwards ease;
 }
 
 @-webkit-keyframes slideUp {
@@ -216,7 +216,7 @@
 
 .tableFadeIn {
   -webkit-animation: tableFadeIn 0.35s forwards ease-in-out;
-  animation: tableFadeIn 0.35s forwards ease-in-out;
+          animation: tableFadeIn 0.35s forwards ease-in-out;
 }
 
 @-webkit-keyframes tableFadeIn {
@@ -245,7 +245,7 @@
 
 .tableFadeOut {
   -webkit-animation: tableFadeOut 0.8s forwards ease-in-out;
-  animation: tableFadeOut 0.8s forwards ease-in-out;
+          animation: tableFadeOut 0.8s forwards ease-in-out;
 }
 
 @-webkit-keyframes tableFadeOut {
@@ -274,7 +274,7 @@
 
 .slideUpControls {
   -webkit-animation: slideUpControls 1s forwards ease;
-  animation: slideUpControls 1s forwards ease;
+          animation: slideUpControls 1s forwards ease;
 }
 
 @-webkit-keyframes slideUpControls {
@@ -296,8 +296,8 @@
 }
 
 .slideDownControls {
-  -webkit-animation: slideDownControls 4s forwards ease;
-  animation: slideDown ontrols 4s forwards ease;
+  -webkit-animation: slideDown ontrols 4s forwards ease;
+          animation: slideDown ontrols 4s forwards ease;
 }
 
 @-webkit-keyframes slideDownControls {
@@ -319,8 +319,8 @@
 }
 
 .welcomePageFadeIn {
-  -webkit-animation: welcomePageFadeIn 1s forwards ease;
-  animation: welcomePageFadeIn 1s forwards ease;
+  -webkit-animation: welcomePageFadeIn 0.75s forwards ease;
+          animation: welcomePageFadeIn 0.75s forwards ease;
 }
 
 @-webkit-keyframes welcomePageFadeIn {

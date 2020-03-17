@@ -12,6 +12,10 @@ var __values = (this && this.__values) || function (o) {
 var Q = document.querySelector.bind(document);
 var QAll = document.querySelectorAll.bind(document);
 this.addEventListener('load', function () {
+    if (!/(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(window.navigator.userAgent))
+        document.body.classList.add('desktop');
+    else
+        document.body.classList.remove('desktop');
     var signInPage = Q('#sign-in-page');
     var signInButton = Q('#sign-in');
     var username = Q('#username');
@@ -85,30 +89,57 @@ this.addEventListener('load', function () {
                 .slice(1)
                 .toLowerCase() + ", you are now signed in. Welcome.";
             setTimeout(function () {
+                welcomePage.style.overflowY = 'hidden';
+                signInPage.style.overflowY = 'hidden';
                 signInPage.className = 'translate';
                 signInStatus.textContent = '';
                 username.value = '';
                 setTimeout(function () {
                     signInPage.style.display = 'none';
                     welcomePage.style.display = 'flex';
-                    welcomePage.className = 'welcomePageFadeIn';
+                    welcomePage.style.overflowY = 'auto';
+                    welcomePage.className = 'welcomePageFadeIn custom-scroll-bar';
                     setTimeout(function () {
                         Q('#buttons-wrapper').className = 'slideUpControls';
                         setTimeout(function () {
                             nextButton.className = 'scaleUp';
-                        }, 2500);
-                    }, 500);
+                        }, 1200);
+                    }, 300);
                 }, 400);
-            }, 2000);
+            }, 1200);
             for (var i = 0; i < QAll('.username').length; i++)
                 QAll('.username')[i].textContent =
                     _username.slice(0, 1).toUpperCase() +
                         _username.slice(1).toLowerCase();
         }
     };
+    var start = 2000;
+    var id = requestAnimationFrame(step);
+    function step(timestamp) {
+        if (!start)
+            start = timestamp;
+        var progress = timestamp - start;
+        if (progress < 2100 && progress > 2000) {
+            console.log('something just happened!', progress);
+            requestAnimationFrame(step);
+        }
+        if (progress > 2500) {
+            console.log('something just cancelled!', progress);
+            cancelAnimationFrame(id);
+        }
+    }
     if (localStorage.userId)
         username.value = localStorage.userId;
     (function (i, j) {
+        var pageNames = [
+            'welcome-page',
+            'formulae-container',
+            'question-solutions',
+            'further-discussion'
+        ];
+        var numOfPages = pageNames.length;
+        var fixedTops = [null, 'fixedTop1', 'fixedTop2', 'fixedTop3'];
+        var pageUpButtons = [null, 'pageUp1', 'pageUp2', 'pageUp3'];
         signOutButton.onclick = function () {
             signOutButton.textContent = 'Signing out...';
             signOutButton.style.width = 'auto';
@@ -122,25 +153,19 @@ this.addEventListener('load', function () {
                 Q('#buttons-wrapper').className = 'slideDownControls';
                 Q('#fixedTop3').className = 'slideUp';
                 previousButton.className = 'scaleDown';
+                signInPage.style.overflowY = 'hidden';
+                furtherDiscussion.style.overflowY = 'hidden';
                 setTimeout(function () {
                     furtherDiscussion.className = 'translate';
                     setTimeout(function () {
-                        signInPage.className = 'fadeIn';
+                        signInPage.className = 'fadeIn custom-scroll-bar';
                         signInPage.style.display = 'flex';
+                        signInPage.style.overflowY = 'auto';
                         signOutButton.textContent = 'Sign Out';
                     }, 500);
                 }, 1300);
             }, 1700);
         };
-        var pageNames = [
-            'welcome-page',
-            'formulae-container',
-            'question-solutions',
-            'further-discussion'
-        ];
-        var numOfPages = pageNames.length;
-        var fixedTops = [null, 'fixedTop1', 'fixedTop2', 'fixedTop3'];
-        var pageUpButtons = [null, 'pageUp1', 'pageUp2', 'pageUp3'];
         pageNumber.textContent = '1 / ' + numOfPages;
         nextButton.onclick = function () {
             if (i == 0 && j == 0) {
@@ -169,12 +194,15 @@ this.addEventListener('load', function () {
             }
             var currentPage = Q("#" + pageNames[i]);
             var nextPage = Q("#" + pageNames[j]);
+            nextPage.style.overflowY = 'hidden';
+            nextPage.style.zIndex = '1';
+            currentPage.style.overflowY = 'hidden';
             currentPage.className = 'translate';
             currentPage.style.zIndex = '2';
-            nextPage.style.zIndex = '1';
             setTimeout(function () {
                 nextPage.style.display = 'flex';
-                nextPage.className = 'fadeIn';
+                nextPage.className = 'fadeIn custom-scroll-bar';
+                nextPage.style.overflowY = 'auto';
                 setTimeout(function () {
                     currentPage.style.display = 'none';
                     currentPage.className = '';
@@ -205,7 +233,7 @@ this.addEventListener('load', function () {
                     Q("#" + fixedTops.slice(-1)).className = '';
                 }, 100);
             }
-            else if (j - i == 1 && j != 1) {
+            else if (j - i == 1 && true) {
                 Q("#" + fixedTops[i]).className = 'slideUp';
                 setTimeout(function () {
                     Q("#" + fixedTops[j]).className = 'slideDown';
@@ -219,6 +247,7 @@ this.addEventListener('load', function () {
                     Q("#" + fixedTops[i]).className = '';
                 }, 100);
             }
+            setTimeout(displayPageUpButton, 200);
         };
         previousButton.onclick = function () {
             if (i == 0 && j == 0) {
@@ -253,13 +282,16 @@ this.addEventListener('load', function () {
             var previousPage = Q("#" + pageNames[j]);
             currentPage.className = 'fadeOut';
             currentPage.style.zIndex = '1';
+            currentPage.style.overflowY = 'hidden';
+            previousPage.style.overflowY = 'hidden';
             previousPage.style.display = 'flex';
-            previousPage.className = 'translateBack';
+            previousPage.className = 'translateBack custom-scroll-bar';
             previousPage.style.zIndex = '2';
             setTimeout(function () {
                 currentPage.style.display = 'none';
                 currentPage.className = '';
-                previousPage.className = '';
+                previousPage.style.overflowY = 'auto';
+                previousPage.className = 'custom-scroll-bar';
             }, 500);
             if (j == numOfPages - 1) {
                 nextButton.className = 'scaleDown';
@@ -301,89 +333,81 @@ this.addEventListener('load', function () {
                     Q("#" + fixedTops[i]).className = '';
                 }, 100);
             }
+            setTimeout(displayPageUpButton, 200);
         };
         var startSwipe = 0;
         var swipeCoord = 0;
-        for (var k = 0; k < numOfPages; k++) {
-            Q("#" + pageNames[k]).addEventListener('touchstart', touch);
-            Q("#" + pageNames[k]).addEventListener('touchend', swipe);
+        addSwipeListeners();
+        QAll('.prevent-swipe').forEach(function (el) {
+            el.addEventListener('scroll', removeSwipeListeners);
+            el.addEventListener('touchend', function () {
+                setTimeout(addSwipeListeners, 100);
+            });
+        });
+        function addSwipeListeners() {
+            pageNames.forEach(function (name) {
+                Q("#" + name).addEventListener('touchstart', touch);
+                Q("#" + name).addEventListener('touchend', swipe);
+            });
+        }
+        function removeSwipeListeners() {
+            pageNames.forEach(function (name) {
+                Q("#" + name).removeEventListener('touchstart', touch);
+                Q("#" + name).removeEventListener('touchend', swipe);
+            });
         }
         function touch(event) {
             startSwipe = event.changedTouches[0].clientX;
         }
         function swipe(event) {
             swipeCoord = event.changedTouches[0].clientX - startSwipe;
+            if (event.changedTouches.length > 1)
+                return;
             if (swipeCoord < -105 && j != numOfPages - 1)
                 nextButton.click();
             if (swipeCoord > 105 && j != 0)
                 previousButton.click();
         }
         for (var p = 1; p < numOfPages; p++)
-            Q("#" + pageNames[p]).addEventListener('scroll', scroll);
-        function scroll() {
+            Q("#" + pageNames[p]).addEventListener('scroll', displayPageUpButton);
+        function displayPageUpButton() {
             var scrollPosition = Q("#" + pageNames[j]).scrollTop;
+            var currentPageUpButton = Q("#" + pageUpButtons[j]);
+            var nextOrPrevPageUpButton = Q("#" + pageUpButtons[i]);
             if (j == 0)
                 return;
-            if (scrollPosition <= 1000 && Q("#" + pageUpButtons[j]).className == '')
+            if (scrollPosition <= 1000 && currentPageUpButton.className == '')
                 return;
             if (scrollPosition > 1000) {
-                if (j == pageUpButtons.length - 1 && i == 0) {
-                    Q("#" + pageUpButtons[i + 1]).style.zIndex = '1';
-                    Q("#" + pageUpButtons[j]).className = 'scaleUp';
-                    Q("#" + pageUpButtons[j]).style.zIndex = '0';
+                if (i == 0 && j == 1) {
+                    Q("#" + pageUpButtons.slice(-1)).className = 'scaleDown';
                     setTimeout(function () {
-                        Q("#" + pageUpButtons[j]).style.zIndex = '1';
-                        Q("#" + pageUpButtons[i + 1]).className = 'scaleDown';
-                        Q("#" + pageUpButtons[i + 1]).style.zIndex = '0';
-                    }, 300);
-                }
-                else if (j == 1 && i == 0) {
-                    (Q("#" + pageUpButtons[pageUpButtons.length - 1]).style.zIndex =
-                        '1'),
-                        (Q("#" + pageUpButtons[j]).className = 'scaleUp');
-                    Q("#" + pageUpButtons[j]).style.zIndex = '0';
-                    setTimeout(function () {
-                        Q("#" + pageUpButtons[j]).style.zIndex = '1';
-                        Q("#" + pageUpButtons[pageUpButtons.length - 1]).className =
-                            'scaleDown';
-                        Q("#" + pageUpButtons[pageUpButtons.length - 1]).style.zIndex =
-                            '0';
-                    }, 300);
+                        currentPageUpButton.className = 'scaleUp';
+                    }, 100);
                 }
                 else if (j - i < 1) {
-                    Q("#" + pageUpButtons[j + 1]).style.zIndex = '1';
-                    Q("#" + pageUpButtons[j]).className = 'scaleUp';
-                    Q("#" + pageUpButtons[j]).style.zIndex = '0';
+                    nextOrPrevPageUpButton.className = 'scaleDown';
                     setTimeout(function () {
-                        Q("#" + pageUpButtons[j]).style.zIndex = '1';
-                        Q("#" + pageUpButtons[j + 1]).className = 'scaleDown';
-                        Q("#" + pageUpButtons[j + 1]).style.zIndex = '0';
-                    }, 300);
+                        currentPageUpButton.className = 'scaleUp';
+                    }, 100);
                 }
                 else if (j - i == 1) {
-                    Q("#" + pageUpButtons[i]).style.zIndex = '1';
-                    Q("#" + pageUpButtons[j]).className = 'scaleUp';
-                    Q("#" + pageUpButtons[j]).style.zIndex = '0';
+                    nextOrPrevPageUpButton.className = 'scaleDown';
                     setTimeout(function () {
-                        Q("#" + pageUpButtons[j]).style.zIndex = '1';
-                        Q("#" + pageUpButtons[i]).className = 'scaleDown';
-                        Q("#" + pageUpButtons[i]).style.zIndex = '0';
-                    }, 300);
+                        currentPageUpButton.className = 'scaleUp';
+                    }, 100);
                 }
                 else if (j == pageUpButtons.length - 1 && i != 0) {
-                    Q("#" + pageUpButtons[j]).style.zIndex = '1';
-                    Q("#" + pageUpButtons[i]).className = 'scaleUp';
-                    Q("#" + pageUpButtons[i]).style.zIndex = '0';
+                    currentPageUpButton.className = 'scaleDown';
                     setTimeout(function () {
-                        Q("#" + pageUpButtons[i]).style.zIndex = '1';
-                        Q("#" + pageUpButtons[j]).className = 'scaleDown';
-                        Q("#" + pageUpButtons[j]).style.zIndex = '0';
-                    }, 300);
+                        nextOrPrevPageUpButton.className = 'scaleUp';
+                    }, 100);
                 }
             }
-            else
+            else {
                 for (var n = 1; n < pageUpButtons.length; n++)
                     Q("#" + pageUpButtons[n]).className = 'scaleDown';
+            }
         }
         var classSizeRef = function () {
             if (j == 3) {
@@ -420,7 +444,7 @@ this.addEventListener('load', function () {
         Q('#the-percentiles-ref').onclick = classSizeRef;
         Q('#quartiles-median-ref').onclick = classSizeRef;
         Q('#link-to-median').onclick = classSizeRef;
-        Q('#myName').textContent = '@Power\'f-GOD ⚡⚡';
+        Q('#myName').textContent = "@Power'f-GOD ⚡⚡";
         var takeExampleRef = function () {
             if (j == 1) {
                 j = 2;
@@ -557,12 +581,12 @@ this.addEventListener('load', function () {
                 Q('#summation-f').innerHTML = '<i>&Sigma;f<sub>i</sub></i> = ' + Ef;
                 Q('#summation-fU').innerHTML =
                     '<i>&Sigma;f<sub>i</sub>U<sub>i</sub></i> = ' + EfU;
-                var sumEfUperEf = (EfU / Ef).toFixed(2);
+                var sumEfUperEf_1 = (EfU / Ef).toFixed(2);
                 QAll('.A').forEach(function (_A) { return (_A.textContent = String(A)); });
                 QAll('.C').forEach(function (_C) { return (_C.textContent = String(C)); });
                 QAll('.EfU').forEach(function (_EfU) { return (_EfU.textContent = String(EfU)); });
                 QAll('.Ef').forEach(function (_Ef) { return (_Ef.textContent = String(Ef)); });
-                QAll('.mean-fraction').forEach(function (_mF) { return (_mF.textContent = String(sumEfUperEf)); });
+                QAll('.mean-fraction').forEach(function (_mF) { return (_mF.textContent = String(sumEfUperEf_1)); });
             }
             if (/\./.test(String(mean))) {
                 Q('#computed-mean').textContent = mean.toFixed(2);
@@ -659,11 +683,11 @@ this.addEventListener('load', function () {
                 }
             }
             if (Q('#result')) {
-                var modalFraction = (D1 / (D1 + D2)).toFixed(2);
+                var modalFraction_1 = (D1 / (D1 + D2)).toFixed(2);
                 QAll('.Lmod').forEach(function (_Lmod) { return (_Lmod.textContent = String(Lmod)); });
                 QAll('.D1').forEach(function (_D1) { return (_D1.textContent = String(D1)); });
                 QAll('.D2').forEach(function (_D2) { return (_D2.textContent = String(D2)); });
-                QAll('.mode-fraction').forEach(function (_mF) { return (_mF.textContent = String(modalFraction)); });
+                QAll('.mode-fraction').forEach(function (_mF) { return (_mF.textContent = String(modalFraction_1)); });
                 Q('#computed-mode').textContent = mode.toFixed(2);
             }
             if (/\./.test(String(mode)))
@@ -673,15 +697,26 @@ this.addEventListener('load', function () {
         }
     };
     Q('#compute').onclick = function () {
-        var frequencies = TABLE.FREQUENCY(Q('#frequencies').value);
+        var intervalInputVals = Q('#interval').value.trim();
+        var frequencyInputVals = Q('#frequencies').value.trim();
+        var frequencies = TABLE.FREQUENCY(frequencyInputVals);
         var numFrequencies = frequencies
             ? frequencies.length
             : null;
-        var classIntervals = TABLE.INTERVAL(Q('#interval').value, numFrequencies);
+        var classIntervals = TABLE.INTERVAL(intervalInputVals, numFrequencies);
         var resultEl = Q('#result');
         Q('#container').style.height = 'auto';
         resultEl.className = 'fadeIn';
-        if (!Q('#interval').value.trim()) {
+        if (!frequencies) {
+            alert('Frequencies not set. Input frequencies.');
+            Q('#frequencies').focus();
+            return;
+        }
+        if (frequencies.length < 2) {
+            alert('Length of frequency ought not be less than 2.');
+            return;
+        }
+        if (!intervalInputVals) {
             alert('Class intervals not set. Input class limits.');
             return;
         }
@@ -689,29 +724,21 @@ this.addEventListener('load', function () {
             alert('Input upper class limit.');
             return;
         }
-        if (classIntervals[0][0] > classIntervals[0][1]) {
+        if (classIntervals[0][0] >= classIntervals[0][1]) {
             resultEl.innerHTML =
-                "<b style='color:red;'>Error! Class limits: Invalid input. Lower class limit should not be greater than upper class limit.</b>";
+                "<b style='color:red;'>Error: Invalid class limits input. Lower class limit cannot be greater than or equal to upper class limit.</b>";
             return;
         }
         if (isNaN(classIntervals[0][0]) || isNaN(classIntervals[0][1])) {
             resultEl.innerHTML =
-                "<b style='color:red;'>Error! Class limits: Invalid input. Delete extra decimal points.</b>";
+                "<b style='color:red;'>Error: Invalid class limits input. Delete extra decimal points.</b>";
             return;
         }
-        if (!frequencies) {
-            alert('Frequencies not set. Input frequencies.');
-            return;
-        }
-        if (frequencies.length < 2) {
-            alert('Length of frequency cannot be less than 2.');
-            return;
-        }
-        if (Q('#frequencies').value.trim() && frequencies.length > 1) {
+        if (frequencyInputVals && frequencies.length > 1) {
             var classIntervalsPrettyJoined = classIntervals.map(function (interval) {
                 return interval.join(' - ');
             });
-            resultEl.innerHTML = "\n        <div id='table-wrapper'>\n          <table id='table-data'>\n            <thead>\n              <th> Class Interval </th>\n              <th> Class Boundary </th>\n              <th><i> f<sub>i</sub> </i></th>\n              <th><i> X<sub>i</sub> </i></th>\n              <th><i> U<sub>i</sub> </i></th>\n              <th><i> f<sub>i</sub>U<sub>i</sub> </i></th>\n              <th> Cummulative Frequency </th>\n            </thead>\n            <tr>\n              <td id='table-interval'> </td>\n              <td id='table-boundary'> </td>\n              <td id='table-frequency'> </td>\n              <td id='table-class-mark'> </td>\n              <td id='table-coding-method'> </td>\n              <td id='table-fU'> </td>\n              <td id='cummulative-frequency'> </td>\n            </tr>\n            <tfoot>\n              <td> </td>\n              <td> </td>\n              <td id='summation-f'> </td>\n              <td> </td>\n              <td> </td>\n              <td id='summation-fU'> </td>\n              <td> </td>\n            </tfoot>\n          </table>\n        </div>\n      ";
+            resultEl.innerHTML = "\n        <div id='table-wrapper' class=\"custom-scroll-bar\">\n          <table id='table-data'>\n            <thead>\n              <th> Class Interval </th>\n              <th> Class Boundary </th>\n              <th><i> f<sub>i</sub> </i></th>\n              <th><i> X<sub>i</sub> </i></th>\n              <th><i> U<sub>i</sub> </i></th>\n              <th><i> f<sub>i</sub>U<sub>i</sub> </i></th>\n              <th> Cummulative Frequency </th>\n            </thead>\n            <tr>\n              <td id='table-interval'> </td>\n              <td id='table-boundary'> </td>\n              <td id='table-frequency'> </td>\n              <td id='table-class-mark'> </td>\n              <td id='table-coding-method'> </td>\n              <td id='table-fU'> </td>\n              <td id='cummulative-frequency'> </td>\n            </tr>\n            <tfoot>\n              <td> </td>\n              <td> </td>\n              <td id='summation-f'> </td>\n              <td> </td>\n              <td> </td>\n              <td id='summation-fU'> </td>\n              <td> </td>\n            </tfoot>\n          </table>\n        </div>\n      ";
             Q('#solutions-wrapper').style.display = 'flex';
             STAT131.MEAN(classIntervals, frequencies);
             STAT131.MEDIAN(classIntervals, frequencies);
