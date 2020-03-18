@@ -1,32 +1,34 @@
 "use strict";
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 var Q = document.querySelector.bind(document);
 var QAll = document.querySelectorAll.bind(document);
-var signInPage = Q('#sign-in-page');
-var signInButton = Q('#sign-in');
-var username = Q('#username');
-var signInStatus = Q('#sign-in-success');
-var nextButton = Q('#next');
-var previousButton = Q('#previous');
-var welcomePage = Q('#welcome-page');
-var signOutButton = Q('#sign-out');
-var pageNumber = Q('#pageNum');
-var furtherDiscussion = Q('#further-discussion');
+var signInPage;
+var signInButton;
+var usernameInput;
+var signInStatus;
+var nextButton;
+var previousButton;
+var welcomePage;
+var signOutButton;
+var pageNumber;
+var furtherDiscussion;
+var username;
 this.addEventListener('load', function () {
+    signInPage = Q('#sign-in-page');
+    signInButton = Q('#sign-in');
+    usernameInput = Q('#username');
+    signInStatus = Q('#sign-in-success');
+    nextButton = Q('#next');
+    previousButton = Q('#previous');
+    welcomePage = Q('#welcome-page');
+    signOutButton = Q('#sign-out');
+    pageNumber = Q('#pageNum');
+    furtherDiscussion = Q('#further-discussion');
     if (!/(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(window.navigator.userAgent))
         document.body.classList.add('desktop');
     else
         document.body.classList.remove('desktop');
     var userExists = false;
+    var inputIsValid = true;
     if (navigator.cookieEnabled)
         for (var i in localStorage)
             if (i == 'userId') {
@@ -35,108 +37,73 @@ this.addEventListener('load', function () {
             }
             else
                 continue;
-    var validCharsList = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    if (!userExists)
+        alert("Hi, there! Good day. \n\nThis offline web-app was made to serve as a refresher for our upcoming STAT131 test. And it also may serve as a study guide for our mates that just joined us, because they are the ones I target and were the ones I had in mind before embarking on creating this so they be not oblivious of the topics herein but have a comprehension of them and fare well for short is the time. \n\nOk. Also, If you don't fully/really understand this topic, I urge you to follow, carefully, through the explanations and elaborations and try to understand the concepts for thy profiting. ;) \n\nPS: The contents of this app is subject to mistakes, errors and flaws and that's why I now advice that you authenticate whatever you read herein with a good Stats. Text or the recommended one. \n\nAlright. Godspeed. ;) \n\nDon't forget to forward this web-app to any of your friends who offers or offer STAT131 and just resumed. You could be lending a helping hand. :)");
+    usernameInput.onkeyup = function (e) {
+        if (e.keyCode == 13 || e.which == 13) {
+            usernameInput.blur();
+            signInButton.click();
+        }
+        inputIsValid = !/\W|\d/.test(usernameInput.value.trim());
+        if (!inputIsValid)
+            usernameInput.classList.add('bad-input');
+        else
+            usernameInput.classList.remove('bad-input');
+    };
     signInButton.onclick = function () {
-        var e_1, _a, e_2, _b;
-        var _username = username.value.trim();
-        if (localStorage)
-            localStorage.userId = _username;
-        var userChars = [];
-        if (_username == '') {
+        username = "" + usernameInput.value
+            .trim()
+            .slice(0, 1)
+            .toUpperCase() + usernameInput.value
+            .trim()
+            .slice(1)
+            .toLowerCase();
+        if (!username) {
             alert('No name.\n\nYou have to input your name to sign in.');
-            username.value = '';
+            usernameInput.value = '';
             return;
         }
-        if (_username.length < 2) {
+        if (username.length < 2) {
             alert('Your real name is not a character long.\n\nInput your name.');
             return;
         }
-        if (_username) {
-            try {
-                for (var validCharsList_1 = __values(validCharsList), validCharsList_1_1 = validCharsList_1.next(); !validCharsList_1_1.done; validCharsList_1_1 = validCharsList_1.next()) {
-                    var validChar = validCharsList_1_1.value;
-                    try {
-                        for (var _c = (e_2 = void 0, __values(_username.split(''))), _d = _c.next(); !_d.done; _d = _c.next()) {
-                            var userChar = _d.value;
-                            if (userChar.toLowerCase() == validChar)
-                                userChars.push(userChar);
-                        }
-                    }
-                    catch (e_2_1) { e_2 = { error: e_2_1 }; }
-                    finally {
-                        try {
-                            if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
-                        }
-                        finally { if (e_2) throw e_2.error; }
-                    }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (validCharsList_1_1 && !validCharsList_1_1.done && (_a = validCharsList_1.return)) _a.call(validCharsList_1);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            if (userChars.length < _username.length) {
-                alert('Invalid input. \n\nInput a name [your name]. No nicks or symbols allowed.');
-                username.value = '';
+        if (username) {
+            if (!inputIsValid) {
+                alert('Invalid input. \n\nInput a name [your name]. No nicks, numbers or symbols allowed.');
                 return;
             }
-            signInStatus.textContent = "" + _username
-                .slice(0, 1)
-                .toUpperCase() + _username
-                .slice(1)
-                .toLowerCase() + ", you are now signed in. Welcome.";
-            loadPageNavScript().then(function () {
-                loadStatComputerScript();
-            });
+            signInStatus.textContent = username + ", you are now signed in. Welcome.";
+            if (localStorage)
+                localStorage.userId = username;
             setTimeout(function () {
-                welcomePage.style.overflowY = 'hidden';
-                signInPage.style.overflowY = 'hidden';
-                signInPage.className = 'translate';
+                signInPage.className = 'custom-scroll-bar translate-out-left';
                 signInStatus.textContent = '';
-                username.value = '';
                 setTimeout(function () {
-                    signInPage.style.display = 'none';
-                    welcomePage.style.display = 'flex';
-                    welcomePage.style.overflowY = 'auto';
-                    welcomePage.className = 'welcomePageFadeIn custom-scroll-bar';
+                    welcomePage.className = 'welcome-page-fade-in custom-scroll-bar';
                     setTimeout(function () {
-                        Q('#buttons-wrapper').className = 'slideUpControls';
+                        Q('#buttons-wrapper').className = 'slide-up-controls';
                         setTimeout(function () {
-                            nextButton.className = 'scaleUp';
-                        }, 1200);
+                            nextButton.className = 'scale-up';
+                        }, 1500);
                     }, 300);
                 }, 400);
             }, 1200);
             for (var i = 0; i < QAll('.username').length; i++)
-                QAll('.username')[i].textContent =
-                    _username.slice(0, 1).toUpperCase() +
-                        _username.slice(1).toLowerCase();
+                QAll('.username')[i].textContent = username;
+            loadPageNavScript().then(function () { return loadStatComputerScript(); });
         }
     };
-    var start = 2000;
-    var id = requestAnimationFrame(step);
-    function step(timestamp) {
-        if (!start)
-            start = timestamp;
-        var progress = timestamp - start;
-        if (progress < 2100 && progress > 2000) {
-            console.log('something just happened!', progress);
-            requestAnimationFrame(step);
-        }
-        if (progress > 2500) {
-            console.log('something just cancelled!', progress);
-            cancelAnimationFrame(id);
-        }
-    }
+    Q('#myName').textContent = "@Power'f-GOD ⚡⚡";
     if (localStorage.userId)
-        username.value = localStorage.userId;
+        usernameInput.value = localStorage.userId;
     function loadPageNavScript() {
-        return import('./page-navigation.js').then(function (module) { return module.loadPageNavScript(); });
+        return import('./page-navigation.js').then(function (module) {
+            return module.loadPageNavScript();
+        });
     }
     function loadStatComputerScript() {
-        return import('./stat-computer.js').then(function (module) { return module.statComputerScript(); });
+        return import('./stat-computer.js').then(function (module) {
+            return module.loadStatComputerScript();
+        });
     }
 });

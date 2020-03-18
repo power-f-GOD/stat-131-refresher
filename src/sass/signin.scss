@@ -1,12 +1,12 @@
 
 #username {
   &::placeholder {
-    color: white;
+    color: #bbb;
   }
 
   &:hover {
     background-color: rgb(31, 84, 243);
-    box-shadow: 0 0 1rem rgba(31, 84, 243, 0.8);
+    box-shadow: 0 0 1.5rem rgba(31, 84, 243, 0.8);
   }
 }
 
@@ -15,7 +15,7 @@
 
   &:hover {
     background-color: rgb(255, 77, 45);
-    box-shadow: 0 0 1rem rgba(255, 77, 45, 0.6);
+    box-shadow: 0 0 1.5rem rgba(255, 77, 45, 0.6);
   }
 }
 

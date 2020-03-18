@@ -1,6 +1,13 @@
 export function loadPageNavScript() {
     var i = 0;
     var j = 0;
+    document.body.onkeyup = function (e) {
+        var key = e.keyCode || e.which;
+        if (key == 39 && j != numOfPages - 1)
+            nextButton.click();
+        else if (key == 37 && j !== 0)
+            previousButton.click();
+    };
     var pageNames = [
         'welcome-page',
         'formulae-container',
@@ -14,23 +21,19 @@ export function loadPageNavScript() {
         signOutButton.textContent = 'Signing out...';
         signOutButton.style.width = 'auto';
         signOutButton.style.padding = '10px 20px';
-        Q('#pageUp3').className = 'scaleDown';
+        Q('#pageUp3').className = 'scale-down';
         if (localStorage.userId)
-            username.value = localStorage.userId;
+            username = localStorage.userId;
         i = 0;
         j = 0;
         setTimeout(function () {
-            Q('#buttons-wrapper').className = 'slideDownControls';
-            Q('#fixedTop3').className = 'slideUp';
-            previousButton.className = 'scaleDown';
-            signInPage.style.overflowY = 'hidden';
-            furtherDiscussion.style.overflowY = 'hidden';
+            Q('#buttons-wrapper').className = 'slide-down-controls';
+            Q('#fixedTop3').className = 'slide-up';
+            previousButton.className = 'scale-down';
             setTimeout(function () {
-                furtherDiscussion.className = 'translate';
+                furtherDiscussion.className = 'custom-scroll-bar translate-out-left';
                 setTimeout(function () {
-                    signInPage.className = 'fadeIn custom-scroll-bar';
-                    signInPage.style.display = 'flex';
-                    signInPage.style.overflowY = 'auto';
+                    signInPage.className = 'custom-scroll-bar translate-in';
                     signOutButton.textContent = 'Sign Out';
                 }, 500);
             }, 1300);
@@ -64,58 +67,35 @@ export function loadPageNavScript() {
         }
         var currentPage = Q("#" + pageNames[i]);
         var nextPage = Q("#" + pageNames[j]);
-        nextPage.style.overflowY = 'hidden';
-        nextPage.style.zIndex = '1';
-        currentPage.style.overflowY = 'hidden';
-        currentPage.className = 'translate';
-        currentPage.style.zIndex = '2';
-        setTimeout(function () {
-            nextPage.style.display = 'flex';
-            nextPage.className = 'fadeIn custom-scroll-bar';
-            nextPage.style.overflowY = 'auto';
-            setTimeout(function () {
-                currentPage.style.display = 'none';
-                currentPage.className = '';
-            }, 600);
-        }, 200);
+        currentPage.className = 'custom-scroll-bar translate-out-left';
+        nextPage.className = 'custom-scroll-bar translate-in';
         if (j == numOfPages - 1) {
-            nextButton.className = 'scaleDown';
-            previousButton.className = 'scaleUp';
+            nextButton.className = 'scale-down';
+            previousButton.className = 'scale-up';
         }
         else if (j == 0) {
-            nextButton.className = 'scaleUp';
-            previousButton.className = 'scaleDown';
+            nextButton.className = 'scale-up';
+            previousButton.className = 'scale-down';
         }
         else {
-            nextButton.className = 'scaleUp';
-            previousButton.className = 'scaleUp';
+            nextButton.className = 'scale-up';
+            previousButton.className = 'scale-up';
         }
         pageNumber.textContent = j + 1 + ' / ' + numOfPages;
-        if (j == 0)
-            for (var n = 1; n < fixedTops.length; n++) {
-                Q("#" + pageUpButtons[n]).className = 'scaleDown';
-                Q("#" + fixedTops[n]).className = 'slideUp';
-            }
+        if (j == 0) {
+            Q("#" + pageUpButtons[j + 1]).className = 'scale-down';
+        }
         else if (j == 1 && i == 0) {
-            Q("#" + fixedTops.slice(-1)).className = 'slideUp';
-            setTimeout(function () {
-                Q("#" + fixedTops[j]).className = 'slideDown';
-                Q("#" + fixedTops.slice(-1)).className = '';
-            }, 100);
+            Q("#" + fixedTops.slice(-1)).className = 'slide-up';
+            Q("#" + fixedTops[j]).className = 'slide-down';
         }
         else if (j - i == 1 && true) {
-            Q("#" + fixedTops[i]).className = 'slideUp';
-            setTimeout(function () {
-                Q("#" + fixedTops[j]).className = 'slideDown';
-                Q("#" + fixedTops[i]).className = '';
-            }, 100);
+            Q("#" + fixedTops[i]).className = 'slide-up';
+            Q("#" + fixedTops[j]).className = 'slide-down';
         }
         else if (j - i < 1) {
-            Q("#" + fixedTops[i]).className = 'slideDown';
-            setTimeout(function () {
-                Q("#" + fixedTops[1]).className = 'slideUp';
-                Q("#" + fixedTops[i]).className = '';
-            }, 100);
+            Q("#" + fixedTops[i]).className = 'slide-down';
+            Q("#" + fixedTops[1]).className = 'slide-up';
         }
         setTimeout(displayPageUpButton, 200);
     };
@@ -150,58 +130,38 @@ export function loadPageNavScript() {
         }
         var currentPage = Q("#" + pageNames[i]);
         var previousPage = Q("#" + pageNames[j]);
-        currentPage.className = 'fadeOut';
-        currentPage.style.zIndex = '1';
-        currentPage.style.overflowY = 'hidden';
-        previousPage.style.overflowY = 'hidden';
-        previousPage.style.display = 'flex';
-        previousPage.className = 'translateBack custom-scroll-bar';
-        previousPage.style.zIndex = '2';
-        setTimeout(function () {
-            currentPage.style.display = 'none';
-            currentPage.className = '';
-            previousPage.style.overflowY = 'auto';
-            previousPage.className = 'custom-scroll-bar';
-        }, 500);
+        currentPage.className = 'custom-scroll-bar translate-out-right';
+        previousPage.className = 'custom-scroll-bar translate-in';
         if (j == numOfPages - 1) {
-            nextButton.className = 'scaleDown';
-            previousButton.className = 'scaleUp';
+            nextButton.className = 'scale-down';
+            previousButton.className = 'scale-up';
         }
         else if (j == 0) {
-            nextButton.className = 'scaleUp';
-            previousButton.className = 'scaleDown';
+            nextButton.className = 'scale-up';
+            previousButton.className = 'scale-down';
         }
         else {
-            nextButton.className = 'scaleUp';
-            previousButton.className = 'scaleUp';
+            nextButton.className = 'scale-up';
+            previousButton.className = 'scale-up';
         }
         previousButton.style.display = 'inline-flex';
         pageNumber.textContent = j + 1 + " / " + numOfPages;
         if (j == 0)
             for (var n = 1; n < fixedTops.length; n++) {
-                Q("#" + pageUpButtons[n]).className = 'scaleDown';
-                Q("#" + fixedTops[n]).className = 'slideUp';
+                Q("#" + pageUpButtons[n]).className = 'scale-down';
+                Q("#" + fixedTops[n]).className = 'slide-up';
             }
         else if (j == fixedTops.length - 1 && i == 0) {
-            Q("#" + fixedTops[1]).className = 'slideUp';
-            setTimeout(function () {
-                Q("#" + fixedTops[j]).className = 'slideDown';
-                Q("#" + fixedTops[1]).className = '';
-            }, 100);
+            Q("#" + fixedTops[1]).className = 'slide-up';
+            Q("#" + fixedTops[j]).className = 'slide-down';
         }
         else if (j - i != 1 && j != fixedTops.length - 1) {
-            Q("#" + fixedTops[i]).className = 'slideUp';
-            setTimeout(function () {
-                Q("#" + fixedTops[j]).className = 'slideDown';
-                Q("#" + fixedTops[i]).className = '';
-            }, 100);
+            Q("#" + fixedTops[i]).className = 'slide-up';
+            Q("#" + fixedTops[j]).className = 'slide-down';
         }
         else if (j - i == 1) {
-            Q("#" + fixedTops[i]).className = 'slideUp';
-            setTimeout(function () {
-                Q("#" + fixedTops.slice(-1)).className = 'slideDown';
-                Q("#" + fixedTops[i]).className = '';
-            }, 100);
+            Q("#" + fixedTops[i]).className = 'slide-up';
+            Q("#" + fixedTops.slice(-1)).className = 'slide-down';
         }
         setTimeout(displayPageUpButton, 200);
     };
@@ -209,6 +169,12 @@ export function loadPageNavScript() {
     var swipeCoord = 0;
     addSwipeListeners();
     QAll('.prevent-swipe').forEach(function (el) {
+        el.addEventListener('scroll', removeSwipeListeners);
+        el.addEventListener('touchend', function () {
+            setTimeout(addSwipeListeners, 100);
+        });
+    });
+    QAll('.custom-scroll-bar').forEach(function (el) {
         el.addEventListener('scroll', removeSwipeListeners);
         el.addEventListener('touchend', function () {
             setTimeout(addSwipeListeners, 100);
@@ -225,17 +191,30 @@ export function loadPageNavScript() {
             Q("#" + name).removeEventListener('touchstart', touch);
             Q("#" + name).removeEventListener('touchend', swipe);
         });
+        leftElastic.style.width = '0';
+        rightElastic.style.width = '0';
     }
+    var leftElastic = Q('#left-elastic');
+    var rightElastic = Q('#right-elastic');
     function touch(event) {
         startSwipe = event.changedTouches[0].clientX;
+        if (Math.abs(swipeCoord) > 25)
+            if (j == 0) {
+                leftElastic.style.width = '10rem';
+            }
+            else if (j == numOfPages - 1) {
+                rightElastic.style.width = '10rem';
+            }
     }
     function swipe(event) {
         swipeCoord = event.changedTouches[0].clientX - startSwipe;
-        if (event.changedTouches.length > 1)
+        leftElastic.style.width = '0';
+        rightElastic.style.width = '0';
+        if (event.touches.length > 1)
             return;
-        if (swipeCoord < -105 && j != numOfPages - 1)
+        if (swipeCoord < -50 && j != numOfPages - 1)
             nextButton.click();
-        if (swipeCoord > 105 && j != 0)
+        if (swipeCoord > 50 && j != 0)
             previousButton.click();
     }
     for (var p = 1; p < numOfPages; p++)
@@ -250,98 +229,58 @@ export function loadPageNavScript() {
             return;
         if (scrollPosition > 1000) {
             if (i == 0 && j == 1) {
-                Q("#" + pageUpButtons.slice(-1)).className = 'scaleDown';
-                setTimeout(function () {
-                    currentPageUpButton.className = 'scaleUp';
-                }, 100);
+                Q("#" + pageUpButtons.slice(-1)).className = 'scale-down';
+                currentPageUpButton.className = 'scale-up';
             }
             else if (j - i < 1) {
-                nextOrPrevPageUpButton.className = 'scaleDown';
-                setTimeout(function () {
-                    currentPageUpButton.className = 'scaleUp';
-                }, 100);
+                nextOrPrevPageUpButton.className = 'scale-down';
+                currentPageUpButton.className = 'scale-up';
             }
             else if (j - i == 1) {
-                nextOrPrevPageUpButton.className = 'scaleDown';
-                setTimeout(function () {
-                    currentPageUpButton.className = 'scaleUp';
-                }, 100);
+                nextOrPrevPageUpButton.className = 'scale-down';
+                currentPageUpButton.className = 'scale-up';
             }
             else if (j == pageUpButtons.length - 1 && i != 0) {
-                currentPageUpButton.className = 'scaleDown';
-                setTimeout(function () {
-                    nextOrPrevPageUpButton.className = 'scaleUp';
-                }, 100);
+                currentPageUpButton.className = 'scale-down';
+                nextOrPrevPageUpButton.className = 'scale-up';
             }
         }
         else {
             for (var n = 1; n < pageUpButtons.length; n++)
-                Q("#" + pageUpButtons[n]).className = 'scaleDown';
+                Q("#" + pageUpButtons[n]).className = 'scale-down';
         }
     }
     var classSizeRef = function () {
         if (j == 3) {
-            furtherDiscussion.className = 'fadeOut';
-            furtherDiscussion.style.zIndex = '1';
+            furtherDiscussion.className = 'custom-scroll-bar translate-out-right';
             j = 1;
             i = 2;
-            var currentPage_1 = Q("#" + pageNames[i]);
-            var refPage_1 = Q("#" + pageNames[j]);
-            var currentPageUpButton_1 = Q("#" + pageUpButtons[3]);
-            var refPageUpButton_1 = Q("#" + pageUpButtons[j]);
-            currentPage_1.className = 'fadeOut';
-            currentPage_1.style.zIndex = '1';
-            refPage_1.style.display = 'flex';
-            refPage_1.className = 'translateBack';
-            refPage_1.style.zIndex = '2';
-            setTimeout(function () {
-                furtherDiscussion.style.display = 'none';
-                currentPage_1.style.display = 'none';
-                currentPage_1.className = '';
-                refPage_1.className = '';
-            }, 600);
-            currentPageUpButton_1.style.zIndex = '1';
-            refPageUpButton_1.className = 'scaleUp';
-            refPageUpButton_1.style.zIndex = '0';
-            setTimeout(function () {
-                refPageUpButton_1.style.zIndex = '1';
-                currentPageUpButton_1.className = 'scaleDown';
-                currentPageUpButton_1.style.zIndex = '0';
-            }, 300);
+            var currentPage = Q("#" + pageNames[i]);
+            var refPage = Q("#" + pageNames[j]);
+            var currentPageUpButton = Q("#" + pageUpButtons[3]);
+            var refPageUpButton = Q("#" + pageUpButtons[j]);
+            currentPage.className = 'custom-scroll-bar translate-out-right';
+            refPage.className = 'custom-scroll-bar translate-in';
+            refPageUpButton.className = 'scale-up';
+            currentPageUpButton.className = 'scale-down';
         }
     };
     Q('#semi-interquartile-range-ref').onclick = classSizeRef;
     Q('#the-percentiles-ref').onclick = classSizeRef;
     Q('#quartiles-median-ref').onclick = classSizeRef;
     Q('#link-to-median').onclick = classSizeRef;
-    Q('#myName').textContent = "@Power'f-GOD ⚡⚡";
     var takeExampleRef = function () {
         if (j == 1) {
             j = 2;
             i = 1;
-            var currentPage_2 = Q("#" + pageNames[i]);
-            var refPage_2 = Q("#" + pageNames[j]);
-            var currentPageUpButton_2 = Q("#" + pageUpButtons[1]);
-            var refPageUpButton_2 = Q("#" + pageUpButtons[j]);
-            currentPage_2.className = 'translate';
-            currentPage_2.style.zIndex = '1';
-            refPage_2.style.zIndex = '2';
-            setTimeout(function () {
-                refPage_2.style.display = 'flex';
-                refPage_2.className = 'fadeIn';
-                setTimeout(function () {
-                    currentPage_2.style.display = 'none';
-                    currentPage_2.className = '';
-                }, 400);
-            }, 200);
-            currentPageUpButton_2.style.zIndex = '1';
-            refPageUpButton_2.className = 'scaleUp';
-            refPageUpButton_2.style.zIndex = '0';
-            setTimeout(function () {
-                refPageUpButton_2.style.zIndex = '1';
-                currentPageUpButton_2.className = 'scaleDown';
-                currentPageUpButton_2.style.zIndex = '0';
-            }, 300);
+            var currentPage = Q("#" + pageNames[i]);
+            var refPage = Q("#" + pageNames[j]);
+            var currentPageUpButton = Q("#" + pageUpButtons[1]);
+            var refPageUpButton = Q("#" + pageUpButtons[j]);
+            currentPage.className = 'custom-scroll-bar translate-out-left';
+            refPage.className = 'custom-scroll-bar translate-in';
+            refPageUpButton.className = 'scale-up';
+            currentPageUpButton.className = 'scale-down';
         }
     };
     Q('#take-example').onclick = takeExampleRef;

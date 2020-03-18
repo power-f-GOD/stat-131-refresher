@@ -1,8 +1,3 @@
-* {
-  border: 1px solid yellow;
-  border: none;
-}
-
 #question-solutions {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -78,6 +73,8 @@
 }
 
 #question-solutions #result {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
   margin: 2rem 0;
   color: deepskyblue;
   text-align: center;
@@ -90,8 +87,8 @@
 
 #question-solutions #table-wrapper {
   width: 100%;
-  -webkit-transition: opacity 0.8s;
-  transition: opacity 0.8s;
+  -webkit-transition: 0.8s;
+  transition: 0.8s;
 }
 
 #question-solutions table {

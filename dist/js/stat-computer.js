@@ -8,7 +8,7 @@ var __values = (this && this.__values) || function (o) {
         }
     };
 };
-export function statComputerScript() {
+export function loadStatComputerScript() {
     var TABLE = {
         FREQUENCY: function (frequencies) {
             var _frequencies = frequencies.split(/\D+/).map(function (d) { return +d; });
@@ -239,7 +239,6 @@ export function statComputerScript() {
         var classIntervals = TABLE.INTERVAL(intervalInputVals, numFrequencies);
         var resultEl = Q('#result');
         Q('#container').style.height = 'auto';
-        resultEl.className = 'fadeIn';
         if (!frequencies) {
             alert('Frequencies not set. Input frequencies.');
             Q('#frequencies').focus();
@@ -271,7 +270,8 @@ export function statComputerScript() {
             var classIntervalsPrettyJoined = classIntervals.map(function (interval) {
                 return interval.join(' - ');
             });
-            resultEl.innerHTML = "\n        <div id='table-wrapper' class=\"custom-scroll-bar\">\n          <table id='table-data'>\n            <thead>\n              <th> Class Interval </th>\n              <th> Class Boundary </th>\n              <th><i> f<sub>i</sub> </i></th>\n              <th><i> X<sub>i</sub> </i></th>\n              <th><i> U<sub>i</sub> </i></th>\n              <th><i> f<sub>i</sub>U<sub>i</sub> </i></th>\n              <th> Cummulative Frequency </th>\n            </thead>\n            <tr>\n              <td id='table-interval'> </td>\n              <td id='table-boundary'> </td>\n              <td id='table-frequency'> </td>\n              <td id='table-class-mark'> </td>\n              <td id='table-coding-method'> </td>\n              <td id='table-fU'> </td>\n              <td id='cummulative-frequency'> </td>\n            </tr>\n            <tfoot>\n              <td> </td>\n              <td> </td>\n              <td id='summation-f'> </td>\n              <td> </td>\n              <td> </td>\n              <td id='summation-fU'> </td>\n              <td> </td>\n            </tfoot>\n          </table>\n        </div>\n      ";
+            resultEl.className = 'table-slide-in custom-scroll-bar prevent-swipe';
+            resultEl.innerHTML = "\n        <div id='table-wrapper'>\n          <table id='table-data'>\n            <thead>\n              <th> Class Interval </th>\n              <th> Class Boundary </th>\n              <th><i> f<sub>i</sub> </i></th>\n              <th><i> X<sub>i</sub> </i></th>\n              <th><i> U<sub>i</sub> </i></th>\n              <th><i> f<sub>i</sub>U<sub>i</sub> </i></th>\n              <th> Cummulative Frequency </th>\n            </thead>\n            <tr>\n              <td id='table-interval'> </td>\n              <td id='table-boundary'> </td>\n              <td id='table-frequency'> </td>\n              <td id='table-class-mark'> </td>\n              <td id='table-coding-method'> </td>\n              <td id='table-fU'> </td>\n              <td id='cummulative-frequency'> </td>\n            </tr>\n            <tfoot>\n              <td> </td>\n              <td> </td>\n              <td id='summation-f'> </td>\n              <td> </td>\n              <td> </td>\n              <td id='summation-fU'> </td>\n              <td> </td>\n            </tfoot>\n          </table>\n        </div>\n      ";
             Q('#solutions-wrapper').style.display = 'flex';
             STAT131.MEAN(classIntervals, frequencies);
             STAT131.MEDIAN(classIntervals, frequencies);
@@ -288,7 +288,7 @@ export function statComputerScript() {
         var tableWrapper = Q('#table-wrapper');
         if (tableWrapper) {
             Q('#solutions-wrapper').style.display = 'none';
-            tableWrapper.style.opacity = '0';
+            tableWrapper.className = 'table-fade-out';
         }
         setTimeout(function () {
             Q('#result').innerHTML =
@@ -297,8 +297,8 @@ export function statComputerScript() {
 				second, input the frequencies of all the classes respectively. Don't forget\
 				to separate the values you input ('23' is not same as \
 				'2 3', you know). <br /> <i>Note: For full width of table when result is displayed, rotate screen. </i>;)";
-            Q('#result').className = 'tableFadeIn';
-        }, 500);
+            Q('#result').className = 'scale-up custom-scroll-bar prevent-swipe';
+        }, 750);
     };
     Q('#interval').oninput = clearResults;
     Q('#frequencies').oninput = clearResults;

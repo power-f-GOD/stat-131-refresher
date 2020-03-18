@@ -15,6 +15,7 @@
   left: 0;
   overflow: auto;
   background: black;
+  will-change: transform;
 }
 
 #intro-text-wrapper {
@@ -28,7 +29,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 1.5rem;
+  margin: 1rem 0;
 }
 
 #intro-text-wrapper #intro-text {
@@ -56,7 +57,6 @@ h2 {
   top: -100%;
   left: 0;
   height: auto;
-  z-index: 3;
   position: fixed;
   background: #1f54f3;
   width: 100%;
@@ -113,12 +113,12 @@ h2 {
 
 #buttons-wrapper {
   padding-bottom: 1rem;
+  display: block;
   position: fixed;
   bottom: -100%;
   left: 0;
   width: 100%;
   text-align: center;
-  z-index: 5;
 }
 
 #previous,

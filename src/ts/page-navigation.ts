@@ -1,13 +1,19 @@
 //This code block handles the display, slide effects etc. of the whole app and...
-/*This is an anonymous function to check that the variables i and j are not 
-      available outside of its scope for the app to function appropriately */
-//array for respective page ID's
 
 //Sign-out script event handler
 export function loadPageNavScript() {
   let i = 0;
   let j = 0;
 
+  //handle keyboard event on when user presses (left|right) arrow keys
+  document.body.onkeyup = (e: any) => {
+    let key = e.keyCode || e.which;
+
+    if (key == 39 && j != numOfPages - 1) nextButton.click();
+    else if (key == 37 && j !== 0) previousButton.click();
+  };
+
+  //array for respective page ID's
   const pageNames = [
     'welcome-page',
     'formulae-container',
@@ -23,26 +29,23 @@ export function loadPageNavScript() {
     signOutButton.textContent = 'Signing out...';
     signOutButton.style.width = 'auto';
     signOutButton.style.padding = '10px 20px';
-    Q('#pageUp3')!.className = 'scaleDown';
+    Q('#pageUp3')!.className = 'scale-down';
 
-    if (localStorage.userId) username.value = localStorage.userId;
+    if (localStorage.userId) username = localStorage.userId;
 
     i = 0;
     j = 0;
 
     //Page slide
     setTimeout(() => {
-      Q('#buttons-wrapper')!.className = 'slideDownControls';
-      Q('#fixedTop3')!.className = 'slideUp';
-      previousButton.className = 'scaleDown';
-      signInPage.style.overflowY = 'hidden';
-      furtherDiscussion.style.overflowY = 'hidden';
+      Q('#buttons-wrapper')!.className = 'slide-down-controls';
+      Q('#fixedTop3')!.className = 'slide-up';
+      previousButton.className = 'scale-down';
+
       setTimeout(() => {
-        furtherDiscussion.className = 'translate';
+        furtherDiscussion.className = 'custom-scroll-bar translate-out-left';
         setTimeout(() => {
-          signInPage.className = 'fadeIn custom-scroll-bar';
-          signInPage.style.display = 'flex';
-          signInPage.style.overflowY = 'auto';
+          signInPage.className = 'custom-scroll-bar translate-in';
           signOutButton.textContent = 'Sign Out';
         }, 500);
       }, 1300);
@@ -80,59 +83,40 @@ export function loadPageNavScript() {
 
     //cycles through pages: page slide
 
-    nextPage.style.overflowY = 'hidden';
-    nextPage.style.zIndex = '1';
-    currentPage.style.overflowY = 'hidden';
-    currentPage.className = 'translate';
-    currentPage.style.zIndex = '2';
-    setTimeout(() => {
-      nextPage.style.display = 'flex';
-      nextPage.className = 'fadeIn custom-scroll-bar';
-      nextPage.style.overflowY = 'auto';
-      setTimeout(() => {
-        currentPage.style.display = 'none';
-        currentPage.className = '';
-      }, 600);
-    }, 200);
+    currentPage.className = 'custom-scroll-bar translate-out-left';
+    nextPage.className = 'custom-scroll-bar translate-in';
 
     if (j == numOfPages - 1) {
-      nextButton.className = 'scaleDown';
-      previousButton.className = 'scaleUp';
+      nextButton.className = 'scale-down';
+      previousButton.className = 'scale-up';
     } else if (j == 0) {
-      nextButton.className = 'scaleUp';
-      previousButton.className = 'scaleDown';
+      nextButton.className = 'scale-up';
+      previousButton.className = 'scale-down';
     } else {
-      nextButton.className = 'scaleUp';
-      previousButton.className = 'scaleUp';
+      nextButton.className = 'scale-up';
+      previousButton.className = 'scale-up';
     }
 
     //displays current page number
     pageNumber.textContent = j + 1 + ' / ' + numOfPages;
 
     //This code-block is mainly for the fixed top div and partly for the page-up buttons
-    if (j == 0)
-      for (let n = 1; n < fixedTops.length; n++) {
-        Q(`#${pageUpButtons[n]}`)!.className = 'scaleDown';
-        Q(`#${fixedTops[n]}`)!.className = 'slideUp';
-      }
+    if (j == 0) {
+      Q(`#${pageUpButtons[j + 1]}`)!.className = 'scale-down';
+      // for (let n = 1; n < fixedTops.length; n++) {
+      //   Q(`#${pageUpButtons[n]}`)!.className = 'scale-down';
+      //   Q(`#${fixedTops[n]}`)!.className = 'slide-up';
+      // }
+    }
     else if (j == 1 && i == 0) {
-      Q(`#${fixedTops.slice(-1)}`)!.className = 'slideUp';
-      setTimeout(() => {
-        Q(`#${fixedTops[j]}`)!.className = 'slideDown';
-        Q(`#${fixedTops.slice(-1)}`)!.className = '';
-      }, 100);
+      Q(`#${fixedTops.slice(-1)}`)!.className = 'slide-up';
+      Q(`#${fixedTops[j]}`)!.className = 'slide-down';
     } else if (j - i == 1 && true) {
-      Q(`#${fixedTops[i]}`)!.className = 'slideUp';
-      setTimeout(() => {
-        Q(`#${fixedTops[j]}`)!.className = 'slideDown';
-        Q(`#${fixedTops[i]}`)!.className = '';
-      }, 100);
+      Q(`#${fixedTops[i]}`)!.className = 'slide-up';
+      Q(`#${fixedTops[j]}`)!.className = 'slide-down';
     } else if (j - i < 1) {
-      Q(`#${fixedTops[i]}`)!.className = 'slideDown';
-      setTimeout(() => {
-        Q(`#${fixedTops[1]}`)!.className = 'slideUp';
-        Q(`#${fixedTops[i]}`)!.className = '';
-      }, 100);
+      Q(`#${fixedTops[i]}`)!.className = 'slide-down';
+      Q(`#${fixedTops[1]}`)!.className = 'slide-up';
     }
 
     setTimeout(displayPageUpButton, 200);
@@ -168,30 +152,18 @@ export function loadPageNavScript() {
     const previousPage = Q(`#${pageNames[j]}`) as HTMLElement;
 
     //cycles through pages: page slide
-    currentPage.className = 'fadeOut';
-    currentPage.style.zIndex = '1';
-    currentPage.style.overflowY = 'hidden';
-    previousPage.style.overflowY = 'hidden';
-    previousPage.style.display = 'flex';
-    previousPage.className = 'translateBack custom-scroll-bar';
-    previousPage.style.zIndex = '2';
-
-    setTimeout(() => {
-      currentPage.style.display = 'none';
-      currentPage.className = '';
-      previousPage.style.overflowY = 'auto';
-      previousPage.className = 'custom-scroll-bar';
-    }, 500);
+    currentPage.className = 'custom-scroll-bar translate-out-right';
+    previousPage.className = 'custom-scroll-bar translate-in';
 
     if (j == numOfPages - 1) {
-      nextButton.className = 'scaleDown';
-      previousButton.className = 'scaleUp';
+      nextButton.className = 'scale-down';
+      previousButton.className = 'scale-up';
     } else if (j == 0) {
-      nextButton.className = 'scaleUp';
-      previousButton.className = 'scaleDown';
+      nextButton.className = 'scale-up';
+      previousButton.className = 'scale-down';
     } else {
-      nextButton.className = 'scaleUp';
-      previousButton.className = 'scaleUp';
+      nextButton.className = 'scale-up';
+      previousButton.className = 'scale-up';
     }
 
     previousButton.style.display = 'inline-flex';
@@ -202,27 +174,18 @@ export function loadPageNavScript() {
     //This code-block is mainly for the fixed top div and partly for the page-up buttons
     if (j == 0)
       for (let n = 1; n < fixedTops.length; n++) {
-        Q(`#${pageUpButtons[n]}`)!.className = 'scaleDown';
-        Q(`#${fixedTops[n]}`)!.className = 'slideUp';
+        Q(`#${pageUpButtons[n]}`)!.className = 'scale-down';
+        Q(`#${fixedTops[n]}`)!.className = 'slide-up';
       }
     else if (j == fixedTops.length - 1 && i == 0) {
-      Q(`#${fixedTops[1]}`)!.className = 'slideUp';
-      setTimeout(() => {
-        Q(`#${fixedTops[j]}`)!.className = 'slideDown';
-        Q(`#${fixedTops[1]}`)!.className = '';
-      }, 100);
+      Q(`#${fixedTops[1]}`)!.className = 'slide-up';
+      Q(`#${fixedTops[j]}`)!.className = 'slide-down';
     } else if (j - i != 1 && j != fixedTops.length - 1) {
-      Q(`#${fixedTops[i]}`)!.className = 'slideUp';
-      setTimeout(() => {
-        Q(`#${fixedTops[j]}`)!.className = 'slideDown';
-        Q(`#${fixedTops[i]}`)!.className = '';
-      }, 100);
+      Q(`#${fixedTops[i]}`)!.className = 'slide-up';
+      Q(`#${fixedTops[j]}`)!.className = 'slide-down';
     } else if (j - i == 1) {
-      Q(`#${fixedTops[i]}`)!.className = 'slideUp';
-      setTimeout(() => {
-        Q(`#${fixedTops.slice(-1)}`)!.className = 'slideDown';
-        Q(`#${fixedTops[i]}`)!.className = '';
-      }, 100);
+      Q(`#${fixedTops[i]}`)!.className = 'slide-up';
+      Q(`#${fixedTops.slice(-1)}`)!.className = 'slide-down';
     }
 
     setTimeout(displayPageUpButton, 200);
@@ -242,6 +205,12 @@ export function loadPageNavScript() {
       setTimeout(addSwipeListeners, 100);
     });
   });
+  QAll('.custom-scroll-bar').forEach(el => {
+    el.addEventListener('scroll', removeSwipeListeners);
+    el.addEventListener('touchend', () => {
+      setTimeout(addSwipeListeners, 100);
+    });
+  });
 
   function addSwipeListeners() {
     pageNames.forEach(name => {
@@ -255,22 +224,36 @@ export function loadPageNavScript() {
       Q(`#${name}`)!.removeEventListener('touchstart', touch);
       Q(`#${name}`)!.removeEventListener('touchend', swipe);
     });
+    leftElastic.style.width = '0';
+    rightElastic.style.width = '0';
   }
+
+  const leftElastic = Q('#left-elastic') as HTMLDivElement;
+  const rightElastic = Q('#right-elastic') as HTMLDivElement;
 
   //touchstart event handler
   function touch(event: any) {
     startSwipe = event.changedTouches[0].clientX;
+
+    if (Math.abs(swipeCoord) > 25)
+      if (j == 0) {
+        leftElastic.style.width = '10rem';
+      } else if (j == numOfPages - 1) {
+        rightElastic.style.width = '10rem';
+      }
   }
 
   //touchend event handler
   function swipe(event: any) {
     swipeCoord = event.changedTouches[0].clientX - startSwipe;
+    leftElastic.style.width = '0';
+    rightElastic.style.width = '0';
 
-    if (event.changedTouches.length > 1) return;
+    if (event.touches.length > 1) return;
 
     //checks to prevent from sliding to next page on page-scroll-Y
-    if (swipeCoord < -105 && j != numOfPages - 1) nextButton.click();
-    if (swipeCoord > 105 && j != 0) previousButton.click();
+    if (swipeCoord < -50 && j != numOfPages - 1) nextButton.click();
+    if (swipeCoord > 50 && j != 0) previousButton.click();
   }
 
   //attaching onscroll event to respective pages
@@ -291,37 +274,28 @@ export function loadPageNavScript() {
     //displays page-up buttons on scroll
     if (scrollPosition > 1000) {
       if (i == 0 && j == 1) {
-        Q(`#${pageUpButtons.slice(-1)}`)!.className = 'scaleDown';
-        setTimeout(() => {
-          currentPageUpButton.className = 'scaleUp';
-        }, 100);
+        Q(`#${pageUpButtons.slice(-1)}`)!.className = 'scale-down';
+        currentPageUpButton.className = 'scale-up';
       } else if (j - i < 1) {
-        nextOrPrevPageUpButton.className = 'scaleDown';
-        setTimeout(() => {
-          currentPageUpButton.className = 'scaleUp';
-        }, 100);
+        nextOrPrevPageUpButton.className = 'scale-down';
+        currentPageUpButton.className = 'scale-up';
       } else if (j - i == 1) {
-        nextOrPrevPageUpButton.className = 'scaleDown';
-        setTimeout(() => {
-          currentPageUpButton.className = 'scaleUp';
-        }, 100);
+        nextOrPrevPageUpButton.className = 'scale-down';
+        currentPageUpButton.className = 'scale-up';
       } else if (j == pageUpButtons.length - 1 && i != 0) {
-        currentPageUpButton.className = 'scaleDown';
-        setTimeout(() => {
-          nextOrPrevPageUpButton.className = 'scaleUp';
-        }, 100);
+        currentPageUpButton.className = 'scale-down';
+        nextOrPrevPageUpButton.className = 'scale-up';
       }
     } else {
       for (let n = 1; n < pageUpButtons.length; n++)
-        Q(`#${pageUpButtons[n]}`)!.className = 'scaleDown';
+        Q(`#${pageUpButtons[n]}`)!.className = 'scale-down';
     }
   }
 
   //class size ref onclick event handler
   const classSizeRef = () => {
     if (j == 3) {
-      furtherDiscussion.className = 'fadeOut';
-      furtherDiscussion.style.zIndex = '1';
+      furtherDiscussion.className = 'custom-scroll-bar translate-out-right';
       j = 1;
       i = 2;
 
@@ -332,25 +306,10 @@ export function loadPageNavScript() {
       ) as HTMLButtonElement;
       const refPageUpButton = Q(`#${pageUpButtons[j]}`) as HTMLButtonElement;
 
-      currentPage.className = 'fadeOut';
-      currentPage.style.zIndex = '1';
-      refPage.style.display = 'flex';
-      refPage.className = 'translateBack';
-      refPage.style.zIndex = '2';
-      setTimeout(() => {
-        furtherDiscussion.style.display = 'none';
-        currentPage.style.display = 'none';
-        currentPage.className = '';
-        refPage.className = '';
-      }, 600);
-      currentPageUpButton.style.zIndex = '1';
-      refPageUpButton.className = 'scaleUp';
-      refPageUpButton.style.zIndex = '0';
-      setTimeout(() => {
-        refPageUpButton.style.zIndex = '1';
-        currentPageUpButton.className = 'scaleDown';
-        currentPageUpButton.style.zIndex = '0';
-      }, 300);
+      currentPage.className = 'custom-scroll-bar translate-out-right';
+      refPage.className = 'custom-scroll-bar translate-in';
+      refPageUpButton.className = 'scale-up';
+      currentPageUpButton.className = 'scale-down';
     }
   };
 
@@ -358,7 +317,6 @@ export function loadPageNavScript() {
   Q('#the-percentiles-ref')!.onclick = classSizeRef;
   Q('#quartiles-median-ref')!.onclick = classSizeRef;
   Q('#link-to-median')!.onclick = classSizeRef;
-  Q('#myName')!.textContent = "@Power'f-GOD ⚡⚡";
 
   //'take-example-ref' onclick event handler on page 2
   const takeExampleRef = () => {
@@ -374,25 +332,10 @@ export function loadPageNavScript() {
       const refPageUpButton = Q(`#${pageUpButtons[j]}`) as HTMLButtonElement;
 
       //cycles through the pages: page slide
-      currentPage.className = 'translate';
-      currentPage.style.zIndex = '1';
-      refPage.style.zIndex = '2';
-      setTimeout(() => {
-        refPage.style.display = 'flex';
-        refPage.className = 'fadeIn';
-        setTimeout(() => {
-          currentPage.style.display = 'none';
-          currentPage.className = '';
-        }, 400);
-      }, 200);
-      currentPageUpButton.style.zIndex = '1';
-      refPageUpButton.className = 'scaleUp';
-      refPageUpButton.style.zIndex = '0';
-      setTimeout(() => {
-        refPageUpButton.style.zIndex = '1';
-        currentPageUpButton.className = 'scaleDown';
-        currentPageUpButton.style.zIndex = '0';
-      }, 300);
+      currentPage.className = 'custom-scroll-bar translate-out-left';
+      refPage.className = 'custom-scroll-bar translate-in';
+      refPageUpButton.className = 'scale-up';
+      currentPageUpButton.className = 'scale-down';
     }
   };
   Q('#take-example')!.onclick = takeExampleRef;

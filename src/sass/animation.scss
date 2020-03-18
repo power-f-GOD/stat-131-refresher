@@ -1,552 +1,79 @@
-.translate {
-  animation: translate 0.7s forwards ease;
+.welcome-page-fade-in {
+  transform: scale(1) !important;
+  opacity: 1 !important;
+  overflow-y: auto !important;
+  transition: 0.75s !important;
 }
 
-@-webkit-keyframes translate {
-  from {
-    left: 0;
-    opacity: 1;
-  }
-  to {
-    left: -100%;
-    opacity: 0.5;
-  }
-}
-@-moz-keyframes translate {
-  from {
-    left: 0;
-    opacity: 1;
-  }
-  to {
-    left: -100%;
-    opacity: 0.5;
-  }
-}
-@-o-keyframes translate {
-  from {
-    left: 0;
-    opacity: 1;
-  }
-  to {
-    left: -100%;
-    opacity: 0.5;
-  }
-}
-@keyframes translate {
-  from {
-    left: 0;
-    opacity: 1;
-  }
-  to {
-    left: -100%;
-    opacity: 0.5;
-  }
+.translate-in {
+  overflow-y: auto !important;
+  transform: translateX(0) !important;
+  z-index: 4;
+  opacity: 1 !important;
+  transition: transform 0.7s, opacity 0.7s !important;
 }
 
-.fadeIn {
-  animation: fadeIn 0.6s forwards ease;
+.translate-out-left {
+  overflow: hidden !important;
+  transform: translateX(-100%) !important;
+  z-index: 3 !important;
+  opacity: 1 !important;
+  transition: transform 0.7s !important;
 }
 
-@-webkit-keyframes fadeIn {
-  from {
-    -webkit-transform: translate(100%, 0);
-    opacity: 0.5;
-  }
-  to {
-    -webkit-transform: translate(0, 0);
-    opacity: 1;
-  }
+.translate-out-right {
+  overflow: hidden !important;
+  opacity: 1 !important;
+  z-index: 3 !important;
+  transform: translate(100%) !important;
+  transition: transform 0.7s !important;
 }
-@-moz-keyframes fadeIn {
-  from {
-    -moz-transform: translate(100%, 0);
-    opacity: 0.5;
-  }
-  to {
-    -moz-transform: translate(0, 0);
-    opacity: 1;
-  }
+
+.scale-up {
+  transform: scale(1) !important;
+  opacity: 1 !important;
+  transition: 0.35s !important;
 }
-@-o-keyframes fadeIn {
-  from {
-    -o-transform: translate(100%, 0);
-    opacity: 0.5;
-  }
-  to {
-    -o-transform: translate(0, 0);
-    opacity: 1;
-  }
+
+.scale-down {
+  opacity: 0 !important;
+  transform: scale(0) !important;
+  transition: 0.25s !important;
 }
-@keyframes fadeIn {
+
+.slide-down {
+  z-index: 5;
+  top: 0 !important;
+  transition: 0.75s !important;
+}
+
+.slide-up {
+  z-index: 5;
+  top: -100% !important;
+  transition: 1s !important;
+}
+
+.table-slide-in {
+  animation: tableSlideIn 0.6s forwards ease;
+}
+
+@keyframes tableSlideIn {
   from {
-    transform: translate(100%, 0);
-    opacity: 0.5;
+    transform: translateX(100%);
   }
   to {
-    transform: translate(0, 0);
-    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-.translateBack {
-  animation: translateBack 0.6s forwards ease;
+.slide-up-controls {
+  z-index: 5;
+  bottom: 0 !important;
+  transition: 1s !important;
 }
 
-@-webkit-keyframes translateBack {
-  from {
-    left: -100%;
-    opacity: 0.5;
-  }
-  to {
-    left: 0;
-    opacity: 1;
-  }
-}
-@-moz-keyframes translateBack {
-  from {
-    left: -100%;
-    opacity: 0.5;
-  }
-  to {
-    left: 0;
-    opacity: 1;
-  }
-}
-@-o-keyframes translateBack {
-  from {
-    left: -100%;
-    opacity: 0.5;
-  }
-  to {
-    left: 0;
-    opacity: 1;
-  }
-}
-@keyframes translateBack {
-  from {
-    left: -100%;
-    opacity: 0.5;
-  }
-  to {
-    left: 0;
-    opacity: 1;
-  }
-}
-
-.fadeOut {
-  animation: fadeOut 0.5s forwards ease;
-}
-
-@-webkit-keyframes fadeOut {
-  from {
-    -webkit-transform: translate(0, 0);
-    opacity: 1;
-  }
-  to {
-    -webkit-transform: translate(100%, 0);
-    opacity: 0.5;
-  }
-}
-@-moz-keyframes fadeOut {
-  from {
-    -moz-transform: translate(0, 0);
-    opacity: 1;
-  }
-  to {
-    -moz-transform: translate(100%, 0);
-    opacity: 0.5;
-  }
-}
-@-o-keyframes fadeOut {
-  from {
-    -o-transform: translate(0, 0);
-    opacity: 1;
-  }
-  to {
-    -o-transform: translate(100%, 0);
-    opacity: 0.5;
-  }
-}
-@keyframes fadeOut {
-  from {
-    transform: translate(0, 0);
-    opacity: 1;
-  }
-  to {
-    transform: translate(100%, 0);
-    opacity: 0.5;
-  }
-}
-
-.scaleUp {
-  animation: scaleUp 0.35s forwards ease;
-}
-
-@-webkit-keyframes scaleUp {
-  from {
-    -webkit-transform: scale(0);
-    opacity: 0.6;
-  }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1;
-  }
-}
-@-moz-keyframes scaleUp {
-  from {
-    -moz-transform: scale(0);
-    opacity: 0.6;
-  }
-  to {
-    -moz-transform: scale(1);
-    opacity: 1;
-  }
-}
-@-o-keyframes scaleUp {
-  from {
-    -o-transform: scale(0);
-    opacity: 0.6;
-  }
-  to {
-    -o-transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes scaleUp {
-  from {
-    transform: scale(0);
-    opacity: 0.6;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.scaleDown {
-  animation: scaleDown 0.25s forwards ease;
-}
-
-@-webkit-keyframes scaleDown {
-  from {
-    -webkit-transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    -webkit-transform: scale(0);
-    opacity: 0.6;
-  }
-}
-@-moz-keyframes scaleDown {
-  from {
-    -moz-transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    -moz-transform: scale(0);
-    opacity: 0.6;
-  }
-}
-@-o-keyframes scaleDown {
-  from {
-    -o-transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    -o-transform: scale(0);
-    opacity: 0.6;
-  }
-}
-@keyframes scaleDown {
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: scale(0);
-    opacity: 0.6;
-  }
-}
-
-.slideDown {
-  animation: slideDown 1s forwards ease;
-}
-
-@-webkit-keyframes slideDown {
-  from {
-    top: -100%;
-  }
-  to {
-    top: 0;
-  }
-}
-@-moz-keyframes slideDown {
-  from {
-    top: -100%;
-  }
-  to {
-    top: 0;
-  }
-}
-@-o-keyframes slideDown {
-  from {
-    top: -100%;
-  }
-  to {
-    top: 0;
-  }
-}
-@keyframes slideDown {
-  from {
-    top: -100%;
-  }
-  to {
-    top: 0;
-  }
-}
-
-.slideUp {
-  animation: slideUp 1s forwards ease;
-}
-
-@-webkit-keyframes slideUp {
-  from {
-    top: 0;
-  }
-  to {
-    top: -100%;
-  }
-}
-@-moz-keyframes slideUp {
-  from {
-    top: 0;
-  }
-  to {
-    top: -100%;
-  }
-}
-@-o-keyframes slideUp {
-  from {
-    top: 0;
-  }
-  to {
-    top: -100%;
-  }
-}
-@keyframes slideUp {
-  from {
-    top: 0;
-  }
-  to {
-    top: -100%;
-  }
-}
-
-.tableFadeIn {
-  animation: tableFadeIn 0.35s forwards ease-in-out;
-}
-
-@-webkit-keyframes tableFadeIn {
-  from {
-    -webkit-transform: scale(0.5);
-    opacity: 0;
-  }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1;
-  }
-}
-@-moz-keyframes tableFadeIn {
-  from {
-    -moz-transform: scale(0.5);
-    opacity: 0;
-  }
-  to {
-    -moz-transform: scale(1);
-    opacity: 1;
-  }
-}
-@-o-keyframes tableFadeIn {
-  from {
-    -o-transform: scale(0.5);
-    opacity: 0;
-  }
-  to {
-    -o-transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes tableFadeIn {
-  from {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.tableFadeOut {
-  animation: tableFadeOut 0.8s forwards ease-in-out;
-}
-
-@-webkit-keyframes tableFadeOut {
-  from {
-    -webkit-transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    -webkit-transform: scale(0.5);
-    opacity: 0;
-  }
-}
-@-moz-keyframes tableFadeOut {
-  from {
-    -moz-transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    -moz-transform: scale(0.5);
-    opacity: 0;
-  }
-}
-@-o-keyframes tableFadeOut {
-  from {
-    -o-transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    -o-transform: scale(0.5);
-    opacity: 0;
-  }
-}
-@keyframes tableFadeOut {
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-}
-
-.slideUpControls {
-  animation: slideUpControls 1s forwards ease;
-}
-
-@-webkit-keyframes slideUpControls {
-  from {
-    bottom: -200%;
-  }
-  to {
-    bottom: 0;
-  }
-}
-@-moz-keyframes slideUpControls {
-  from {
-    bottom: -200%;
-  }
-  to {
-    bottom: 0;
-  }
-}
-@-o-keyframes slideUpControls {
-  from {
-    bottom: -200%;
-  }
-  to {
-    bottom: 0;
-  }
-}
-@keyframes slideUpControls {
-  from {
-    bottom: -200%;
-  }
-  to {
-    bottom: 0;
-  }
-}
-
-.slideDownControls {
-  animation: slideDown ontrols 4s forwards ease;
-}
-
-@-webkit-keyframes slideDownControls {
-  from {
-    bottom: 0;
-  }
-  to {
-    bottom: -200%;
-  }
-}
-@-moz-keyframes slideDownControls {
-  from {
-    bottom: 0;
-  }
-  to {
-    bottom: -200%;
-  }
-}
-@-o-keyframes slideDownControls {
-  from {
-    bottom: 0;
-  }
-  to {
-    bottom: -200%;
-  }
-}
-@keyframes slideDownControls {
-  from {
-    bottom: 0;
-  }
-  to {
-    bottom: -200%;
-  }
-}
-
-.welcomePageFadeIn {
-  animation: welcomePageFadeIn 0.75s forwards ease;
-}
-
-@-webkit-keyframes welcomePageFadeIn {
-  from {
-    -webkit-transform: scale(0.75);
-    opacity: 0;
-  }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1;
-  }
-}
-@-moz-keyframes welcomePageFadeIn {
-  from {
-    -moz-transform: scale(0.75);
-    opacity: 0;
-  }
-  to {
-    -moz-transform: scale(1);
-    opacity: 1;
-  }
-}
-@-o-keyframes welcomePageFadeIn {
-  from {
-    -o-transform: scale(0.75);
-    opacity: 0;
-  }
-  to {
-    -o-transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes welcomePageFadeIn {
-  from {
-    transform: scale(0.75);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.slide-down-controls {
+  z-index: 5;
+  bottom: -200%;
+  transition: 4s !important;
 }

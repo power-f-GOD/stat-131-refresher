@@ -7,24 +7,38 @@
   <meta name="description" content="Author: Power I. Sunday, Desc: A STATS 131 Web App (refresher) for 100 Level Physical Sciences students University of Nigeria Nsukka Nigeria." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preload" as="style" href="dist/css/main.min.css" onload="this.onload=null;this.rel='stylesheet';" />
-  <!-- <link rel="preload" as="style" href="./dist/css/welcome.min.css" onload="this.onload=null;this.rel='stylesheet';" /> -->
+  <link rel="preload" as="style" href="dist/css/animation.min.css" onload="this.onload=null;this.rel='stylesheet';" />
   <script src='dist/js/main.js' async></script>
   <!-- sign in page style included here to prevent FOUC (Flash Of Unstyled Content) -->
   <style>
+    #sign-page-page,
+    #welcome-page,
+    #formulae-container,
+    #question-solutions,
+    #further-discussion {
+      opacity: 0;
+      display: flex;
+      transition: 0.5s;
+      transform: translateX(100%);
+    }
+    #welcome-page {
+      opacity: 0;
+      z-index: 4;
+      transform: scale(0.5);
+    }
     #sign-in-page {
       overflow-y: auto;
       background: black;
       height: 100%;
       width: 100%;
-      display: flex;
       flex-direction: column;
       align-items: center;
       position: absolute;
-      padding: 3rem 1rem;
+      padding: 2.75rem 1rem;
       top: 0;
       left: 0;
+      z-index: 6;
     }
-
     #input-wrapper {
       display: flex;
       flex-direction: column;
@@ -32,20 +46,18 @@
       padding: 3.5rem 0;
       width: 100%;
     }
-
     #username {
       width: 80%;
       max-width: 22rem;
       margin: 0.625rem;
       padding: 0.625rem 0.75rem;
-      border: none;
+      border: 0.1875rem solid transparent;
       background: royalblue;
       color: white;
       outline: none;
       border-radius: 0.2rem;
-      transition: background-color 0.3s, box-shadow 0.3s;
+      transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
     }
-
     #sign-in,
     #sign-out {
       width: 40%;
@@ -58,20 +70,17 @@
       color: white;
       transition: background-color 0.3s, box-shadow 0.3s;
     }
-
     #sign-in-page-footer {
       padding: 1rem;
       width: 100%;
       text-align: center;
       background: black;
     }
-
     #sign-in-page-footer span {
       color: #444;
       display: block;
       margin: 0.25rem;
     }
-
     #sign-in-page-footer a {
       color: #888;
       text-decoration: underline;
@@ -84,7 +93,6 @@
       box-sizing: border-box;
       outline: none;
     }
-
     html,
     body {
       background: black;
@@ -96,19 +104,15 @@
       font-size: 1.055rem;
       font-family: Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif;
     }
-
     input,
     button {
       font-size: inherit !important;
       font-family: inherit;
       min-height: 2.8rem;
     }
-
-    input:focus,
-    button:focus {
-      outline: 0.125rem solid rgb(255, 76, 44);
+    button {
+      cursor: pointer !important;
     }
-
     label {
       width: 100%;
       text-align: center;
@@ -117,13 +121,14 @@
 </head>
 
 <body>
+  <div id='left-elastic'></div >
+    <div id='right-elastic'></div >
   <!-- Sign in page - START -->
-  <div id="sign-in-page" style="display: flex;" class="custom-scroll-bar">
+  <div id="sign-in-page" class="custom-scroll-bar">
     <div id="input-wrapper" class="row">
         <label>
         <input type="text" id="username" placeholder="Enter first name to sign in " />
       </label>
-      <br /> 
       <button id="sign-in"> Sign in</button>
       <div id="sign-in-success"></div>
     </div>
@@ -146,7 +151,7 @@
   <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
 
   <!-- Home page - START -->
-  <div id="welcome-page" style="display: none;" class="custom-scroll-bar">
+  <div id="welcome-page" class="custom-scroll-bar">
     <header>
       <h2>MEASURES OF CENTRAL TENDENCY</h2>
       <div class="fixed-top">
@@ -173,7 +178,7 @@
   <!-- Home page - END -->
 
   <!-- Navigation buttons - START -->
-  <div id="buttons-wrapper" style="display: block;">
+  <div id="buttons-wrapper">
     <span id="previous"><span>←</span></span>
     <span id="pageNum"></span>
     <span id="next"><span>→</span></span>
@@ -192,7 +197,7 @@
   <!-- Animated fixed top div - START -->
 
   <!-- PAGE 1 - Formulae Explications - START -->
-  <div id="formulae-container" style="display: none;" class="custom-scroll-bar">
+  <div id="formulae-container" class="custom-scroll-bar">
     <header id="header1">
       <h4 class="rider"><i>(Grouped Data)</i></i></h4>
     </header>
@@ -601,7 +606,7 @@
   </div>
 
   <!-- PAGE 2 - Solving Questions - START -->
-  <div id="question-solutions" style="display: none;" class="custom-scroll-bar">
+  <div id="question-solutions" class="custom-scroll-bar">
     <header id="header2">
       <h4 class="rider"><i>(Grouped Data)</i></i></h4>
     </header>
@@ -619,7 +624,7 @@
         </label>
         <button id="compute">Compute</button>
       </div>
-      <div id="result" class="prevent-swipe">
+      <div id="result" class="prevent-swipe custom-scroll-bar">
         In the input boxes above, for the first, input the class limits of
         only the first class. You don't have to input the limits for all the classes. And for the
         second, input the frequencies of all the classes respectively. Don't forget
@@ -898,7 +903,7 @@
     <h4 class="sub-heading"> Quartiles, Deciles and Percentiles</h4>
   </div>
   <!-- PAGE 3 - Quartiles, Percentiles and Deciles -->
-  <div id="further-discussion" style="display: none;" class="custom-scroll-bar">
+  <div id="further-discussion" class="custom-scroll-bar">
     <header id="header3">
       <h4 class="rider"><i>(Grouped Data)</i></i></h4>
     </header>
@@ -1314,7 +1319,7 @@
   <!-- PAGE 3 - Quartiles, Deciles and Percentiles - END -->
 
   <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK  -->
-
+  
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 //Code for table calculation
-export function statComputerScript() {
+export function loadStatComputerScript() {
   const TABLE = {
     FREQUENCY: (frequencies: string): number[] | null => {
       //extract and return frequencies of classes
@@ -309,7 +309,6 @@ export function statComputerScript() {
     const resultEl = Q('#result') as HTMLElement;
 
     Q('#container')!.style.height = 'auto';
-    resultEl.className = 'fadeIn';
 
     // Input check for frequencies
     if (!frequencies) {
@@ -351,8 +350,9 @@ export function statComputerScript() {
         interval.join(' - ')
       );
 
+      resultEl.className = 'table-slide-in custom-scroll-bar prevent-swipe';
       resultEl.innerHTML = `
-        <div id='table-wrapper' class="custom-scroll-bar">
+        <div id='table-wrapper'>
           <table id='table-data'>
             <thead>
               <th> Class Interval </th>
@@ -414,7 +414,7 @@ export function statComputerScript() {
 
     if (tableWrapper) {
       Q('#solutions-wrapper')!.style.display = 'none';
-      tableWrapper.style.opacity = '0';
+      tableWrapper.className = 'table-fade-out';
     }
 
     setTimeout(() => {
@@ -425,8 +425,8 @@ export function statComputerScript() {
 				to separate the values you input ('23' is not same as \
 				'2 3', you know). <br /> <i>Note: For full width of table when result is displayed, rotate screen. </i>;)";
 
-      Q('#result')!.className = 'tableFadeIn';
-    }, 500);
+      Q('#result')!.className = 'scale-up custom-scroll-bar prevent-swipe';
+    }, 750);
   };
 
   Q('#interval')!.oninput = clearResults;

@@ -1,9 +1,3 @@
-
-
-
-
-
-
 @import './welcome.scss';
 @import './signin.scss';
 @import './explanations.scss';
@@ -42,6 +36,16 @@ i {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+.bad-input {
+  background: rgba(235, 0, 0, 0.5) !important;
+  border-color: rgb(245, 0, 0) !important;
+  box-shadow: 0 0 1.5rem rgba(235, 0, 0, 0.5) !important;
+
+  &:focus {
+    border-color: rgb(255, 0, 0) !important;
+  }
+}
+
 .slant,
 sup,
 sub {
@@ -59,6 +63,26 @@ sub {
   padding: 0 1em;
 }
 
+#left-elastic,
+#right-elastic {
+  height: 100%;
+  width: 0;
+  border-radius: 50%;
+  z-index: 6;
+  background: rgba(255, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  transition: width 0.35s ease-in-out;
+}
+
+#left-elastic {
+  left: -6rem;
+}
+
+#right-elastic {
+  right: -6rem;
+}
+
 .desktop .custom-scroll-bar {
   &::-webkit-scrollbar {
     width: 0.75rem;
@@ -66,7 +90,6 @@ sub {
 
   &::-webkit-scrollbar-track {
     background: rgba(70, 70, 70, 0.7);
-    
   }
 
   &::-webkit-scrollbar-thumb {
@@ -74,4 +97,3 @@ sub {
     border-radius: 0.5rem;
   }
 }
-
