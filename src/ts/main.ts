@@ -14,6 +14,12 @@ let pageNumber: HTMLSpanElement;
 let furtherDiscussion: HTMLDivElement;
 let username: string;
 
+//preload (minified) main CSS. Using this approach as Firefox doesn't support rel='preload' for the link element
+import('./main.min.css.js').then(module => {
+  const minCSS = `<style id='min-main-css'>${module.minifiedMainCSS}</style>`;
+  document.head.querySelector('#general-style')!.insertAdjacentHTML('beforebegin', minCSS);
+}).catch(e => console.error(e + 'Failed to load main CSS!'));
+
 this.addEventListener('load', () => {
   signInPage = Q('#sign-in-page') as HTMLDivElement;
   signInButton = Q('#sign-in') as HTMLButtonElement;

@@ -12,6 +12,10 @@ var signOutButton;
 var pageNumber;
 var furtherDiscussion;
 var username;
+import('./main.min.css.js').then(function (module) {
+    var minCSS = "<style id='min-main-css'>" + module.minifiedMainCSS + "</style>";
+    document.head.querySelector('#general-style').insertAdjacentHTML('beforebegin', minCSS);
+}).catch(function (e) { return console.error(e + 'Failed to load main CSS!'); });
 this.addEventListener('load', function () {
     signInPage = Q('#sign-in-page');
     signInButton = Q('#sign-in');
