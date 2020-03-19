@@ -1,5 +1,5 @@
-#formulae-container,
-#further-discussion {
+#mean-median-mode-page,
+#further-discussion-page {
   padding: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -21,29 +21,29 @@
   overflow: auto;
 }
 
-#further-discussion .align-vertical {
+#further-discussion-page .align-vertical {
   display: table-cell;
   white-space: nowrap;
 }
 
-#further-discussion .div1 {
+#further-discussion-page .div1 {
   display: inline-table;
   white-space: nowrap;
 }
 
-#further-discussion .variable-names {
+#further-discussion-page .variable-names {
   background: #207420;
 }
 
-#further-discussion .variable-definitions {
+#further-discussion-page .variable-definitions {
   background: #aacdaa;
 }
 
-#further-discussion .fraction-wrapper {
+#further-discussion-page .fraction-wrapper {
   padding-top: 0;
 }
 
-#further-discussion #quartile-range {
+#further-discussion-page #quartile-range {
   width: 100%;
   text-align: center;
   font-family: 'Trebuchet MS';

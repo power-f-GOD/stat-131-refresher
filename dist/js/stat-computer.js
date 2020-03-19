@@ -77,11 +77,12 @@ export function loadStatComputerScript() {
                 Xi = +Xi.toFixed(1);
                 X.push(Xi);
             }
-            if (X.length % 2 == 1)
-                A = X[X.length / 2 - 0.5];
+            var xLen = X.length;
+            if (xLen % 2 == 1)
+                A = X[xLen / 2 - 0.5];
             else
-                A = X[X.length / 2];
-            for (var i = 0; i < X.length; i++) {
+                A = X[xLen / 2];
+            for (var i = 0; i < xLen; i++) {
                 Ui = (X[i] - A) / C;
                 if (/\./.test(String(Ui)))
                     U.push(+Ui.toFixed(1));

@@ -93,12 +93,14 @@ export function loadStatComputerScript() {
         X.push(Xi);
       }
 
+      let xLen = X.length;
+
       // Choosing an assumed mean
-      if (X.length % 2 == 1) A = X[X.length / 2 - 0.5];
-      else A = X[X.length / 2];
+      if (xLen % 2 == 1) A = X[xLen / 2 - 0.5];
+      else A = X[xLen / 2];
 
       // Calculating coding method's "U"
-      for (let i = 0; i < X.length; i++) {
+      for (let i = 0; i < xLen; i++) {
         Ui = (X[i] - A) / C;
         if (/\./.test(String(Ui))) U.push(+Ui.toFixed(1));
         else U.push(Ui);

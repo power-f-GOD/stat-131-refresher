@@ -23,8 +23,10 @@ this.addEventListener('load', () => {
   previousButton = Q('#previous') as HTMLButtonElement;
   welcomePage = Q('#welcome-page') as HTMLDivElement;
   signOutButton = Q('#sign-out') as HTMLButtonElement;
-  pageNumber = Q('#pageNum') as HTMLSpanElement;
-  furtherDiscussion = Q('#further-discussion') as HTMLDivElement;
+  pageNumber = Q('#page-num') as HTMLSpanElement;
+  furtherDiscussion = Q('#further-discussion-page') as HTMLDivElement;
+
+  const usernameElements = QAll('.username');
 
   if (
     !/(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(
@@ -38,11 +40,9 @@ this.addEventListener('load', () => {
   let inputIsValid = true;
 
   if (navigator.cookieEnabled)
-    for (let i in localStorage)
-      if (i == 'userId') {
-        userExists = true;
-        break;
-      } else continue;
+    if (localStorage.userId) {
+      userExists = true;
+    }
 
   if (!userExists)
     alert(
@@ -107,30 +107,31 @@ this.addEventListener('load', () => {
             Q('#buttons-wrapper')!.className = 'slide-up-controls';
             setTimeout(() => {
               nextButton.className = 'scale-up';
+              //translate signInPage to right position in case of sign out
+              signInPage.className = 'custom-scroll-bar translate-out-right';
             }, 1500);
           }, 300);
         }, 400);
       }, 1200);
 
       //sets username to kin'a personalize UX
-      for (let i = 0; i < QAll('.username').length; i++)
-        QAll('.username')[i].textContent = username;
+      usernameElements.forEach(element => (element.textContent = username));
 
       loadPageNavScript().then(() => loadStatComputerScript());
     }
   };
-  Q('#myName')!.textContent = "@Power'f-GOD ⚡⚡";
+  Q('#myName')!.textContent = "@Power'f-GOD⚡⚡";
 
   if (localStorage.userId) usernameInput.value = localStorage.userId;
 
   function loadPageNavScript() {
-    return import('./page-navigation.js').then(module =>
+    return import('./page-navigation.min.js').then(module =>
       module.loadPageNavScript()
     );
   }
 
   function loadStatComputerScript() {
-    return import('./stat-computer.js').then(module =>
+    return import('./stat-computer.min.js').then(module =>
       module.loadStatComputerScript()
     );
   }

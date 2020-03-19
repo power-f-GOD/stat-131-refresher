@@ -3,130 +3,27 @@
 
 <head lang="en-US">
   <title>STAT 131</title>
-  <meta  />
-  <meta name="description" content="Author: Power I. Sunday, Desc: A STATS 131 Web App (refresher) for 100 Level Physical Sciences students University of Nigeria Nsukka Nigeria." />
+  <meta />
+  <meta name="description"
+    content="Author: Power I. Sunday, Desc: A STATS 131 Web App (refresher) for 100 Level Physical Sciences students University of Nigeria Nsukka Nigeria." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preload" as="style" href="dist/css/main.min.css" onload="this.onload=null;this.rel='stylesheet';" />
-  <link rel="preload" as="style" href="dist/css/animation.min.css" onload="this.onload=null;this.rel='stylesheet';" />
-  <script src='dist/js/main.js' async></script>
+  <!-- <link rel="preload" as="style" href="dist/css/welcome.min.css" onload="this.onload=null;this.rel='stylesheet';" /> -->
+  <script src='dist/js/main.min.js' async></script>
   <!-- sign in page style included here to prevent FOUC (Flash Of Unstyled Content) -->
   <style>
-    #sign-page-page,
-    #welcome-page,
-    #formulae-container,
-    #question-solutions,
-    #further-discussion {
-      opacity: 0;
-      display: flex;
-      transition: 0.5s;
-      transform: translateX(100%);
-    }
-    #welcome-page {
-      opacity: 0;
-      z-index: 4;
-      transform: scale(0.5);
-    }
-    #sign-in-page {
-      overflow-y: auto;
-      background: black;
-      height: 100%;
-      width: 100%;
-      flex-direction: column;
-      align-items: center;
-      position: absolute;
-      padding: 2.75rem 1rem;
-      top: 0;
-      left: 0;
-      z-index: 6;
-    }
-    #input-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 3.5rem 0;
-      width: 100%;
-    }
-    #username {
-      width: 80%;
-      max-width: 22rem;
-      margin: 0.625rem;
-      padding: 0.625rem 0.75rem;
-      border: 0.1875rem solid transparent;
-      background: royalblue;
-      color: white;
-      outline: none;
-      border-radius: 0.2rem;
-      transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
-    }
-    #sign-in,
-    #sign-out {
-      width: 40%;
-      max-width: 10rem;
-      margin: 0.625rem;
-      padding: 0.625rem;
-      border-radius: 2rem;
-      border: none;
-      background: rgb(255, 76, 44);
-      color: white;
-      transition: background-color 0.3s, box-shadow 0.3s;
-    }
-    #sign-in-page-footer {
-      padding: 1rem;
-      width: 100%;
-      text-align: center;
-      background: black;
-    }
-    #sign-in-page-footer span {
-      color: #444;
-      display: block;
-      margin: 0.25rem;
-    }
-    #sign-in-page-footer a {
-      color: #888;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-  </style>
-  <!-- general style  -->
-  <style>
-    * {
-      box-sizing: border-box;
-      outline: none;
-    }
-    html,
-    body {
-      background: black;
-      color: gainsboro;
-      height: 100%;
-      margin: 0;
-      position: relative;
-      overflow: hidden !important;
-      font-size: 1.055rem;
-      font-family: Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif;
-    }
-    input,
-    button {
-      font-size: inherit !important;
-      font-family: inherit;
-      min-height: 2.8rem;
-    }
-    button {
-      cursor: pointer !important;
-    }
-    label {
-      width: 100%;
-      text-align: center;
-    }
+    /* #sign-in-page and general page style*/
+    #welcome-page,#mean-median-mode-page,#solve-questions-page,#further-discussion-page{opacity:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-transform:translateX(100%);transform:translateX(100%)}#welcome-page{opacity:0;z-index:4;-webkit-transform:scale(0.5);transform:scale(0.5)}#sign-in-page{overflow-y:auto;background:black;height:100%;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;position:absolute;padding:2.75rem 1rem;top:0;left:0;z-index:6}#input-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:3.5rem 0;width:100%}#username{width:80%;max-width:22rem;margin:1rem 0.625rem;padding:0.625rem 0.75rem;border:0.1875rem solid transparent;background:royalblue;color:white;outline:none;border-radius:0.2rem;-webkit-transition:background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s, border 0.3s;transition:background-color 0.3s, box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s}#sign-in,#sign-out{width:40%;max-width:10rem;margin:1rem 0.625rem;padding:0.625rem;border-radius:2rem;border-color:tomato;background:#ff4c2c;color:white;-webkit-transition:background-color 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s}#sign-in-page-footer{padding:1rem;width:100%;text-align:center;background:black}#sign-in-page-footer span{color:#444;display:block;margin:0.25rem}#sign-in-page-footer a{color:#888;text-decoration:underline;font-weight:bold}*{-webkit-box-sizing:border-box;box-sizing:border-box;outline:none}html,body{background:black;color:gainsboro;height:100%;margin:0;position:relative;overflow:hidden !important;font-size:1.055rem;font-family:Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif}input,button{font-size:inherit !important;font-family:inherit;min-height:3rem}button{cursor:pointer !important}label{width:100%;text-align:center}
   </style>
 </head>
 
 <body>
-  <div id='left-elastic'></div >
-    <div id='right-elastic'></div >
+  <div id='left-elastic'></div>
+  <div id='right-elastic'></div>
   <!-- Sign in page - START -->
   <div id="sign-in-page" class="custom-scroll-bar">
     <div id="input-wrapper" class="row">
-        <label>
+      <label>
         <input type="text" id="username" placeholder="Enter first name to sign in " />
       </label>
       <button id="sign-in"> Sign in</button>
@@ -148,10 +45,10 @@
   </div>
   <!-- Sign in page - END -->
 
-  <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
+  <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
 
   <!-- Home page - START -->
-  <div id="welcome-page" class="custom-scroll-bar">
+  <div id="welcome-page" class="custom-scroll-bar" data-role='page'>
     <header>
       <h2>MEASURES OF CENTRAL TENDENCY</h2>
       <div class="fixed-top">
@@ -179,25 +76,30 @@
 
   <!-- Navigation buttons - START -->
   <div id="buttons-wrapper">
-    <span id="previous"><span>←</span></span>
-    <span id="pageNum"></span>
-    <span id="next"><span>→</span></span>
-    <a href="#header1"><span id="pageUp1" class="scaleDown" style="background: rgb(53, 0, 139);">↑</span></a>
-    <a href="#header2"><span id="pageUp2" class="scaleDown" style="background: red;">↑</span></a>
-    <a href="#header3"><span id="pageUp3" class="scaleDown" style="background: deeppink;">↑</span></a>
+    <button id="previous">←</button>
+    <span id="page-num"></span>
+    <button id="next">→</button>
+    <a href="#header1"><span id="pageUp1" data-name='go-up-button' class="scale-down"
+        style="background: rgb(53, 0, 139);">↑</span></a>
+    <a href="#header2"><span id="pageUp2" data-name='go-up-button' class="scale-down"
+        style="background: red;">↑</span></a>
+    <a href="#header3"><span id="pageUp3" data-name='go-up-button' class="scale-down"
+        style="background: deeppink;">↑</span></a>
   </div>
   <!-- Navigation buttons - END -->
 
-  <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
-
+  <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
+  
   <!-- Animated fixed top div - START -->
-  <div id="fixedTop1">
-    <h4 class="sub-heading"> Mean, Median and Mode</h4>
+  <div id="page-title-bar" class="fade-out">
+    <h4 class="sub-heading page-title" data-state='visible'> Mean, Median and Mode</h4>
+    <h4 class="sub-heading page-title" data-state='hidden'> Solve Questions</h4>
+    <h4 class="sub-heading page-title" data-state='hidden'> Quartiles, Deciles and Percentiles</h4>
   </div>
   <!-- Animated fixed top div - START -->
 
   <!-- PAGE 1 - Formulae Explications - START -->
-  <div id="formulae-container" class="custom-scroll-bar">
+  <div id="mean-median-mode-page" class="custom-scroll-bar" data-role='page'>
     <header id="header1">
       <h4 class="rider"><i>(Grouped Data)</i></i></h4>
     </header>
@@ -279,7 +181,7 @@
               mark chosen by you from the frequency table. Generally, it is advised
               that you choose or take the median class mark as your assumed mean because
               it makes finding <b>U<sub>i</sub></b> easier. For instance, if you
-              <a href="#header2" id="take-example"> take an example</a>, you'll notice
+              <a href="#solve-questions-page" id="take-example" rel="noreferrer">take an example</a>, you'll notice
               how the sequence of values in the <b>U<sub>i</sub></b> column of the table,
               starting from the middle, 0 upwards, descends towards <b><span class="infinity">&minus;&infin;</span></b>
               (negatively), and
@@ -598,29 +500,24 @@
   </div>
   <!-- PAGE 1 - Formulae Explications - END -->
 
-
-  <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
-
-  <div id="fixedTop2">
-    <h4 class="sub-heading"> Solve Questions</h4>
-  </div>
+  <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
 
   <!-- PAGE 2 - Solving Questions - START -->
-  <div id="question-solutions" class="custom-scroll-bar">
+  <div id="solve-questions-page" class="custom-scroll-bar" data-role='page'>
     <header id="header2">
       <h4 class="rider"><i>(Grouped Data)</i></i></h4>
     </header>
-    <h3 class="padded white-bg page-name"> Solve Questions:</h3>
+    <h3 class="padded white-bg page-name">Solve Questions:</h3>
 
     <!-- Input for calculations -->
     <div class="row">
       <div id="container" class="padded">
         <label>
-          <input id="interval" value="45 50" placeholder="Input limits of only 1st class e.g. 45 50" type="text" />
+          <input id="interval" value="" placeholder="Input limits of only 1st class e.g. 45 50" type="text" />
         </label>
         <label>
-          <input id="frequencies" value="3 4 5 6 7 8 9"
-          placeholder="Input respective frequencies of all classes e.g. 3 2 5 6 4..." />
+          <input id="frequencies" value=""
+            placeholder="Input respective frequencies of all classes e.g. 3 2 5 6 4..." />
         </label>
         <button id="compute">Compute</button>
       </div>
@@ -632,7 +529,6 @@
         '2 3', you know). <br /> <i>Note: For full width of table when result is displayed, rotate screen.</i>;)
       </div>
     </div>
-
 
     <!-- Container for input question solutions - START -->
     <div class="row">
@@ -896,14 +792,9 @@
       </div>
     </div>
   </div>
-
-  <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
-
-  <div id="fixedTop3">
-    <h4 class="sub-heading"> Quartiles, Deciles and Percentiles</h4>
-  </div>
+  <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
   <!-- PAGE 3 - Quartiles, Percentiles and Deciles -->
-  <div id="further-discussion" class="custom-scroll-bar">
+  <div id="further-discussion-page" class="custom-scroll-bar" data-role='page'>
     <header id="header3">
       <h4 class="rider"><i>(Grouped Data)</i></i></h4>
     </header>
@@ -1317,9 +1208,6 @@
     </div>
   </div>
   <!-- PAGE 3 - Quartiles, Deciles and Percentiles - END -->
-
-  <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK  -->
-  
+  <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
 </body>
-
 </html>

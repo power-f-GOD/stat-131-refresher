@@ -1,9 +1,8 @@
-#formulae-container,
-#further-discussion {
+#mean-median-mode-page,
+#further-discussion-page {
   padding: 0;
   display: flex;
   flex-direction: column;
-  // will-change: ;
   flex-basis: 100%;
   padding-bottom: 7.5rem;
   position: absolute;
@@ -16,29 +15,29 @@
   overflow: auto;
 }
 
-#further-discussion .align-vertical {
+#further-discussion-page .align-vertical {
   display: table-cell;
   white-space: nowrap;
 }
 
-#further-discussion .div1 {
+#further-discussion-page .div1 {
   display: inline-table;
   white-space: nowrap;
 }
 
-#further-discussion .variable-names {
+#further-discussion-page .variable-names {
   background: #207420;
 }
 
-#further-discussion .variable-definitions {
+#further-discussion-page .variable-definitions {
   background: rgb(170, 205, 170);
 }
 
-#further-discussion .fraction-wrapper {
+#further-discussion-page .fraction-wrapper {
   padding-top: 0;
 }
 
-#further-discussion #quartile-range {
+#further-discussion-page #quartile-range {
   width: 100%;
   text-align: center;
   font-family: 'Trebuchet MS';

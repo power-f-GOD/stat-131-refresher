@@ -1,6 +1,7 @@
 .welcome-page-fade-in {
   -webkit-transform: scale(1) !important;
           transform: scale(1) !important;
+  z-index: 5;
   opacity: 1 !important;
   overflow-y: auto !important;
   -webkit-transition: 0.75s !important;
@@ -11,7 +12,7 @@
   overflow-y: auto !important;
   -webkit-transform: translateX(0) !important;
           transform: translateX(0) !important;
-  z-index: 4;
+  z-index: 5;
   opacity: 1 !important;
   -webkit-transition: opacity 0.7s, -webkit-transform 0.7s !important;
   transition: opacity 0.7s, -webkit-transform 0.7s !important;
@@ -101,15 +102,15 @@
 }
 
 .slide-up-controls {
-  z-index: 5;
+  z-index: 8;
   bottom: 0 !important;
   -webkit-transition: 1s !important;
   transition: 1s !important;
 }
 
 .slide-down-controls {
-  z-index: 5;
+  z-index: 8;
   bottom: -200%;
-  -webkit-transition: 4s !important;
-  transition: 4s !important;
+  -webkit-transition: 1s !important;
+  transition: 1s !important;
 }

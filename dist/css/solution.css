@@ -1,4 +1,4 @@
-#question-solutions {
+#solve-questions-page {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -17,11 +17,11 @@
   left: 0;
 }
 
-#question-solutions #container {
+#solve-questions-page #container {
   text-align: center;
 }
 
-#question-solutions input {
+#solve-questions-page input {
   width: 100%;
   display: block;
   max-width: 100%;
@@ -36,18 +36,18 @@
   transition: 0.3s;
 }
 
-#question-solutions input:hover {
+#solve-questions-page input:hover {
   color: white;
   border-color: deepskyblue;
   -webkit-box-shadow: 0 0 1rem rgba(0, 139, 185, 0.5);
           box-shadow: 0 0 1rem rgba(0, 139, 185, 0.5);
 }
 
-#question-solutions input:focus {
+#solve-questions-page input:focus {
   background-color: rgba(0, 98, 131, 0.5);
 }
 
-#question-solutions button#compute {
+#solve-questions-page button#compute {
   width: 40%;
   max-width: 12rem;
   background: seagreen;
@@ -61,18 +61,18 @@
           box-shadow: 0 0.35rem 0 #005400;
 }
 
-#question-solutions button#compute:hover {
+#solve-questions-page button#compute:hover {
   background: #237446;
 }
 
-#question-solutions button#compute:focus {
+#solve-questions-page button#compute:focus {
   -webkit-box-shadow: 0 0.2rem 0 darkgreen;
           box-shadow: 0 0.2rem 0 darkgreen;
   margin-top: 0.7rem;
   margin-bottom: 0.3rem;
 }
 
-#question-solutions #result {
+#solve-questions-page #result {
   -webkit-transform: translateX(0);
           transform: translateX(0);
   margin: 2rem 0;
@@ -81,17 +81,17 @@
   overflow-x: auto;
 }
 
-#question-solutions #result2 {
+#solve-questions-page #result2 {
   padding-top: 2rem;
 }
 
-#question-solutions #table-wrapper {
+#solve-questions-page #table-wrapper {
   width: 100%;
   -webkit-transition: 0.8s;
   transition: 0.8s;
 }
 
-#question-solutions table {
+#solve-questions-page table {
   width: 100%;
   border: 0.125rem solid #333;
   border-collapse: collapse;
@@ -101,30 +101,30 @@
   font-family: 'Cambria', 'Times New Roman';
 }
 
-#question-solutions tfoot {
+#solve-questions-page tfoot {
   font-weight: bold;
   padding: 0.325rem 0;
   text-align: left;
 }
 
-#question-solutions p {
+#solve-questions-page p {
   margin: 0.5rem 0;
 }
 
-#question-solutions td,
-#question-solutions th {
+#solve-questions-page td,
+#solve-questions-page th {
   border-collapse: collapse;
   border: 0.125rem solid #333;
   padding: 0.25rem 0.75rem;
 }
 
-#question-solutions td p,
-#question-solutions th p {
+#solve-questions-page td p,
+#solve-questions-page th p {
   text-align: center;
 }
 
-#question-solutions .brace-open,
-#question-solutions .brace-close {
+#solve-questions-page .brace-open,
+#solve-questions-page .brace-close {
   font-size: 3.25rem;
 }
 

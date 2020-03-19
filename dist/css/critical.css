@@ -1,0 +1,140 @@
+#welcome-page,
+#mean-median-mode-page,
+#solve-questions-page,
+#further-discussion-page {
+  opacity: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+#welcome-page {
+  opacity: 0;
+  z-index: 4;
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+}
+
+#sign-in-page {
+  overflow-y: auto;
+  background: black;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  padding: 2.75rem 1rem;
+  top: 0;
+  left: 0;
+  z-index: 6;
+}
+
+#input-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3.5rem 0;
+  width: 100%;
+}
+
+#username {
+  width: 80%;
+  max-width: 22rem;
+  margin: 1rem 0.625rem;
+  padding: 0.625rem 0.75rem;
+  border: 0.1875rem solid transparent;
+  background: royalblue;
+  color: white;
+  outline: none;
+  border-radius: 0.2rem;
+  -webkit-transition: background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;
+  transition: background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s;
+}
+
+#sign-in,
+#sign-out {
+  width: 40%;
+  max-width: 10rem;
+  margin: 1rem 0.625rem;
+  padding: 0.625rem;
+  border-radius: 2rem;
+  border-color: tomato;
+  background: #ff4c2c;
+  color: white;
+  -webkit-transition: background-color 0.3s, -webkit-box-shadow 0.3s;
+  transition: background-color 0.3s, -webkit-box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s;
+}
+
+#sign-in-page-footer {
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  background: black;
+}
+
+#sign-in-page-footer span {
+  color: #444;
+  display: block;
+  margin: 0.25rem;
+}
+
+#sign-in-page-footer a {
+  color: #888;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  outline: none;
+}
+
+html,
+body {
+  background: black;
+  color: gainsboro;
+  height: 100%;
+  margin: 0;
+  position: relative;
+  overflow: hidden !important;
+  font-size: 1.055rem;
+  font-family: Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif;
+}
+
+input,
+button {
+  font-size: inherit !important;
+  font-family: inherit;
+  min-height: 3rem;
+}
+
+button {
+  cursor: pointer !important;
+}
+
+label {
+  width: 100%;
+  text-align: center;
+}

@@ -1,6 +1,12 @@
 export function loadPageNavScript() {
     var i = 0;
     var j = 0;
+    var pages = QAll('div[data-role="page"]');
+    var numOfPages = pages.length;
+    var pageTitleBar = Q('#page-title-bar');
+    var pageTitles = QAll('.page-title');
+    var goUpButtons = QAll('span[data-name="go-up-button"]');
+    var numOfPageUpButtons = goUpButtons.length;
     document.body.onkeyup = function (e) {
         var key = e.keyCode || e.which;
         if (key == 39 && j != numOfPages - 1)
@@ -8,19 +14,8 @@ export function loadPageNavScript() {
         else if (key == 37 && j !== 0)
             previousButton.click();
     };
-    var pageNames = [
-        'welcome-page',
-        'formulae-container',
-        'question-solutions',
-        'further-discussion'
-    ];
-    var numOfPages = pageNames.length;
-    var fixedTops = [null, 'fixedTop1', 'fixedTop2', 'fixedTop3'];
-    var pageUpButtons = [null, 'pageUp1', 'pageUp2', 'pageUp3'];
     signOutButton.onclick = function () {
         signOutButton.textContent = 'Signing out...';
-        signOutButton.style.width = 'auto';
-        signOutButton.style.padding = '10px 20px';
         Q('#pageUp3').className = 'scale-down';
         if (localStorage.userId)
             username = localStorage.userId;
@@ -28,19 +23,25 @@ export function loadPageNavScript() {
         j = 0;
         setTimeout(function () {
             Q('#buttons-wrapper').className = 'slide-down-controls';
-            Q('#fixedTop3').className = 'slide-up';
+            pageTitleBar.dataset.state = 'hidden';
             previousButton.className = 'scale-down';
             setTimeout(function () {
                 furtherDiscussion.className = 'custom-scroll-bar translate-out-left';
                 setTimeout(function () {
                     signInPage.className = 'custom-scroll-bar translate-in';
+                    pages.forEach(function (page) { return (page.className = 'custom-scroll-bar'); });
                     signOutButton.textContent = 'Sign Out';
                 }, 500);
             }, 1300);
         }, 1700);
     };
     pageNumber.textContent = '1 / ' + numOfPages;
+    var currentPage;
+    var nextOrPrevPage;
+    var currentPageUpButton;
+    var nextOrPrevPageUpButton;
     nextButton.onclick = function () {
+        nextButton.disabled = true;
         if (i == 0 && j == 0) {
             i = 0;
             j++;
@@ -65,10 +66,10 @@ export function loadPageNavScript() {
             i++;
             j++;
         }
-        var currentPage = Q("#" + pageNames[i]);
-        var nextPage = Q("#" + pageNames[j]);
+        currentPage = pages[i];
+        nextOrPrevPage = pages[j];
         currentPage.className = 'custom-scroll-bar translate-out-left';
-        nextPage.className = 'custom-scroll-bar translate-in';
+        nextOrPrevPage.className = 'custom-scroll-bar translate-in';
         if (j == numOfPages - 1) {
             nextButton.className = 'scale-down';
             previousButton.className = 'scale-up';
@@ -82,24 +83,26 @@ export function loadPageNavScript() {
             previousButton.className = 'scale-up';
         }
         pageNumber.textContent = j + 1 + ' / ' + numOfPages;
+        pageTitleBar.dataset.state = 'visible';
         if (j == 0) {
-            Q("#" + pageUpButtons[j + 1]).className = 'scale-down';
+            goUpButtons[j].className = 'scale-down';
+            pageTitleBar.dataset.state = 'hidden';
         }
         else if (j == 1 && i == 0) {
-            Q("#" + fixedTops.slice(-1)).className = 'slide-up';
-            Q("#" + fixedTops[j]).className = 'slide-down';
+            pageTitles[numOfPages - 2].dataset.state = 'hidden';
+            pageTitles[j - 1].dataset.state = 'visible';
         }
-        else if (j - i == 1 && true) {
-            Q("#" + fixedTops[i]).className = 'slide-up';
-            Q("#" + fixedTops[j]).className = 'slide-down';
+        else if (j - i == 1) {
+            pageTitles[i - 1].dataset.state = 'hidden';
+            pageTitles[j - 1].dataset.state = 'visible';
         }
-        else if (j - i < 1) {
-            Q("#" + fixedTops[i]).className = 'slide-down';
-            Q("#" + fixedTops[1]).className = 'slide-up';
-        }
-        setTimeout(displayPageUpButton, 200);
+        setTimeout(function () {
+            displayPageUpButton();
+            nextButton.disabled = false;
+        }, 300);
     };
     previousButton.onclick = function () {
+        previousButton.disabled = true;
         if (i == 0 && j == 0) {
             i = 0;
             j = numOfPages - 1;
@@ -128,10 +131,10 @@ export function loadPageNavScript() {
             j--;
             i--;
         }
-        var currentPage = Q("#" + pageNames[i]);
-        var previousPage = Q("#" + pageNames[j]);
+        currentPage = pages[i];
+        nextOrPrevPage = pages[j];
         currentPage.className = 'custom-scroll-bar translate-out-right';
-        previousPage.className = 'custom-scroll-bar translate-in';
+        nextOrPrevPage.className = 'custom-scroll-bar translate-in';
         if (j == numOfPages - 1) {
             nextButton.className = 'scale-down';
             previousButton.className = 'scale-up';
@@ -146,56 +149,55 @@ export function loadPageNavScript() {
         }
         previousButton.style.display = 'inline-flex';
         pageNumber.textContent = j + 1 + " / " + numOfPages;
-        if (j == 0)
-            for (var n = 1; n < fixedTops.length; n++) {
-                Q("#" + pageUpButtons[n]).className = 'scale-down';
-                Q("#" + fixedTops[n]).className = 'slide-up';
-            }
-        else if (j == fixedTops.length - 1 && i == 0) {
-            Q("#" + fixedTops[1]).className = 'slide-up';
-            Q("#" + fixedTops[j]).className = 'slide-down';
+        if (j == 0) {
+            goUpButtons[j].className = 'scale-down';
+            pageTitleBar.dataset.state = 'hidden';
         }
-        else if (j - i != 1 && j != fixedTops.length - 1) {
-            Q("#" + fixedTops[i]).className = 'slide-up';
-            Q("#" + fixedTops[j]).className = 'slide-down';
+        else if (j == numOfPages - 1 && i == 0) {
+            pageTitles[i].dataset.state = 'hidden';
+            pageTitles[j].dataset.state = 'visible';
         }
-        else if (j - i == 1) {
-            Q("#" + fixedTops[i]).className = 'slide-up';
-            Q("#" + fixedTops.slice(-1)).className = 'slide-down';
+        else if (j - i != 1 && j != numOfPages - 1) {
+            pageTitles[i - 1].dataset.state = 'hidden';
+            pageTitles[j - 1].dataset.state = 'visible';
         }
-        setTimeout(displayPageUpButton, 200);
+        setTimeout(function () {
+            displayPageUpButton();
+            previousButton.disabled = false;
+        }, 300);
     };
     var startSwipe = 0;
     var swipeCoord = 0;
-    addSwipeListeners();
+    var leftElastic = Q('#left-elastic');
+    var rightElastic = Q('#right-elastic');
+    pages.forEach(function (page) {
+        page.addEventListener('touchstart', touch);
+        page.addEventListener('touchend', swipe);
+        page.addEventListener('scroll', displayPageUpButton);
+    });
     QAll('.prevent-swipe').forEach(function (el) {
         el.addEventListener('scroll', removeSwipeListeners);
-        el.addEventListener('touchend', function () {
-            setTimeout(addSwipeListeners, 100);
-        });
+        el.addEventListener('touchend', addSwipeListeners);
     });
     QAll('.custom-scroll-bar').forEach(function (el) {
         el.addEventListener('scroll', removeSwipeListeners);
-        el.addEventListener('touchend', function () {
-            setTimeout(addSwipeListeners, 100);
-        });
+        el.addEventListener('touchend', addSwipeListeners);
     });
     function addSwipeListeners() {
-        pageNames.forEach(function (name) {
-            Q("#" + name).addEventListener('touchstart', touch);
-            Q("#" + name).addEventListener('touchend', swipe);
-        });
+        if (nextOrPrevPage)
+            setTimeout(function () {
+                nextOrPrevPage.addEventListener('touchstart', touch);
+                nextOrPrevPage.addEventListener('touchend', swipe);
+            }, 300);
+        hideElastic();
     }
     function removeSwipeListeners() {
-        pageNames.forEach(function (name) {
-            Q("#" + name).removeEventListener('touchstart', touch);
-            Q("#" + name).removeEventListener('touchend', swipe);
-        });
-        leftElastic.style.width = '0';
-        rightElastic.style.width = '0';
+        if (nextOrPrevPage) {
+            nextOrPrevPage.removeEventListener('touchstart', touch);
+            nextOrPrevPage.removeEventListener('touchend', swipe);
+        }
+        hideElastic();
     }
-    var leftElastic = Q('#left-elastic');
-    var rightElastic = Q('#right-elastic');
     function touch(event) {
         startSwipe = event.changedTouches[0].clientX;
         if (Math.abs(swipeCoord) > 25)
@@ -208,8 +210,7 @@ export function loadPageNavScript() {
     }
     function swipe(event) {
         swipeCoord = event.changedTouches[0].clientX - startSwipe;
-        leftElastic.style.width = '0';
-        rightElastic.style.width = '0';
+        hideElastic();
         if (event.touches.length > 1)
             return;
         if (swipeCoord < -50 && j != numOfPages - 1)
@@ -217,19 +218,24 @@ export function loadPageNavScript() {
         if (swipeCoord > 50 && j != 0)
             previousButton.click();
     }
-    for (var p = 1; p < numOfPages; p++)
-        Q("#" + pageNames[p]).addEventListener('scroll', displayPageUpButton);
+    function hideElastic() {
+        leftElastic.style.width = '0';
+        rightElastic.style.width = '0';
+    }
     function displayPageUpButton() {
-        var scrollPosition = Q("#" + pageNames[j]).scrollTop;
-        var currentPageUpButton = Q("#" + pageUpButtons[j]);
-        var nextOrPrevPageUpButton = Q("#" + pageUpButtons[i]);
         if (j == 0)
             return;
-        if (scrollPosition <= 1000 && currentPageUpButton.className == '')
+        var scrollPosition = pages[j].scrollTop;
+        currentPageUpButton = goUpButtons[j - 1];
+        nextOrPrevPageUpButton = goUpButtons[i == 0 ? 0 : i - 1];
+        if (scrollPosition <= 1000 &&
+            currentPageUpButton.className == 'scale-down') {
+            nextOrPrevPageUpButton.className = 'scale-down';
             return;
+        }
         if (scrollPosition > 1000) {
             if (i == 0 && j == 1) {
-                Q("#" + pageUpButtons.slice(-1)).className = 'scale-down';
+                goUpButtons[numOfPageUpButtons - 1].className = 'scale-down';
                 currentPageUpButton.className = 'scale-up';
             }
             else if (j - i < 1) {
@@ -240,48 +246,31 @@ export function loadPageNavScript() {
                 nextOrPrevPageUpButton.className = 'scale-down';
                 currentPageUpButton.className = 'scale-up';
             }
-            else if (j == pageUpButtons.length - 1 && i != 0) {
+            else if (j == numOfPageUpButtons - 1 && i != 0) {
                 currentPageUpButton.className = 'scale-down';
                 nextOrPrevPageUpButton.className = 'scale-up';
             }
         }
         else {
-            for (var n = 1; n < pageUpButtons.length; n++)
-                Q("#" + pageUpButtons[n]).className = 'scale-down';
+            currentPageUpButton.className = 'scale-down';
         }
     }
     var classSizeRef = function () {
         if (j == 3) {
             furtherDiscussion.className = 'custom-scroll-bar translate-out-right';
-            j = 1;
-            i = 2;
-            var currentPage = Q("#" + pageNames[i]);
-            var refPage = Q("#" + pageNames[j]);
-            var currentPageUpButton = Q("#" + pageUpButtons[3]);
-            var refPageUpButton = Q("#" + pageUpButtons[j]);
-            currentPage.className = 'custom-scroll-bar translate-out-right';
-            refPage.className = 'custom-scroll-bar translate-in';
-            refPageUpButton.className = 'scale-up';
-            currentPageUpButton.className = 'scale-down';
+            pageTitles[2].dataset.state = 'hidden';
+            goUpButtons[2].className = 'scale-down';
+            j = 2;
+            i = 1;
+            previousButton.click();
         }
     };
     Q('#semi-interquartile-range-ref').onclick = classSizeRef;
     Q('#the-percentiles-ref').onclick = classSizeRef;
     Q('#quartiles-median-ref').onclick = classSizeRef;
     Q('#link-to-median').onclick = classSizeRef;
-    var takeExampleRef = function () {
-        if (j == 1) {
-            j = 2;
-            i = 1;
-            var currentPage = Q("#" + pageNames[i]);
-            var refPage = Q("#" + pageNames[j]);
-            var currentPageUpButton = Q("#" + pageUpButtons[1]);
-            var refPageUpButton = Q("#" + pageUpButtons[j]);
-            currentPage.className = 'custom-scroll-bar translate-out-left';
-            refPage.className = 'custom-scroll-bar translate-in';
-            refPageUpButton.className = 'scale-up';
-            currentPageUpButton.className = 'scale-down';
-        }
+    Q('#take-example').onclick = function (e) {
+        e.preventDefault();
+        nextButton.click();
     };
-    Q('#take-example').onclick = takeExampleRef;
 }
