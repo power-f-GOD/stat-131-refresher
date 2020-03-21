@@ -67,10 +67,6 @@
   color: tomato;
 }
 
-.quick-links a:hover {
-  text-decoration: underline;
-}
-
 .formula-wrapper {
   width: 100%;
   height: 8.125rem;
@@ -130,6 +126,14 @@ span {
 a {
   text-decoration: none;
   color: #3e62ff;
+}
+
+a:focus, a:hover {
+  font-weight: bolder;
+}
+
+a:focus {
+  text-decoration: underline;
 }
 
 .align-vertical {

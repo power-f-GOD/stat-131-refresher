@@ -11,15 +11,15 @@ var __values = (this && this.__values) || function (o) {
 export function loadStatComputerScript() {
     var TABLE = {
         FREQUENCY: function (frequencies) {
-            var _frequencies = frequencies.split(/\D+/).map(function (d) { return +d; });
-            return Number(_frequencies[1]) ? _frequencies : null;
+            var _frequencies = frequencies.split(/\D+/).map(Number);
+            return _frequencies;
         },
         INTERVAL: function (intervals, numFrequencies) {
             var classIntervals = [[]];
             var firstClassLimits = intervals
                 .split(/[^.\d+]/)
                 .filter(Boolean)
-                .map(function (d) { return +d; });
+                .map(Number);
             var C;
             if (isNaN(firstClassLimits[1]) || !numFrequencies) {
                 return null;
@@ -239,40 +239,51 @@ export function loadStatComputerScript() {
             : null;
         var classIntervals = TABLE.INTERVAL(intervalInputVals, numFrequencies);
         var resultEl = Q('#result');
+        var errMsg;
         Q('#container').style.height = 'auto';
-        if (!frequencies) {
-            alert('Frequencies not set. Input frequencies.');
+        resultEl.className = 'bad-input-feedback';
+        if (!intervalInputVals) {
+            errMsg = 'Class intervals not set. Input class limits.';
+            resultEl.textContent = errMsg;
+            alert(errMsg);
+            return;
+        }
+        if (!intervalInputVals.split(/\D+/)[1]) {
+            console.log(classIntervals, frequencies);
+            errMsg = 'Input upper class limit.';
+            resultEl.textContent = errMsg;
+            alert(errMsg);
+            Q('#interval').focus();
+            return;
+        }
+        if (!frequencyInputVals) {
+            errMsg = 'Frequencies not set. Input frequencies.';
+            resultEl.textContent = errMsg;
+            alert(errMsg);
             Q('#frequencies').focus();
             return;
         }
         if (frequencies.length < 2) {
-            alert('Length of frequency ought not be less than 2.');
-            return;
-        }
-        if (!intervalInputVals) {
-            alert('Class intervals not set. Input class limits.');
-            return;
-        }
-        if (!classIntervals) {
-            alert('Input upper class limit.');
+            errMsg = 'Length of frequency ought not be less than 2.';
+            resultEl.textContent = errMsg;
+            alert(errMsg);
             return;
         }
         if (classIntervals[0][0] >= classIntervals[0][1]) {
             resultEl.innerHTML =
-                "<b style='color:red;'>Error: Invalid class limits input. Lower class limit cannot be greater than or equal to upper class limit.</b>";
+                "Error: Invalid input for class limits. Lower class limit, " + classIntervals[0][0] + ", cannot be greater than or equal to upper class limit, " + classIntervals[0][1] + ".<br />Input limits like \"35, 45\"";
             return;
         }
         if (isNaN(classIntervals[0][0]) || isNaN(classIntervals[0][1])) {
-            resultEl.innerHTML =
-                "<b style='color:red;'>Error: Invalid class limits input. Delete extra decimal points.</b>";
+            resultEl.innerHTML = "Error: Invalid class limits input. Delete extra decimal points";
             return;
         }
         if (frequencyInputVals && frequencies.length > 1) {
             var classIntervalsPrettyJoined = classIntervals.map(function (interval) {
                 return interval.join(' - ');
             });
-            resultEl.className = 'table-slide-in custom-scroll-bar prevent-swipe';
             resultEl.innerHTML = "\n        <div id='table-wrapper'>\n          <table id='table-data'>\n            <thead>\n              <th> Class Interval </th>\n              <th> Class Boundary </th>\n              <th><i> f<sub>i</sub> </i></th>\n              <th><i> X<sub>i</sub> </i></th>\n              <th><i> U<sub>i</sub> </i></th>\n              <th><i> f<sub>i</sub>U<sub>i</sub> </i></th>\n              <th> Cummulative Frequency </th>\n            </thead>\n            <tr>\n              <td id='table-interval'> </td>\n              <td id='table-boundary'> </td>\n              <td id='table-frequency'> </td>\n              <td id='table-class-mark'> </td>\n              <td id='table-coding-method'> </td>\n              <td id='table-fU'> </td>\n              <td id='cummulative-frequency'> </td>\n            </tr>\n            <tfoot>\n              <td> </td>\n              <td> </td>\n              <td id='summation-f'> </td>\n              <td> </td>\n              <td> </td>\n              <td id='summation-fU'> </td>\n              <td> </td>\n            </tfoot>\n          </table>\n        </div>\n      ";
+            resultEl.className = 'table-slide-in custom-scroll-bar prevent-swipe';
             Q('#solutions-wrapper').style.display = 'flex';
             STAT131.MEAN(classIntervals, frequencies);
             STAT131.MEDIAN(classIntervals, frequencies);
@@ -285,12 +296,18 @@ export function loadStatComputerScript() {
             }
         }
     };
-    var clearResults = function () {
+    var clearResults = function (e) {
         var tableWrapper = Q('#table-wrapper');
         if (tableWrapper) {
             Q('#solutions-wrapper').style.display = 'none';
             tableWrapper.className = 'table-fade-out';
         }
+        if (e.keyCode == 13 || e.which == 13) {
+            Q('#compute').click();
+            e.target.blur();
+            return;
+        }
+        Q('#result').className = 'custom-scroll-bar prevent-swipe';
         setTimeout(function () {
             Q('#result').innerHTML =
                 "In the input boxes above, for the first, input the class limits of\
@@ -298,9 +315,8 @@ export function loadStatComputerScript() {
 				second, input the frequencies of all the classes respectively. Don't forget\
 				to separate the values you input ('23' is not same as \
 				'2 3', you know). <br /> <i>Note: For full width of table when result is displayed, rotate screen. </i>;)";
-            Q('#result').className = 'scale-up custom-scroll-bar prevent-swipe';
-        }, 750);
+        }, 650);
     };
-    Q('#interval').oninput = clearResults;
-    Q('#frequencies').oninput = clearResults;
+    Q('#interval').onkeyup = clearResults;
+    Q('#frequencies').onkeyup = clearResults;
 }

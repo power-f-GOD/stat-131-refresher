@@ -15,22 +15,33 @@ let furtherDiscussion: HTMLDivElement;
 let username: string;
 
 //preload (minified) main CSS. Using this approach as Firefox doesn't support rel='preload' for the link element
-import('./main.min.css.js').then(module => {
-  const minCSS = `<style id='min-main-css'>${module.minifiedMainCSS}</style>`;
-  document.head.querySelector('#general-style')!.insertAdjacentHTML('beforebegin', minCSS);
-}).catch(e => console.error(e + 'Failed to load main CSS!'));
+// import('./main.min.css.js').then(module => {
+//   const minCSS = `<style id='min-main-css'>${module.minifiedMainCSS}</style>`;
+//   document.head.querySelector('#general-style')!.insertAdjacentHTML('beforebegin', minCSS);
+// }).catch(e => console.error(e + 'Failed to load main CSS!'));
 
 this.addEventListener('load', () => {
   signInPage = Q('#sign-in-page') as HTMLDivElement;
   signInButton = Q('#sign-in') as HTMLButtonElement;
   usernameInput = Q('#username') as HTMLInputElement;
-  signInStatus = Q('#sign-in-success') as HTMLSpanElement;
+  signInStatus = Q('#sign-in-status') as HTMLSpanElement;
   nextButton = Q('#next') as HTMLButtonElement;
   previousButton = Q('#previous') as HTMLButtonElement;
   welcomePage = Q('#welcome-page') as HTMLDivElement;
   signOutButton = Q('#sign-out') as HTMLButtonElement;
   pageNumber = Q('#page-num') as HTMLSpanElement;
   furtherDiscussion = Q('#further-discussion-page') as HTMLDivElement;
+
+  QAll('[data-state="hidden"]').forEach(target => {
+    target.addEventListener('transitionend', () => {
+      let classNames = /translate-in|welcome-page-fade-in|scale-up|slide-down|slide-up-controls|title-bar|page-title/;
+
+      if (!classNames.test(target.className))
+        setTimeout(() => {
+          target.dataset.state = 'hidden';
+        }, 200);
+    });
+  });
 
   const usernameElements = QAll('.username');
 
@@ -45,10 +56,7 @@ this.addEventListener('load', () => {
   let userExists = false;
   let inputIsValid = true;
 
-  if (navigator.cookieEnabled)
-    if (localStorage.userId) {
-      userExists = true;
-    }
+  if (navigator.cookieEnabled) if (localStorage.userId) userExists = true;
 
   if (!userExists)
     alert(
@@ -57,19 +65,24 @@ this.addEventListener('load', () => {
 
   //Sign user in when user presses the 'enter' key
   usernameInput.onkeyup = (e: any) => {
-    if (e.keyCode == 13 || e.which == 13) {
-      usernameInput.blur();
-      signInButton.click();
-    }
-
     inputIsValid = !/\W|\d/.test(usernameInput.value.trim());
 
     if (!inputIsValid) usernameInput.classList.add('bad-input');
     else usernameInput.classList.remove('bad-input');
+
+    signInStatus.textContent = '';
+
+    if (e.keyCode == 13 || e.which == 13) {
+      usernameInput.blur();
+      signInButton.click();
+    }
   };
 
   //Sign-in script event handler
   signInButton.onclick = () => {
+    let errMsg;
+
+    signInStatus.className = 'bad-input-feedback';
     username = `${usernameInput.value
       .trim()
       .slice(0, 1)
@@ -80,45 +93,52 @@ this.addEventListener('load', () => {
 
     //Condition if user hasn't inputted a value as username
     if (!username) {
-      alert('No name.\n\nYou have to input your name to sign in.');
+      errMsg = 'No name.\n\nYou have to input your name to sign in.';
+      signInStatus.innerHTML = errMsg.replace('\n\n', '<br />');
       usernameInput.value = '';
-      return;
+      return alert(errMsg);
     }
 
     if (username.length < 2) {
-      alert('Your real name is not a character long.\n\nInput your name.');
+      errMsg = 'Your real name is not a character long. Input your name.';
+      signInStatus.innerHTML = errMsg;
       return;
     }
 
     //this code-block works with the preceeding line(s) of code to ensure user inputs letter names
     if (username) {
       if (!inputIsValid) {
-        alert(
-          'Invalid input. \n\nInput a name [your name]. No nicks, numbers or symbols allowed.'
-        );
+        errMsg =
+          'Invalid input. Input a name━your name.\n\nNo numbers or symbols allowed.';
+        signInStatus.innerHTML = errMsg.replace('\n\n', '<br />');
         return;
       }
 
-      signInStatus.textContent = `${username}, you are now signed in. Welcome.`;
+      signInStatus.className = '';
+      signInStatus.textContent = `Sign in success! Welcome, ${username}!`;
 
       if (localStorage) localStorage.userId = username;
 
       //page slide
       setTimeout(() => {
+        welcomePage.dataset.state = 'visible';
         signInPage.className = 'custom-scroll-bar translate-out-left';
         signInStatus.textContent = '';
         setTimeout(() => {
           welcomePage.className = 'welcome-page-fade-in custom-scroll-bar';
+          Q('#buttons-wrapper')!.dataset.state = 'visible';
           setTimeout(() => {
             Q('#buttons-wrapper')!.className = 'slide-up-controls';
+            nextButton.dataset.state = 'visible';
             setTimeout(() => {
               nextButton.className = 'scale-up';
-              //translate signInPage to right position in case of sign out
+              //translate/reposition signInPage to right position in case of sign out in order to slide in from right
               signInPage.className = 'custom-scroll-bar translate-out-right';
-            }, 1500);
-          }, 300);
+              signInPage.dataset.state = 'hidden';
+            }, 800);
+          }, 800);
         }, 400);
-      }, 1200);
+      }, 1500);
 
       //sets username to kin'a personalize UX
       usernameElements.forEach(element => (element.textContent = username));
@@ -126,18 +146,18 @@ this.addEventListener('load', () => {
       loadPageNavScript().then(() => loadStatComputerScript());
     }
   };
-  Q('#myName')!.textContent = "@Power'f-GOD⚡⚡";
+  Q('#my-name')!.textContent = "@Power'f-GOD⚡⚡";
 
   if (localStorage.userId) usernameInput.value = localStorage.userId;
 
   function loadPageNavScript() {
-    return import('./page-navigation.min.js').then(module =>
+    return import('./page-navigation.js').then(module =>
       module.loadPageNavScript()
     );
   }
 
   function loadStatComputerScript() {
-    return import('./stat-computer.min.js').then(module =>
+    return import('./stat-computer.js').then(module =>
       module.loadStatComputerScript()
     );
   }

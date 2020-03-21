@@ -36,7 +36,7 @@
   transition: 0.3s;
 }
 
-#solve-questions-page input:hover {
+#solve-questions-page input:hover, #solve-questions-page input:focus {
   color: white;
   border-color: deepskyblue;
   -webkit-box-shadow: 0 0 1rem rgba(0, 139, 185, 0.5);
@@ -54,7 +54,7 @@
   color: white;
   cursor: pointer;
   font-weight: bold;
-  border: none;
+  border: 0.15rem outset transparent;
   margin: 0.5rem 0;
   border-radius: 2rem;
   -webkit-box-shadow: 0 0.35rem 0 #005400;
@@ -68,21 +68,16 @@
 #solve-questions-page button#compute:focus {
   -webkit-box-shadow: 0 0.2rem 0 darkgreen;
           box-shadow: 0 0.2rem 0 darkgreen;
+  border-color: white !important;
   margin-top: 0.7rem;
   margin-bottom: 0.3rem;
 }
 
 #solve-questions-page #result {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
   margin: 2rem 0;
   color: deepskyblue;
   text-align: center;
   overflow-x: auto;
-}
-
-#solve-questions-page #result2 {
-  padding-top: 2rem;
 }
 
 #solve-questions-page #table-wrapper {
@@ -108,14 +103,14 @@
 }
 
 #solve-questions-page p {
-  margin: 0.5rem 0;
+  margin: 0.65rem 0;
 }
 
 #solve-questions-page td,
 #solve-questions-page th {
   border-collapse: collapse;
   border: 0.125rem solid #333;
-  padding: 0.25rem 0.75rem;
+  padding: 0.5rem 0.75rem;
 }
 
 #solve-questions-page td p,
@@ -182,7 +177,7 @@ tfoot {
 #mean-solution .variable-definitions,
 #median-solution .variable-definitions,
 #mode-solution .variable-definitions {
-  padding: 1rem;
+  padding: 1.25rem 1rem;
   color: black;
   font-style: normal;
   font-family: 'Cambria', 'Times New Roman';

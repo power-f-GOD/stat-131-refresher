@@ -1,5 +1,4 @@
 @import './welcome.scss';
-@import './signin.scss';
 @import './explanations.scss';
 @import './solution.scss';
 @import './animation.scss';
@@ -36,6 +35,10 @@ i {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+button {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
 .bad-input {
   background: rgba(235, 0, 0, 0.5) !important;
   border-color: rgb(245, 0, 0) !important;
@@ -44,6 +47,11 @@ i {
   &:focus {
     border-color: rgb(255, 0, 0) !important;
   }
+}
+
+.bad-input-feedback {
+  color: red !important;
+  font-weight: bold;
 }
 
 .slant,
@@ -65,14 +73,14 @@ sub {
 
 #left-elastic,
 #right-elastic {
-  height: 100%;
+  height: 120%;
   width: 0;
   border-radius: 50%;
-  z-index: 6;
+  z-index: 10;
   background: rgba(255, 0, 0, 0.3);
   position: fixed;
-  top: 0;
-  transition: width 0.35s ease-in-out;
+  top: -10%;
+  transition: width 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 #left-elastic {

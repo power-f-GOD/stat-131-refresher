@@ -1,7 +1,7 @@
 .welcome-page-fade-in {
   -webkit-transform: scale(1) !important;
           transform: scale(1) !important;
-  z-index: 5;
+  z-index: 5 !important;
   opacity: 1 !important;
   overflow-y: auto !important;
   -webkit-transition: 0.75s !important;
@@ -12,24 +12,24 @@
   overflow-y: auto !important;
   -webkit-transform: translateX(0) !important;
           transform: translateX(0) !important;
-  z-index: 5;
+  z-index: 5 !important;
   opacity: 1 !important;
-  -webkit-transition: opacity 0.7s, -webkit-transform 0.7s !important;
-  transition: opacity 0.7s, -webkit-transform 0.7s !important;
-  transition: transform 0.7s, opacity 0.7s !important;
-  transition: transform 0.7s, opacity 0.7s, -webkit-transform 0.7s !important;
+  -webkit-transition: opacity 0.1s, -webkit-transform 0.4s !important;
+  transition: opacity 0.1s, -webkit-transform 0.4s !important;
+  transition: transform 0.4s, opacity 0.1s !important;
+  transition: transform 0.4s, opacity 0.1s, -webkit-transform 0.4s !important;
 }
 
 .translate-out-left {
   overflow: hidden !important;
-  -webkit-transform: translateX(-100%) !important;
-          transform: translateX(-100%) !important;
   z-index: 3 !important;
   opacity: 1 !important;
-  -webkit-transition: -webkit-transform 0.7s !important;
-  transition: -webkit-transform 0.7s !important;
-  transition: transform 0.7s !important;
-  transition: transform 0.7s, -webkit-transform 0.7s !important;
+  -webkit-transform: translateX(-100%) !important;
+          transform: translateX(-100%) !important;
+  -webkit-transition: -webkit-transform 0.4s !important;
+  transition: -webkit-transform 0.4s !important;
+  transition: transform 0.4s !important;
+  transition: transform 0.4s, -webkit-transform 0.4s !important;
 }
 
 .translate-out-right {
@@ -38,31 +38,38 @@
   z-index: 3 !important;
   -webkit-transform: translate(100%) !important;
           transform: translate(100%) !important;
-  -webkit-transition: -webkit-transform 0.7s !important;
-  transition: -webkit-transform 0.7s !important;
-  transition: transform 0.7s !important;
-  transition: transform 0.7s, -webkit-transform 0.7s !important;
+  -webkit-transition: -webkit-transform 0.4s !important;
+  transition: -webkit-transform 0.4s !important;
+  transition: transform 0.4s !important;
+  transition: transform 0.4s, -webkit-transform 0.4s !important;
 }
 
 .scale-up {
+  opacity: 1 !important;
   -webkit-transform: scale(1) !important;
           transform: scale(1) !important;
-  opacity: 1 !important;
-  -webkit-transition: 0.35s !important;
-  transition: 0.35s !important;
+  -webkit-transition: all 0.15s, opacity 0.35s, -webkit-transform 0.35s !important;
+  transition: all 0.15s, opacity 0.35s, -webkit-transform 0.35s !important;
+  transition: all 0.15s, transform 0.35s, opacity 0.35s !important;
+  transition: all 0.15s, transform 0.35s, opacity 0.35s, -webkit-transform 0.35s !important;
 }
 
 .scale-down {
   opacity: 0 !important;
   -webkit-transform: scale(0) !important;
           transform: scale(0) !important;
-  -webkit-transition: 0.25s !important;
-  transition: 0.25s !important;
+  -webkit-transition: all 0.15s, opacity 0.25s, -webkit-transform 0.25s !important;
+  transition: all 0.15s, opacity 0.25s, -webkit-transform 0.25s !important;
+  transition: all 0.15s, transform 0.25s, opacity 0.25s !important;
+  transition: all 0.15s, transform 0.25s, opacity 0.25s, -webkit-transform 0.25s !important;
 }
 
 .slide-down {
   z-index: 5;
   top: 0 !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
   -webkit-transition: 0.75s !important;
   transition: 0.75s !important;
 }
@@ -101,16 +108,22 @@
   }
 }
 
+.table-fade-out {
+  opacity: 0 !important;
+  -webkit-transition: 0.5s !important;
+  transition: 0.5s !important;
+}
+
 .slide-up-controls {
-  z-index: 8;
-  bottom: 0 !important;
-  -webkit-transition: 1s !important;
-  transition: 1s !important;
+  -webkit-transform: translateY(100vh) !important;
+          transform: translateY(100vh) !important;
+  -webkit-transition: 0.5s !important;
+  transition: 0.5s !important;
 }
 
 .slide-down-controls {
-  z-index: 8;
-  bottom: -200%;
-  -webkit-transition: 1s !important;
-  transition: 1s !important;
+  -webkit-transform: translateY(calc(100vh + 3.35rem)) !important;
+          transform: translateY(calc(100vh + 3.35rem)) !important;
+  -webkit-transition: 0.5s !important;
+  transition: 0.5s !important;
 }

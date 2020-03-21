@@ -47,23 +47,25 @@ h2 {
 }
 
 #page-title-bar {
-  top: -100%;
+  -webkit-transform: translateY(-110%);
+          transform: translateY(-110%);
   left: 0;
   height: 3.45rem;
   position: fixed;
-  z-index: 0;
+  z-index: 6;
   background: #1f54f3;
   width: 100%;
+  border-bottom: 0.25rem solid rgba(10, 69, 247, 0.5);
   text-align: center;
   -webkit-box-shadow: 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3), 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
           box-shadow: 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3), 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
-  -webkit-transition: 1s;
-  transition: 1s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 #page-title-bar[data-state='visible'] {
-  top: 0;
-  z-index: 6;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
 }
 
 #page-title-bar .page-title {
@@ -122,18 +124,29 @@ h2 {
 }
 
 #buttons-wrapper {
-  padding-bottom: 1rem;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: fixed;
-  bottom: -100%;
+  z-index: 6;
+  -webkit-transform: translateY(calc(100vh + 3.5rem));
+          transform: translateY(calc(100vh + 3.5rem));
   left: 0;
   width: 100%;
   text-align: center;
 }
 
+#buttons-wrapper[data-state='hidden'] {
+  display: none;
+}
+
 #previous,
 #next,
-span[data-name='go-up-button'] {
+button[data-name='go-up-button'] {
   width: 3rem;
   height: 3rem;
   display: -webkit-box;
@@ -148,7 +161,8 @@ span[data-name='go-up-button'] {
           justify-content: center;
   background: #1f54f3;
   border-color: royalblue;
-  font-size: 2.5rem;
+  border-width: 0.215rem;
+  font-size: 3rem;
   font-weight: bolder;
   text-align: center;
   border-radius: 50%;
@@ -158,10 +172,25 @@ span[data-name='go-up-button'] {
   cursor: pointer;
 }
 
-#previous span,
-#next span,
-span[data-name='go-up-button'] span {
-  margin-top: -0.2rem;
+#previous[data-state='hidden'],
+#next[data-state='hidden'],
+button[data-name='go-up-button'][data-state='hidden'] {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  display: none;
+}
+
+#previous:hover,
+#next:hover,
+button[data-name='go-up-button']:hover {
+  border-style: inset;
+}
+
+#previous:focus,
+#next:focus,
+button[data-name='go-up-button']:focus {
+  border-color: white !important;
+  border-style: solid !important;
 }
 
 #previous {
@@ -172,7 +201,7 @@ span[data-name='go-up-button'] span {
 }
 
 #previous:hover {
-  background-color: royalblue;
+  background-color: #3863e4;
 }
 
 #next {
@@ -183,21 +212,42 @@ span[data-name='go-up-button'] span {
 }
 
 #next:hover {
-  background-color: royalblue;
+  background-color: #3863e4;
 }
 
-span[data-name='go-up-button'] {
+button[data-name='go-up-button'] {
   right: 1.25rem;
   bottom: 5rem;
   background: red;
   font-size: 1.3rem;
   height: 2.5rem;
-  width: 2.5rem;
+  min-height: 2.5rem !important;
+  width: 2.5rem !important;
   -webkit-transform: scale(0);
           transform: scale(0);
 }
 
+#go-up-1 {
+  background: #009b9b;
+  border-color: #00bebe;
+}
+
+#go-up-2 {
+  background: #d70000;
+  border-color: red;
+}
+
+#go-up-3 {
+  background: #d40073;
+  border-color: #ff0087;
+}
+
 #page-num {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: absolute;
+  bottom: 1rem;
   width: 5rem;
   padding: 0.3rem;
   background: rgba(50, 130, 50, 0.8);

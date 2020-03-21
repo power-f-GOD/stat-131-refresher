@@ -3,8 +3,8 @@ export function loadStatComputerScript() {
   const TABLE = {
     FREQUENCY: (frequencies: string): number[] | null => {
       //extract and return frequencies of classes
-      const _frequencies: number[] = frequencies.split(/\D+/).map(d => +d);
-      return Number(_frequencies[1]) ? _frequencies : null;
+      const _frequencies: number[] = frequencies.split(/\D+/).map(Number);
+      return _frequencies;
     },
 
     INTERVAL: (
@@ -16,7 +16,7 @@ export function loadStatComputerScript() {
       const firstClassLimits = intervals
         .split(/[^.\d+]/)
         .filter(Boolean)
-        .map(d => +d);
+        .map(Number);
       let C: number; // Class size
 
       //TO DO: Fix class limit bug
@@ -300,7 +300,7 @@ export function loadStatComputerScript() {
   Q('#compute')!.onclick = () => {
     const intervalInputVals = Q('#interval')!.value.trim();
     const frequencyInputVals = Q('#frequencies')!.value.trim();
-    const frequencies: number[] | null = TABLE.FREQUENCY(frequencyInputVals);
+    const frequencies: number[] = TABLE.FREQUENCY(frequencyInputVals);
     const numFrequencies: number | null = frequencies
       ? frequencies.length
       : null;
@@ -309,39 +309,53 @@ export function loadStatComputerScript() {
       numFrequencies
     )!;
     const resultEl = Q('#result') as HTMLElement;
+    let errMsg;
 
     Q('#container')!.style.height = 'auto';
-
-    // Input check for frequencies
-    if (!frequencies) {
-      alert('Frequencies not set. Input frequencies.');
-      Q('#frequencies')!.focus();
-      return;
-    }
-    if (frequencies.length < 2) {
-      alert('Length of frequency ought not be less than 2.');
-      return;
-    }
+    resultEl.className = 'bad-input-feedback';
 
     // Input check for interval input box
     if (!intervalInputVals) {
-      alert('Class intervals not set. Input class limits.');
+      errMsg = 'Class intervals not set. Input class limits.';
+      resultEl.textContent = errMsg;
+      alert(errMsg);
       return;
     }
 
     // Error check for interval input box
-    if (!classIntervals) {
-      alert('Input upper class limit.');
+    if (!intervalInputVals.split(/\D+/)[1]) {
+      console.log(classIntervals, frequencies)
+      errMsg = 'Input upper class limit.';
+      resultEl.textContent = errMsg;
+      alert(errMsg);
+      Q('#interval')!.focus();
       return;
     }
+
+    // Input check for frequencies
+    if (!frequencyInputVals) {
+      errMsg = 'Frequencies not set. Input frequencies.';
+      resultEl.textContent = errMsg;
+      alert(errMsg);
+      Q('#frequencies')!.focus();
+      return;
+    }
+
+    if (frequencies.length < 2) {
+      errMsg = 'Length of frequency ought not be less than 2.';
+      resultEl.textContent = errMsg;
+      alert(errMsg);
+      return;
+    }
+
     if (classIntervals[0][0] >= classIntervals[0][1]) {
       resultEl.innerHTML =
-        "<b style='color:red;'>Error: Invalid class limits input. Lower class limit cannot be greater than or equal to upper class limit.</b>";
+        `Error: Invalid input for class limits. Lower class limit, ${classIntervals[0][0]}, cannot be greater than or equal to upper class limit, ${classIntervals[0][1]}.<br />Input limits like "35, 45"`;
       return;
     }
+
     if (isNaN(classIntervals[0][0]) || isNaN(classIntervals[0][1])) {
-      resultEl.innerHTML =
-        "<b style='color:red;'>Error: Invalid class limits input. Delete extra decimal points.</b>";
+      resultEl.innerHTML = "Error: Invalid class limits input. Delete extra decimal points";
       return;
     }
 
@@ -352,7 +366,7 @@ export function loadStatComputerScript() {
         interval.join(' - ')
       );
 
-      resultEl.className = 'table-slide-in custom-scroll-bar prevent-swipe';
+      
       resultEl.innerHTML = `
         <div id='table-wrapper'>
           <table id='table-data'>
@@ -386,6 +400,7 @@ export function loadStatComputerScript() {
           </table>
         </div>
       `;
+      resultEl.className = 'table-slide-in custom-scroll-bar prevent-swipe';
 
       Q('#solutions-wrapper')!.style.display = 'flex';
 
@@ -411,7 +426,7 @@ export function loadStatComputerScript() {
   };
 
   // Clear result function
-  const clearResults = () => {
+  const clearResults = (e: any) => {
     const tableWrapper = Q('#table-wrapper') as HTMLElement;
 
     if (tableWrapper) {
@@ -419,6 +434,14 @@ export function loadStatComputerScript() {
       tableWrapper.className = 'table-fade-out';
     }
 
+    if (e.keyCode == 13 || e.which == 13) {
+      Q('#compute')!.click();
+      e.target.blur();
+      return;
+    }
+
+    
+    Q('#result')!.className = 'custom-scroll-bar prevent-swipe';
     setTimeout(() => {
       Q('#result')!.innerHTML =
         "In the input boxes above, for the first, input the class limits of\
@@ -426,11 +449,9 @@ export function loadStatComputerScript() {
 				second, input the frequencies of all the classes respectively. Don't forget\
 				to separate the values you input ('23' is not same as \
 				'2 3', you know). <br /> <i>Note: For full width of table when result is displayed, rotate screen. </i>;)";
-
-      Q('#result')!.className = 'scale-up custom-scroll-bar prevent-swipe';
-    }, 750);
+    }, 650);
   };
 
-  Q('#interval')!.oninput = clearResults;
-  Q('#frequencies')!.oninput = clearResults;
+  Q('#interval')!.onkeyup = clearResults;
+  Q('#frequencies')!.onkeyup = clearResults;
 }

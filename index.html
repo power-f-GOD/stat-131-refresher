@@ -8,35 +8,42 @@
     content="Author: Power I. Sunday, Desc: A STATS 131 Web App (refresher) for 100 Level Physical Sciences students University of Nigeria Nsukka Nigeria." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- <link rel="preload" as="style" href="dist/css/main.min.css" onload="this.onload=null;this.rel='stylesheet';" /> -->
+  <link rel="preload" as="style" href="dist/css/main.min.css" onload="this.onload=null;this.rel='stylesheet';" />
   <!-- <link rel="preload" as="style" href="dist/css/welcome.min.css" onload="this.onload=null;this.rel='stylesheet';" /> -->
   <script src='dist/js/main.js' async></script>
   <!-- sign in page style included here to prevent FOUC (Flash Of Unstyled Content) -->
-  <style id='general-style'>
-    /* #sign-in-page and general page style*/
-    #welcome-page,#mean-median-mode-page,#solve-questions-page,#further-discussion-page{opacity:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-transform:translateX(100%);transform:translateX(100%)}#welcome-page{opacity:0;z-index:4;-webkit-transform:scale(0.5);transform:scale(0.5)}#sign-in-page{overflow-y:auto;background:black;height:100%;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;position:absolute;padding:2.75rem 1rem;top:0;left:0;z-index:6}#input-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:3.5rem 0;width:100%}#username{width:80%;max-width:22rem;margin:1rem 0.625rem;padding:0.625rem 0.75rem;border:0.1875rem solid transparent;background:royalblue;color:white;outline:none;border-radius:0.2rem;-webkit-transition:background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s, border 0.3s;transition:background-color 0.3s, box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s}#sign-in,#sign-out{width:40%;max-width:10rem;margin:1rem 0.625rem;padding:0.625rem;border-radius:2rem;border-color:tomato;background:#ff4c2c;color:white;-webkit-transition:background-color 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s}#sign-in-page-footer{padding:1rem;width:100%;text-align:center;background:black}#sign-in-page-footer span{color:#444;display:block;margin:0.25rem}#sign-in-page-footer a{color:#888;text-decoration:underline;font-weight:bold}*{-webkit-box-sizing:border-box;box-sizing:border-box;outline:none}html,body{background:black;color:gainsboro;height:100%;margin:0;position:relative;overflow:hidden !important;font-size:1.055rem;font-family:Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif}input,button{font-size:inherit !important;font-family:inherit;min-height:3rem}button{cursor:pointer !important}label{width:100%;text-align:center}
-  </style i>
+  <!-- #sign-in-page and general page style -->
+  <link rel="preload" as="style" href="dist/css/critical.min.css" onload="this.onload=null;this.rel='stylesheet';" />
+  <style id='general-style'></style>
 </head>
 
 <body>
+  <!-- Animated fixed top div - START -->
+  <header id="page-title-bar" class="title-bar" data-state="hidden" role="heading">
+    <h4 class="sub-heading page-title" data-state='visible'> Mean, Median and Mode</h4>
+    <h4 class="sub-heading page-title" data-state='hidden'> Solve Questions</h4>
+    <h4 class="sub-heading page-title" data-state='hidden'> Quartiles, Deciles and Percentiles</h4>
+  </header>
+  <!-- Animated fixed top div - START -->
+
   <div id='left-elastic'></div>
   <div id='right-elastic'></div>
   <!-- Sign in page - START -->
-  <div id="sign-in-page" class="custom-scroll-bar">
-    <div id="input-wrapper" class="row">
+  <div id="sign-in-page" class="custom-scroll-bar" data-state="visible" role="document">
+    <div id="input-wrapper" class="row" role="form">
       <label>
-        <input type="text" id="username" placeholder="Enter first name to sign in " />
+        <input type="text" id="username" placeholder="Enter first name to sign in" spellcheck="false" aria-label="username" aria-describedby="sign-in-status" />
       </label>
-      <button id="sign-in"> Sign in</button>
-      <div id="sign-in-success"></div>
+      <button id="sign-in">Sign in</button>
+      <div id="sign-in-status" class="bad-input-feedback"></div>
     </div>
     <!-- Sign-in page footer - START -->
-    <div id="sign-in-page-footer" class="row">
+    <div id="sign-in-page-footer" class="row" role="doc-footnote">
       <span>MEASURES OF CENTRAL TENDENCY</span>
       <span>STAT131 Refresher for Upcoming Test</span><br />
       <span>Written &amp; Developed By</span>
-      <span><a href="https://m.facebook.com/power.sunday3?refid=8" target="_blank" id="myName" rel="noreferrer">Sunday
-          Power Inemesit</a>
+      <span>
+        <a href="https://m.facebook.com/power.sunday3?refid=8" target="_blank" id="my-name" rel="noreferrer">Sunday Power Inemesit</a>
       </span>
       <span>Computer Science Dept. <b>&frac34;</b></span>
       <br />
@@ -49,7 +56,7 @@
   <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
 
   <!-- Home page - START -->
-  <div id="welcome-page" class="custom-scroll-bar" data-role='page'>
+  <div id="welcome-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
     <header>
       <h2>MEASURES OF CENTRAL TENDENCY</h2>
       <div class="fixed-top">
@@ -75,32 +82,10 @@
   </div>
   <!-- Home page - END -->
 
-  <!-- Navigation buttons - START -->
-  <div id="buttons-wrapper">
-    <button id="previous">←</button>
-    <span id="page-num"></span>
-    <button id="next">→</button>
-    <a href="#header1"><span id="pageUp1" data-name='go-up-button' class="scale-down"
-        style="background: rgb(53, 0, 139);">↑</span></a>
-    <a href="#header2"><span id="pageUp2" data-name='go-up-button' class="scale-down"
-        style="background: red;">↑</span></a>
-    <a href="#header3"><span id="pageUp3" data-name='go-up-button' class="scale-down"
-        style="background: deeppink;">↑</span></a>
-  </div>
-  <!-- Navigation buttons - END -->
-
   <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
-  
-  <!-- Animated fixed top div - START -->
-  <div id="page-title-bar" class="fade-out">
-    <h4 class="sub-heading page-title" data-state='visible'> Mean, Median and Mode</h4>
-    <h4 class="sub-heading page-title" data-state='hidden'> Solve Questions</h4>
-    <h4 class="sub-heading page-title" data-state='hidden'> Quartiles, Deciles and Percentiles</h4>
-  </div>
-  <!-- Animated fixed top div - START -->
 
   <!-- PAGE 1 - Formulae Explications - START -->
-  <div id="mean-median-mode-page" class="custom-scroll-bar" data-role='page'>
+  <div id="mean-median-mode-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
     <header id="header1">
       <h4 class="rider"><i>(Grouped Data)</i></i></h4>
     </header>
@@ -504,7 +489,7 @@
   <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
 
   <!-- PAGE 2 - Solving Questions - START -->
-  <div id="solve-questions-page" class="custom-scroll-bar" data-role='page'>
+  <div id="solve-questions-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
     <header id="header2">
       <h4 class="rider"><i>(Grouped Data)</i></i></h4>
     </header>
@@ -512,12 +497,12 @@
 
     <!-- Input for calculations -->
     <div class="row">
-      <div id="container" class="padded">
+      <div id="container" class="padded" role="form">
         <label>
-          <input id="interval" value="" placeholder="Input limits of only 1st class e.g. 45 50" type="text" />
+          <input id="interval" type="text" value="" aria-label="class intervals" aria-describedby="result" placeholder="Input limits of only 1st class e.g. 45 50" />
         </label>
         <label>
-          <input id="frequencies" value=""
+          <input id="frequencies" type="text" value="" aria-label="frequencies" aria-describedby="result"
             placeholder="Input respective frequencies of all classes e.g. 3 2 5 6 4..." />
         </label>
         <button id="compute">Compute</button>
@@ -795,7 +780,7 @@
   </div>
   <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
   <!-- PAGE 3 - Quartiles, Percentiles and Deciles -->
-  <div id="further-discussion-page" class="custom-scroll-bar" data-role='page'>
+  <div id="further-discussion-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
     <header id="header3">
       <h4 class="rider"><i>(Grouped Data)</i></i></h4>
     </header>
@@ -1210,5 +1195,17 @@
   </div>
   <!-- PAGE 3 - Quartiles, Deciles and Percentiles - END -->
   <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
+
+    <!-- Navigation buttons - START -->
+    <div id="buttons-wrapper" data-state='hidden' role="navigation">
+      <button id="previous" data-state="hidden" aria-label="previous">←</button>
+      <span id="page-num"></span>
+      <button id="next" data-state="hidden" aria-label="next">→</button>
+      <button id="go-up-1" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
+      <button id="go-up-2" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
+      <button id="go-up-3" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
+    </div>
+    <!-- Navigation buttons - END -->
 </body>
+
 </html>

@@ -58,10 +58,6 @@
 
   a {
     color: tomato;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 }
 
@@ -125,6 +121,14 @@ span {
 a {
   text-decoration: none;
   color: rgb(62, 98, 255);
+
+  &:focus, &:hover {
+    font-weight: bolder;
+  }
+
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 .align-vertical {

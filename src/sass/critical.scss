@@ -5,12 +5,18 @@
   opacity: 0;
   display: flex;
   transform: translateX(100%);
+
+  &[data-state='hidden'] {
+    display: none;
+  }
 }
+
 #welcome-page {
   opacity: 0;
   z-index: 4;
   transform: scale(0.5);
 }
+
 #sign-in-page {
   overflow-y: auto;
   background: black;
@@ -24,7 +30,12 @@
   top: 0;
   left: 0;
   z-index: 6;
+
+  &[data-state="hidden"] {
+    display: none;
+  }
 }
+
 #input-wrapper {
   display: flex;
   flex-direction: column;
@@ -32,18 +43,34 @@
   padding: 3.5rem 0;
   width: 100%;
 }
+
 #username {
   width: 80%;
   max-width: 22rem;
   margin: 1rem 0.625rem;
   padding: 0.625rem 0.75rem;
-  border: 0.1875rem solid transparent;
+  border: 0.25rem ridge #4271ff;
   background: royalblue;
   color: white;
   outline: none;
-  border-radius: 0.2rem;
+  border-radius: 0.25rem;
   transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
+
+  &::placeholder {
+    color: #bbb;
+  }
+
+  &:focus {
+    border-color: white;
+    background-color: rgb(20, 78, 255);
+  }
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 0 1.5rem rgba(20, 78, 255, 0.8);
+  }
 }
+
 #sign-in,
 #sign-out {
   width: 40%;
@@ -52,25 +79,58 @@
   padding: 0.625rem;
   border-radius: 2rem;
   border-color: tomato;
+  border-width: 0.25rem;
   background: rgb(255, 76, 44);
   color: white;
   transition: background-color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    border-color: rgb(255, 76, 45);
+  }
+  
+  &:focus {
+    border-color: white;
+  }
+
+  &:hover, &:focus {
+    background-color: rgb(255, 53, 17);
+    box-shadow: 0 0 1.5rem rgba(255, 77, 45, 0.6);
+  }  
 }
+
 #sign-in-page-footer {
   padding: 1rem;
   width: 100%;
   text-align: center;
   background: black;
+
+  span {
+    color: #444;
+    display: block;
+    margin: 0.25rem;
+  }
+  a {
+    color: #888;
+    text-decoration: underline;
+    font-weight: bold;
+
+    &:hover, &:focus {
+      color: #ddd;
+      transform: scale(1.1);
+    }
+  }
 }
-#sign-in-page-footer span {
-  color: #444;
-  display: block;
-  margin: 0.25rem;
+
+#sign-out-wrapper {
+  text-align: center;
+  margin: 2.5rem 0;
 }
-#sign-in-page-footer a {
-  color: #888;
-  text-decoration: underline;
+
+#sign-in-status {
   font-weight: bold;
+  color: limegreen;
+  padding: 0.625rem 1rem;
+  text-align: center;
 }
 
 // -------------------------------------------------
