@@ -142,6 +142,24 @@
           box-shadow: 0 0 1.5rem rgba(255, 77, 45, 0.6);
 }
 
+#remember-me-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-style: italic;
+  color: #aaa;
+}
+
+#remember-me-label input {
+  margin-right: 0.75em;
+}
+
 #sign-in-page-footer {
   padding: 1rem;
   width: 100%;
@@ -150,7 +168,7 @@
 }
 
 #sign-in-page-footer span {
-  color: #444;
+  color: #555;
   display: block;
   margin: 0.25rem;
 }

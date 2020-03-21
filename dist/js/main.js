@@ -1,9 +1,11 @@
 "use strict";
 var Q = document.querySelector.bind(document);
 var QAll = document.querySelectorAll.bind(document);
+var cookieEnabled = navigator.cookieEnabled;
 var signInPage;
-var signInButton;
 var usernameInput;
+var signInButton;
+var rememberMeCheckbox;
 var signInStatus;
 var nextButton;
 var previousButton;
@@ -14,10 +16,12 @@ var intervalInput;
 var frequenciesInput;
 var furtherDiscussion;
 var username;
+var rememberMe;
 this.addEventListener('load', function () {
     signInPage = Q('#sign-in-page');
-    signInButton = Q('#sign-in');
     usernameInput = Q('#username');
+    signInButton = Q('#sign-in');
+    rememberMeCheckbox = Q('#remember-me');
     signInStatus = Q('#sign-in-status');
     nextButton = Q('#next');
     previousButton = Q('#previous');
@@ -43,9 +47,14 @@ this.addEventListener('load', function () {
         document.body.classList.remove('desktop');
     var userExists = false;
     var inputIsValid = true;
-    if (navigator.cookieEnabled)
-        if (localStorage.userId)
-            userExists = true;
+    if (cookieEnabled) {
+        var _rememberMe = localStorage.rememberMe;
+        userExists = !!localStorage.userId;
+        rememberMe = _rememberMe ? JSON.parse(_rememberMe) : false;
+        if (rememberMe) {
+            rememberMeCheckbox.checked = true;
+        }
+    }
     if (!userExists)
         alert("Hi, there! Good day. \n\nThis offline web-app was made to serve as a refresher for our upcoming STAT131 test. And it also may serve as a study guide for our mates that just joined us, because they are the ones I target and were the ones I had in mind before embarking on creating this so they be not oblivious of the topics herein but have a comprehension of them and fare well for short is the time. \n\nOk. Also, If you don't fully/really understand this topic, I urge you to follow, carefully, through the explanations and elaborations and try to understand the concepts for thy profiting. ;) \n\nPS: The contents of this app is subject to mistakes, errors and flaws and that's why I now advice that you authenticate whatever you read herein with a good Stats. Text or the recommended one. \n\nAlright. Godspeed. ;) \n\nDon't forget to forward this web-app to any of your friends who offers or offer STAT131 and just resumed. You could be lending a helping hand. :)");
     usernameInput.onkeyup = function (e) {
@@ -62,6 +71,12 @@ this.addEventListener('load', function () {
     };
     signInButton.onclick = function () {
         var errMsg;
+        if (cookieEnabled) {
+            if (rememberMeCheckbox.checked)
+                localStorage.rememberMe = true;
+            else
+                localStorage.rememberMe = false;
+        }
         signInStatus.className = 'bad-input-feedback';
         username = "" + usernameInput.value
             .trim()
@@ -89,8 +104,8 @@ this.addEventListener('load', function () {
                 return;
             }
             signInStatus.className = '';
-            signInStatus.textContent = "Sign in success! Welcome, " + username + "!";
-            if (localStorage)
+            signInStatus.textContent = !rememberMe ? "Sign in success! Welcome, " + username + "!" : '';
+            if (cookieEnabled)
                 localStorage.userId = username;
             setTimeout(function () {
                 welcomePage.dataset.state = 'visible';
@@ -126,5 +141,10 @@ this.addEventListener('load', function () {
         return import('./stat-computer.js').then(function (module) {
             return module.loadStatComputerScript();
         });
+    }
+    if (cookieEnabled) {
+        if (localStorage.rememberMe)
+            if (JSON.parse(localStorage.rememberMe))
+                signInButton.click();
     }
 });

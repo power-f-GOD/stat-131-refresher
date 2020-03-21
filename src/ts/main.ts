@@ -2,9 +2,11 @@
 const Q = document.querySelector.bind(document);
 const QAll = document.querySelectorAll.bind(document);
 
+const { cookieEnabled } = navigator;
 let signInPage: HTMLDivElement;
-let signInButton: HTMLButtonElement;
 let usernameInput: HTMLInputElement;
+let signInButton: HTMLButtonElement;
+let rememberMeCheckbox: HTMLInputElement;
 let signInStatus: HTMLSpanElement;
 let nextButton: HTMLButtonElement;
 let previousButton: HTMLButtonElement;
@@ -15,6 +17,7 @@ let intervalInput: HTMLInputElement;
 let frequenciesInput: HTMLInputElement;
 let furtherDiscussion: HTMLDivElement;
 let username: string;
+let rememberMe: boolean;
 
 //preload (minified) main CSS. Using this approach as Firefox doesn't support rel='preload' for the link element
 // import('./main.min.css.js').then(module => {
@@ -24,8 +27,9 @@ let username: string;
 
 this.addEventListener('load', () => {
   signInPage = Q('#sign-in-page') as HTMLDivElement;
-  signInButton = Q('#sign-in') as HTMLButtonElement;
   usernameInput = Q('#username') as HTMLInputElement;
+  signInButton = Q('#sign-in') as HTMLButtonElement;
+  rememberMeCheckbox = Q('#remember-me') as HTMLInputElement;
   signInStatus = Q('#sign-in-status') as HTMLSpanElement;
   nextButton = Q('#next') as HTMLButtonElement;
   previousButton = Q('#previous') as HTMLButtonElement;
@@ -60,7 +64,16 @@ this.addEventListener('load', () => {
   let userExists = false;
   let inputIsValid = true;
 
-  if (navigator.cookieEnabled) if (localStorage.userId) userExists = true;
+  if (cookieEnabled) {
+    let _rememberMe  = localStorage.rememberMe;
+    
+    userExists = !!localStorage.userId;
+    rememberMe = _rememberMe ? JSON.parse(_rememberMe) : false;
+
+    if (rememberMe) {
+      rememberMeCheckbox.checked = true;
+    }
+  }
 
   if (!userExists)
     alert(
@@ -85,6 +98,11 @@ this.addEventListener('load', () => {
   //Sign-in script event handler
   signInButton.onclick = () => {
     let errMsg;
+
+    if (cookieEnabled) {
+      if (rememberMeCheckbox.checked) localStorage.rememberMe = true;
+      else localStorage.rememberMe = false;
+    }
 
     signInStatus.className = 'bad-input-feedback';
     username = `${usernameInput.value
@@ -119,9 +137,9 @@ this.addEventListener('load', () => {
       }
 
       signInStatus.className = '';
-      signInStatus.textContent = `Sign in success! Welcome, ${username}!`;
+      signInStatus.textContent = !rememberMe ? `Sign in success! Welcome, ${username}!` : '';
 
-      if (localStorage) localStorage.userId = username;
+      if (cookieEnabled) localStorage.userId = username;
 
       //page slide
       setTimeout(() => {
@@ -164,5 +182,11 @@ this.addEventListener('load', () => {
     return import('./stat-computer.js').then(module =>
       module.loadStatComputerScript()
     );
+  }
+
+  if (cookieEnabled) {
+    if (localStorage.rememberMe)
+      if (JSON.parse(localStorage.rememberMe))
+        signInButton.click();
   }
 });

@@ -1,3 +1,5 @@
+//The following CSS is for the landing page, that's why I named it 'critical' as it is a critical resource for rendering and page first paint
+
 #welcome-page,
 #mean-median-mode-page,
 #solve-questions-page,
@@ -99,6 +101,18 @@
   }
 }
 
+#remember-me-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  color: #aaa;
+  
+  input {
+    margin-right: 0.75em;
+  }
+}
+
 #sign-in-page-footer {
   padding: 1rem;
   width: 100%;
@@ -106,10 +120,11 @@
   background: black;
 
   span {
-    color: #444;
+    color: #555;
     display: block;
     margin: 0.25rem;
   }
+
   a {
     color: #888;
     text-decoration: underline;

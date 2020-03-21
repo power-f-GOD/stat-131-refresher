@@ -37,9 +37,14 @@ export function loadPageNavScript() {
     ;
     signOutButton.onclick = function () {
         signOutButton.textContent = 'Signing out...';
+        rememberMeCheckbox.checked = false;
+        rememberMe = false;
         goUpButtons[2].className = 'scale-down';
-        if (localStorage.userId)
-            username = localStorage.userId;
+        if (navigator.cookieEnabled) {
+            if (localStorage.userId)
+                username = localStorage.userId;
+            localStorage.rememberMe = false;
+        }
         i = 0;
         j = 0;
         setTimeout(function () {
