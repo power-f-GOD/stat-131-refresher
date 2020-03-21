@@ -29,7 +29,19 @@ export function loadPageNavScript() {
   );
 
   //handle keyboard event on when user presses (left|right) arrow keys
-  document.body.onkeyup = (e: any) => {
+  document.body.addEventListener('keyup', handleKeyboardNavEvent);
+
+  //remove/add left|right arrow keys event listeners when input has focus to prevent unexpected behaviour
+  QAll('input').forEach(input => {
+    input.addEventListener('focus', () => {
+      document.body.removeEventListener('keyup', handleKeyboardNavEvent);
+    });
+    input.addEventListener('blur', () => {
+      document.body.addEventListener('keyup', handleKeyboardNavEvent);
+    });
+  })
+
+  function handleKeyboardNavEvent(e: any) {
     let key = e.keyCode || e.which;
 
     if (key == 39 && j != numOfPages - 1) nextButton.click();

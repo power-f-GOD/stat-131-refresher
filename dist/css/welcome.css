@@ -50,12 +50,12 @@ h1, h2 {
   -webkit-transform: translateY(-110%);
           transform: translateY(-110%);
   left: 0;
-  height: 3.45rem;
+  height: 3.5em;
   position: fixed;
   z-index: 6;
   background: #1f54f3;
   width: 100%;
-  border-bottom: 0.25rem solid rgba(10, 69, 247, 0.5);
+  border-bottom: 0.25em solid rgba(10, 69, 247, 0.5);
   text-align: center;
   -webkit-box-shadow: 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3), 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
           box-shadow: 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3), 0 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
@@ -75,7 +75,7 @@ h1, h2 {
   left: 0;
   background: #1f54f3;
   height: 100%;
-  padding: 1rem;
+  padding: 0.9em;
   opacity: 0;
   -webkit-transition: 0.35s;
   transition: 0.35s;
@@ -106,7 +106,7 @@ h1, h2 {
 #solve-questions-page header,
 #further-discussion-page header {
   background: #ff4a2a;
-  margin-top: 3.55rem;
+  margin-top: 3.7em;
   margin-bottom: 0;
   position: relative;
   width: 100%;
@@ -148,8 +148,8 @@ h1, h2 {
 #previous,
 #next,
 button[data-name='go-up-button'] {
-  width: 3rem;
-  height: 3rem;
+  width: 3em;
+  height: 3em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -162,7 +162,7 @@ button[data-name='go-up-button'] {
           justify-content: center;
   background: #1f54f3;
   border-color: royalblue;
-  border-width: 0.215rem;
+  border-width: 0.215em;
   font-size: 3rem;
   font-weight: bolder;
   text-align: center;
@@ -218,12 +218,12 @@ button[data-name='go-up-button']:focus {
 
 button[data-name='go-up-button'] {
   right: 1.25rem;
-  bottom: 5rem;
+  bottom: calc(2rem + 3em);
   background: red;
   font-size: 1.3rem;
-  height: 2.5rem;
-  min-height: 2.5rem !important;
-  width: 2.5rem !important;
+  height: 2.5em;
+  min-height: 2.5em !important;
+  width: 2.5em !important;
   -webkit-transform: scale(0);
           transform: scale(0);
 }

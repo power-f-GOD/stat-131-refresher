@@ -7,7 +7,7 @@
 #mean-median-mode-page,
 #solve-questions-page,
 #further-discussion-page {
-  line-height: 1.75rem;
+  line-height: 1.75em;
   overflow-x: hidden;
 }
 
@@ -65,7 +65,7 @@ sub {
 }
 
 .row {
-  max-width: 41rem;
+  max-width: 40em;
   width: 100%;
   margin: auto;
   padding: 0 1em;
@@ -93,7 +93,7 @@ sub {
 
 .desktop .custom-scroll-bar {
   &::-webkit-scrollbar {
-    width: 0.75rem;
+    width: 0.75em;
   }
 
   &::-webkit-scrollbar-track {
@@ -102,6 +102,6 @@ sub {
 
   &::-webkit-scrollbar-thumb {
     background: rgb(255, 74, 42);
-    border-radius: 0.5rem;
+    border-radius: 0.5em;
   }
 }

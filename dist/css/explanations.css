@@ -13,7 +13,7 @@
   padding-bottom: 7.5rem;
   position: absolute;
   background: black;
-  line-height: 1.5rem;
+  line-height: 1.5em;
   top: 0;
   left: 0;
   width: 100%;
@@ -69,8 +69,7 @@
 
 .formula-wrapper {
   width: 100%;
-  height: 8.125rem;
-  margin: 1.5rem 0 1rem 0;
+  margin: 0.65em 0;
   text-align: center;
   background: skyblue;
   color: black;
@@ -126,21 +125,23 @@ span {
 }
 
 .padded {
-  padding: 0.25rem 0;
+  padding: 0.25em 0;
   width: 100%;
 }
 
 a {
   text-decoration: none;
   color: #3e62ff;
-}
-
-a:focus, a:hover {
   font-weight: bolder;
 }
 
-a:focus {
+a:focus, a:hover {
   text-decoration: underline;
+}
+
+a:focus {
+  -webkit-text-decoration-color: white;
+          text-decoration-color: white;
 }
 
 .align-vertical {
@@ -159,7 +160,7 @@ a:focus {
 
 .brace-open,
 .brace-close {
-  font-size: 3.4rem;
+  font-size: 3em;
   font-style: normal;
   font-weight: lighter;
   font-family: 'Arial Narrow';
@@ -198,7 +199,7 @@ a:focus {
 .variable-names {
   font-style: normal;
   display: block;
-  padding: 0.5rem 0;
+  padding: 0.5em 0;
   background: #cd4c4c;
   color: white;
   border-radius: 0.25rem 0.25rem 0 0;
@@ -244,7 +245,7 @@ a:focus {
 }
 
 .variable-U .fraction-wrapper {
-  padding: 0 0.25rem;
+  padding: 0 0.25em;
 }
 
 .variable-U .numerator {

@@ -18,13 +18,23 @@ export function loadPageNavScript() {
             pages[index].onclick = function () { return clearInterval(start); };
         });
     });
-    document.body.onkeyup = function (e) {
+    document.body.addEventListener('keyup', handleKeyboardNavEvent);
+    QAll('input').forEach(function (input) {
+        input.addEventListener('focus', function () {
+            document.body.removeEventListener('keyup', handleKeyboardNavEvent);
+        });
+        input.addEventListener('blur', function () {
+            document.body.addEventListener('keyup', handleKeyboardNavEvent);
+        });
+    });
+    function handleKeyboardNavEvent(e) {
         var key = e.keyCode || e.which;
         if (key == 39 && j != numOfPages - 1)
             nextButton.click();
         else if (key == 37 && j !== 0)
             previousButton.click();
-    };
+    }
+    ;
     signOutButton.onclick = function () {
         signOutButton.textContent = 'Signing out...';
         goUpButtons[2].className = 'scale-down';
