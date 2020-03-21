@@ -40,7 +40,7 @@ header {
   text-align: center;
 }
 
-h2 {
+h1, h2 {
   color: rgba(170, 170, 170, 0.9);
   padding: 1rem;
   margin: 0;
@@ -106,7 +106,7 @@ h2 {
 #solve-questions-page header,
 #further-discussion-page header {
   background: #ff4a2a;
-  margin-top: 3.5rem;
+  margin-top: 3.55rem;
   margin-bottom: 0;
   position: relative;
   width: 100%;
@@ -128,13 +128,14 @@ h2 {
   display: -ms-flexbox;
   display: flex;
   height: 0;
+  bottom: 0;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   position: fixed;
   z-index: 6;
-  -webkit-transform: translateY(calc(100vh + 3.5rem));
-          transform: translateY(calc(100vh + 3.5rem));
+  -webkit-transform: translateY(8rem);
+          transform: translateY(8rem);
   left: 0;
   width: 100%;
   text-align: center;

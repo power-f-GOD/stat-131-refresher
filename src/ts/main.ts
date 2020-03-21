@@ -11,6 +11,8 @@ let previousButton: HTMLButtonElement;
 let welcomePage: HTMLDivElement;
 let signOutButton: HTMLButtonElement;
 let pageNumber: HTMLSpanElement;
+let intervalInput: HTMLInputElement;
+let frequenciesInput: HTMLInputElement;
 let furtherDiscussion: HTMLDivElement;
 let username: string;
 
@@ -30,6 +32,8 @@ this.addEventListener('load', () => {
   welcomePage = Q('#welcome-page') as HTMLDivElement;
   signOutButton = Q('#sign-out') as HTMLButtonElement;
   pageNumber = Q('#page-num') as HTMLSpanElement;
+  intervalInput = Q('#interval') as HTMLInputElement;
+  frequenciesInput = Q('#frequencies') as HTMLInputElement;
   furtherDiscussion = Q('#further-discussion-page') as HTMLDivElement;
 
   QAll('[data-state="hidden"]').forEach(target => {

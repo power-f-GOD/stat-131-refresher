@@ -1,7 +1,7 @@
 //Code for table calculation
 export function loadStatComputerScript() {
   const TABLE = {
-    FREQUENCY: (frequencies: string): number[] | null => {
+    FREQUENCY: (frequencies: string): number[] => {
       //extract and return frequencies of classes
       const _frequencies: number[] = frequencies.split(/\D+/).map(Number);
       return _frequencies;
@@ -298,9 +298,9 @@ export function loadStatComputerScript() {
   //Calling functions to carry out arithmetic and output results
 
   Q('#compute')!.onclick = () => {
-    const intervalInputVals = Q('#interval')!.value.trim();
-    const frequencyInputVals = Q('#frequencies')!.value.trim();
-    const frequencies: number[] = TABLE.FREQUENCY(frequencyInputVals);
+    const intervalInputVals = intervalInput.value.trim();
+    const frequenciesInputVals = frequenciesInput.value.trim();
+    const frequencies: number[] = TABLE.FREQUENCY(frequenciesInputVals);
     const numFrequencies: number | null = frequencies
       ? frequencies.length
       : null;
@@ -324,7 +324,6 @@ export function loadStatComputerScript() {
 
     // Error check for interval input box
     if (!intervalInputVals.split(/\D+/)[1]) {
-      console.log(classIntervals, frequencies)
       errMsg = 'Input upper class limit.';
       resultEl.textContent = errMsg;
       alert(errMsg);
@@ -333,7 +332,7 @@ export function loadStatComputerScript() {
     }
 
     // Input check for frequencies
-    if (!frequencyInputVals) {
+    if (!frequenciesInputVals) {
       errMsg = 'Frequencies not set. Input frequencies.';
       resultEl.textContent = errMsg;
       alert(errMsg);
@@ -348,24 +347,28 @@ export function loadStatComputerScript() {
       return;
     }
 
+    if (!classIntervals || isNaN(classIntervals[0][0]) || isNaN(classIntervals[0][1])) {
+      resultEl.innerHTML = "Error: Invalid class limits input. Check your inputs and try again.";
+      return;
+    }
+
     if (classIntervals[0][0] >= classIntervals[0][1]) {
       resultEl.innerHTML =
         `Error: Invalid input for class limits. Lower class limit, ${classIntervals[0][0]}, cannot be greater than or equal to upper class limit, ${classIntervals[0][1]}.<br />Input limits like "35, 45"`;
       return;
     }
 
-    if (isNaN(classIntervals[0][0]) || isNaN(classIntervals[0][1])) {
-      resultEl.innerHTML = "Error: Invalid class limits input. Delete extra decimal points";
-      return;
-    }
-
     // Outputs result
-    if (frequencyInputVals && frequencies.length > 1) {
+    if (frequenciesInputVals && frequencies.length > 1) {
       // Just for neat/clean joining of class intervals on output/display
       const classIntervalsPrettyJoined = classIntervals.map(interval =>
         interval.join(' - ')
       );
 
+      if (navigator.cookieEnabled) {
+        localStorage.interval = intervalInputVals;
+        localStorage.frequencies = frequenciesInputVals;
+      }
       
       resultEl.innerHTML = `
         <div id='table-wrapper'>

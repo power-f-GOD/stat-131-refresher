@@ -157,6 +157,11 @@ button {
   font-size: inherit !important;
   font-family: inherit;
   min-height: 3rem;
+
+  &[disabled] {
+    background: rgb(126, 126, 126) !important;
+    border-color: rgb(160, 160, 160) !important;
+  }
 }
 
 button {

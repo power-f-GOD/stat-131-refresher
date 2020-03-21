@@ -231,9 +231,9 @@ export function loadStatComputerScript() {
         }
     };
     Q('#compute').onclick = function () {
-        var intervalInputVals = Q('#interval').value.trim();
-        var frequencyInputVals = Q('#frequencies').value.trim();
-        var frequencies = TABLE.FREQUENCY(frequencyInputVals);
+        var intervalInputVals = intervalInput.value.trim();
+        var frequenciesInputVals = frequenciesInput.value.trim();
+        var frequencies = TABLE.FREQUENCY(frequenciesInputVals);
         var numFrequencies = frequencies
             ? frequencies.length
             : null;
@@ -249,14 +249,13 @@ export function loadStatComputerScript() {
             return;
         }
         if (!intervalInputVals.split(/\D+/)[1]) {
-            console.log(classIntervals, frequencies);
             errMsg = 'Input upper class limit.';
             resultEl.textContent = errMsg;
             alert(errMsg);
             Q('#interval').focus();
             return;
         }
-        if (!frequencyInputVals) {
+        if (!frequenciesInputVals) {
             errMsg = 'Frequencies not set. Input frequencies.';
             resultEl.textContent = errMsg;
             alert(errMsg);
@@ -269,19 +268,23 @@ export function loadStatComputerScript() {
             alert(errMsg);
             return;
         }
+        if (!classIntervals || isNaN(classIntervals[0][0]) || isNaN(classIntervals[0][1])) {
+            resultEl.innerHTML = "Error: Invalid class limits input. Check your inputs and try again.";
+            return;
+        }
         if (classIntervals[0][0] >= classIntervals[0][1]) {
             resultEl.innerHTML =
                 "Error: Invalid input for class limits. Lower class limit, " + classIntervals[0][0] + ", cannot be greater than or equal to upper class limit, " + classIntervals[0][1] + ".<br />Input limits like \"35, 45\"";
             return;
         }
-        if (isNaN(classIntervals[0][0]) || isNaN(classIntervals[0][1])) {
-            resultEl.innerHTML = "Error: Invalid class limits input. Delete extra decimal points";
-            return;
-        }
-        if (frequencyInputVals && frequencies.length > 1) {
+        if (frequenciesInputVals && frequencies.length > 1) {
             var classIntervalsPrettyJoined = classIntervals.map(function (interval) {
                 return interval.join(' - ');
             });
+            if (navigator.cookieEnabled) {
+                localStorage.interval = intervalInputVals;
+                localStorage.frequencies = frequenciesInputVals;
+            }
             resultEl.innerHTML = "\n        <div id='table-wrapper'>\n          <table id='table-data'>\n            <thead>\n              <th> Class Interval </th>\n              <th> Class Boundary </th>\n              <th><i> f<sub>i</sub> </i></th>\n              <th><i> X<sub>i</sub> </i></th>\n              <th><i> U<sub>i</sub> </i></th>\n              <th><i> f<sub>i</sub>U<sub>i</sub> </i></th>\n              <th> Cummulative Frequency </th>\n            </thead>\n            <tr>\n              <td id='table-interval'> </td>\n              <td id='table-boundary'> </td>\n              <td id='table-frequency'> </td>\n              <td id='table-class-mark'> </td>\n              <td id='table-coding-method'> </td>\n              <td id='table-fU'> </td>\n              <td id='cummulative-frequency'> </td>\n            </tr>\n            <tfoot>\n              <td> </td>\n              <td> </td>\n              <td id='summation-f'> </td>\n              <td> </td>\n              <td> </td>\n              <td id='summation-fU'> </td>\n              <td> </td>\n            </tfoot>\n          </table>\n        </div>\n      ";
             resultEl.className = 'table-slide-in custom-scroll-bar prevent-swipe';
             Q('#solutions-wrapper').style.display = 'flex';

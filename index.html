@@ -9,30 +9,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="preload" as="style" href="dist/css/main.min.css" onload="this.onload=null;this.rel='stylesheet';" />
-  <!-- <link rel="preload" as="style" href="dist/css/welcome.min.css" onload="this.onload=null;this.rel='stylesheet';" /> -->
+  <link rel="preload" as="style" href="dist/css/welcome.min.css" onload="this.onload=null;this.rel='stylesheet';" />
   <script src='dist/js/main.js' async></script>
   <!-- sign in page style included here to prevent FOUC (Flash Of Unstyled Content) -->
   <!-- #sign-in-page and general page style -->
   <link rel="preload" as="style" href="dist/css/critical.min.css" onload="this.onload=null;this.rel='stylesheet';" />
-  <style id='general-style'></style>
+  <style id='general-style'>
+    /* * {
+      border: 1px solid yellow;
+      border: none;
+    } */
+  </style>
 </head>
 
 <body>
   <!-- Animated fixed top div - START -->
   <header id="page-title-bar" class="title-bar" data-state="hidden" role="heading">
-    <h4 class="sub-heading page-title" data-state='visible'> Mean, Median and Mode</h4>
-    <h4 class="sub-heading page-title" data-state='hidden'> Solve Questions</h4>
-    <h4 class="sub-heading page-title" data-state='hidden'> Quartiles, Deciles and Percentiles</h4>
+    <h3 class="sub-heading page-title" data-state='visible'> Mean, Median and Mode</h3>
+    <h3 class="sub-heading page-title" data-state='hidden'> Solve Questions</h4>
+      <h3 class="sub-heading page-title" data-state='hidden'> Quartiles, Deciles and Percentiles</h4>
   </header>
   <!-- Animated fixed top div - START -->
 
   <div id='left-elastic'></div>
   <div id='right-elastic'></div>
   <!-- Sign in page - START -->
-  <div id="sign-in-page" class="custom-scroll-bar" data-state="visible" role="document">
+  <section id="sign-in-page" class="custom-scroll-bar" data-state="visible" role="document">
     <div id="input-wrapper" class="row" role="form">
       <label>
-        <input type="text" id="username" placeholder="Enter first name to sign in" spellcheck="false" aria-label="username" aria-describedby="sign-in-status" />
+        <input type="text" id="username" placeholder="Enter first name to sign in" spellcheck="false"
+          aria-label="username" aria-describedby="sign-in-status" />
       </label>
       <button id="sign-in">Sign in</button>
       <div id="sign-in-status" class="bad-input-feedback"></div>
@@ -43,509 +49,99 @@
       <span>STAT131 Refresher for Upcoming Test</span><br />
       <span>Written &amp; Developed By</span>
       <span>
-        <a href="https://m.facebook.com/power.sunday3?refid=8" target="_blank" id="my-name" rel="noreferrer">Sunday Power Inemesit</a>
+        <a href="https://m.facebook.com/power.sunday3?refid=8" target="_blank" id="my-name" rel="noreferrer">Sunday
+          Power Inemesit</a>
       </span>
       <span>Computer Science Dept. <b>&frac34;</b></span>
       <br />
       <span>&copy; 2018</span>
     </div>
     <!-- Sign-in page footer - END -->
-  </div>
+  </section>
   <!-- Sign in page - END -->
 
   <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
+  <main>
+    <!-- Home page - START -->
+    <section id="welcome-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
+      <header>
+        <h1>MEASURES OF CENTRAL TENDENCY</h1>
+        <div class="fixed-top">
+          <h3 class="sub-heading"> Mean, Median and Mode</h3>
+          <h4 class="rider"><i>(Grouped Data)</i></i></h4>
+        </div>
+      </header>
+      <!-- Intro text - START -->
+      <div id="intro-text-wrapper">
+        <div id="intro-text" class="row">
+          <p>
+            Once again, I welcome you, <span class="username"> Power</span>, to
+            this refresher 'course' in preparation for our upcoming STAT131 test. :)
+          </p>
+          <p>
+            Before we begin solving questions with the electronic machine I programmed, ;D,
+            let's go through the formulas or formulae for a reminder and for comprehension.
+            <br />So, let's get started. Click the next button. ;)
+          </p>
+        </div>
+      </div>
+      <!-- Intro text - END -->
+    </section>
+    <!-- Home page - END -->
 
-  <!-- Home page - START -->
-  <div id="welcome-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
-    <header>
-      <h2>MEASURES OF CENTRAL TENDENCY</h2>
-      <div class="fixed-top">
-        <h4 class="sub-heading"> Mean, Median and Mode</h4>
+    <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
+
+    <!-- PAGE 1 - Formulae Explications - START -->
+    <section id="mean-median-mode-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
+      <header id="header1">
         <h4 class="rider"><i>(Grouped Data)</i></i></h4>
-      </div>
-    </header>
-    <!-- Intro text - START -->
-    <div id="intro-text-wrapper">
-      <div id="intro-text" class="row">
-        <p>
-          Once again, I welcome you, <span class="username"> Power</span>, to
-          this refresher 'course' in preparation for our upcoming STAT131 test. :)
-        </p>
-        <p>
-          Before we begin solving questions with the electronic machine I programmed, ;D,
-          let's go through the formulas or formulae for a reminder and for comprehension.
-          <br />So, let's get started. Click the next button. ;)
-        </p>
-      </div>
-    </div>
-    <!-- Intro text - END -->
-  </div>
-  <!-- Home page - END -->
-
-  <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
-
-  <!-- PAGE 1 - Formulae Explications - START -->
-  <div id="mean-median-mode-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
-    <header id="header1">
-      <h4 class="rider"><i>(Grouped Data)</i></i></h4>
-    </header>
-    <h3 class="padded whte-bg page-name"> Formulae Explications:</h3>
-    <!-- Quick links - START -->
-    <div class="padded">
+      </header>
+      <h3 class="padded whte-bg page-name"> Formulae Explications:</h3>
+      <!-- Quick links - START -->
       <div class="quick-links padded">
         <div class="row">
           <i>Quick links:</i><br />
           <ol>
-            <li><a href="#mean-formula-ref" class="padded"> The mean</a></li>
+            <li><a href="#mean-formula-ref" class="padded">The mean</a></li>
             <li><a href="#median-formula-ref" class="padded">The median</a></li>
             <li><a href="#mode-formula-ref" class="padded">The mode</a></li>
           </ol>
         </div>
       </div>
-    </div>
-    <!-- Quick links - END -->
-    <br /><br />
-    <!-- The mean container - START -->
-    <div id="mean">
-      <div class="padded">
+      <!-- Quick links - END -->
+      <br /><br />
+      <!-- The mean container - START -->
+      <div id="mean">
         <div class="row">
           The formulae for finding the <b class="white-bg">mean</b>, the <b class="white-bg">median</b>,
           and the <b id="mean-formula-ref" class="white-bg">mode</b> of any grouped data set are as given below:
         </div>
-      </div>
-      <br /><br />
-      <div class="padded white-bg">
-        <div class="row">
-          <b>1.</b> The <b>mean</b> (coding method):
-        </div>
-      </div>
-      <!-- Wrapper for the 'mean' formula - START -->
-      <div class="padded">
-        <div class="row">
-          <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
-            <div class="formula-wrapper-first-child">
-              <div class="formula-wrapper-second-child">
-                <div class="div1">
-                  <span class="align-vertical"> <b>X&#772;</b> = A +</span>
-                </div>
-                <div class="div2">
-                  <!-- Mean formula fraction - START -->
-                  <div class="div2-childDiv">
-                    <span class="brace-open"> (</span>
-                    <span class="fraction-wrapper">
-                      <span class="numerator"> &Sigma;f<sub>i</sub>U<sub>i</sub></span>
-                      <span class="denominator"> &Sigma;f<sub>i</sub></span>
-                    </span>
-                    <span class="brace-close"> )</span>
-                  </div>
-                  <!-- Mean formula fraction - END -->
-                </div>
-                <div class="div3">
-                  <span class="align-vertical"> &times; C</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Wrapper for the 'mean' formula - END -->
-      <!-- Formula explanation for 'mean' - START -->
-      <div class="formula-explanation">
-        <div class="p">
-          <div id="assumed-mean-ref" class="row">
-            Where;
-          </div> <br />
-          <!-- Assumed mean - START-->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>A</b></i> = <b>the assumed mean</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (The assumed mean is the value of any class
-              mark chosen by you from the frequency table. Generally, it is advised
-              that you choose or take the median class mark as your assumed mean because
-              it makes finding <b>U<sub>i</sub></b> easier. For instance, if you
-              <a href="#solve-questions-page" id="take-example" rel="noreferrer">take an example</a>, you'll notice
-              how the sequence of values in the <b>U<sub>i</sub></b> column of the table,
-              starting from the middle, 0 upwards, descends towards <b><span class="infinity">&minus;&infin;</span></b>
-              (negatively), and
-              ascends downwards towards <b><span class="infinity" id="i-definition-ref">&plus;&infin;</span></b>
-              (positively) with increments of 1 for each.
-              <br /><br />
-              <b><u>Note:</u></b> <b>X<sub>i</sub></b>, the i'th class mark, is calculated
-              by taking the average of the limits of the i'th class. As in this:<br />
-              <b>X<sub>4</sub></b>, i.e. the <b>4th</b> class mark, will be equal to;
-              <!-- the i'th class mark, Xi, formula - START -->
-              <div id="class-mark" class="variable-names variable-U">
-                <div class="div1">
-                  <span class="align-vertical"> <b>X<sub>4</sub></b> =</span>
-                </div>
-                <div class="div2">
-                  <!-- Formula fraction - START -->
-                  <div class="div2-childDiv">
-                    <span class="fraction-wrapper">
-                      <span class="numerator"><b>UCL<sub>4</sub> &plus; LCL<sub>4</sub></b>;</span>
-                      <span class="denominator"><b>2</b></span>
-                    </span>
-                  </div>
-                  <!-- Formula fraction - END -->
-                </div>
-              </div>
-              <!-- the i'th class mark, Xi, formula - END -->
-              where <b>UCL<sub>4</sub></b> is the <b>upper class limit</b> of the <b>4th</b> class, and
-              <b>LCL<sub>4</sub></b>
-              is the <b>lower class limit</b> of the same. I hope you understand, <span class="username">Power</span>?
-              Okay,
-              let's continue);
-            </div>
-          </div>
-          <!-- Assumed mean - END-->
-          <!-- i'th class frequency - START -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>f<sub>i</sub></b></i> = <b>i'th class frequency</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (<b><u>Note:</u></b> 'i' is a variable and is as a placeholder. As in the <a
-                href="#i-definition-ref">above
-                definition</a>, the i'th class mark/frequency
-              in a table could be the <b>4</b>th class mark/frequency or <b>6</b>th class mark/frequency etc. in that
-              table.
-              Just know that wherever you see 'i', it is a variable; it changes, nothing more. For instance
-              <i><b>f<sub>4</sub></b></i>,
-              (<b>4</b> in place of 'i') is the frequency of the fourth class. Do you now comprende', <span
-                class="username">Power</span>?
-              Good. We're making progress. ;))
-            </div>
-          </div>
-          <!-- i'th class frequency - END -->
-          <!-- The coding method variable, 'U' - START -->
-          <div class="variable-names variable-U">
-            <div class="row">
-              <div class="div1">
-                <span class="align-vertical"> <b>U<sub>i</sub></b> =</span>
-              </div>
-              <div class="div2">
-                <!-- Coding method formula variable fraction, U - START -->
-                <div class="div2-childDiv">
-                  <span class="fraction-wrapper">
-                    <span class="numerator"><b>X<sub>i</sub> &minus; A</b></span>
-                    <span class="denominator"><b>C</b></span>
-                  </span>
-                </div>
-                <!-- Coding method formula variable fraction, U - END -->
-              </div>
-            </div>
-          </div>
-          <!-- The coding method variable, 'U' - END -->
-          <div class="variable-definitions">
-            <div class="row">
-              (<b><i>X<sub>i</sub></i></b> is the i'th class mark, <b><i>A</i></b>
-              is the <a href="#assumed-mean-ref">assumed mean</a>, <b><i id="C">C</i></b> is the class size);
-            </div>
-          </div>
-          <!-- Class size - START -->
-          <div class="variable-names">
-            <div class="row">
-              <b><i>C</i></b> = <b>class size...</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (Calculated as: The difference between the upper class limit and the
-              lower class limit of any class + 1. <br />
-              <b>Mathematically:<br /> (U<sub>limit</sub> &minus; L<sub id="median-formula-ref">limit</sub>) + 1.</b>
-              <br />
-              Get the logic? Nice. Moving forward.
-            </div>
-          </div>
-          <!-- Class size - END -->
-        </div>
-      </div>
-    </div>
-    <!-- The 'mean' container - END -->
-    <br />
-
-    <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
-
-    <!-- The 'mediam' container - START -->
-    <div id="median">
-      <!-- Wrapper for 'median' formula - START -->
-      <div class="padded white-bg">
-        <div class="row">
-          <b>2.</b> The <b>median</b>:
-        </div>
-      </div>
-      <div class="padded">
-        <div class="row">
-          <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
-            <div class="formula-wrapper-first-child">
-              <div class="formula-wrapper-second-child">
-                <div class="div1">
-                  <span class="align-vertical"> <b>X&#771;</b> = L<sub>med</sub> +</span>
-                </div>
-                <div class="div2">
-                  <!-- Formula fraction -->
-                  <div class="div2-childDiv">
-                    <span class="brace-open"> (</span>
-                    <span class="fraction-wrapper">
-                      <span class="numerator"> <sup>N</sup>/<sub>2</sub> &minus; &Sigma;f<sub>&lt;med</sub></span>
-                      <span class="denominator"> f<sub>med</sub></span>
-                    </span>
-                    <span class="brace-close"> )</span>
-                  </div>
-                </div>
-                <div class="div3">
-                  <span class="align-vertical"> &times; C</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <!-- Wrapper for 'median' formula - END -->
-      <!-- Formula explain for 'median' -START -->
-      <div class="formula-explanation">
-        <div class="p">
-          <div id="Lmed-ref" class="row">
-            Where;
-          </div><br />
-          <!-- Lower boundary of median class -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>L<sub>med</sub></b></i> = <b>lower class boundary of median class</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (The lower class boundary of the median class is obtained by substracting 0.5 from the lower class limit
-              of the same. For instance, say we have median class limits of <b>55 - 67</b>, the lower class boundary
-              would then be <b>54.5</b>);
-            </div>
-          </div>
-          <!-- Summation of frequencies of all classes -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>N</b></i> = <b>&Sigma;f</b> <i>(read as summation-f or sigma-f)</i>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (This is the same as the summation of the frequencies of all the classes);
-            </div>
-          </div>
-          <!-- Cummulative frequency below median class -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>&Sigma;f<sub>&lt;med</sub></b></i> = <b>cummulative frequency below median
-                class</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (I like to call it "sigma-f below", i.e. summation of frequencies below median class);
-            </div>
-          </div>
-          <!-- Frequency of median class -->
-          <div class="variable-names">
-            <div class="row">
-              <b><i>f<sub>med</sub></i></b> = <b>frequency of median class</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (This is obtained directly from the frequency distribution table);
-            </div>
-          </div>
-          <!-- Class size -->
-          <div class="variable-names">
-            <div class="row">
-              <b><i>C</i></b> = <b>class size</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (Refer to <a href="#C" id="mode-formula-ref">class size</a> under 'The mean' above).
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Formula explain for 'median' - END -->
-    </div>
-    <!-- THe 'median' container - END -->
-    <br />
-
-    <!-- Break Break Break Break Break Break Break Break Break Break Break Break Break Break Break -->
-
-    <!-- THe 'modal' container - START -->
-    <div id="mode">
-      <!-- Wrapper for 'mode' formula - START -->
-      <div class="padded white-bg">
-        <div class="row">
-          <b>3.</b> The <b>mode</b>:
-        </div>
-      </div>
-      <div class="padded">
-        <div class="row">
-          <div class="mode formula-wrapper custom-scroll-bar prevent-swipe">
-            <div class="formula-wrapper-first-child">
-              <div class="formula-wrapper-second-child">
-                <div class="div1">
-                  <span class="align-vertical"> <b>X&#770;</b> = L<sub>mod</sub> +</span>
-                </div>
-                <div class="div2">
-                  <!-- Formula fraction -->
-                  <div class="div2-childDiv">
-                    <span class="brace-open"> (</span>
-                    <span class="fraction-wrapper">
-                      <span class="numerator"> D<sub>1</sub></span>
-                      <span class="denominator"> D<sub>1</sub> + D<sub>2</sub></span>
-                    </span>
-                    <span class="brace-close"> )</span>
-                  </div>
-                </div>
-                <div class="div3">
-                  <span class="align-vertical"> &times; C</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Wrapper for 'mode' formula - END -->
-      <!-- Formula explanation for 'mode' - START -->
-      <div class="formula-explanation">
-        <div class="p">
+        <br /><br />
+        <div class="padded white-bg">
           <div class="row">
-            Where;
-          </div><br />
-          <!-- Lower boundary of modal class -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>L<sub>mod</sub></b></i> = <b>lower class boundary of modal class</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (The lower class boundary of the modal class is obtained by substracting 0.5 from the lower class limit of
-              the same. See <a href="#Lmed-ref">L<sub>med</sub></a>);
-            </div>
-          </div>
-          <!-- Frequency of next lower class -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>D<sub>1</sub></b></i> = <b>frequency difference between modal class and
-                next lower class</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (This is obtained directly from the table. It is the difference between the frequencies of the modal class
-              and the class just before it, the modal class.);
-            </div>
-          </div>
-          <!-- Frequency of next higher class -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>D<sub>2</sub></b></i> = <b>frequency difference between modal class and
-                next higher class</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (This is also obtained directly from the table. It is the difference between the frequencies of the modal
-              class and the class just after the modal class.);
-            </div>
-          </div>
-          <!-- Class size -->
-          <div class="variable-names">
-            <div class="row"> <b><i>C</i></b> = <b>class size</b></div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (Refer to <a href="#C">class size</a> under 'The mean'</a> above).
-            </div>
+            <b>1.</b> The <b>mean</b> (coding method):
           </div>
         </div>
-      </div>
-      <!-- Formula explanation for 'mode' - END -->
-    </div>
-    <!-- The 'modal' container - END -->
-    <br />
-    <div class="row">
-      <p class="padded p">
-        Okay now, <span class="username">Power</span>, having refreshed our minds on these formulas, let's move on to
-        solve any questions you'll be providing. ;)
-      </p>
-    </div>
-  </div>
-  <!-- PAGE 1 - Formulae Explications - END -->
-
-  <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
-
-  <!-- PAGE 2 - Solving Questions - START -->
-  <div id="solve-questions-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
-    <header id="header2">
-      <h4 class="rider"><i>(Grouped Data)</i></i></h4>
-    </header>
-    <h3 class="padded white-bg page-name">Solve Questions:</h3>
-
-    <!-- Input for calculations -->
-    <div class="row">
-      <div id="container" class="padded" role="form">
-        <label>
-          <input id="interval" type="text" value="" aria-label="class intervals" aria-describedby="result" placeholder="Input limits of only 1st class e.g. 45 50" />
-        </label>
-        <label>
-          <input id="frequencies" type="text" value="" aria-label="frequencies" aria-describedby="result"
-            placeholder="Input respective frequencies of all classes e.g. 3 2 5 6 4..." />
-        </label>
-        <button id="compute">Compute</button>
-      </div>
-      <div id="result" class="prevent-swipe custom-scroll-bar">
-        In the input boxes above, for the first, input the class limits of
-        only the first class. You don't have to input the limits for all the classes. And for the
-        second, input the frequencies of all the classes respectively. Don't forget
-        to separate the values you input ('23' is not same as
-        '2 3', you know). <br /> <i>Note: For full width of table when result is displayed, rotate screen.</i>;)
-      </div>
-    </div>
-
-    <!-- Container for input question solutions - START -->
-    <div class="row">
-      <div id="solutions-wrapper">
-        <!-- Wrapper for 'mean' solution - START -->
-        <div id="mean-solution">
-          <div class="variable-definitions">
-            Solving for the <b>mean</b>, from the values you provided, and from the table above, we have that: <br />
-            <b>A</b> = <span class="A"> A</span>; <br />
-            <b>&Sigma;f<sub>i</sub>U<sub>i</sub></b> = <span class="EfU">&Sigma;f<sub>i</sub>U<sub>i</sub></span>;
-            <br />
-            <b>&Sigma;f<sub>i</sub></b> = <span class="Ef">&Sigma;f<sub>i</sub></span>; and<br />
-            <b>C</b> = <span class="C">C</span>. <br /><br />
-            Therefore, using the <b>mean</b> formula:
-            <!-- The mean formula - START -->
-            <div class="formula-wrapper custom-scroll-bar prevent-swipe">
+        <!-- Wrapper for the 'mean' formula - START -->
+        <div class="padded">
+          <div class="row">
+            <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
               <div class="formula-wrapper-first-child">
                 <div class="formula-wrapper-second-child">
                   <div class="div1">
-                    <span class="align-vertical"><b>X&#772;</b> = A +</span>
+                    <span class="align-vertical"> <b>X&#772;</b> = A +</span>
                   </div>
                   <div class="div2">
-                    <!-- Formula fraction -->
+                    <!-- Mean formula fraction - START -->
                     <div class="div2-childDiv">
                       <span class="brace-open"> (</span>
                       <span class="fraction-wrapper">
-                        <span class="numerator">&Sigma;f<sub>i</sub>U<sub>i</sub></span>
-                        <span class="denominator">&Sigma;f<sub>i</sub></span>
+                        <span class="numerator"> &Sigma;f<sub>i</sub>U<sub>i</sub></span>
+                        <span class="denominator"> &Sigma;f<sub>i</sub></span>
                       </span>
                       <span class="brace-close"> )</span>
                     </div>
+                    <!-- Mean formula fraction - END -->
                   </div>
                   <div class="div3">
                     <span class="align-vertical"> &times; C</span>
@@ -553,71 +149,148 @@
                 </div>
               </div>
             </div>
-            <!-- The mean formula - END -->
-            We have,
-            <!-- Formula values inputted - START -->
-            <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
-              <div class="formula-wrapper-first-child">
-                <div class="formula-wrapper-second-child">
-                  <div class="div1">
-                    <span class="align-vertical"> <b class="slant">X&#772;</b> = <span class="A">A</span> +</span>
-                  </div>
-                  <div class="div2">
-                    <!-- Formula fraction -->
-                    <div class="div2-childDiv">
-                      <span class="brace-open"> (</span>
-                      <span class="fraction-wrapper">
-                        <span class="EfU numerator"> &Sigma;f<sub>i</sub>U<sub>i</sub></span>
-                        <span class="Ef denominator"> &Sigma;f<sub>i</sub></span>
-                      </span>
-                      <span class="brace-close"> )</span>
-                    </div>
-                  </div>
-                  <div class="div3">
-                    <span class="align-vertical fraction-wrapper"> &times; <span class="C"> C</span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Formula values inputted - END -->
-            <!-- Solving further - START -->
-            <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
-              <div class="formula-wrapper-first-child">
-                <div class="formula-wrapper-second-child">
-                  <div class="div1">
-                    <span class="align-vertical">
-                      <b class="slant">X&#772;</b> =
-                      <span class="A"> A</span> &plus; <b class="unslant"> (</b>
-                      <span class="mean-fraction"> EfU/Ef</span> &times; <span class="C"> C</span><b class="unslant"> )
-                      </b>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Solving further - END -->
-            The <b>mean</b>, therefore, of the frequency distribution is <b>&asymp; <span id="computed-mean"> MEAN
-              </span></b>.
           </div>
         </div>
-        <!-- Wrapper for 'mean' solution - END -->
+        <!-- Wrapper for the 'mean' formula - END -->
+        <!-- Formula explanation for 'mean' - START -->
+        <div class="formula-explanation">
+          <div class="p">
+            <div id="assumed-mean-ref" class="row">
+              Where;
+            </div> <br />
+            <!-- Assumed mean - START-->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>A</b></i> = <b>the assumed mean</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (The assumed mean is the value of any class
+                mark chosen by you from the frequency table. Generally, it is advised
+                that you choose or take the median class mark as your assumed mean because
+                it makes finding <b>U<sub>i</sub></b> easier. For instance, if you
+                <a href="#solve-questions-page" id="take-example" rel="noreferrer">take an example</a>, you'll notice
+                how the sequence of values in the <b>U<sub>i</sub></b> column of the table,
+                starting from the middle, 0 upwards, descends towards <b><span
+                    class="infinity">&minus;&infin;</span></b>
+                (negatively), and
+                ascends downwards towards <b><span class="infinity" id="i-definition-ref">&plus;&infin;</span></b>
+                (positively) with increments of 1 for each.
+                <br /><br />
+                <b><u>Note:</u></b> <b>X<sub>i</sub></b>, the i'th class mark, is calculated
+                by taking the average of the limits of the i'th class. As in this:<br />
+                <b>X<sub>4</sub></b>, i.e. the <b>4th</b> class mark, will be equal to;
+                <!-- the i'th class mark, Xi, formula - START -->
+                <div id="class-mark" class="variable-names variable-U">
+                  <div class="div1">
+                    <span class="align-vertical"> <b>X<sub>4</sub></b> =</span>
+                  </div>
+                  <div class="div2">
+                    <!-- Formula fraction - START -->
+                    <div class="div2-childDiv">
+                      <span class="fraction-wrapper">
+                        <span class="numerator"><b>UCL<sub>4</sub> &plus; LCL<sub>4</sub></b>;</span>
+                        <span class="denominator"><b>2</b></span>
+                      </span>
+                    </div>
+                    <!-- Formula fraction - END -->
+                  </div>
+                </div>
+                <!-- the i'th class mark, Xi, formula - END -->
+                where <b>UCL<sub>4</sub></b> is the <b>upper class limit</b> of the <b>4th</b> class, and
+                <b>LCL<sub>4</sub></b>
+                is the <b>lower class limit</b> of the same. I hope you understand, <span class="username">Power</span>?
+                Okay,
+                let's continue);
+              </div>
+            </div>
+            <!-- Assumed mean - END-->
+            <!-- i'th class frequency - START -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>f<sub>i</sub></b></i> = <b>i'th class frequency</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (<b><u>Note:</u></b> 'i' is a variable and is as a placeholder. As in the <a
+                  href="#i-definition-ref">above
+                  definition</a>, the i'th class mark/frequency
+                in a table could be the <b>4</b>th class mark/frequency or <b>6</b>th class mark/frequency etc. in that
+                table.
+                Just know that wherever you see 'i', it is a variable; it changes, nothing more. For instance
+                <i><b>f<sub>4</sub></b></i>,
+                (<b>4</b> in place of 'i') is the frequency of the fourth class. Do you now comprende', <span
+                  class="username">Power</span>?
+                Good. We're making progress. ;))
+              </div>
+            </div>
+            <!-- i'th class frequency - END -->
+            <!-- The coding method variable, 'U' - START -->
+            <div class="variable-names variable-U">
+              <div class="row">
+                <div class="div1">
+                  <span class="align-vertical"> <b>U<sub>i</sub></b> =</span>
+                </div>
+                <div class="div2">
+                  <!-- Coding method formula variable fraction, U - START -->
+                  <div class="div2-childDiv">
+                    <span class="fraction-wrapper">
+                      <span class="numerator"><b>X<sub>i</sub> &minus; A</b></span>
+                      <span class="denominator"><b>C</b></span>
+                    </span>
+                  </div>
+                  <!-- Coding method formula variable fraction, U - END -->
+                </div>
+              </div>
+            </div>
+            <!-- The coding method variable, 'U' - END -->
+            <div class="variable-definitions">
+              <div class="row">
+                (<b><i>X<sub>i</sub></i></b> is the i'th class mark, <b><i>A</i></b>
+                is the <a href="#assumed-mean-ref">assumed mean</a>, <b><i id="C">C</i></b> is the class size);
+              </div>
+            </div>
+            <!-- Class size - START -->
+            <div class="variable-names">
+              <div class="row">
+                <b><i>C</i></b> = <b>class size...</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (Calculated as: The difference between the upper class limit and the
+                lower class limit of any class + 1. <br />
+                <b>Mathematically:<br /> (U<sub>limit</sub> &minus; L<sub id="median-formula-ref">limit</sub>) + 1.</b>
+                <br />
+                Get the logic? Nice. Moving forward.
+              </div>
+            </div>
+            <!-- Class size - END -->
+          </div>
+        </div>
+      </div>
+      <!-- The 'mean' container - END -->
+      <br />
 
-        <!-- Wrapper for 'median' solution - START -->
-        <div id="median-solution">
-          <div class="variable-definitions">
-            In the same vein, solving for the <b>median</b>, we have: <br />
-            <b>L<sub>med</sub></b> = <span class="Lmed"> L<sub>med</sub></span>; <br />
-            <b>N</b> = <span class="N"> N</span>; <br />
-            <b>&Sigma;f<sub>&lt;med</sub></b> = <span class="EfBelow"> &Sigma;f<sub>&lt;med</sub></span>; <br />
-            <b>f<sub>med</sub></b> = <span class="fmed"> f<sub>med</sub></span>; <br />
-            <b>C</b> = <span class="C"> C</span>. <br /><br />
-            Therefore, using the <b>median</b> formula:
-            <!-- The mean formula wrapper - START -->
+      <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
+
+      <!-- The 'mediam' container - START -->
+      <div id="median">
+        <!-- Wrapper for 'median' formula - START -->
+        <div class="padded white-bg">
+          <div class="row">
+            <b>2.</b> The <b>median</b>:
+          </div>
+        </div>
+        <div class="padded">
+          <div class="row">
             <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
               <div class="formula-wrapper-first-child">
                 <div class="formula-wrapper-second-child">
                   <div class="div1">
-                    <span class="align-vertical"> <b class="slant">X&#771;</b> = L<sub>med</sub> +</span>
+                    <span class="align-vertical"> <b>X&#771;</b> = L<sub>med</sub> +</span>
                   </div>
                   <div class="div2">
                     <!-- Formula fraction -->
@@ -636,72 +309,98 @@
                 </div>
               </div>
             </div>
-            <!-- The mean formula wrapper - END -->
-            We also have that,
-            <!-- Formula values inputted - START -->
-            <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
-              <div class="formula-wrapper-first-child">
-                <div class="formula-wrapper-second-child">
-                  <div class="div1">
-                    <span class="align-vertical"> <b class="slant">X&#771;</b> = <span class="Lmed">
-                        L<sub>med</sub></span> +</span>
-                  </div>
-                  <div class="div2">
-                    <!-- Formula fraction -->
-                    <div class="div2-childDiv">
-                      <span class="brace-open"> (</span>
-                      <span class="fraction-wrapper">
-                        <span class="numerator"> <sup class="N">N</sup>/<sub>2</sub> &minus; <span class="EfBelow">
-                            &Sigma;f<sub>&lt;med</sub></span></span>
-                        <span class="fmed denominator"> f<sub>med</sub></span>
-                      </span>
-                      <span class="brace-close"> )</span>
-                    </div>
-                  </div>
-                  <div class="div3">
-                    <span class="align-vertical"> &times; <span class="C"> C</span></span>
-                  </div>
-                </div>
+          </div>
+
+        </div>
+        <!-- Wrapper for 'median' formula - END -->
+        <!-- Formula explain for 'median' -START -->
+        <div class="formula-explanation">
+          <div class="p">
+            <div id="Lmed-ref" class="row">
+              Where;
+            </div><br />
+            <!-- Lower boundary of median class -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>L<sub>med</sub></b></i> = <b>lower class boundary of median class</b>
               </div>
             </div>
-            <!-- Formula values inputted - END -->
-            <!-- Solving further - START -->
-            <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
-              <div class="formula-wrapper-first-child">
-                <div class="formula-wrapper-second-child">
-                  <div class="div1">
-                    <span class="align-vertical">
-                      <b class="slant">X&#771;</b> =
-                      <span class="Lmed"> Lmed</span> &plus;
-                      <b class="unslant"> (</b>
-                      <span class="median-fraction"> N/2</span> &times; <span class="C"> C</span>
-                      <b class="unslant"> )</b>
-                    </span>
-                  </div>
-                </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (The lower class boundary of the median class is obtained by substracting 0.5 from the lower class limit
+                of the same. For instance, say we have median class limits of <b>55 - 67</b>, the lower class boundary
+                would then be <b>54.5</b>);
               </div>
             </div>
-            <!-- Solving further - END -->
-            Hence, the <b>median</b> of the distribution is <b>&asymp; <span id="computed-median"> MEDIAN</span></b>.
+            <!-- Summation of frequencies of all classes -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>N</b></i> = <b>&Sigma;f</b> <i>(read as summation-f or sigma-f)</i>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (This is the same as the summation of the frequencies of all the classes);
+              </div>
+            </div>
+            <!-- Cummulative frequency below median class -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>&Sigma;f<sub>&lt;med</sub></b></i> = <b>cummulative frequency below median
+                  class</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (I like to call it "sigma-f below", i.e. summation of frequencies below median class);
+              </div>
+            </div>
+            <!-- Frequency of median class -->
+            <div class="variable-names">
+              <div class="row">
+                <b><i>f<sub>med</sub></i></b> = <b>frequency of median class</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (This is obtained directly from the frequency distribution table);
+              </div>
+            </div>
+            <!-- Class size -->
+            <div class="variable-names">
+              <div class="row">
+                <b><i>C</i></b> = <b>class size</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (Refer to <a href="#C" id="mode-formula-ref">class size</a> under 'The mean' above).
+              </div>
+            </div>
           </div>
         </div>
-        <!-- Wrapper for 'median' solution - END -->
+        <!-- Formula explain for 'median' - END -->
+      </div>
+      <!-- THe 'median' container - END -->
+      <br />
 
-        <!-- Wrapper for 'mode' solution - START -->
-        <div id="mode-solution">
-          <div class="variable-definitions">
-            Finally, solving for the <b>mode</b>, we have that: <br />
-            <b>L<sub>mod</sub></b> = <span class="Lmod"> L<sub>mod</sub></span>; <br />
-            <b>D<sub>1</sub></b> = <span class="D1"> D<sub>1</sub></span>; <br />
-            <b>D<sub>2</sub></b> = <span class="D2"> D<sub>2</sub></span>; and<br />
-            <b>C</b> = <span class="C"> C</span>. <br /><br />
-            Therefore, using the <b>mode</b> formula:
-            <!-- The modal formula wrapper - START -->
+      <!-- Break Break Break Break Break Break Break Break Break Break Break Break Break Break Break -->
+
+      <!-- THe 'modal' container - START -->
+      <div id="mode">
+        <!-- Wrapper for 'mode' formula - START -->
+        <div class="padded white-bg">
+          <div class="row">
+            <b>3.</b> The <b>mode</b>:
+          </div>
+        </div>
+        <div class="padded">
+          <div class="row">
             <div class="mode formula-wrapper custom-scroll-bar prevent-swipe">
               <div class="formula-wrapper-first-child">
                 <div class="formula-wrapper-second-child">
                   <div class="div1">
-                    <span class="align-vertical"> <b class="slant">X&#770;</b> = L<sub>mod</sub> +</span>
+                    <span class="align-vertical"> <b>X&#770;</b> = L<sub>mod</sub> +</span>
                   </div>
                   <div class="div2">
                     <!-- Formula fraction -->
@@ -720,492 +419,807 @@
                 </div>
               </div>
             </div>
-            <!-- The modal formula wrapper - END -->
-            We have,
-            <!-- Formula values inputted - START -->
-            <div class="mode formula-wrapper custom-scroll-bar prevent-swipe">
-              <div class="formula-wrapper-first-child">
-                <div class="formula-wrapper-second-child">
-                  <div class="div1">
-                    <span class="align-vertical"> <b class="slant">X&#770;</b> = <span class="Lmod"> L<sub>mod</sub>
-                      </span> +</span>
-                  </div>
-                  <div class="div2">
-                    <!-- Formula fraction -->
-                    <div class="div2-childDiv">
-                      <span class="brace-open"> (</span>
-                      <span class="fraction-wrapper">
-                        <span class="D1 numerator"> D<sub>1</sub></span>
-                        <span class="denominator"><span class="D1"> D<sub>1</sub></span> + <span class="D2">
-                            D<sub>2</sub></span></span>
-                      </span>
-                      <span class="brace-close"> )</span>
+          </div>
+        </div>
+        <!-- Wrapper for 'mode' formula - END -->
+        <!-- Formula explanation for 'mode' - START -->
+        <div class="formula-explanation">
+          <div class="p">
+            <div class="row">
+              Where;
+            </div><br />
+            <!-- Lower boundary of modal class -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>L<sub>mod</sub></b></i> = <b>lower class boundary of modal class</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (The lower class boundary of the modal class is obtained by substracting 0.5 from the lower class limit
+                of
+                the same. See <a href="#Lmed-ref">L<sub>med</sub></a>);
+              </div>
+            </div>
+            <!-- Frequency of next lower class -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>D<sub>1</sub></b></i> = <b>frequency difference between modal class and
+                  next lower class</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (This is obtained directly from the table. It is the difference between the frequencies of the modal
+                class
+                and the class just before it, the modal class.);
+              </div>
+            </div>
+            <!-- Frequency of next higher class -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>D<sub>2</sub></b></i> = <b>frequency difference between modal class and
+                  next higher class</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (This is also obtained directly from the table. It is the difference between the frequencies of the
+                modal
+                class and the class just after the modal class.);
+              </div>
+            </div>
+            <!-- Class size -->
+            <div class="variable-names">
+              <div class="row"> <b><i>C</i></b> = <b>class size</b></div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (Refer to <a href="#C">class size</a> under 'The mean'</a> above).
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Formula explanation for 'mode' - END -->
+      </div>
+      <!-- The 'modal' container - END -->
+      <br />
+      <div class="row">
+        <p class="padded p">
+          Okay now, <span class="username">Power</span>, having refreshed our minds on these formulas, let's move on to
+          solve any questions you'll be providing. ;)
+        </p>
+      </div>
+    </section>
+    <!-- PAGE 1 - Formulae Explications - END -->
+
+    <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
+
+    <!-- PAGE 2 - Solving Questions - START -->
+    <section id="solve-questions-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
+      <header id="header2">
+        <h4 class="rider"><i>(Grouped Data)</i></i></h4>
+      </header>
+      <h3 class="padded white-bg page-name">Solve Questions:</h3>
+
+      <!-- Input for calculations -->
+      <div class="row">
+        <div id="container" class="padded" role="form">
+          <label>
+            <input id="interval" type="text" value="" aria-label="class intervals" aria-describedby="result"
+              placeholder="Input limits of only 1st class e.g. 45 50" />
+          </label>
+          <label>
+            <input id="frequencies" type="text" value="" aria-label="frequencies" aria-describedby="result"
+              placeholder="Input respective frequencies of all classes e.g. 3 2 5 6 4..." />
+          </label>
+          <button id="compute">Compute</button>
+        </div>
+        <div id="result" class="prevent-swipe custom-scroll-bar">
+          In the input boxes above, for the first, input the class limits of
+          only the first class. You don't have to input the limits for all the classes. And for the
+          second, input the frequencies of all the classes respectively. Don't forget
+          to separate the values you input ('23' is not same as
+          '2 3', you know). <br /> <i>Note: For full width of table when result is displayed, rotate screen.</i>;)
+        </div>
+      </div>
+
+      <!-- Container for input question solutions - START -->
+      <div class="row">
+        <div id="solutions-wrapper">
+          <!-- Wrapper for 'mean' solution - START -->
+          <div id="mean-solution">
+            <div class="variable-definitions">
+              Solving for the <b>mean</b>, from the values you provided, and from the table above, we have that: <br />
+              <b>A</b> = <span class="A"> A</span>; <br />
+              <b>&Sigma;f<sub>i</sub>U<sub>i</sub></b> = <span class="EfU">&Sigma;f<sub>i</sub>U<sub>i</sub></span>;
+              <br />
+              <b>&Sigma;f<sub>i</sub></b> = <span class="Ef">&Sigma;f<sub>i</sub></span>; and<br />
+              <b>C</b> = <span class="C">C</span>. <br /><br />
+              Therefore, using the <b>mean</b> formula:
+              <!-- The mean formula - START -->
+              <div class="formula-wrapper custom-scroll-bar prevent-swipe">
+                <div class="formula-wrapper-first-child">
+                  <div class="formula-wrapper-second-child">
+                    <div class="div1">
+                      <span class="align-vertical"><b>X&#772;</b> = A +</span>
+                    </div>
+                    <div class="div2">
+                      <!-- Formula fraction -->
+                      <div class="div2-childDiv">
+                        <span class="brace-open"> (</span>
+                        <span class="fraction-wrapper">
+                          <span class="numerator">&Sigma;f<sub>i</sub>U<sub>i</sub></span>
+                          <span class="denominator">&Sigma;f<sub>i</sub></span>
+                        </span>
+                        <span class="brace-close"> )</span>
+                      </div>
+                    </div>
+                    <div class="div3">
+                      <span class="align-vertical"> &times; C</span>
                     </div>
                   </div>
-                  <div class="div3">
-                    <span class="align-vertical"> &times; <span class="C"> C</span></span>
+                </div>
+              </div>
+              <!-- The mean formula - END -->
+              We have,
+              <!-- Formula values inputted - START -->
+              <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
+                <div class="formula-wrapper-first-child">
+                  <div class="formula-wrapper-second-child">
+                    <div class="div1">
+                      <span class="align-vertical"> <b class="slant">X&#772;</b> = <span class="A">A</span> +</span>
+                    </div>
+                    <div class="div2">
+                      <!-- Formula fraction -->
+                      <div class="div2-childDiv">
+                        <span class="brace-open"> (</span>
+                        <span class="fraction-wrapper">
+                          <span class="EfU numerator"> &Sigma;f<sub>i</sub>U<sub>i</sub></span>
+                          <span class="Ef denominator"> &Sigma;f<sub>i</sub></span>
+                        </span>
+                        <span class="brace-close"> )</span>
+                      </div>
+                    </div>
+                    <div class="div3">
+                      <span class="align-vertical fraction-wrapper"> &times; <span class="C"> C</span></span>
+                    </div>
                   </div>
                 </div>
               </div>
+              <!-- Formula values inputted - END -->
+              <!-- Solving further - START -->
+              <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
+                <div class="formula-wrapper-first-child">
+                  <div class="formula-wrapper-second-child">
+                    <div class="div1">
+                      <span class="align-vertical">
+                        <b class="slant">X&#772;</b> =
+                        <span class="A"> A</span> &plus; <b class="unslant"> (</b>
+                        <span class="mean-fraction"> EfU/Ef</span> &times; <span class="C"> C</span><b class="unslant">
+                          )
+                        </b>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Solving further - END -->
+              The <b>mean</b>, therefore, of the frequency distribution is <b>&asymp; <span id="computed-mean"> MEAN
+                </span></b>.
             </div>
-            <!-- Formula values inputted - END -->
-            <!-- Solving further - START -->
-            <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
-              <div class="formula-wrapper-first-child">
-                <div class="formula-wrapper-second-child">
-                  <div class="div1">
-                    <span class="align-vertical">
-                      <b class="slant">X&#770;</b> =
-                      <span class="Lmod"> Lmod</span> +</span> <b class="unslant"> (</b>
-                    <span class="mode-fraction"> D1/D2</span> &times; <span class="C"> C</span><b class="unslant"> )
-                    </b>
+          </div>
+          <!-- Wrapper for 'mean' solution - END -->
+
+          <!-- Wrapper for 'median' solution - START -->
+          <div id="median-solution">
+            <div class="variable-definitions">
+              In the same vein, solving for the <b>median</b>, we have: <br />
+              <b>L<sub>med</sub></b> = <span class="Lmed"> L<sub>med</sub></span>; <br />
+              <b>N</b> = <span class="N"> N</span>; <br />
+              <b>&Sigma;f<sub>&lt;med</sub></b> = <span class="EfBelow"> &Sigma;f<sub>&lt;med</sub></span>; <br />
+              <b>f<sub>med</sub></b> = <span class="fmed"> f<sub>med</sub></span>; <br />
+              <b>C</b> = <span class="C"> C</span>. <br /><br />
+              Therefore, using the <b>median</b> formula:
+              <!-- The mean formula wrapper - START -->
+              <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
+                <div class="formula-wrapper-first-child">
+                  <div class="formula-wrapper-second-child">
+                    <div class="div1">
+                      <span class="align-vertical"> <b class="slant">X&#771;</b> = L<sub>med</sub> +</span>
+                    </div>
+                    <div class="div2">
+                      <!-- Formula fraction -->
+                      <div class="div2-childDiv">
+                        <span class="brace-open"> (</span>
+                        <span class="fraction-wrapper">
+                          <span class="numerator"> <sup>N</sup>/<sub>2</sub> &minus; &Sigma;f<sub>&lt;med</sub></span>
+                          <span class="denominator"> f<sub>med</sub></span>
+                        </span>
+                        <span class="brace-close"> )</span>
+                      </div>
+                    </div>
+                    <div class="div3">
+                      <span class="align-vertical"> &times; C</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- The mean formula wrapper - END -->
+              We also have that,
+              <!-- Formula values inputted - START -->
+              <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
+                <div class="formula-wrapper-first-child">
+                  <div class="formula-wrapper-second-child">
+                    <div class="div1">
+                      <span class="align-vertical"> <b class="slant">X&#771;</b> = <span class="Lmed">
+                          L<sub>med</sub></span> +</span>
+                    </div>
+                    <div class="div2">
+                      <!-- Formula fraction -->
+                      <div class="div2-childDiv">
+                        <span class="brace-open"> (</span>
+                        <span class="fraction-wrapper">
+                          <span class="numerator"> <sup class="N">N</sup>/<sub>2</sub> &minus; <span class="EfBelow">
+                              &Sigma;f<sub>&lt;med</sub></span></span>
+                          <span class="fmed denominator"> f<sub>med</sub></span>
+                        </span>
+                        <span class="brace-close"> )</span>
+                      </div>
+                    </div>
+                    <div class="div3">
+                      <span class="align-vertical"> &times; <span class="C"> C</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Formula values inputted - END -->
+              <!-- Solving further - START -->
+              <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
+                <div class="formula-wrapper-first-child">
+                  <div class="formula-wrapper-second-child">
+                    <div class="div1">
+                      <span class="align-vertical">
+                        <b class="slant">X&#771;</b> =
+                        <span class="Lmed"> Lmed</span> &plus;
+                        <b class="unslant"> (</b>
+                        <span class="median-fraction"> N/2</span> &times; <span class="C"> C</span>
+                        <b class="unslant"> )</b>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Solving further - END -->
+              Hence, the <b>median</b> of the distribution is <b>&asymp; <span id="computed-median"> MEDIAN</span></b>.
+            </div>
+          </div>
+          <!-- Wrapper for 'median' solution - END -->
+
+          <!-- Wrapper for 'mode' solution - START -->
+          <div id="mode-solution">
+            <div class="variable-definitions">
+              Finally, solving for the <b>mode</b>, we have that: <br />
+              <b>L<sub>mod</sub></b> = <span class="Lmod"> L<sub>mod</sub></span>; <br />
+              <b>D<sub>1</sub></b> = <span class="D1"> D<sub>1</sub></span>; <br />
+              <b>D<sub>2</sub></b> = <span class="D2"> D<sub>2</sub></span>; and<br />
+              <b>C</b> = <span class="C"> C</span>. <br /><br />
+              Therefore, using the <b>mode</b> formula:
+              <!-- The modal formula wrapper - START -->
+              <div class="mode formula-wrapper custom-scroll-bar prevent-swipe">
+                <div class="formula-wrapper-first-child">
+                  <div class="formula-wrapper-second-child">
+                    <div class="div1">
+                      <span class="align-vertical"> <b class="slant">X&#770;</b> = L<sub>mod</sub> +</span>
+                    </div>
+                    <div class="div2">
+                      <!-- Formula fraction -->
+                      <div class="div2-childDiv">
+                        <span class="brace-open"> (</span>
+                        <span class="fraction-wrapper">
+                          <span class="numerator"> D<sub>1</sub></span>
+                          <span class="denominator"> D<sub>1</sub> + D<sub>2</sub></span>
+                        </span>
+                        <span class="brace-close"> )</span>
+                      </div>
+                    </div>
+                    <div class="div3">
+                      <span class="align-vertical"> &times; C</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- The modal formula wrapper - END -->
+              We have,
+              <!-- Formula values inputted - START -->
+              <div class="mode formula-wrapper custom-scroll-bar prevent-swipe">
+                <div class="formula-wrapper-first-child">
+                  <div class="formula-wrapper-second-child">
+                    <div class="div1">
+                      <span class="align-vertical"> <b class="slant">X&#770;</b> = <span class="Lmod"> L<sub>mod</sub>
+                        </span> +</span>
+                    </div>
+                    <div class="div2">
+                      <!-- Formula fraction -->
+                      <div class="div2-childDiv">
+                        <span class="brace-open"> (</span>
+                        <span class="fraction-wrapper">
+                          <span class="D1 numerator"> D<sub>1</sub></span>
+                          <span class="denominator"><span class="D1"> D<sub>1</sub></span> + <span class="D2">
+                              D<sub>2</sub></span></span>
+                        </span>
+                        <span class="brace-close"> )</span>
+                      </div>
+                    </div>
+                    <div class="div3">
+                      <span class="align-vertical"> &times; <span class="C"> C</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Formula values inputted - END -->
+              <!-- Solving further - START -->
+              <div class="mean formula-wrapper custom-scroll-bar prevent-swipe">
+                <div class="formula-wrapper-first-child">
+                  <div class="formula-wrapper-second-child">
+                    <div class="div1">
+                      <span class="align-vertical">
+                        <b class="slant">X&#770;</b> =
+                        <span class="Lmod"> Lmod</span> +</span> <b class="unslant"> (</b>
+                      <span class="mode-fraction"> D1/D2</span> &times; <span class="C"> C</span><b class="unslant"> )
+                      </b>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Solving further - END -->
+              Consequentially, the <b>mode</b> of the distribution is <b>&asymp; <span id="computed-mode">
+                  MODE</span></b>.
+            </div>
+            <!-- Wrapper for 'mode' solution - END -->
+            <span class="padded">
+              Alright, <span class="username"> Power</span>. Having understood all these, let's discuss a little bit
+              further.
+              Tap the 'next' button or swipe left. ;)
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
+    <!-- PAGE 3 - Quartiles, Percentiles and Deciles -->
+    <section id="further-discussion-page" class="custom-scroll-bar" data-role='page' role="document"
+      data-state="hidden">
+      <header id="header3">
+        <h4 class="rider"><i>(Grouped Data)</i></i></h4>
+      </header>
+      <h3 class="padded page-name"> Quartiles, Deciles and Percentiles:</h3>
+      <!-- Quick links - START -->
+      <div class="quick-links white-bg">
+        <div class="row">
+          <i>Quick links:</i><br />
+          <ol type="1">
+            <li>
+              <a href="#the-quartiles-ref"> The quartiles</a>
+              <ol type="A">
+                <li><a href="#quartile-formula-ref" class="padded"> The quartile formula</a></li>
+                <li>
+                  <a href="#semi-interquartile-range-ref" class="padded"> The semi-interquartile-range
+                  </a>
+                </li>
+              </ol>
+            </li>
+            <li>
+              <a href="#the-deciles-ref"> The deciles</a>
+              <ol type="A">
+                <li><a href="#decile-formula-ref" class="padded"> The decile formula</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#the-percentiles-ref"> The percentiles</a>
+              <ol type="A">
+                <li><a href="#percentile-formula-ref" class="padded"> The percentile formula</a></li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Quick links - END -->
+      <br />
+      <div class="row">
+        <div class="padded">
+          Alright. Now, <span class="username"> Power</span>? I'm sure you must have heard of these words that end with
+          <b><i>"iles"</i></b> (hmm...what about we call them <b><i>"the iles"</i></b>? Cool, right? ;)). Okay. They are
+          the
+          <b class="white-bg">quartiles</b>, the <b class="white-bg">deciles</b>,
+          and the <b class="white-bg">percentiles</b>.<br />
+          When you meet them, do not let them scare you. They are easy to handle so long you can get the logic behind
+          handling them well enough.<br />
+          So, let's talk about them, about <b><i id="the-quartiles-ref">"the iles".</i></b>
+        </div>
+      </div>
+      <!-- Wrapper for 'quartiles' formula - START -->
+      <div id="quartiles">
+        <h4>
+          <div class="white-bg padded">
+            <div class="row">
+              <b>1.</b> The quartiles:
+            </div>
+          </div>
+        </h4>
+        <div class="row">
+          The <b>quartiles</b> consist of four parts, (just like from the word, <i>'quarter'</i> which implies a fourth
+          part of something), obviously
+          the first part, <b><i>Q1</i></b>, the second, <b><i>Q2</i></b>, the third, <b><i>Q3</i></b> and the fourth,
+          <b><i>Q4</i></b>. <br />
+          Now, we are going to consider only two of the parts here and discard the other two. I'll tell you why. Let's
+          continue. <br />
+          The two parts we'll consider are <b><i>Q1</i></b> and <b><i>Q3</i></b>. <br /><br />
+          From the elaboration of quartiles and quarter above, we can say that <b><i>Q1</i></b>
+          is the 1'th part of the quartile (called as first-quartile) and <b><i>Q3</i></b> is
+          the 3'th part of the quartile (called as third-quartile). This means that <b><i>Q1</i></b>
+          = &frac14; of <b><i>Q4</i></b> and <b><i>Q3</i></b> = &frac34; of <b><i>Q4</i></b>. Notice I
+          said, <b>"...of Q4"</b>, because Q4 is itself the quartile. And also <b><i>Q2</i></b>, the
+          2'th part, would be <sup>2</sup><i class="slant">/</i><sub>4</sub> of <b><i>Q4</i></b>
+          which is equal to &frac12; of <b><i>Q4</i></b> which is also the same as the <b><i>median</i></b>,
+          because when we divide a dataset by 2 we get <a href="#median-formula-ref" id="link-to-median">the median</a>
+          which we discussed earlier. So, <b><i>Q2</i></b> is the median (half of the quartile) and <b><i>Q4</i></b>
+          is the quartile itself, the full package. Now, you see why we had to discard them both. Good. So,
+          let's move forward.<br /> <br />
+          Again, from the above illustration, we see how the quartiles are related to each other and the median.
+          <br /><br />
+          Take this logic and never forget it, because you'll use the same when solving for <span
+            class="white-bg">deciles</span>
+          and <span class="white-bg">percentiles</span>: <br />
+          If you take a look at the formula for finding <a href="#median-formula-ref" id="quartiles-median-ref">the
+            median</a>
+          of a grouped data, you'll notice there's a variable <b><i>N</i></b> involved in the calculation. This variable
+          is the 'mother'
+          quartile, I mean <b><i>Q4</i></b>; same with <b><i>D10</i></b> for the <b class="white-bg"> deciles</b> and
+          <b><i>P100</i></b>
+          for the <b class="white-bg">percentiles</b>. Also, notice the variable, <b><i>N</i></b>, is divided by 2 which
+          is the same as saying &frac12; of
+          <b><i>N</i></b> which also implies &frac12; of <b><i>Q4</i></b> which is, as well, equal to <b><i>Q2</i></b>,
+          the median.
+          <span class="username"> Power</span>? I hope you are grasping? <br />
+          Now, using the same logic, we can compute the values of <b><i>Q1</i></b> and <b><i>Q3</i></b> by substituting
+          '<b><i><sup class="unslant">1</sup><i class="slant">/</i><sub class="unslant">2</sub></i></b>' in the formula
+          for '&frac14;'
+          and '&frac34;' respectively since <b><i>Q4</i></b> = <b><i>N</i></b>.<br /><br />
+          <b id="quartile-formula-ref"> <b class="white-bg">1.A</b></b>For <b><i>Q1</i></b>, the formula would look
+          like this:
+        </div>
+        <!-- Quartile formula wrapper - START -->
+        <div class="row">
+          <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
+            <div class="formula-wrapper-first-child">
+              <div class="formula-wrapper-second-child">
+                <div class="div1">
+                  <span class="align-vertical"> <b>Q1</b> = L<sub>Q1</sub> +</span>
+                </div>
+                <div class="div2">
+                  <!-- Formula fraction -->
+                  <div class="div2-childDiv">
+                    <span class="brace-open"> (</span>
+                    <span class="fraction-wrapper">
+                      <span class="numerator"> <b class="unslant"> [</b><span class="unslant">&frac14;</span> &times;
+                        N<b class="unslant">]</b> &minus; &Sigma;f<sub>&lt;Q1</sub></span>
+                      <span class="denominator"> f<sub>Q1</sub></span>
                     </span>
+                    <span class="brace-close"> )</span>
                   </div>
                 </div>
-              </div>
-            </div>
-            <!-- Solving further - END -->
-            Consequentially, the <b>mode</b> of the distribution is <b>&asymp; <span id="computed-mode">
-                MODE</span></b>.
-          </div>
-          <!-- Wrapper for 'mode' solution - END -->
-          <span class="padded">
-            Alright, <span class="username"> Power</span>. Having understood all these, let's discuss a little bit
-            further.
-            Tap the 'next' button or swipe left. ;)
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
-  <!-- PAGE 3 - Quartiles, Percentiles and Deciles -->
-  <div id="further-discussion-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
-    <header id="header3">
-      <h4 class="rider"><i>(Grouped Data)</i></i></h4>
-    </header>
-    <h3 class="padded page-name"> Quartiles, Deciles and Percentiles:</h3>
-    <!-- Quick links - START -->
-    <div class="quick-links white-bg">
-      <div class="row">
-        <i>Quick links:</i><br />
-        <ol type="1">
-          <li>
-            <a href="#the-quartiles-ref"> The quartiles</a>
-            <ol type="A">
-              <li><a href="#quartile-formula-ref" class="padded"> The quartile formula</a></li>
-              <li>
-                <a href="#semi-interquartile-range-ref" class="padded"> The semi-interquartile-range
-                </a>
-              </li>
-            </ol>
-          </li>
-          <li>
-            <a href="#the-deciles-ref"> The deciles</a>
-            <ol type="A">
-              <li><a href="#decile-formula-ref" class="padded"> The decile formula</a></li>
-            </ol>
-          </li>
-          <li>
-            <a href="#the-percentiles-ref"> The percentiles</a>
-            <ol type="A">
-              <li><a href="#percentile-formula-ref" class="padded"> The percentile formula</a></li>
-            </ol>
-          </li>
-        </ol>
-      </div>
-    </div>
-
-    <!-- Quick links - END -->
-    <br />
-    <div class="row">
-      <div class="padded">
-        Alright. Now, <span class="username"> Power</span>? I'm sure you must have heard of these words that end with
-        <b><i>"iles"</i></b> (hmm...what about we call them <b><i>"the iles"</i></b>? Cool, right? ;)). Okay. They are
-        the
-        <b class="white-bg">quartiles</b>, the <b class="white-bg">deciles</b>,
-        and the <b class="white-bg">percentiles</b>.<br />
-        When you meet them, do not let them scare you. They are easy to handle so long you can get the logic behind
-        handling them well enough.<br />
-        So, let's talk about them, about <b><i id="the-quartiles-ref">"the iles".</i></b>
-      </div>
-    </div>
-    <!-- Wrapper for 'quartiles' formula - START -->
-    <div id="quartiles">
-      <h4>
-        <div class="white-bg padded">
-          <div class="row">
-            <b>1.</b> The quartiles:
-          </div>
-        </div>
-      </h4>
-      <div class="row">
-        The <b>quartiles</b> consist of four parts, (just like from the word, <i>'quarter'</i> which implies a fourth
-        part of something), obviously
-        the first part, <b><i>Q1</i></b>, the second, <b><i>Q2</i></b>, the third, <b><i>Q3</i></b> and the fourth,
-        <b><i>Q4</i></b>. <br />
-        Now, we are going to consider only two of the parts here and discard the other two. I'll tell you why. Let's
-        continue. <br />
-        The two parts we'll consider are <b><i>Q1</i></b> and <b><i>Q3</i></b>. <br /><br />
-        From the elaboration of quartiles and quarter above, we can say that <b><i>Q1</i></b>
-        is the 1'th part of the quartile (called as first-quartile) and <b><i>Q3</i></b> is
-        the 3'th part of the quartile (called as third-quartile). This means that <b><i>Q1</i></b>
-        = &frac14; of <b><i>Q4</i></b> and <b><i>Q3</i></b> = &frac34; of <b><i>Q4</i></b>. Notice I
-        said, <b>"...of Q4"</b>, because Q4 is itself the quartile. And also <b><i>Q2</i></b>, the
-        2'th part, would be <sup>2</sup><i class="slant">/</i><sub>4</sub> of <b><i>Q4</i></b>
-        which is equal to &frac12; of <b><i>Q4</i></b> which is also the same as the <b><i>median</i></b>,
-        because when we divide a dataset by 2 we get <a href="#median-formula-ref" id="link-to-median">the median</a>
-        which we discussed earlier. So, <b><i>Q2</i></b> is the median (half of the quartile) and <b><i>Q4</i></b>
-        is the quartile itself, the full package. Now, you see why we had to discard them both. Good. So,
-        let's move forward.<br /> <br />
-        Again, from the above illustration, we see how the quartiles are related to each other and the median.
-        <br /><br />
-        Take this logic and never forget it, because you'll use the same when solving for <span
-          class="white-bg">deciles</span>
-        and <span class="white-bg">percentiles</span>: <br />
-        If you take a look at the formula for finding <a href="#median-formula-ref" id="quartiles-median-ref">the
-          median</a>
-        of a grouped data, you'll notice there's a variable <b><i>N</i></b> involved in the calculation. This variable
-        is the 'mother'
-        quartile, I mean <b><i>Q4</i></b>; same with <b><i>D10</i></b> for the <b class="white-bg"> deciles</b> and
-        <b><i>P100</i></b>
-        for the <b class="white-bg">percentiles</b>. Also, notice the variable, <b><i>N</i></b>, is divided by 2 which
-        is the same as saying &frac12; of
-        <b><i>N</i></b> which also implies &frac12; of <b><i>Q4</i></b> which is, as well, equal to <b><i>Q2</i></b>,
-        the median.
-        <span class="username"> Power</span>? I hope you are grasping? <br />
-        Now, using the same logic, we can compute the values of <b><i>Q1</i></b> and <b><i>Q3</i></b> by substituting
-        '<b><i><sup class="unslant">1</sup><i class="slant">/</i><sub class="unslant">2</sub></i></b>' in the formula
-        for '&frac14;'
-        and '&frac34;' respectively since <b><i>Q4</i></b> = <b><i>N</i></b>.<br /><br />
-        <b id="quartile-formula-ref"> <b class="white-bg">1.A</b></b>For <b><i>Q1</i></b>, the formula would look
-        like this:
-      </div>
-      <!-- Quartile formula wrapper - START -->
-      <div class="row">
-        <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
-          <div class="formula-wrapper-first-child">
-            <div class="formula-wrapper-second-child">
-              <div class="div1">
-                <span class="align-vertical"> <b>Q1</b> = L<sub>Q1</sub> +</span>
-              </div>
-              <div class="div2">
-                <!-- Formula fraction -->
-                <div class="div2-childDiv">
-                  <span class="brace-open"> (</span>
-                  <span class="fraction-wrapper">
-                    <span class="numerator"> <b class="unslant"> [</b><span class="unslant">&frac14;</span> &times; N<b
-                        class="unslant">]</b> &minus; &Sigma;f<sub>&lt;Q1</sub></span>
-                    <span class="denominator"> f<sub>Q1</sub></span>
-                  </span>
-                  <span class="brace-close"> )</span>
+                <div class="div3">
+                  <span class="align-vertical"> &times; C</span>
                 </div>
               </div>
-              <div class="div3">
-                <span class="align-vertical"> &times; C</span>
+            </div>
+          </div>
+        </div>
+        <!-- Quartile formula wrapper - END -->
+        <!-- Formula explanation for 'first-quartile' - START -->
+        <div class="formula-explanation">
+          <div class="p">
+            <div class="row">Where;</div><br />
+            <!-- Lower boundary of median class -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>L<sub>Q1</sub></b></i> = <b>lower class boundary of the first-quartile
+                  class</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (Having known how to calculate for lower class boundaries, the quartile class in this case is the class
+                whose frequency has the result<i class="slant">/</i>value of <b class="unslant">[</b><span
+                  class="unslant">&frac14;</span> &times; N<b class="unslant">]</b> embedded in it. I.e. the value<i
+                  class="slant">/</i>result of <b class="unslant">[</b><span class="unslant">&frac14;</span> &times; N<b
+                  class="unslant">]</b> is in the range of values of the frequency of the class);
+              </div>
+            </div>
+
+            <!-- Summation of frequencies of all classes -->
+            <div class="variable-names">
+              <div class="row">
+                <b><i>N</i> = Q4 = <i>&Sigma;f</i></b> <i>(read as summation-f or sigma-f)</i>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (This is the same as the summation of the frequencies of all the classes);
+              </div>
+            </div>
+            <!-- Cummulative frequency below median class -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>&Sigma;f<sub>&lt;Q1</sub></b></i> = <b>cummulative frequency below
+                  <b><i>Q1</i></b> class</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (I.e. the summation of the frequencies below the frequecy of the quartile class, <b><i>Q1 (the first
+                    quartile class)</i></b>, in this case);
+              </div>
+            </div>
+            <!-- Frequency of median class -->
+            <div class="variable-names">
+              <div class="row"> <b><i>f<sub>Q1</sub></i></b> = <b>frequency of <b><i>Q1</i></b> class</b></div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (This is obtained directly from the frequency distribution table having gotten the value of <b
+                  class="unslant">[</b><span class="unslant">&frac14;</span> &times; N<b class="unslant">]</b>);
+              </div>
+            </div>
+            <!-- Class size -->
+            <div class="variable-names">
+              <div class="row"> <b><i>C</i></b> = <b>class size</b></div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (This has already been discussed. Refer to <a href="#C" id="semi-interquartile-range-ref"
+                  class="refer-to-C">class size</a> under 'The mean' in the other page).
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Formula explaination for 'first-quartile' - END -->
+
+        <!-- Semi-interquartile range - START -->
+        <h4 class="padded">
+          <div class="padded white-bg">
+            <div class="row"> 1.B The semi-interquartile-range:</div>
+          </div>
+        </h4>
+        <div class="row">
+          I'll try to make this as short as possible.<br /><br />
+          <span class="username">Power</span>? I believe you know what 'range' is and how to calculate it? <br />
+          The range is the difference between the highest value and the lowest value in a dataset...and also what
+          'semi' is, half of something, as in semi-circle.<br />
+          Therefore, to compute the semi-interquartile-range, let's first break the expression into two
+          (<i>'interquartile-range'</i> and <i>'semi'</i>, in that order). So, to compute the interquartile-range,
+          we get the lowest of the inter-quartiles (notice I broke the word here again) and subtract it from the
+          highest of the inter-quartiles. <br />
+          The reason I broke the word, 'interquartile', is this: <br />
+          You have to know that <b><i>Q4</i></b> is not 'a part' of the quartile. It is not 'inter' the quartile.
+          It is the quartile itself. It is not included in the 'inter' quartiles. So therefore, <b><i>Q3</i></b> becomes
+          the
+          highest interquartile and <b><i>Q1</i></b> becomes the lowest interquartile. Hence, the range of the
+          interquartiles would be <b><i>Q3</i></b> &minus; <b><i>Q1</i></b>, and the semi-interquartile-range would then
+          be
+          the result of the interquartile-range halved. <i>Mathematically:</i>
+          <div id="quartile-range" class="variable-names variable-U">
+            <div class="div1">
+              <span class="align-vertical"> <b>Q<sub>range</sub></b> =</span>
+            </div>
+            <div class="div2">
+              <!-- Formula fraction -->
+              <div class="div2-childDiv">
+                <span class="fraction-wrapper">
+                  <span class="numerator"><b>Q3 &minus; Q1</b></span>
+                  <span class="denominator"><b id="the-deciles-ref"> 2</b></span>
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Quartile formula wrapper - END -->
-      <!-- Formula explanation for 'first-quartile' - START -->
-      <div class="formula-explanation">
-        <div class="p">
-          <div class="row">Where;</div><br />
-          <!-- Lower boundary of median class -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>L<sub>Q1</sub></b></i> = <b>lower class boundary of the first-quartile
-                class</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (Having known how to calculate for lower class boundaries, the quartile class in this case is the class
-              whose frequency has the result<i class="slant">/</i>value of <b class="unslant">[</b><span
-                class="unslant">&frac14;</span> &times; N<b class="unslant">]</b> embedded in it. I.e. the value<i
-                class="slant">/</i>result of <b class="unslant">[</b><span class="unslant">&frac14;</span> &times; N<b
-                class="unslant">]</b> is in the range of values of the frequency of the class);
-            </div>
-          </div>
+      <!-- Semi-interquartile range - END -->
+      <br />
 
-          <!-- Summation of frequencies of all classes -->
-          <div class="variable-names">
+      <div id="deciles">
+        <!-- Wrapper for 'quartiles' formula -->
+        <h4>
+          <div class="white-bg padded">
             <div class="row">
-              <b><i>N</i> = Q4 = <i>&Sigma;f</i></b> <i>(read as summation-f or sigma-f)</i>
+              <b>2.</b> The deciles:
             </div>
           </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (This is the same as the summation of the frequencies of all the classes);
-            </div>
-          </div>
-          <!-- Cummulative frequency below median class -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>&Sigma;f<sub>&lt;Q1</sub></b></i> = <b>cummulative frequency below
-                <b><i>Q1</i></b> class</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (I.e. the summation of the frequencies below the frequecy of the quartile class, <b><i>Q1 (the first
-                  quartile class)</i></b>, in this case);
-            </div>
-          </div>
-          <!-- Frequency of median class -->
-          <div class="variable-names">
-            <div class="row"> <b><i>f<sub>Q1</sub></i></b> = <b>frequency of <b><i>Q1</i></b> class</b></div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (This is obtained directly from the frequency distribution table having gotten the value of <b
-                class="unslant">[</b><span class="unslant">&frac14;</span> &times; N<b class="unslant">]</b>);
-            </div>
-          </div>
-          <!-- Class size -->
-          <div class="variable-names">
-            <div class="row"> <b><i>C</i></b> = <b>class size</b></div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (This has already been discussed. Refer to <a href="#C" id="semi-interquartile-range-ref"
-                class="refer-to-C">class size</a> under 'The mean' in the other page).
-            </div>
-          </div>
+        </h4>
+        <div class="row">
+          Just like the quartiles, the deciles also take the form of the median.<br />
+          But before we continue, take note of the term "decile", 'dec-' deals with a tenth (10th).
+          For instances, as we know, 'dec-imal', 'dec-imeter', 'dec-ade' etc. They all refer to a '10th'.<br />
+          Why I chipped that in is this: The i'th decile is calculated by just substituting
+          '<i><sup class="unslant">1</sup>/<sub class="unslant">2</sub></i>' for '<i><sup class="slant">i</sup>/<sub
+              class="unslant">2</sub></i>' accordingly just as we did with quartiles.
+          As in this: <br />If we are asked to find the i'th decile, say 9th decile, of a grouped data, we simply
+          do this: substitute '<i><sup class="unslant">1</sup>/<sub class="unslant">2</sub></i>' for
+          '<i><sup class="unslant">9</sup>/<sub class="unslant">10</sub></i>'. <br />
+          <i id="decile-formula-ref">Note:</i> For deciles; <i class="slant">i: 0 &lt; i &lt; 10</i>
+          (i.e. i is greater than 0 and is less than 10)</i>'. <br />
+          The formula would then look like this, for <i class="slant">D9</i>:
         </div>
-      </div>
-      <!-- Formula explaination for 'first-quartile' - END -->
-
-      <!-- Semi-interquartile range - START -->
-      <h4 class="padded">
-        <div class="padded white-bg">
-          <div class="row"> 1.B The semi-interquartile-range:</div>
-        </div>
-      </h4>
-      <div class="row">
-        I'll try to make this as short as possible.<br /><br />
-        <span class="username">Power</span>? I believe you know what 'range' is and how to calculate it? <br />
-        The range is the difference between the highest value and the lowest value in a dataset...and also what
-        'semi' is, half of something, as in semi-circle.<br />
-        Therefore, to compute the semi-interquartile-range, let's first break the expression into two
-        (<i>'interquartile-range'</i> and <i>'semi'</i>, in that order). So, to compute the interquartile-range,
-        we get the lowest of the inter-quartiles (notice I broke the word here again) and subtract it from the
-        highest of the inter-quartiles. <br />
-        The reason I broke the word, 'interquartile', is this: <br />
-        You have to know that <b><i>Q4</i></b> is not 'a part' of the quartile. It is not 'inter' the quartile.
-        It is the quartile itself. It is not included in the 'inter' quartiles. So therefore, <b><i>Q3</i></b> becomes
-        the
-        highest interquartile and <b><i>Q1</i></b> becomes the lowest interquartile. Hence, the range of the
-        interquartiles would be <b><i>Q3</i></b> &minus; <b><i>Q1</i></b>, and the semi-interquartile-range would then
-        be
-        the result of the interquartile-range halved. <i>Mathematically:</i>
-        <div id="quartile-range" class="variable-names variable-U">
-          <div class="div1">
-            <span class="align-vertical"> <b>Q<sub>range</sub></b> =</span>
-          </div>
-          <div class="div2">
-            <!-- Formula fraction -->
-            <div class="div2-childDiv">
-              <span class="fraction-wrapper">
-                <span class="numerator"><b>Q3 &minus; Q1</b></span>
-                <span class="denominator"><b id="the-deciles-ref"> 2</b></span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Semi-interquartile range - END -->
-    <br />
-
-    <div id="deciles">
-      <!-- Wrapper for 'quartiles' formula -->
-      <h4>
-        <div class="white-bg padded">
-          <div class="row">
-            <b>2.</b> The deciles:
-          </div>
-        </div>
-      </h4>
-      <div class="row">
-        Just like the quartiles, the deciles also take the form of the median.<br />
-        But before we continue, take note of the term "decile", 'dec-' deals with a tenth (10th).
-        For instances, as we know, 'dec-imal', 'dec-imeter', 'dec-ade' etc. They all refer to a '10th'.<br />
-        Why I chipped that in is this: The i'th decile is calculated by just substituting
-        '<i><sup class="unslant">1</sup>/<sub class="unslant">2</sub></i>' for '<i><sup class="slant">i</sup>/<sub
-            class="unslant">2</sub></i>' accordingly just as we did with quartiles.
-        As in this: <br />If we are asked to find the i'th decile, say 9th decile, of a grouped data, we simply
-        do this: substitute '<i><sup class="unslant">1</sup>/<sub class="unslant">2</sub></i>' for
-        '<i><sup class="unslant">9</sup>/<sub class="unslant">10</sub></i>'. <br />
-        <i id="decile-formula-ref">Note:</i> For deciles; <i class="slant">i: 0 &lt; i &lt; 10</i>
-        (i.e. i is greater than 0 and is less than 10)</i>'. <br />
-        The formula would then look like this, for <i class="slant">D9</i>:
-      </div>
-      <div class="row">
-        <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
-          <div class="formula-wrapper-first-child">
-            <div class="formula-wrapper-second-child">
-              <div class="div1">
-                <span class="align-vertical"> <b>D9</b> = L<sub>D9</sub> +</span>
-              </div>
-              <div class="div2">
-                <!-- Formula fraction -->
-                <div class="div2-childDiv">
-                  <span class="brace-open"> (</span>
-                  <span class="fraction-wrapper">
-                    <span class="numerator"> <b class="unslant">[</b><sup class="unslant">9</sup>/<sub
-                        class="unslant">10</sub> &times; N<b class="unslant">]</b> &minus;
-                      &Sigma;f<sub>&lt;D9</sub></span>
-                    <span class="denominator"> f<sub>D9</sub></span>
-                  </span>
-                  <span class="brace-close"> )</span>
+        <div class="row">
+          <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
+            <div class="formula-wrapper-first-child">
+              <div class="formula-wrapper-second-child">
+                <div class="div1">
+                  <span class="align-vertical"> <b>D9</b> = L<sub>D9</sub> +</span>
+                </div>
+                <div class="div2">
+                  <!-- Formula fraction -->
+                  <div class="div2-childDiv">
+                    <span class="brace-open"> (</span>
+                    <span class="fraction-wrapper">
+                      <span class="numerator"> <b class="unslant">[</b><sup class="unslant">9</sup>/<sub
+                          class="unslant">10</sub> &times; N<b class="unslant">]</b> &minus;
+                        &Sigma;f<sub>&lt;D9</sub></span>
+                      <span class="denominator"> f<sub>D9</sub></span>
+                    </span>
+                    <span class="brace-close"> )</span>
+                  </div>
+                </div>
+                <div class="div3">
+                  <span class="align-vertical"> &times; C</span>
                 </div>
               </div>
-              <div class="div3">
-                <span class="align-vertical"> &times; C</span>
+            </div>
+          </div>
+        </div>
+        <!-- Formula explain for 'decile' - START -->
+        <div class="formula-explanation">
+          <div class="p">
+            <div class="row">Where;</div><br />
+            <!-- Lower boundary of median class -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>L<sub>D9</sub></b></i> = <b>lower class boundary of the 9th-decile
+                  class</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (The 9th-decile class is the class whose frequency, having gotten the value<i class="slant">/</i>result
+                of
+                <b><b class="unslant">[</b><i><sup class="unslant">9</sup><i class="slant">/</i><sub
+                      class="unslant">10</sub> &times; N</i><b class="unslant">]</b></b>, is in the range of values of
+                the
+                frequency of the class);
+              </div>
+            </div>
+            <!-- Summation of frequencies of all classes -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>N</b></i> = <b>D10 = <i>&Sigma;f</i></b> <i>(read as summation-f or
+                  sigma-f)</i>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (This is the same as the summation of the frequencies of all the classes);
+              </div>
+            </div>
+            <!-- Cummulative frequency below median class -->
+            <div class="variable-names">
+              <div class="row">
+                <i><b>&Sigma;f<sub>&lt;D9</sub></b></i> = <b>cummulative frequency below
+                  <b><i>D9</i></b> class</b>
+              </div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (I.e. the summation of the frequencies below the frequecy of the decile class, <b><i>D9 (the 9th decile
+                    class)</i></b>, in this case);
+              </div>
+            </div>
+            <!-- Frequency of median class -->
+            <div class="variable-names">
+              <div class="row"> <b><i>f<sub>D9</sub></i></b> = <b>frequency of <b><i>D9</i></b> class</b></div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (This is obtained directly from the frequency distribution table having gotten the value of <b><b
+                    class="unslant">[</b><i><sup class="unslant">9</sup><i class="slant">/</i><sub
+                      class="unslant">10</sub>
+                    &times; D10</i><b class="unslant">]</b></b>);
+              </div>
+            </div>
+            <!-- Class size -->
+            <div class="variable-names">
+              <div class="row"> <b><i>C</i></b> = <b>class size</b></div>
+            </div>
+            <div class="variable-definitions">
+              <div class="row">
+                (See <a href="#C" id="the-percentiles-ref" class="refer-to-C">class size</a> under 'The mean' in the
+                other
+                page).
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Formula explain for 'decile' - START -->
-      <div class="formula-explanation">
-        <div class="p">
-          <div class="row">Where;</div><br />
-          <!-- Lower boundary of median class -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>L<sub>D9</sub></b></i> = <b>lower class boundary of the 9th-decile
-                class</b>
-            </div>
+        <!-- Formula explain for 'decile' - END -->
+        <h4 class="padded">
+          <div class="padded white-bg">
+            <div class="row"> 3. The percentiles:</div>
           </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (The 9th-decile class is the class whose frequency, having gotten the value<i class="slant">/</i>result of
-              <b><b class="unslant">[</b><i><sup class="unslant">9</sup><i class="slant">/</i><sub
-                    class="unslant">10</sub> &times; N</i><b class="unslant">]</b></b>, is in the range of values of the
-              frequency of the class);
-            </div>
-          </div>
-          <!-- Summation of frequencies of all classes -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>N</b></i> = <b>D10 = <i>&Sigma;f</i></b> <i>(read as summation-f or
-                sigma-f)</i>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (This is the same as the summation of the frequencies of all the classes);
-            </div>
-          </div>
-          <!-- Cummulative frequency below median class -->
-          <div class="variable-names">
-            <div class="row">
-              <i><b>&Sigma;f<sub>&lt;D9</sub></b></i> = <b>cummulative frequency below
-                <b><i>D9</i></b> class</b>
-            </div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (I.e. the summation of the frequencies below the frequecy of the decile class, <b><i>D9 (the 9th decile
-                  class)</i></b>, in this case);
-            </div>
-          </div>
-          <!-- Frequency of median class -->
-          <div class="variable-names">
-            <div class="row"> <b><i>f<sub>D9</sub></i></b> = <b>frequency of <b><i>D9</i></b> class</b></div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (This is obtained directly from the frequency distribution table having gotten the value of <b><b
-                  class="unslant">[</b><i><sup class="unslant">9</sup><i class="slant">/</i><sub
-                    class="unslant">10</sub>
-                  &times; D10</i><b class="unslant">]</b></b>);
-            </div>
-          </div>
-          <!-- Class size -->
-          <div class="variable-names">
-            <div class="row"> <b><i>C</i></b> = <b>class size</b></div>
-          </div>
-          <div class="variable-definitions">
-            <div class="row">
-              (See <a href="#C" id="the-percentiles-ref" class="refer-to-C">class size</a> under 'The mean' in the other
-              page).
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Formula explain for 'decile' - END -->
-      <h4 class="padded">
-        <div class="padded white-bg">
-          <div class="row"> 3. The percentiles:</div>
-        </div>
-      </h4>
-      <div class="row">
-        Alright. This will be the last of all the things I've been discussing so far. It's not been easy getting these
-        done. I'm really tired now. I've got to rest. :) <br /><br />
-        So, finally, <span class="username">Power</span>, the percentiles...<br />
-        Just use the same logic as discussed above.<br />
-        We know that 'percentile' is a derivative of the word, 'percent'
-        which means a hundred. So finding, for instance, say the 86th percentile,
-        we just substitute '<i class="unslant"><sup>1</sup><i class="slant">/</i><sub>2</sub></i>' in the median formula
-        for '<sup class="unslant"> 86</sup><i class="slant">/</i><sub id="percentile-formula-ref">100</sub>', then we
-        solve. As easy as that. Mathematically:
-        <!-- The percentile formula wrapper - START -->
-        <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
-          <div class="formula-wrapper-first-child">
-            <div class="formula-wrapper-second-child">
-              <div class="div1">
-                <span class="align-vertical"> <b>P86</b> = L<sub>P86</sub> +</span>
-              </div>
-              <div class="div2">
-                <!-- Formula fraction -->
-                <div class="div2-childDiv">
-                  <span class="brace-open"> (</span>
-                  <span class="fraction-wrapper">
-                    <span class="numerator"> <b class="unslant">[</b><i><sup class="unslant">86</sup><i
-                          class="slant">/</i><sub class="unslant">100</sub> &times; N</i><b class="unslant">]</b>
-                      &minus; &Sigma;f<sub>&lt;P86</sub></span>
-                    <span class="denominator"> f<sub>P86</sub></span>
-                  </span>
-                  <span class="brace-close"> )</span>
+        </h4>
+        <div class="row">
+          Alright. This will be the last of all the things I've been discussing so far. It's not been easy getting these
+          done. I'm really tired now. I've got to rest. :) <br /><br />
+          So, finally, <span class="username">Power</span>, the percentiles...<br />
+          Just use the same logic as discussed above.<br />
+          We know that 'percentile' is a derivative of the word, 'percent'
+          which means a hundred. So finding, for instance, say the 86th percentile,
+          we just substitute '<i class="unslant"><sup>1</sup><i class="slant">/</i><sub>2</sub></i>' in the median
+          formula
+          for '<sup class="unslant"> 86</sup><i class="slant">/</i><sub id="percentile-formula-ref">100</sub>', then we
+          solve. As easy as that. Mathematically:
+          <!-- The percentile formula wrapper - START -->
+          <div class="median formula-wrapper custom-scroll-bar prevent-swipe">
+            <div class="formula-wrapper-first-child">
+              <div class="formula-wrapper-second-child">
+                <div class="div1">
+                  <span class="align-vertical"> <b>P86</b> = L<sub>P86</sub> +</span>
+                </div>
+                <div class="div2">
+                  <!-- Formula fraction -->
+                  <div class="div2-childDiv">
+                    <span class="brace-open"> (</span>
+                    <span class="fraction-wrapper">
+                      <span class="numerator"> <b class="unslant">[</b><i><sup class="unslant">86</sup><i
+                            class="slant">/</i><sub class="unslant">100</sub> &times; N</i><b class="unslant">]</b>
+                        &minus; &Sigma;f<sub>&lt;P86</sub></span>
+                      <span class="denominator"> f<sub>P86</sub></span>
+                    </span>
+                    <span class="brace-close"> )</span>
+                  </div>
+                </div>
+                <div class="div3">
+                  <span class="align-vertical"> &times; C</span>
                 </div>
               </div>
-              <div class="div3">
-                <span class="align-vertical"> &times; C</span>
-              </div>
             </div>
           </div>
-        </div>
-        <!-- The percentile formula wrapper - END -->
-        <br /><br />
-        Alright. So that will be all for now. <br />
-        Thanks for taking time out and also for taking your time to study
-        these for yourself. See you later, <span class="username">Power</span>. Byeee! ;)<br /> <br />
-        PS: Lest I forget...<b>HAPPY NEW YEEEAR, 2018! ;D</b>
+          <!-- The percentile formula wrapper - END -->
+          <br /><br />
+          Alright. So that will be all for now. <br />
+          Thanks for taking time out and also for taking your time to study
+          these for yourself. See you later, <span class="username">Power</span>. Byeee! ;)<br /> <br />
+          PS: Lest I forget...<b>HAPPY NEW YEEEAR, 2018! ;D</b>
 
-        <div id="sign-out-wrapper">
-          <button id="sign-out"> Sign Out</button>
+          <div id="sign-out-wrapper">
+            <button id="sign-out"> Sign Out</button>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- PAGE 3 - Quartiles, Deciles and Percentiles - END -->
-  <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
-
-    <!-- Navigation buttons - START -->
-    <div id="buttons-wrapper" data-state='hidden' role="navigation">
-      <button id="previous" data-state="hidden" aria-label="previous">←</button>
-      <span id="page-num"></span>
-      <button id="next" data-state="hidden" aria-label="next">→</button>
-      <button id="go-up-1" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
-      <button id="go-up-2" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
-      <button id="go-up-3" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
-    </div>
-    <!-- Navigation buttons - END -->
+    </section>
+    <!-- PAGE 3 - Quartiles, Deciles and Percentiles - END -->
+    <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
+  </main>
+  <!-- Navigation buttons - START -->
+  <nav id="buttons-wrapper" data-state='hidden' role="navigation">
+    <button id="previous" data-state="hidden" aria-label="previous">←</button>
+    <span id="page-num"></span>
+    <button id="next" data-state="hidden" aria-label="next">→</button>
+    <button id="go-up-1" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
+    <button id="go-up-2" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
+    <button id="go-up-3" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
+  </nav>
+  <!-- Navigation buttons - END -->
 </body>
 
 </html>

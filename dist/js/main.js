@@ -10,6 +10,8 @@ var previousButton;
 var welcomePage;
 var signOutButton;
 var pageNumber;
+var intervalInput;
+var frequenciesInput;
 var furtherDiscussion;
 var username;
 this.addEventListener('load', function () {
@@ -22,6 +24,8 @@ this.addEventListener('load', function () {
     welcomePage = Q('#welcome-page');
     signOutButton = Q('#sign-out');
     pageNumber = Q('#page-num');
+    intervalInput = Q('#interval');
+    frequenciesInput = Q('#frequencies');
     furtherDiscussion = Q('#further-discussion-page');
     QAll('[data-state="hidden"]').forEach(function (target) {
         target.addEventListener('transitionend', function () {

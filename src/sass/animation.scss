@@ -75,11 +75,11 @@
 }
 
 .slide-up-controls {
-  transform: translateY(100vh) !important;
+  transform: translateY(0) !important;
   transition: 0.5s !important;
 }
 
 .slide-down-controls {
-  transform: translateY(calc(100vh + 3.35rem)) !important;
+  transform: translateY(8rem) !important;
   transition: 0.5s !important;
 }

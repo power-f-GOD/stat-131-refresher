@@ -115,15 +115,15 @@
 }
 
 .slide-up-controls {
-  -webkit-transform: translateY(100vh) !important;
-          transform: translateY(100vh) !important;
+  -webkit-transform: translateY(0) !important;
+          transform: translateY(0) !important;
   -webkit-transition: 0.5s !important;
   transition: 0.5s !important;
 }
 
 .slide-down-controls {
-  -webkit-transform: translateY(calc(100vh + 3.35rem)) !important;
-          transform: translateY(calc(100vh + 3.35rem)) !important;
+  -webkit-transform: translateY(8rem) !important;
+          transform: translateY(8rem) !important;
   -webkit-transition: 0.5s !important;
   transition: 0.5s !important;
 }

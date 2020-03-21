@@ -204,6 +204,12 @@ button {
   min-height: 3rem;
 }
 
+input[disabled],
+button[disabled] {
+  background: #7e7e7e !important;
+  border-color: #a0a0a0 !important;
+}
+
 button {
   cursor: pointer !important;
 }

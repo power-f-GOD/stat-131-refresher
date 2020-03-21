@@ -6,7 +6,7 @@ export function loadPageNavScript() {
   let i = 0;
   let j = 0;
 
-  const pages = QAll('div[data-role="page"]');
+  const pages = QAll('[data-role="page"]');
   const numOfPages = pages.length;
   const pageTitleBar = Q('#page-title-bar') as HTMLDivElement;
   const pageTitles = QAll('.page-title');
@@ -104,42 +104,11 @@ export function loadPageNavScript() {
     nextOrPrevPage = pages[j] as HTMLDivElement;
     nextOrPrevPage.dataset.state = 'visible';
 
-    // if (j == numOfPages - 1) previousButton.dataset.state = 'visible';
-    // else if (j == 0) nextButton.dataset.state = 'visible';
-    // else {
-    //   previousButton.dataset.state = 'visible';
-    //   nextButton.dataset.state = 'visible';
-    // }
-
     //delay for 100ms for page slide animation to work
     setTimeout(() => {
       currentPage.className = 'custom-scroll-bar translate-out-left';
       nextOrPrevPage.className = 'custom-scroll-bar translate-in';
-
-      // if (j == numOfPages - 1) {
-      //   nextButton.className = 'scale-down';
-      //   previousButton.className = 'scale-up';
-      // } else if (j == 0) {
-      //   nextButton.className = 'scale-up';
-      //   previousButton.className = 'scale-down';
-      // } else {
-      //   nextButton.className = 'scale-up';
-      //   previousButton.className = 'scale-up';
-      // }
-
       pageTitleBar.dataset.state = 'visible';
-
-      //This code-block is mainly for the fixed top div and partly for the go-up buttons
-      // if (j == 0) {
-      //   goUpButtons[j].className = 'scale-down';
-      //   pageTitleBar.dataset.state = 'hidden';
-      // } else if (j == 1 && i == 0) {
-      //   pageTitles[numOfPages - 2].dataset.state = 'hidden';
-      //   pageTitles[j - 1].dataset.state = 'visible';
-      // } else if (j - i == 1) {
-      //   pageTitles[i - 1].dataset.state = 'hidden';
-      //   pageTitles[j - 1].dataset.state = 'visible';
-      // }
     }, 100);
     displayNavigationButtons();
   };
@@ -181,12 +150,19 @@ export function loadPageNavScript() {
     setTimeout(() => {
       currentPage.className = 'custom-scroll-bar translate-out-right';
       nextOrPrevPage.className = 'custom-scroll-bar translate-in';
-
       displayNavigationButtons();
     }, 100);
   };
 
   function displayNavigationButtons() {
+    if (j == 2) {
+      let { interval, frequencies } = localStorage;
+
+      if (interval && !intervalInput.value) intervalInput.value = interval;
+      if (frequencies && !frequenciesInput.value)
+        frequenciesInput.value = frequencies;
+    }
+
     //displays current page number
     pageNumber.textContent = `${j + 1} / ${numOfPages}`;
 
@@ -221,7 +197,7 @@ export function loadPageNavScript() {
       } else if (j == 1 && i == 0) {
         pageTitles[numOfPages - 2].dataset.state = 'hidden';
         pageTitles[j - 1].dataset.state = 'visible';
-      } else if (j - i == 1) {
+      } else {
         pageTitles[i - 1].dataset.state = 'hidden';
         pageTitles[j - 1].dataset.state = 'visible';
       }
@@ -279,14 +255,13 @@ export function loadPageNavScript() {
   //touchstart event handler
   function touchStart(event: any) {
     startCoord = event.changedTouches[0].clientX;
-
-    
   }
 
   //touchend event handler
   function swipe(event: any) {
     endCoord = event.changedTouches[0].clientX;
     swipeCoord = endCoord - startCoord;
+
     if (Math.abs(swipeCoord) > 25)
       if (j == 0 && swipeCoord > 0) {
         leftElastic.style.width = '10rem';
@@ -304,10 +279,9 @@ export function loadPageNavScript() {
 
   function hideElastic() {
     setTimeout(() => {
-leftElastic.style.width = '0';
-    rightElastic.style.width = '0';
-    }, 600)
-    
+      leftElastic.style.width = '0';
+      rightElastic.style.width = '0';
+    }, 600);
   }
 
   //onscroll event handler

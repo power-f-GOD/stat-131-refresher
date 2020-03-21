@@ -1,7 +1,7 @@
 export function loadPageNavScript() {
     var i = 0;
     var j = 0;
-    var pages = QAll('div[data-role="page"]');
+    var pages = QAll('[data-role="page"]');
     var numOfPages = pages.length;
     var pageTitleBar = Q('#page-title-bar');
     var pageTitles = QAll('.page-title');
@@ -131,6 +131,13 @@ export function loadPageNavScript() {
         }, 100);
     };
     function displayNavigationButtons() {
+        if (j == 2) {
+            var interval = localStorage.interval, frequencies = localStorage.frequencies;
+            if (interval && !intervalInput.value)
+                intervalInput.value = interval;
+            if (frequencies && !frequenciesInput.value)
+                frequenciesInput.value = frequencies;
+        }
         pageNumber.textContent = j + 1 + " / " + numOfPages;
         if (j == numOfPages - 1) {
             previousButton.dataset.state = 'visible';
@@ -163,7 +170,7 @@ export function loadPageNavScript() {
                 pageTitles[numOfPages - 2].dataset.state = 'hidden';
                 pageTitles[j - 1].dataset.state = 'visible';
             }
-            else if (j - i == 1) {
+            else {
                 pageTitles[i - 1].dataset.state = 'hidden';
                 pageTitles[j - 1].dataset.state = 'visible';
             }
