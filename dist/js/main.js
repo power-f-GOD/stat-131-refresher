@@ -25,13 +25,6 @@ var username;
 var rememberMe;
 var _requestAnimationFrame = _requestAnimationFrameWrapper();
 var _cancelAnimationFrame = _cancelAnimationFrameWrapper();
-function _cancelAnimationFrameWrapper() {
-    if (window.cancelAnimationFrame)
-        return window.cancelAnimationFrame;
-    return function (id) {
-        clearTimeout(id);
-    };
-}
 this.addEventListener('load', function () {
     pages = QAll('[data-role="page"]');
     numOfPages = pages.length;
@@ -56,7 +49,7 @@ this.addEventListener('load', function () {
         target.addEventListener('transitionend', function () {
             var classNames = /translate-in|welcome-page-fade-in|scale-up|slide-down|slide-up-controls|title-bar|page-title/;
             if (!classNames.test(target.className))
-                awaits(200).then(function () {
+                delay(200).then(function () {
                     target.dataset.state = 'hidden';
                 });
         });
@@ -131,17 +124,17 @@ this.addEventListener('load', function () {
                 : '';
             if (cookieEnabled)
                 localStorage.userId = username;
-            awaits(rememberMe ? 500 : 1500).then(function () {
+            delay(rememberMe ? 500 : 1500).then(function () {
                 welcomePage.dataset.state = 'visible';
                 signInPage.className = 'custom-scroll-bar translate-out-left';
                 signInStatus.textContent = '';
-                awaits(400).then(function () {
+                delay(350).then(function () {
                     welcomePage.className = 'welcome-page-fade-in custom-scroll-bar';
                     Q('#buttons-wrapper').dataset.state = 'visible';
-                    awaits(800).then(function () {
+                    delay(800).then(function () {
                         Q('#buttons-wrapper').className = 'slide-up-controls';
                         nextButton.dataset.state = 'visible';
-                        awaits(800).then(function () {
+                        delay(800).then(function () {
                             nextButton.className = 'scale-up';
                             signInPage.className = 'custom-scroll-bar translate-out-right';
                             signInPage.dataset.state = 'hidden';
@@ -150,24 +143,34 @@ this.addEventListener('load', function () {
                 });
             });
             usernameElements.forEach(function (element) { return (element.textContent = username); });
-            loadPageNavScript().then(function () {
-                return loadStatComputerScript().then(function () {
-                    awaits(200).then(function () {
-                        if (cookieEnabled) {
-                            if (localStorage.activePageId && rememberMe) {
-                                var activePageId = localStorage.activePageId;
-                                var currentPage = Array.prototype.find.call(pages, function (page) {
-                                    return page.dataset.state == 'visible';
-                                });
-                                for (var i = 0; i < numOfPages; i++)
-                                    if (activePageId != currentPage.id) {
-                                        awaits(300).then(function () {
-                                            nextButton.click();
-                                        });
-                                    }
+            loadPageNavScript()
+                .then(function () { return loadStatComputerScript(); })
+                .then(function () {
+                delay(1000).then(function () {
+                    if (cookieEnabled) {
+                        var activePageId_1 = localStorage.activePageId;
+                        if (activePageId_1 && rememberMe) {
+                            var _loop_1 = function (i, timeout) {
+                                var currentPage = pages[i];
+                                var scrollTop = +localStorage.activePageScrollTop;
+                                if (activePageId_1 != currentPage.id) {
+                                    delay((timeout += 500)).then(function () { return nextButton.click(); });
+                                }
+                                else {
+                                    delay(timeout ? timeout : 2000).then(function () { return (Q("#" + activePageId_1).scrollTop = scrollTop); });
+                                    return out_timeout_1 = timeout, "break";
+                                }
+                                out_timeout_1 = timeout;
+                            };
+                            var out_timeout_1;
+                            for (var i = 0, timeout = 0; i < numOfPages; i++) {
+                                var state_1 = _loop_1(i, timeout);
+                                timeout = out_timeout_1;
+                                if (state_1 === "break")
+                                    break;
                             }
                         }
-                    });
+                    }
                 });
             });
         }
@@ -176,17 +179,17 @@ this.addEventListener('load', function () {
     if (localStorage.userId)
         usernameInput.value = localStorage.userId;
     function loadPageNavScript() {
-        return import('./page-navigation.js').then(function (module) {
+        return import('./page-navigation.min.js').then(function (module) {
             return module.loadPageNavScript();
         });
     }
     function loadStatComputerScript() {
-        return import('./stat-computer.js').then(function (module) {
+        return import('./stat-computer.min.js').then(function (module) {
             return module.loadStatComputerScript();
         });
     }
     if (cookieEnabled)
-        if (localStorage.rememberMe && JSON.parse(localStorage.rememberMe))
+        if (rememberMe)
             signInButton.click();
 });
 this.addEventListener('visibilitychange', function () {
@@ -202,10 +205,11 @@ this.addEventListener('visibilitychange', function () {
             });
             localStorage.activePageId = activePage.id;
             localStorage.activePageIndex = index_1;
+            localStorage.activePageScrollTop = activePage.scrollTop;
         }
     }
 });
-function awaits(timeout) {
+function delay(timeout) {
     return new Promise(function (resolve) {
         if (!Number(timeout))
             throw Error('Expects a time in milliseconds as parameter.');
@@ -222,9 +226,26 @@ function awaits(timeout) {
         }
     });
 }
+function customTimeout(callback, timeout) {
+    if (!Number(timeout))
+        throw Error('Expects a time in milliseconds as parameter.');
+    var start = 0;
+    var id = _requestAnimationFrame(animate);
+    function animate(timestamp) {
+        if (!start)
+            start = timestamp;
+        var timeElapsed = timestamp - start;
+        if (timeElapsed < timeout)
+            id = _requestAnimationFrame(animate);
+        else
+            callback();
+    }
+    return id;
+}
 function customInterval(callback, interval) {
-    if (!callback || !Number(interval))
+    if (!callback || isNaN(interval))
         throw Error('Two parameters expected.');
+    interval = interval == 0 ? 1 : interval;
     var start = 0;
     var spy = { id: _requestAnimationFrame(animate) };
     function animate(timestamp) {
@@ -251,5 +272,12 @@ function _requestAnimationFrameWrapper() {
             previousTime = timestamp + timeout;
             return id;
         };
+    };
+}
+function _cancelAnimationFrameWrapper() {
+    if (window.cancelAnimationFrame)
+        return window.cancelAnimationFrame;
+    return function (id) {
+        clearTimeout(id);
     };
 }

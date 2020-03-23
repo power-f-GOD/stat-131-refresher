@@ -448,7 +448,7 @@ export function loadStatComputerScript() {
     }
 
     Q('#result')!.className = 'custom-scroll-bar prevent-swipe';
-    awaits(650).then(() => {
+    delay(650).then(() => {
       Q('#result')!.innerHTML =
         "In the input boxes above, for the first, input the class limits of\
 				only the first class. You don't have to input the limits for all the classes. And for the\

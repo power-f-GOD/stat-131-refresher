@@ -14,11 +14,11 @@ export function loadPageNavScript() {
       let spy = customInterval(() => {
         let id = spy.id;
 
-        pages[index].scrollTop -= 100;
+        pages[index].scrollTop -= 150;
 
         if (pages[index].scrollTop <= 0) _cancelAnimationFrame(+id);
         pages[index].onclick = () => _cancelAnimationFrame(+id);
-      }, 1);
+      }, 0);
     })
   );
 
@@ -38,8 +38,8 @@ export function loadPageNavScript() {
   function handleKeyboardNavEvent(e: any) {
     let key = e.keyCode || e.which;
 
-    if (key == 39 && j != numOfPages - 1) nextButton.click();
-    else if (key == 37 && j !== 0) previousButton.click();
+    if (key == 39 && j != numOfPages - 1) gotoNextPage();
+    else if (key == 37 && j !== 0) gotoPreviousPage();
   }
 
   signOutButton.onclick = () => {
@@ -57,18 +57,18 @@ export function loadPageNavScript() {
     i = 0;
     j = 0;
     //Page slide
-    awaits(1500).then(() => {
+    delay(1500).then(() => {
       Q('#buttons-wrapper')!.className = 'slide-down-controls';
       pageTitleBar.dataset.state = 'hidden';
       previousButton.className = 'scale-down';
       previousButton.dataset.state = 'hidden';
       goUpButtons[2].dataset.state = 'hidden';
 
-      awaits(1300).then(() => {
+      delay(1000).then(() => {
         furtherDiscussion.className = 'custom-scroll-bar translate-out-left';
         signInPage.dataset.state = 'visible';
 
-        awaits(500).then(() => {
+        delay(500).then(() => {
           furtherDiscussion.dataset.state = 'hidden';
           signInPage.className = 'custom-scroll-bar translate-in';
           //reset pages positions
@@ -88,10 +88,9 @@ export function loadPageNavScript() {
   let nextOrPrevGoUpButton: HTMLButtonElement;
 
   //next button click event handler
-  nextButton.onclick = () => {
-    //prevent user from clicking simultaneously quickly to avoid UI deformity
-    nextButton.disabled = true;
+  nextButton.onclick = gotoNextPage;
 
+  function gotoNextPage() {
     //conditionals for page slide handling
     if (i == 0 && j == 0) {
       i = 0;
@@ -100,8 +99,10 @@ export function loadPageNavScript() {
       i = j;
       j++;
     } else {
-      i++;
-      j++;
+      if (j < numOfPages - 1) {
+        i++;
+        j++;
+      }
     }
 
     currentPage = pages[i] as HTMLDivElement;
@@ -109,26 +110,27 @@ export function loadPageNavScript() {
     nextOrPrevPage.dataset.state = 'visible';
 
     //delay for 100ms for page slide animation to work
-    awaits(100).then(() => {
+    delay(5).then(() => {
       currentPage.className = 'custom-scroll-bar translate-out-left';
       nextOrPrevPage.className = 'custom-scroll-bar translate-in';
       pageTitleBar.dataset.state = 'visible';
     });
     displayNavigationButtons();
-  };
+  }
 
   //previous button click event handler
-  previousButton.onclick = () => {
-    //prevent user from clicking simultaneously quickly to avoid UI deformity
-    previousButton.disabled = true;
+  previousButton.onclick = gotoPreviousPage;
 
+  function gotoPreviousPage() {
     //conditionals for page slide handling
     if (i - j == -1) {
       i = j;
       j--;
     } else {
-      j--;
-      i--;
+      if (j > 0) {
+        j--;
+        i--;
+      }
     }
 
     currentPage = pages[i] as HTMLDivElement;
@@ -136,12 +138,12 @@ export function loadPageNavScript() {
     nextOrPrevPage.dataset.state = 'visible';
 
     //delay for 100ms for page slide animation to work
-    awaits(100).then(() => {
+    delay(5).then(() => {
       currentPage.className = 'custom-scroll-bar translate-out-right';
       nextOrPrevPage.className = 'custom-scroll-bar translate-in';
-      displayNavigationButtons();
     });
-  };
+    displayNavigationButtons();
+  }
 
   //setting variables for swipe event
   let startCoord = 0;
@@ -190,8 +192,8 @@ export function loadPageNavScript() {
       nextButton.dataset.state = 'visible';
     }
 
-    //using awaitss for the sake of making animations work as expected
-    awaits(100).then(() => {
+    //using delays for the sake of making animations work as expected
+    delay(5).then(() => {
       //hide/show next or previous buttons
       if (j == numOfPages - 1) {
         nextButton.className = 'scale-down';
@@ -216,9 +218,7 @@ export function loadPageNavScript() {
         pageTitles[j - 1].dataset.state = 'visible';
       }
 
-      previousButton.disabled = false;
-      nextButton.disabled = false;
-      awaits(100).then(() => {
+      delay(5).then(() => {
         displayGoUpButton();
       });
     });
@@ -238,8 +238,8 @@ export function loadPageNavScript() {
       currentGoUpButton.dataset.state = 'visible';
     }
 
-    //using awaitss for the sake of making animations work as expected
-    awaits(100).then(() => {
+    //using delay for the sake of making animations work as expected
+    delay(5).then(() => {
       //ensures go-up buttons don't pop-up unexpectedly before re-appearing
       if (
         scrollPosition <= 1000 &&
@@ -272,7 +272,7 @@ export function loadPageNavScript() {
 
   function addSwipeListeners() {
     if (nextOrPrevPage)
-      awaits(300).then(() => {
+      delay(300).then(() => {
         nextOrPrevPage.addEventListener('touchstart', touchStart);
         nextOrPrevPage.addEventListener('touchend', swipe);
       });
@@ -308,13 +308,13 @@ export function loadPageNavScript() {
     if (event.touches.length > 1) return;
 
     //checks to prevent from sliding to next page on page-scroll-Y
-    if (swipeCoord < -50 && j != numOfPages - 1) nextButton.click();
-    else if (swipeCoord > 50 && j != 0) previousButton.click();
+    if (swipeCoord < -50 && j != numOfPages - 1) gotoNextPage();
+    else if (swipeCoord > 50 && j != 0) gotoPreviousPage();
   }
 
   //elastic for when user is on first or last page and tries to swipe right or left
   function hideElastic() {
-    awaits(600).then(() => {
+    delay(600).then(() => {
       leftElastic.style.width = '0';
       rightElastic.style.width = '0';
     });
@@ -328,7 +328,7 @@ export function loadPageNavScript() {
       goUpButtons[2].className = 'scale-down';
       j = 2;
       i = 1;
-      previousButton.click();
+      gotoPreviousPage();
     }
   };
 
@@ -340,6 +340,6 @@ export function loadPageNavScript() {
   //'take-example-ref' onclick event handler on page 2
   Q('#take-example')!.onclick = (e: any) => {
     e.preventDefault(); //prevent default to prevent UI deformity
-    nextButton.click();
+    gotoNextPage();
   };
 }

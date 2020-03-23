@@ -28,15 +28,8 @@ let rememberMe: boolean;
 const _requestAnimationFrame = _requestAnimationFrameWrapper();
 const _cancelAnimationFrame = _cancelAnimationFrameWrapper();
 
-function _cancelAnimationFrameWrapper() {
-  if (window.cancelAnimationFrame) return window.cancelAnimationFrame;
-  return (id: number) => {
-    clearTimeout(id);
-  };
-}
-
 this.addEventListener('load', () => {
-  pages = QAll('[data-role="page"]');
+  pages = QAll('[data-role="page"]') as any;
   numOfPages = pages.length;
   pageTitleBar = Q('#page-title-bar') as HTMLDivElement;
   pageTitles = QAll('.page-title');
@@ -62,7 +55,7 @@ this.addEventListener('load', () => {
       let classNames = /translate-in|welcome-page-fade-in|scale-up|slide-down|slide-up-controls|title-bar|page-title/;
 
       if (!classNames.test(target.className))
-        awaits(200).then(() => {
+        delay(200).then(() => {
           target.dataset.state = 'hidden';
         });
     });
@@ -161,20 +154,20 @@ this.addEventListener('load', () => {
       if (cookieEnabled) localStorage.userId = username;
 
       //page slide animation
-      awaits(rememberMe ? 500 : 1500).then(() => {
+      delay(rememberMe ? 500 : 1500).then(() => {
         welcomePage.dataset.state = 'visible';
         signInPage.className = 'custom-scroll-bar translate-out-left';
         signInStatus.textContent = '';
 
-        awaits(400).then(() => {
+        delay(350).then(() => {
           welcomePage.className = 'welcome-page-fade-in custom-scroll-bar';
           Q('#buttons-wrapper')!.dataset.state = 'visible';
 
-          awaits(800).then(() => {
+          delay(800).then(() => {
             Q('#buttons-wrapper')!.className = 'slide-up-controls';
             nextButton.dataset.state = 'visible';
 
-            awaits(800).then(() => {
+            delay(800).then(() => {
               nextButton.className = 'scale-up';
               //translate/reposition signInPage to right position in case of sign out in order to slide in from right again
               signInPage.className = 'custom-scroll-bar translate-out-right';
@@ -187,27 +180,30 @@ this.addEventListener('load', () => {
       //sets all username in app to kin'a personalize UX
       usernameElements.forEach(element => (element.textContent = username));
 
-      loadPageNavScript().then(() =>
-        loadStatComputerScript().then(() => {
-          awaits(200).then(() => {
+      loadPageNavScript()
+        .then(() => loadStatComputerScript())
+        .then(() => {
+          delay(1000).then(() => {
             if (cookieEnabled) {
-              if (localStorage.activePageId && rememberMe) {
-                let { activePageId } = localStorage;
-                let currentPage = Array.prototype.find.call(pages, page =>
-                  page.dataset.state == 'visible'
-                );
+              let { activePageId } = localStorage;
 
-                for (let i = 0; i < numOfPages; i++)
+              if (activePageId && rememberMe)
+                for (let i = 0, timeout = 0; i < numOfPages; i++) {
+                  let currentPage = pages[i];
+                  let scrollTop = +localStorage.activePageScrollTop;
+
                   if (activePageId != currentPage.id) {
-                    awaits(300).then(() => {
-                      nextButton.click();
-                    });
+                    delay((timeout += 500)).then(() => nextButton.click());
+                  } else {
+                    delay(timeout ? timeout : 2000).then(
+                      () => (Q(`#${activePageId}`)!.scrollTop = scrollTop)
+                    );
+                    break;
                   }
-              }
+                }
             }
           });
-        })
-      );
+        });
     }
   };
   Q('#my-name')!.textContent = "@Power'f-GOD⚡⚡";
@@ -226,9 +222,7 @@ this.addEventListener('load', () => {
     );
   }
 
-  if (cookieEnabled)
-    if (localStorage.rememberMe && JSON.parse(localStorage.rememberMe))
-      signInButton.click();
+  if (cookieEnabled) if (rememberMe) signInButton.click();
 });
 
 //save active page info on close of window or on visibility change; will be used to restore state on app reload
@@ -248,12 +242,15 @@ this.addEventListener('visibilitychange', function(this: any) {
       );
       localStorage.activePageId = activePage.id;
       localStorage.activePageIndex = index;
+      localStorage.activePageScrollTop = activePage.scrollTop;
     }
   }
 });
 
-//optimized window.setTimeout replacement that returns a promise
-function awaits(timeout: number) {
+//The following are timers used throught out app
+
+//optimized somewhat version of window.setTimeout that returns a promise
+function delay(timeout: number) {
   return new Promise((resolve: Function) => {
     if (!Number(timeout))
       throw Error('Expects a time in milliseconds as parameter.');
@@ -271,9 +268,29 @@ function awaits(timeout: number) {
   });
 }
 
+function customTimeout(callback: Function, timeout: number) {
+  if (!Number(timeout))
+    throw Error('Expects a time in milliseconds as parameter.');
+
+  let start = 0;
+  let id = _requestAnimationFrame(animate);
+
+  function animate(timestamp: number) {
+    if (!start) start = timestamp;
+    let timeElapsed = timestamp - start;
+
+    if (timeElapsed < timeout) id = _requestAnimationFrame(animate);
+    else callback();
+  }
+
+  return id;
+}
+
 //optimized window.setInterval replacement that returns the interval id
 function customInterval(callback: Function, interval: number) {
-  if (!callback || !Number(interval)) throw Error('Two parameters expected.');
+  if (!callback || isNaN(interval)) throw Error('Two parameters expected.');
+
+  interval = interval == 0 ? 1 : interval;
 
   let start = 0;
   let spy = { id: _requestAnimationFrame(animate) };
@@ -310,5 +327,12 @@ function _requestAnimationFrameWrapper() {
 
       return id;
     };
+  };
+}
+
+function _cancelAnimationFrameWrapper() {
+  if (window.cancelAnimationFrame) return window.cancelAnimationFrame;
+  return (id: number) => {
+    clearTimeout(id);
   };
 }

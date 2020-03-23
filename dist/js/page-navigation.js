@@ -6,11 +6,11 @@ export function loadPageNavScript() {
             var index = i + 1;
             var spy = customInterval(function () {
                 var id = spy.id;
-                pages[index].scrollTop -= 100;
+                pages[index].scrollTop -= 150;
                 if (pages[index].scrollTop <= 0)
                     _cancelAnimationFrame(+id);
                 pages[index].onclick = function () { return _cancelAnimationFrame(+id); };
-            }, 1);
+            }, 0);
         });
     });
     document.body.addEventListener('keyup', handleKeyboardNavEvent);
@@ -25,9 +25,9 @@ export function loadPageNavScript() {
     function handleKeyboardNavEvent(e) {
         var key = e.keyCode || e.which;
         if (key == 39 && j != numOfPages - 1)
-            nextButton.click();
+            gotoNextPage();
         else if (key == 37 && j !== 0)
-            previousButton.click();
+            gotoPreviousPage();
     }
     signOutButton.onclick = function () {
         signOutButton.textContent = 'Signing out...';
@@ -41,16 +41,16 @@ export function loadPageNavScript() {
         }
         i = 0;
         j = 0;
-        awaits(1500).then(function () {
+        delay(1500).then(function () {
             Q('#buttons-wrapper').className = 'slide-down-controls';
             pageTitleBar.dataset.state = 'hidden';
             previousButton.className = 'scale-down';
             previousButton.dataset.state = 'hidden';
             goUpButtons[2].dataset.state = 'hidden';
-            awaits(1300).then(function () {
+            delay(1000).then(function () {
                 furtherDiscussion.className = 'custom-scroll-bar translate-out-left';
                 signInPage.dataset.state = 'visible';
-                awaits(500).then(function () {
+                delay(500).then(function () {
                     furtherDiscussion.dataset.state = 'hidden';
                     signInPage.className = 'custom-scroll-bar translate-in';
                     pages.forEach(function (page) { return (page.className = 'custom-scroll-bar'); });
@@ -64,8 +64,8 @@ export function loadPageNavScript() {
     var nextOrPrevPage;
     var currentGoUpButton;
     var nextOrPrevGoUpButton;
-    nextButton.onclick = function () {
-        nextButton.disabled = true;
+    nextButton.onclick = gotoNextPage;
+    function gotoNextPage() {
         if (i == 0 && j == 0) {
             i = 0;
             j++;
@@ -75,38 +75,42 @@ export function loadPageNavScript() {
             j++;
         }
         else {
-            i++;
-            j++;
+            if (j < numOfPages - 1) {
+                i++;
+                j++;
+            }
         }
         currentPage = pages[i];
         nextOrPrevPage = pages[j];
         nextOrPrevPage.dataset.state = 'visible';
-        awaits(100).then(function () {
+        delay(5).then(function () {
             currentPage.className = 'custom-scroll-bar translate-out-left';
             nextOrPrevPage.className = 'custom-scroll-bar translate-in';
             pageTitleBar.dataset.state = 'visible';
         });
         displayNavigationButtons();
-    };
-    previousButton.onclick = function () {
-        previousButton.disabled = true;
+    }
+    previousButton.onclick = gotoPreviousPage;
+    function gotoPreviousPage() {
         if (i - j == -1) {
             i = j;
             j--;
         }
         else {
-            j--;
-            i--;
+            if (j > 0) {
+                j--;
+                i--;
+            }
         }
         currentPage = pages[i];
         nextOrPrevPage = pages[j];
         nextOrPrevPage.dataset.state = 'visible';
-        awaits(100).then(function () {
+        delay(5).then(function () {
             currentPage.className = 'custom-scroll-bar translate-out-right';
             nextOrPrevPage.className = 'custom-scroll-bar translate-in';
-            displayNavigationButtons();
         });
-    };
+        displayNavigationButtons();
+    }
     var startCoord = 0;
     var swipeCoord = 0;
     var endCoord = 0;
@@ -144,7 +148,7 @@ export function loadPageNavScript() {
             previousButton.dataset.state = 'visible';
             nextButton.dataset.state = 'visible';
         }
-        awaits(100).then(function () {
+        delay(5).then(function () {
             if (j == numOfPages - 1) {
                 nextButton.className = 'scale-down';
                 previousButton.className = 'scale-up';
@@ -169,9 +173,7 @@ export function loadPageNavScript() {
                 pageTitles[i - 1].dataset.state = 'hidden';
                 pageTitles[j - 1].dataset.state = 'visible';
             }
-            previousButton.disabled = false;
-            nextButton.disabled = false;
-            awaits(100).then(function () {
+            delay(5).then(function () {
                 displayGoUpButton();
             });
         });
@@ -185,7 +187,7 @@ export function loadPageNavScript() {
         if (scrollPosition > 1000) {
             currentGoUpButton.dataset.state = 'visible';
         }
-        awaits(100).then(function () {
+        delay(5).then(function () {
             if (scrollPosition <= 1000 &&
                 currentGoUpButton.className == 'scale-down') {
                 nextOrPrevGoUpButton.className = 'scale-down';
@@ -216,7 +218,7 @@ export function loadPageNavScript() {
     }
     function addSwipeListeners() {
         if (nextOrPrevPage)
-            awaits(300).then(function () {
+            delay(300).then(function () {
                 nextOrPrevPage.addEventListener('touchstart', touchStart);
                 nextOrPrevPage.addEventListener('touchend', swipe);
             });
@@ -246,12 +248,12 @@ export function loadPageNavScript() {
         if (event.touches.length > 1)
             return;
         if (swipeCoord < -50 && j != numOfPages - 1)
-            nextButton.click();
+            gotoNextPage();
         else if (swipeCoord > 50 && j != 0)
-            previousButton.click();
+            gotoPreviousPage();
     }
     function hideElastic() {
-        awaits(600).then(function () {
+        delay(600).then(function () {
             leftElastic.style.width = '0';
             rightElastic.style.width = '0';
         });
@@ -263,7 +265,7 @@ export function loadPageNavScript() {
             goUpButtons[2].className = 'scale-down';
             j = 2;
             i = 1;
-            previousButton.click();
+            gotoPreviousPage();
         }
     };
     Q('#semi-interquartile-range-ref').onclick = classSizeRef;
@@ -272,6 +274,6 @@ export function loadPageNavScript() {
     Q('#link-to-median').onclick = classSizeRef;
     Q('#take-example').onclick = function (e) {
         e.preventDefault();
-        nextButton.click();
+        gotoNextPage();
     };
 }

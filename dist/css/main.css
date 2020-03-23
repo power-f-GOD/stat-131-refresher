@@ -40,7 +40,8 @@ header {
   text-align: center;
 }
 
-h1, h2 {
+h1,
+h2 {
   color: rgba(170, 170, 170, 0.9);
   padding: 1rem;
   margin: 0;
@@ -89,7 +90,8 @@ h1, h2 {
 .sub-heading {
   background: #ff4a2a;
   color: #eee;
-  padding: 0.75rem;
+  padding: 0.45em;
+  font-size: 1.1em;
   margin: 0;
 }
 
@@ -566,7 +568,7 @@ a:focus {
 }
 
 #solve-questions-page button#compute {
-  width: 40%;
+  width: 45%;
   padding: 0.5em;
   max-width: 12rem;
   background: seagreen;
@@ -854,6 +856,29 @@ tfoot {
   to {
     -webkit-transform: translateX(0);
             transform: translateX(0);
+  }
+}
+
+.sign-in-page-slide-up {
+  -webkit-animation: signInPageSlideUp 0.5s forwards ease;
+          animation: signInPageSlideUp 0.5s forwards ease;
+}
+
+@-webkit-keyframes signInPageSlideUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes signInPageSlideUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
