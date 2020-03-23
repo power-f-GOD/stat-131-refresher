@@ -2,6 +2,8 @@
 var Q = document.querySelector.bind(document);
 var QAll = document.querySelectorAll.bind(document);
 var cookieEnabled = navigator.cookieEnabled;
+var pages;
+var numOfPages;
 var signInPage;
 var usernameInput;
 var signInButton;
@@ -12,12 +14,31 @@ var previousButton;
 var welcomePage;
 var signOutButton;
 var pageNumber;
+var pageTitleBar;
+var pageTitles;
+var goUpButtons;
+var numOfGoUpButtons;
 var intervalInput;
 var frequenciesInput;
 var furtherDiscussion;
 var username;
 var rememberMe;
+var _requestAnimationFrame = _requestAnimationFrameWrapper();
+var _cancelAnimationFrame = _cancelAnimationFrameWrapper();
+function _cancelAnimationFrameWrapper() {
+    if (window.cancelAnimationFrame)
+        return window.cancelAnimationFrame;
+    return function (id) {
+        clearTimeout(id);
+    };
+}
 this.addEventListener('load', function () {
+    pages = QAll('[data-role="page"]');
+    numOfPages = pages.length;
+    pageTitleBar = Q('#page-title-bar');
+    pageTitles = QAll('.page-title');
+    goUpButtons = QAll('button[data-name="go-up-button"]');
+    numOfGoUpButtons = goUpButtons.length;
     signInPage = Q('#sign-in-page');
     usernameInput = Q('#username');
     signInButton = Q('#sign-in');
@@ -35,18 +56,19 @@ this.addEventListener('load', function () {
         target.addEventListener('transitionend', function () {
             var classNames = /translate-in|welcome-page-fade-in|scale-up|slide-down|slide-up-controls|title-bar|page-title/;
             if (!classNames.test(target.className))
-                setTimeout(function () {
+                awaits(200).then(function () {
                     target.dataset.state = 'hidden';
-                }, 200);
+                });
         });
     });
-    var usernameElements = QAll('.username');
-    if (!/(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(window.navigator.userAgent))
+    var isMobile = /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i;
+    if (!isMobile.test(window.navigator.userAgent))
         document.body.classList.add('desktop');
     else
         document.body.classList.remove('desktop');
+    var usernameElements = QAll('.username');
     var userExists = false;
-    var inputIsValid = true;
+    var usernameInputIsValid = true;
     if (cookieEnabled) {
         var _rememberMe = localStorage.rememberMe;
         userExists = !!localStorage.userId;
@@ -56,10 +78,10 @@ this.addEventListener('load', function () {
         }
     }
     if (!userExists)
-        alert("Hi, there! Good day. \n\nThis offline web-app was made to serve as a refresher for our upcoming STAT131 test. And it also may serve as a study guide for our mates that just joined us, because they are the ones I target and were the ones I had in mind before embarking on creating this so they be not oblivious of the topics herein but have a comprehension of them and fare well for short is the time. \n\nOk. Also, If you don't fully/really understand this topic, I urge you to follow, carefully, through the explanations and elaborations and try to understand the concepts for thy profiting. ;) \n\nPS: The contents of this app is subject to mistakes, errors and flaws and that's why I now advice that you authenticate whatever you read herein with a good Stats. Text or the recommended one. \n\nAlright. Godspeed. ;) \n\nDon't forget to forward this web-app to any of your friends who offers or offer STAT131 and just resumed. You could be lending a helping hand. :)");
+        alert("Hi, there! Good day. \n\nOk. This offline web-app was made to serve as a refresher for the upcoming STAT131 test. And it also may serve as a study guide for our colleagues who just joined us, because they were the ones I target and had in mind before embarking on creating this, so they be not oblivious of the topics herein but have a comprehension of them and fare well in the test for short is the time. \n\nAlso, if you don't fully/really understand this topic, I urge you to follow, carefully, through the explanations and elaborations and try to understand the concepts for thy profiting. ;) \n\nPS: The contents of this app may be subject to mistakes, errors and flaws and that's why I now advise that you authenticate whatever you read herein with a good Stats Text or the recommended one. \n\nAlright. Godspeed. ;) \n\nDon't forget to forward or share this web-app to any of your friends who offers or offer STAT131 and just resumed. You could be lending a helping hand. :)");
     usernameInput.onkeyup = function (e) {
-        inputIsValid = !/\W|\d/.test(usernameInput.value.trim());
-        if (!inputIsValid)
+        usernameInputIsValid = !/\W|\d/.test(usernameInput.value.trim());
+        if (!usernameInputIsValid)
             usernameInput.classList.add('bad-input');
         else
             usernameInput.classList.remove('bad-input');
@@ -97,36 +119,57 @@ this.addEventListener('load', function () {
             return;
         }
         if (username) {
-            if (!inputIsValid) {
+            if (!usernameInputIsValid) {
                 errMsg =
                     'Invalid input. Input a name━your name.\n\nNo numbers or symbols allowed.';
                 signInStatus.innerHTML = errMsg.replace('\n\n', '<br />');
                 return;
             }
             signInStatus.className = '';
-            signInStatus.textContent = !rememberMe ? "Sign in success! Welcome, " + username + "!" : '';
+            signInStatus.textContent = !rememberMe
+                ? "Sign in success! Welcome, " + username + "!"
+                : '';
             if (cookieEnabled)
                 localStorage.userId = username;
-            setTimeout(function () {
+            awaits(rememberMe ? 500 : 1500).then(function () {
                 welcomePage.dataset.state = 'visible';
                 signInPage.className = 'custom-scroll-bar translate-out-left';
                 signInStatus.textContent = '';
-                setTimeout(function () {
+                awaits(400).then(function () {
                     welcomePage.className = 'welcome-page-fade-in custom-scroll-bar';
                     Q('#buttons-wrapper').dataset.state = 'visible';
-                    setTimeout(function () {
+                    awaits(800).then(function () {
                         Q('#buttons-wrapper').className = 'slide-up-controls';
                         nextButton.dataset.state = 'visible';
-                        setTimeout(function () {
+                        awaits(800).then(function () {
                             nextButton.className = 'scale-up';
                             signInPage.className = 'custom-scroll-bar translate-out-right';
                             signInPage.dataset.state = 'hidden';
-                        }, 800);
-                    }, 800);
-                }, 400);
-            }, 1500);
+                        });
+                    });
+                });
+            });
             usernameElements.forEach(function (element) { return (element.textContent = username); });
-            loadPageNavScript().then(function () { return loadStatComputerScript(); });
+            loadPageNavScript().then(function () {
+                return loadStatComputerScript().then(function () {
+                    awaits(200).then(function () {
+                        if (cookieEnabled) {
+                            if (localStorage.activePageId && rememberMe) {
+                                var activePageId = localStorage.activePageId;
+                                var currentPage = Array.prototype.find.call(pages, function (page) {
+                                    return page.dataset.state == 'visible';
+                                });
+                                for (var i = 0; i < numOfPages; i++)
+                                    if (activePageId != currentPage.id) {
+                                        awaits(300).then(function () {
+                                            nextButton.click();
+                                        });
+                                    }
+                            }
+                        }
+                    });
+                });
+            });
         }
     };
     Q('#my-name').textContent = "@Power'f-GOD⚡⚡";
@@ -142,9 +185,71 @@ this.addEventListener('load', function () {
             return module.loadStatComputerScript();
         });
     }
-    if (cookieEnabled) {
-        if (localStorage.rememberMe)
-            if (JSON.parse(localStorage.rememberMe))
-                signInButton.click();
+    if (cookieEnabled)
+        if (localStorage.rememberMe && JSON.parse(localStorage.rememberMe))
+            signInButton.click();
+});
+this.addEventListener('visibilitychange', function () {
+    if (document.visibilityState == 'hidden') {
+        if (cookieEnabled) {
+            var index_1 = 0;
+            var activePage = Array.prototype.find.call(pages, function (page, i) {
+                if (page.dataset.state == 'visible') {
+                    index_1 = i;
+                    return true;
+                }
+                return false;
+            });
+            localStorage.activePageId = activePage.id;
+            localStorage.activePageIndex = index_1;
+        }
     }
 });
+function awaits(timeout) {
+    return new Promise(function (resolve) {
+        if (!Number(timeout))
+            throw Error('Expects a time in milliseconds as parameter.');
+        var start = 0;
+        var id = _requestAnimationFrame(animate);
+        function animate(timestamp) {
+            if (!start)
+                start = timestamp;
+            var timeElapsed = timestamp - start;
+            if (timeElapsed < timeout)
+                id = _requestAnimationFrame(animate);
+            else
+                resolve(id);
+        }
+    });
+}
+function customInterval(callback, interval) {
+    if (!callback || !Number(interval))
+        throw Error('Two parameters expected.');
+    var start = 0;
+    var spy = { id: _requestAnimationFrame(animate) };
+    function animate(timestamp) {
+        if (!start)
+            start = timestamp;
+        var timeElapsed = timestamp - start;
+        spy.id = _requestAnimationFrame(animate);
+        if (timeElapsed % interval < 17 && timeElapsed > interval)
+            callback();
+    }
+    return spy;
+}
+function _requestAnimationFrameWrapper() {
+    if (window.requestAnimationFrame)
+        return window.requestAnimationFrame;
+    return function () {
+        var previousTime = 0;
+        return function (callback) {
+            var timestamp = new Date().getTime();
+            var timeout = Math.max(0, 16 - (timestamp - previousTime));
+            var id = setTimeout(function () {
+                callback(timestamp + timeout);
+            }, 16);
+            previousTime = timestamp + timeout;
+            return id;
+        };
+    };
+}

@@ -40,7 +40,8 @@ header {
   text-align: center;
 }
 
-h1, h2 {
+h1,
+h2 {
   color: rgba(170, 170, 170, 0.9);
   padding: 1rem;
   margin: 0;
@@ -50,7 +51,7 @@ h1, h2 {
   -webkit-transform: translateY(-110%);
           transform: translateY(-110%);
   left: 0;
-  height: 3.5em;
+  height: 3.25em;
   position: fixed;
   z-index: 6;
   background: #1f54f3;
@@ -73,9 +74,10 @@ h1, h2 {
   width: 100%;
   top: 0;
   left: 0;
+  font-size: 1.1em;
   background: #1f54f3;
   height: 100%;
-  padding: 0.9em;
+  padding: 0.85em;
   opacity: 0;
   -webkit-transition: 0.35s;
   transition: 0.35s;
@@ -88,7 +90,8 @@ h1, h2 {
 .sub-heading {
   background: #ff4a2a;
   color: #eee;
-  padding: 0.75rem;
+  padding: 0.45em;
+  font-size: 1.1em;
   margin: 0;
 }
 
@@ -106,7 +109,7 @@ h1, h2 {
 #solve-questions-page header,
 #further-discussion-page header {
   background: #ff4a2a;
-  margin-top: 3.7em;
+  margin-top: 3.45em;
   margin-bottom: 0;
   position: relative;
   width: 100%;

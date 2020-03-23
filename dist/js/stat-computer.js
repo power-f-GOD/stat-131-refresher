@@ -268,13 +268,15 @@ export function loadStatComputerScript() {
             alert(errMsg);
             return;
         }
-        if (!classIntervals || isNaN(classIntervals[0][0]) || isNaN(classIntervals[0][1])) {
-            resultEl.innerHTML = "Error: Invalid class limits input. Check your inputs and try again.";
+        if (!classIntervals ||
+            isNaN(classIntervals[0][0]) ||
+            isNaN(classIntervals[0][1])) {
+            resultEl.innerHTML =
+                'Error: Invalid class limits input. Check your inputs and try again.';
             return;
         }
         if (classIntervals[0][0] >= classIntervals[0][1]) {
-            resultEl.innerHTML =
-                "Error: Invalid input for class limits. Lower class limit, " + classIntervals[0][0] + ", cannot be greater than or equal to upper class limit, " + classIntervals[0][1] + ".<br />Input limits like \"35, 45\"";
+            resultEl.innerHTML = "Error: Invalid input for class limits. Lower class limit, " + classIntervals[0][0] + ", cannot be greater than or equal to upper class limit, " + classIntervals[0][1] + ".<br />Input limits like \"35, 45\"";
             return;
         }
         if (frequenciesInputVals && frequencies.length > 1) {
@@ -311,14 +313,14 @@ export function loadStatComputerScript() {
             return;
         }
         Q('#result').className = 'custom-scroll-bar prevent-swipe';
-        setTimeout(function () {
+        awaits(650).then(function () {
             Q('#result').innerHTML =
                 "In the input boxes above, for the first, input the class limits of\
 				only the first class. You don't have to input the limits for all the classes. And for the\
 				second, input the frequencies of all the classes respectively. Don't forget\
 				to separate the values you input ('23' is not same as \
 				'2 3', you know). <br /> <i>Note: For full width of table when result is displayed, rotate screen. </i>;)";
-        }, 650);
+        });
     };
     Q('#interval').onkeyup = clearResults;
     Q('#frequencies').onkeyup = clearResults;

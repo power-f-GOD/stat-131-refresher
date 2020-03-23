@@ -6,25 +6,19 @@ export function loadPageNavScript() {
   let i = 0;
   let j = 0;
 
-  const pages = QAll('[data-role="page"]');
-  const numOfPages = pages.length;
-  const pageTitleBar = Q('#page-title-bar') as HTMLDivElement;
-  const pageTitles = QAll('.page-title');
-  //ID arrays for fixed-positioned top div elements and go-up buttons respectively
-  const goUpButtons = QAll('button[data-name="go-up-button"]');
-  const numOfGoUpButtons = goUpButtons.length;
-
   //add onclick event handlers for page goUpButtons
   goUpButtons.forEach((button, i) =>
     button.addEventListener('click', () => {
       const index = i + 1;
-      const start = setInterval(() => {
+
+      let spy = customInterval(() => {
+        let id = spy.id;
+
         pages[index].scrollTop -= 100;
 
-        if (pages[index].scrollTop <= 0) clearInterval(start);
-      }, 16);
-
-      pages[index].onclick = () => clearInterval(start);
+        if (pages[index].scrollTop <= 0) _cancelAnimationFrame(+id);
+        pages[index].onclick = () => _cancelAnimationFrame(+id);
+      }, 1);
     })
   );
 
@@ -39,14 +33,14 @@ export function loadPageNavScript() {
     input.addEventListener('blur', () => {
       document.body.addEventListener('keyup', handleKeyboardNavEvent);
     });
-  })
+  });
 
   function handleKeyboardNavEvent(e: any) {
     let key = e.keyCode || e.which;
 
     if (key == 39 && j != numOfPages - 1) nextButton.click();
     else if (key == 37 && j !== 0) previousButton.click();
-  };
+  }
 
   signOutButton.onclick = () => {
     signOutButton.textContent = 'Signing out...';
@@ -59,29 +53,30 @@ export function loadPageNavScript() {
 
       localStorage.rememberMe = false;
     }
-    
 
     i = 0;
     j = 0;
     //Page slide
-    setTimeout(() => {
+    awaits(1500).then(() => {
       Q('#buttons-wrapper')!.className = 'slide-down-controls';
       pageTitleBar.dataset.state = 'hidden';
       previousButton.className = 'scale-down';
       previousButton.dataset.state = 'hidden';
       goUpButtons[2].dataset.state = 'hidden';
-      setTimeout(() => {
+
+      awaits(1300).then(() => {
         furtherDiscussion.className = 'custom-scroll-bar translate-out-left';
         signInPage.dataset.state = 'visible';
-        setTimeout(() => {
+
+        awaits(500).then(() => {
           furtherDiscussion.dataset.state = 'hidden';
           signInPage.className = 'custom-scroll-bar translate-in';
           //reset pages positions
           pages.forEach(page => (page.className = 'custom-scroll-bar'));
           signOutButton.textContent = 'Sign Out';
-        }, 500);
-      }, 1300);
-    }, 1700);
+        });
+      });
+    });
   };
 
   //displays page number on page load
@@ -101,15 +96,6 @@ export function loadPageNavScript() {
     if (i == 0 && j == 0) {
       i = 0;
       j++;
-    } else if (j == numOfPages - 1 && i == numOfPages - 2) {
-      j = 0;
-      i++;
-    } else if (i == numOfPages - 1 && j == 0) {
-      i = 0;
-      j++;
-    } else if (i == 0 && j == numOfPages - 1) {
-      i = j;
-      j = 0;
     } else if (i - j == 1) {
       i = j;
       j++;
@@ -123,11 +109,11 @@ export function loadPageNavScript() {
     nextOrPrevPage.dataset.state = 'visible';
 
     //delay for 100ms for page slide animation to work
-    setTimeout(() => {
+    awaits(100).then(() => {
       currentPage.className = 'custom-scroll-bar translate-out-left';
       nextOrPrevPage.className = 'custom-scroll-bar translate-in';
       pageTitleBar.dataset.state = 'visible';
-    }, 100);
+    });
     displayNavigationButtons();
   };
 
@@ -137,22 +123,7 @@ export function loadPageNavScript() {
     previousButton.disabled = true;
 
     //conditionals for page slide handling
-    if (i == 0 && j == 0) {
-      i = 0;
-      j = numOfPages - 1;
-    } else if (i == numOfPages - 1 && j == 0) {
-      i = j;
-      j = numOfPages - 1;
-    } else if (i == 0 && j == 1) {
-      i = j;
-      j--;
-    } else if (i == 0 && j == numOfPages - 1) {
-      i = numOfPages - 1;
-      j--;
-    } else if (i == 1 && j == 0) {
-      j = numOfPages - 1;
-      i = 0;
-    } else if (i - j == -1) {
+    if (i - j == -1) {
       i = j;
       j--;
     } else {
@@ -165,68 +136,12 @@ export function loadPageNavScript() {
     nextOrPrevPage.dataset.state = 'visible';
 
     //delay for 100ms for page slide animation to work
-    setTimeout(() => {
+    awaits(100).then(() => {
       currentPage.className = 'custom-scroll-bar translate-out-right';
       nextOrPrevPage.className = 'custom-scroll-bar translate-in';
       displayNavigationButtons();
-    }, 100);
+    });
   };
-
-  function displayNavigationButtons() {
-    if (j == 2) {
-      let { interval, frequencies } = localStorage;
-
-      if (interval && !intervalInput.value) intervalInput.value = interval;
-      if (frequencies && !frequenciesInput.value)
-        frequenciesInput.value = frequencies;
-    }
-
-    //displays current page number
-    pageNumber.textContent = `${j + 1} / ${numOfPages}`;
-
-    //set hidden/visible states for control/navigation buttons
-    if (j == numOfPages - 1) {
-      previousButton.dataset.state = 'visible';
-    } else if (j == 0) {
-      nextButton.dataset.state = 'visible';
-    } else {
-      previousButton.dataset.state = 'visible';
-      nextButton.dataset.state = 'visible';
-    }
-
-    //using setTimeouts for the sake of making animations work as expected
-    setTimeout(() => {
-      //hide/show next or previous buttons
-      if (j == numOfPages - 1) {
-        nextButton.className = 'scale-down';
-        previousButton.className = 'scale-up';
-      } else if (j == 0) {
-        nextButton.className = 'scale-up';
-        previousButton.className = 'scale-down';
-      } else {
-        nextButton.className = 'scale-up';
-        previousButton.className = 'scale-up';
-      }
-
-      //This code-block is mainly for the page titles and partly for the go-up buttons
-      if (j == 0) {
-        goUpButtons[j].className = 'scale-down';
-        pageTitleBar.dataset.state = 'hidden';
-      } else if (j == 1 && i == 0) {
-        pageTitles[numOfPages - 2].dataset.state = 'hidden';
-        pageTitles[j - 1].dataset.state = 'visible';
-      } else {
-        pageTitles[i - 1].dataset.state = 'hidden';
-        pageTitles[j - 1].dataset.state = 'visible';
-      }
-
-      setTimeout(() => {
-        displayGoUpButton();
-        previousButton.disabled = false;
-        nextButton.disabled = false;
-      }, 200);
-    }, 100);
-  }
 
   //setting variables for swipe event
   let startCoord = 0;
@@ -253,12 +168,114 @@ export function loadPageNavScript() {
     el.addEventListener('touchend', addSwipeListeners);
   });
 
+  function displayNavigationButtons() {
+    if (j == 2) {
+      let { interval, frequencies } = localStorage;
+
+      if (interval && !intervalInput.value) intervalInput.value = interval;
+      if (frequencies && !frequenciesInput.value)
+        frequenciesInput.value = frequencies;
+    }
+
+    //displays current page number
+    pageNumber.textContent = `${j + 1} / ${numOfPages}`;
+
+    //set hidden/visible states for control/navigation buttons
+    if (j == numOfPages - 1) {
+      previousButton.dataset.state = 'visible';
+    } else if (j == 0) {
+      nextButton.dataset.state = 'visible';
+    } else {
+      previousButton.dataset.state = 'visible';
+      nextButton.dataset.state = 'visible';
+    }
+
+    //using awaitss for the sake of making animations work as expected
+    awaits(100).then(() => {
+      //hide/show next or previous buttons
+      if (j == numOfPages - 1) {
+        nextButton.className = 'scale-down';
+        previousButton.className = 'scale-up';
+      } else if (j == 0) {
+        nextButton.className = 'scale-up';
+        previousButton.className = 'scale-down';
+      } else {
+        nextButton.className = 'scale-up';
+        previousButton.className = 'scale-up';
+      }
+
+      //This code-block is mainly for the page titles and partly for the go-up buttons
+      if (j == 0) {
+        goUpButtons[j].className = 'scale-down';
+        pageTitleBar.dataset.state = 'hidden';
+      } else if (j == 1 && i == 0) {
+        pageTitles[numOfPages - 2].dataset.state = 'hidden';
+        pageTitles[j - 1].dataset.state = 'visible';
+      } else {
+        pageTitles[i - 1].dataset.state = 'hidden';
+        pageTitles[j - 1].dataset.state = 'visible';
+      }
+
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+      awaits(100).then(() => {
+        displayGoUpButton();
+      });
+    });
+  }
+
+  //onscroll event handler
+  function displayGoUpButton() {
+    if (j == 0) return;
+
+    let scrollPosition = pages[j].scrollTop;
+
+    currentGoUpButton = goUpButtons[j == 0 ? j : j - 1] as HTMLButtonElement;
+    nextOrPrevGoUpButton = goUpButtons[i == 0 ? 0 : i - 1] as HTMLButtonElement;
+
+    //set hidden/visible states for control/navigation button
+    if (scrollPosition > 1000) {
+      currentGoUpButton.dataset.state = 'visible';
+    }
+
+    //using awaitss for the sake of making animations work as expected
+    awaits(100).then(() => {
+      //ensures go-up buttons don't pop-up unexpectedly before re-appearing
+      if (
+        scrollPosition <= 1000 &&
+        currentGoUpButton.className == 'scale-down'
+      ) {
+        nextOrPrevGoUpButton.className = 'scale-down';
+        return;
+      }
+
+      //displays go-up buttons on scroll
+      if (scrollPosition > 1000) {
+        if (i == 0 && j == 1) {
+          goUpButtons[numOfGoUpButtons - 1].className = 'scale-down';
+          currentGoUpButton.className = 'scale-up';
+        } else if (j - i < 1) {
+          nextOrPrevGoUpButton.className = 'scale-down';
+          currentGoUpButton.className = 'scale-up';
+        } else if (j - i == 1) {
+          nextOrPrevGoUpButton.className = 'scale-down';
+          currentGoUpButton.className = 'scale-up';
+        } else if (j == numOfGoUpButtons - 1 && i != 0) {
+          currentGoUpButton.className = 'scale-down';
+          nextOrPrevGoUpButton.className = 'scale-up';
+        }
+      } else {
+        currentGoUpButton.className = 'scale-down';
+      }
+    });
+  }
+
   function addSwipeListeners() {
     if (nextOrPrevPage)
-      setTimeout(() => {
+      awaits(300).then(() => {
         nextOrPrevPage.addEventListener('touchstart', touchStart);
         nextOrPrevPage.addEventListener('touchend', swipe);
-      }, 300);
+      });
     hideElastic();
   }
 
@@ -295,57 +312,12 @@ export function loadPageNavScript() {
     else if (swipeCoord > 50 && j != 0) previousButton.click();
   }
 
+  //elastic for when user is on first or last page and tries to swipe right or left
   function hideElastic() {
-    setTimeout(() => {
+    awaits(600).then(() => {
       leftElastic.style.width = '0';
       rightElastic.style.width = '0';
-    }, 600);
-  }
-
-  //onscroll event handler
-  function displayGoUpButton() {
-    if (j == 0) return;
-
-    let scrollPosition = pages[j].scrollTop;
-
-    currentGoUpButton = goUpButtons[j == 0 ? j : j - 1] as HTMLButtonElement;
-    nextOrPrevGoUpButton = goUpButtons[i == 0 ? 0 : i - 1] as HTMLButtonElement;
-
-    //set hidden/visible states for control/navigation button
-    if (scrollPosition > 1000) {
-      currentGoUpButton.dataset.state = 'visible';
-    }
-
-    //using setTimeouts for the sake of making animations work as expected
-    setTimeout(() => {
-      //ensures go-up buttons don't pop-up unexpectedly before re-appearing
-      if (
-        scrollPosition <= 1000 &&
-        currentGoUpButton.className == 'scale-down'
-      ) {
-        nextOrPrevGoUpButton.className = 'scale-down';
-        return;
-      }
-
-      //displays go-up buttons on scroll
-      if (scrollPosition > 1000) {
-        if (i == 0 && j == 1) {
-          goUpButtons[numOfGoUpButtons - 1].className = 'scale-down';
-          currentGoUpButton.className = 'scale-up';
-        } else if (j - i < 1) {
-          nextOrPrevGoUpButton.className = 'scale-down';
-          currentGoUpButton.className = 'scale-up';
-        } else if (j - i == 1) {
-          nextOrPrevGoUpButton.className = 'scale-down';
-          currentGoUpButton.className = 'scale-up';
-        } else if (j == numOfGoUpButtons - 1 && i != 0) {
-          currentGoUpButton.className = 'scale-down';
-          nextOrPrevGoUpButton.className = 'scale-up';
-        }
-      } else {
-        currentGoUpButton.className = 'scale-down';
-      }
-    }, 100);
+    });
   }
 
   //class size ref onclick event handler

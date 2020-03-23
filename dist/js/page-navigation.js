@@ -1,21 +1,16 @@
 export function loadPageNavScript() {
     var i = 0;
     var j = 0;
-    var pages = QAll('[data-role="page"]');
-    var numOfPages = pages.length;
-    var pageTitleBar = Q('#page-title-bar');
-    var pageTitles = QAll('.page-title');
-    var goUpButtons = QAll('button[data-name="go-up-button"]');
-    var numOfGoUpButtons = goUpButtons.length;
     goUpButtons.forEach(function (button, i) {
         return button.addEventListener('click', function () {
             var index = i + 1;
-            var start = setInterval(function () {
+            var spy = customInterval(function () {
+                var id = spy.id;
                 pages[index].scrollTop -= 100;
                 if (pages[index].scrollTop <= 0)
-                    clearInterval(start);
-            }, 16);
-            pages[index].onclick = function () { return clearInterval(start); };
+                    _cancelAnimationFrame(+id);
+                pages[index].onclick = function () { return _cancelAnimationFrame(+id); };
+            }, 1);
         });
     });
     document.body.addEventListener('keyup', handleKeyboardNavEvent);
@@ -34,7 +29,6 @@ export function loadPageNavScript() {
         else if (key == 37 && j !== 0)
             previousButton.click();
     }
-    ;
     signOutButton.onclick = function () {
         signOutButton.textContent = 'Signing out...';
         rememberMeCheckbox.checked = false;
@@ -47,23 +41,23 @@ export function loadPageNavScript() {
         }
         i = 0;
         j = 0;
-        setTimeout(function () {
+        awaits(1500).then(function () {
             Q('#buttons-wrapper').className = 'slide-down-controls';
             pageTitleBar.dataset.state = 'hidden';
             previousButton.className = 'scale-down';
             previousButton.dataset.state = 'hidden';
             goUpButtons[2].dataset.state = 'hidden';
-            setTimeout(function () {
+            awaits(1300).then(function () {
                 furtherDiscussion.className = 'custom-scroll-bar translate-out-left';
                 signInPage.dataset.state = 'visible';
-                setTimeout(function () {
+                awaits(500).then(function () {
                     furtherDiscussion.dataset.state = 'hidden';
                     signInPage.className = 'custom-scroll-bar translate-in';
                     pages.forEach(function (page) { return (page.className = 'custom-scroll-bar'); });
                     signOutButton.textContent = 'Sign Out';
-                }, 500);
-            }, 1300);
-        }, 1700);
+                });
+            });
+        });
     };
     pageNumber.textContent = '1 / ' + numOfPages;
     var currentPage;
@@ -76,18 +70,6 @@ export function loadPageNavScript() {
             i = 0;
             j++;
         }
-        else if (j == numOfPages - 1 && i == numOfPages - 2) {
-            j = 0;
-            i++;
-        }
-        else if (i == numOfPages - 1 && j == 0) {
-            i = 0;
-            j++;
-        }
-        else if (i == 0 && j == numOfPages - 1) {
-            i = j;
-            j = 0;
-        }
         else if (i - j == 1) {
             i = j;
             j++;
@@ -99,36 +81,16 @@ export function loadPageNavScript() {
         currentPage = pages[i];
         nextOrPrevPage = pages[j];
         nextOrPrevPage.dataset.state = 'visible';
-        setTimeout(function () {
+        awaits(100).then(function () {
             currentPage.className = 'custom-scroll-bar translate-out-left';
             nextOrPrevPage.className = 'custom-scroll-bar translate-in';
             pageTitleBar.dataset.state = 'visible';
-        }, 100);
+        });
         displayNavigationButtons();
     };
     previousButton.onclick = function () {
         previousButton.disabled = true;
-        if (i == 0 && j == 0) {
-            i = 0;
-            j = numOfPages - 1;
-        }
-        else if (i == numOfPages - 1 && j == 0) {
-            i = j;
-            j = numOfPages - 1;
-        }
-        else if (i == 0 && j == 1) {
-            i = j;
-            j--;
-        }
-        else if (i == 0 && j == numOfPages - 1) {
-            i = numOfPages - 1;
-            j--;
-        }
-        else if (i == 1 && j == 0) {
-            j = numOfPages - 1;
-            i = 0;
-        }
-        else if (i - j == -1) {
+        if (i - j == -1) {
             i = j;
             j--;
         }
@@ -139,12 +101,30 @@ export function loadPageNavScript() {
         currentPage = pages[i];
         nextOrPrevPage = pages[j];
         nextOrPrevPage.dataset.state = 'visible';
-        setTimeout(function () {
+        awaits(100).then(function () {
             currentPage.className = 'custom-scroll-bar translate-out-right';
             nextOrPrevPage.className = 'custom-scroll-bar translate-in';
             displayNavigationButtons();
-        }, 100);
+        });
     };
+    var startCoord = 0;
+    var swipeCoord = 0;
+    var endCoord = 0;
+    var leftElastic = Q('#left-elastic');
+    var rightElastic = Q('#right-elastic');
+    pages.forEach(function (page) {
+        page.addEventListener('touchstart', touchStart);
+        page.addEventListener('touchend', swipe);
+        page.addEventListener('scroll', displayGoUpButton);
+    });
+    QAll('.prevent-swipe').forEach(function (el) {
+        el.addEventListener('scroll', removeSwipeListeners);
+        el.addEventListener('touchend', addSwipeListeners);
+    });
+    QAll('.custom-scroll-bar').forEach(function (el) {
+        el.addEventListener('scroll', removeSwipeListeners);
+        el.addEventListener('touchend', addSwipeListeners);
+    });
     function displayNavigationButtons() {
         if (j == 2) {
             var interval = localStorage.interval, frequencies = localStorage.frequencies;
@@ -164,7 +144,7 @@ export function loadPageNavScript() {
             previousButton.dataset.state = 'visible';
             nextButton.dataset.state = 'visible';
         }
-        setTimeout(function () {
+        awaits(100).then(function () {
             if (j == numOfPages - 1) {
                 nextButton.className = 'scale-down';
                 previousButton.className = 'scale-up';
@@ -189,37 +169,57 @@ export function loadPageNavScript() {
                 pageTitles[i - 1].dataset.state = 'hidden';
                 pageTitles[j - 1].dataset.state = 'visible';
             }
-            setTimeout(function () {
+            previousButton.disabled = false;
+            nextButton.disabled = false;
+            awaits(100).then(function () {
                 displayGoUpButton();
-                previousButton.disabled = false;
-                nextButton.disabled = false;
-            }, 200);
-        }, 100);
+            });
+        });
     }
-    var startCoord = 0;
-    var swipeCoord = 0;
-    var endCoord = 0;
-    var leftElastic = Q('#left-elastic');
-    var rightElastic = Q('#right-elastic');
-    pages.forEach(function (page) {
-        page.addEventListener('touchstart', touchStart);
-        page.addEventListener('touchend', swipe);
-        page.addEventListener('scroll', displayGoUpButton);
-    });
-    QAll('.prevent-swipe').forEach(function (el) {
-        el.addEventListener('scroll', removeSwipeListeners);
-        el.addEventListener('touchend', addSwipeListeners);
-    });
-    QAll('.custom-scroll-bar').forEach(function (el) {
-        el.addEventListener('scroll', removeSwipeListeners);
-        el.addEventListener('touchend', addSwipeListeners);
-    });
+    function displayGoUpButton() {
+        if (j == 0)
+            return;
+        var scrollPosition = pages[j].scrollTop;
+        currentGoUpButton = goUpButtons[j == 0 ? j : j - 1];
+        nextOrPrevGoUpButton = goUpButtons[i == 0 ? 0 : i - 1];
+        if (scrollPosition > 1000) {
+            currentGoUpButton.dataset.state = 'visible';
+        }
+        awaits(100).then(function () {
+            if (scrollPosition <= 1000 &&
+                currentGoUpButton.className == 'scale-down') {
+                nextOrPrevGoUpButton.className = 'scale-down';
+                return;
+            }
+            if (scrollPosition > 1000) {
+                if (i == 0 && j == 1) {
+                    goUpButtons[numOfGoUpButtons - 1].className = 'scale-down';
+                    currentGoUpButton.className = 'scale-up';
+                }
+                else if (j - i < 1) {
+                    nextOrPrevGoUpButton.className = 'scale-down';
+                    currentGoUpButton.className = 'scale-up';
+                }
+                else if (j - i == 1) {
+                    nextOrPrevGoUpButton.className = 'scale-down';
+                    currentGoUpButton.className = 'scale-up';
+                }
+                else if (j == numOfGoUpButtons - 1 && i != 0) {
+                    currentGoUpButton.className = 'scale-down';
+                    nextOrPrevGoUpButton.className = 'scale-up';
+                }
+            }
+            else {
+                currentGoUpButton.className = 'scale-down';
+            }
+        });
+    }
     function addSwipeListeners() {
         if (nextOrPrevPage)
-            setTimeout(function () {
+            awaits(300).then(function () {
                 nextOrPrevPage.addEventListener('touchstart', touchStart);
                 nextOrPrevPage.addEventListener('touchend', swipe);
-            }, 300);
+            });
         hideElastic();
     }
     function removeSwipeListeners() {
@@ -251,48 +251,10 @@ export function loadPageNavScript() {
             previousButton.click();
     }
     function hideElastic() {
-        setTimeout(function () {
+        awaits(600).then(function () {
             leftElastic.style.width = '0';
             rightElastic.style.width = '0';
-        }, 600);
-    }
-    function displayGoUpButton() {
-        if (j == 0)
-            return;
-        var scrollPosition = pages[j].scrollTop;
-        currentGoUpButton = goUpButtons[j == 0 ? j : j - 1];
-        nextOrPrevGoUpButton = goUpButtons[i == 0 ? 0 : i - 1];
-        if (scrollPosition > 1000) {
-            currentGoUpButton.dataset.state = 'visible';
-        }
-        setTimeout(function () {
-            if (scrollPosition <= 1000 &&
-                currentGoUpButton.className == 'scale-down') {
-                nextOrPrevGoUpButton.className = 'scale-down';
-                return;
-            }
-            if (scrollPosition > 1000) {
-                if (i == 0 && j == 1) {
-                    goUpButtons[numOfGoUpButtons - 1].className = 'scale-down';
-                    currentGoUpButton.className = 'scale-up';
-                }
-                else if (j - i < 1) {
-                    nextOrPrevGoUpButton.className = 'scale-down';
-                    currentGoUpButton.className = 'scale-up';
-                }
-                else if (j - i == 1) {
-                    nextOrPrevGoUpButton.className = 'scale-down';
-                    currentGoUpButton.className = 'scale-up';
-                }
-                else if (j == numOfGoUpButtons - 1 && i != 0) {
-                    currentGoUpButton.className = 'scale-down';
-                    nextOrPrevGoUpButton.className = 'scale-up';
-                }
-            }
-            else {
-                currentGoUpButton.className = 'scale-down';
-            }
-        }, 100);
+        });
     }
     var classSizeRef = function () {
         if (j == 3) {
