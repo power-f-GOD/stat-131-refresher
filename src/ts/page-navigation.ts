@@ -165,7 +165,7 @@ export function loadPageNavScript() {
   });
   QAll('.custom-scroll-bar').forEach(el => {
     el.addEventListener('scroll', removeSwipeListeners);
-     el.addEventListener('touchend', addSwipeListeners);
+    el.addEventListener('touchend', addSwipeListeners);
   });
 
   function displayNavigationButtons() {
@@ -256,7 +256,9 @@ export function loadPageNavScript() {
 
   function removeSwipeListeners() {
     nextOrPrevPage.removeEventListener('touchstart', touchStart);
-    delay(100).then(() => nextOrPrevPage.removeEventListener('touchend', swipe));
+    delay(100).then(() =>
+      nextOrPrevPage.removeEventListener('touchend', swipe)
+    );
 
     hideElastic();
   }
@@ -316,35 +318,6 @@ export function loadPageNavScript() {
     e.preventDefault(); //prevent default to prevent UI deformity
     nextButton.click();
   };
-
-  //install app listener
-  let deferredPrompt: any;
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    deferredPrompt = e;
-
-    //delay for the sake of animation only
-    delay(2000).then(() => {
-      installButton.disabled = false;
-      installButton.dataset.state = 'visible';
-
-      installButton.addEventListener('click', () => {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult: any) => {
-          if (choiceResult.outcome == 'accepted') {
-            installButton.disabled = true;
-            installButton.dataset.state = 'invisible';
-          }
-          deferredPrompt = null;
-        });
-      });
-      window.addEventListener('appinstalled', () =>
-        alert(
-          'STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether offline or online.'
-        )
-      );
-    });
-  });
 
   //save current state of user app navigation on change of window or tab for purpose of a reload/relaunch
   window.addEventListener('visibilitychange', function(this: any) {

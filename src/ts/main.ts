@@ -54,13 +54,25 @@ this.addEventListener('load', () => {
   frequenciesInput = Q('#frequencies') as HTMLInputElement;
   furtherDiscussion = Q('#further-discussion-page') as HTMLDivElement;
 
+  //install app listener
+  let deferredPrompt: any;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    window.addEventListener('appinstalled', () =>
+      alert(
+        'STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether offline or online.'
+      )
+    );
+  });
+
   //add transition end listeners to set state of non visible pages to 'hidden' after end of transition (animation) for the sake of accessibility and the tab index issue
   QAll('[data-state="hidden"]').forEach(target => {
     target.addEventListener('transitionend', () => {
       let classNames = /translate-in|welcome-page-fade-in|scale-up|slide-down|slide-up-controls|title-bar|page-title/;
 
-      if (!classNames.test(target.className))
-          target.dataset.state = 'hidden';
+      if (!classNames.test(target.className)) target.dataset.state = 'hidden';
     });
   });
 
@@ -159,7 +171,7 @@ this.addEventListener('load', () => {
       if (cookieEnabled) localStorage.userId = username;
 
       //prevent zoom in and out on mobile for the sake of swipe feature
-      if (isMobile) Q('meta[name="viewport"]')!.content += ", user-scalable=no";
+      if (isMobile) Q('meta[name="viewport"]')!.content += ', user-scalable=no';
 
       //page slide animation
       delay(rememberMe ? 750 : 1500).then(() => {
@@ -181,6 +193,20 @@ this.addEventListener('load', () => {
               //translate/reposition signInPage to right position in case of sign out in order to slide in from right again
               signInPage.className = 'custom-scroll-bar translate-out-right';
               signInPage.dataset.state = 'hidden';
+              installButton.disabled = false;
+              installButton.dataset.state = 'visible';
+
+              //add click event for install button after user has signed in
+              installButton.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult: any) => {
+                  if (choiceResult.outcome == 'accepted') {
+                    installButton.disabled = true;
+                    installButton.dataset.state = 'invisible';
+                  }
+                  deferredPrompt = null;
+                });
+              });
             });
           });
         });

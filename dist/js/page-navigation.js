@@ -205,7 +205,9 @@ export function loadPageNavScript() {
     }
     function removeSwipeListeners() {
         nextOrPrevPage.removeEventListener('touchstart', touchStart);
-        delay(100).then(function () { return nextOrPrevPage.removeEventListener('touchend', swipe); });
+        delay(100).then(function () {
+            return nextOrPrevPage.removeEventListener('touchend', swipe);
+        });
         hideElastic();
     }
     function touchStart(event) {
@@ -253,28 +255,6 @@ export function loadPageNavScript() {
         e.preventDefault();
         nextButton.click();
     };
-    var deferredPrompt;
-    window.addEventListener('beforeinstallprompt', function (e) {
-        e.preventDefault();
-        deferredPrompt = e;
-        delay(2000).then(function () {
-            installButton.disabled = false;
-            installButton.dataset.state = 'visible';
-            installButton.addEventListener('click', function () {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(function (choiceResult) {
-                    if (choiceResult.outcome == 'accepted') {
-                        installButton.disabled = true;
-                        installButton.dataset.state = 'invisible';
-                    }
-                    deferredPrompt = null;
-                });
-            });
-            window.addEventListener('appinstalled', function () {
-                return alert('STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether offline or online.');
-            });
-        });
-    });
     window.addEventListener('visibilitychange', function () {
         if (document.visibilityState == 'hidden') {
             if (cookieEnabled) {

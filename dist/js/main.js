@@ -49,6 +49,14 @@ this.addEventListener('load', function () {
     intervalInput = Q('#interval');
     frequenciesInput = Q('#frequencies');
     furtherDiscussion = Q('#further-discussion-page');
+    var deferredPrompt;
+    window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        window.addEventListener('appinstalled', function () {
+            return alert('STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether offline or online.');
+        });
+    });
     QAll('[data-state="hidden"]').forEach(function (target) {
         target.addEventListener('transitionend', function () {
             var classNames = /translate-in|welcome-page-fade-in|scale-up|slide-down|slide-up-controls|title-bar|page-title/;
@@ -128,7 +136,7 @@ this.addEventListener('load', function () {
             if (cookieEnabled)
                 localStorage.userId = username;
             if (isMobile)
-                Q('meta[name="viewport"]').content += ", user-scalable=no";
+                Q('meta[name="viewport"]').content += ', user-scalable=no';
             delay(rememberMe ? 750 : 1500).then(function () {
                 welcomePage.dataset.state = 'visible';
                 signInPage.className = 'custom-scroll-bar translate-out-left';
@@ -144,6 +152,18 @@ this.addEventListener('load', function () {
                             previousButton.className = 'scale-up';
                             signInPage.className = 'custom-scroll-bar translate-out-right';
                             signInPage.dataset.state = 'hidden';
+                            installButton.disabled = false;
+                            installButton.dataset.state = 'visible';
+                            installButton.addEventListener('click', function () {
+                                deferredPrompt.prompt();
+                                deferredPrompt.userChoice.then(function (choiceResult) {
+                                    if (choiceResult.outcome == 'accepted') {
+                                        installButton.disabled = true;
+                                        installButton.dataset.state = 'invisible';
+                                    }
+                                    deferredPrompt = null;
+                                });
+                            });
                         });
                     });
                 });
