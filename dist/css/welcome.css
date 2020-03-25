@@ -30,19 +30,18 @@
 #intro-text-wrapper #intro-text {
   text-align: center;
   width: 94%;
-  color: #969696;
-  border: 0.25rem solid rgba(170, 170, 170, 0.5);
+  border: 0.25rem solid #999;
   padding: 1.25rem;
 }
 
 header {
-  background: #1e1e1e;
+  background: #202020;
   text-align: center;
 }
 
 h1,
 h2 {
-  color: rgba(170, 170, 170, 0.9);
+  color: rgba(255, 255, 255, 0.9);
   padding: 1rem;
   margin: 0;
 }
@@ -81,6 +80,8 @@ h2 {
   opacity: 0;
   -webkit-transition: 0.35s;
   transition: 0.35s;
+  color: #eee;
+  margin: 0;
 }
 
 #page-title-bar .page-title[data-state='visible'] {
@@ -88,7 +89,7 @@ h2 {
 }
 
 .sub-heading {
-  background: #ff4a2a;
+  background: #dd0077;
   color: #eee;
   padding: 0.45em;
   font-size: 1.1em;
@@ -96,7 +97,7 @@ h2 {
 }
 
 #welcome-page .rider {
-  color: #a0a0a0;
+  color: white;
 }
 
 .rider {
@@ -109,7 +110,7 @@ h2 {
 #mean-median-mode-page header,
 #solve-questions-page header,
 #further-discussion-page header {
-  background: #ff4a2a;
+  background: #dd0077;
   margin-top: 3.45em;
   margin-bottom: 0;
   position: relative;
@@ -279,8 +280,8 @@ button[aria-label='go up'][disabled] {
 }
 
 #go-up-3 {
-  background: #d40073;
-  border-color: #ff0087;
+  background: #9100ff;
+  border-color: #9e36ed;
 }
 
 #page-num {

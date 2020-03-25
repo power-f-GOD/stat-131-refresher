@@ -59,12 +59,12 @@
 }
 
 .quick-links {
-  background: rgba(70, 70, 70, 0.7);
+  background: rgba(40, 40, 40, 0.7);
   padding: 0.5rem 0;
 }
 
 .quick-links a {
-  color: tomato;
+  color: #ff42a7;
 }
 
 .formula-wrapper {
@@ -101,7 +101,7 @@
 }
 
 .white-bg {
-  background: rgba(70, 70, 70, 0.7);
+  background: rgba(40, 40, 40, 0.7);
   color: lightgrey;
 }
 
@@ -131,7 +131,7 @@ span {
 
 a {
   text-decoration: none;
-  color: #3e62ff;
+  color: #3b6dff;
 }
 
 a:focus, a:hover {
@@ -199,7 +199,7 @@ a:focus {
   font-style: normal;
   display: block;
   padding: 0.5em 0;
-  background: #cd4c4c;
+  background: #ce1919;
   color: white;
   border-radius: 0.25rem 0.25rem 0 0;
   font-family: 'Cambria', 'Times New Roman';
@@ -209,7 +209,7 @@ a:focus {
   display: block;
   width: 100%;
   text-align: justify;
-  background: lightpink;
+  background: #ffa7b4;
   color: #101010;
 }
 

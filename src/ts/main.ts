@@ -25,6 +25,7 @@ let frequenciesInput: HTMLInputElement;
 let furtherDiscussion: HTMLDivElement;
 let username: string;
 let rememberMe: boolean;
+let appInstalled: boolean;
 
 let _requestAnimationFrame: Function;
 let _cancelAnimationFrame: Function;
@@ -61,9 +62,13 @@ this.addEventListener('load', () => {
     deferredPrompt = e;
 
     window.addEventListener('appinstalled', () =>
-      alert(
-        'STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether offline or online.'
-      )
+      delay(1000).then(() => {
+        if (cookieEnabled) localStorage.appInstalled = true;
+
+        alert(
+          'STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether online or offline.'
+        );
+      })
     );
   });
 
@@ -95,6 +100,7 @@ this.addEventListener('load', () => {
 
     userExists = !!localStorage.userId;
     rememberMe = _rememberMe ? JSON.parse(_rememberMe) : false;
+    appInstalled = localStorage.appInstalled == 'true';
 
     if (rememberMe) {
       rememberMeCheckbox.checked = true;
@@ -193,20 +199,23 @@ this.addEventListener('load', () => {
               //translate/reposition signInPage to right position in case of sign out in order to slide in from right again
               signInPage.className = 'custom-scroll-bar translate-out-right';
               signInPage.dataset.state = 'hidden';
-              installButton.disabled = false;
-              installButton.dataset.state = 'visible';
 
-              //add click event for install button after user has signed in
-              installButton.addEventListener('click', () => {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult: any) => {
-                  if (choiceResult.outcome == 'accepted') {
-                    installButton.disabled = true;
-                    installButton.dataset.state = 'invisible';
-                  }
-                  deferredPrompt = null;
+              if (!appInstalled) {
+                installButton.disabled = false;
+                installButton.dataset.state = 'visible';
+
+                //add click event for install button after user has signed in
+                installButton.addEventListener('click', () => {
+                  deferredPrompt.prompt();
+                  deferredPrompt.userChoice.then((choiceResult: any) => {
+                    if (choiceResult.outcome == 'accepted') {
+                      installButton.disabled = true;
+                      installButton.dataset.state = 'invisible';
+                    }
+                    deferredPrompt = null;
+                  });
                 });
-              });
+              }
             });
           });
         });

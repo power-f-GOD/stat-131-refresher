@@ -24,6 +24,7 @@ var frequenciesInput;
 var furtherDiscussion;
 var username;
 var rememberMe;
+var appInstalled;
 var _requestAnimationFrame;
 var _cancelAnimationFrame;
 this.addEventListener('load', function () {
@@ -54,7 +55,11 @@ this.addEventListener('load', function () {
         e.preventDefault();
         deferredPrompt = e;
         window.addEventListener('appinstalled', function () {
-            return alert('STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether offline or online.');
+            return delay(1000).then(function () {
+                if (cookieEnabled)
+                    localStorage.appInstalled = true;
+                alert('STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether online or offline.');
+            });
         });
     });
     QAll('[data-state="hidden"]').forEach(function (target) {
@@ -77,6 +82,7 @@ this.addEventListener('load', function () {
         var _rememberMe = localStorage.rememberMe;
         userExists = !!localStorage.userId;
         rememberMe = _rememberMe ? JSON.parse(_rememberMe) : false;
+        appInstalled = localStorage.appInstalled == 'true';
         if (rememberMe) {
             rememberMeCheckbox.checked = true;
         }
@@ -152,18 +158,20 @@ this.addEventListener('load', function () {
                             previousButton.className = 'scale-up';
                             signInPage.className = 'custom-scroll-bar translate-out-right';
                             signInPage.dataset.state = 'hidden';
-                            installButton.disabled = false;
-                            installButton.dataset.state = 'visible';
-                            installButton.addEventListener('click', function () {
-                                deferredPrompt.prompt();
-                                deferredPrompt.userChoice.then(function (choiceResult) {
-                                    if (choiceResult.outcome == 'accepted') {
-                                        installButton.disabled = true;
-                                        installButton.dataset.state = 'invisible';
-                                    }
-                                    deferredPrompt = null;
+                            if (!appInstalled) {
+                                installButton.disabled = false;
+                                installButton.dataset.state = 'visible';
+                                installButton.addEventListener('click', function () {
+                                    deferredPrompt.prompt();
+                                    deferredPrompt.userChoice.then(function (choiceResult) {
+                                        if (choiceResult.outcome == 'accepted') {
+                                            installButton.disabled = true;
+                                            installButton.dataset.state = 'invisible';
+                                        }
+                                        deferredPrompt = null;
+                                    });
                                 });
-                            });
+                            }
                         });
                     });
                 });
