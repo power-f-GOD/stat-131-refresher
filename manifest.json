@@ -2,7 +2,7 @@
   "name": "STATS 131 Refresher",
   "short_name": "STATS 131 Refresher",
   "lang": "en-US",
-  "start_url": "/index.html",
+  "start_url": "/stat-131-refresher/index.html",
   "display": "standalone",
   "theme_color": "#1f54f3",
   "background_color": "#1f54f3",
