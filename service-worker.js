@@ -1,5 +1,7 @@
+let isGHPagesHosted = /github\.io/.test(location.href);
+
 const resources = [
-  '/',
+  isGHPagesHosted ? 'stat-131-refresher/' : '/',
   'index.html',
   'dist/css/main.min.css',
   'dist/js/main.min.js',
