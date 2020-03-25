@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   overflow: auto;
-  background: black;
+  background: #101010;
   will-change: transform;
 }
 
@@ -90,6 +90,7 @@ h2 {
   color: white;
   padding: 0.55rem;
   margin: 0;
+  font-size: 1em;
 }
 
 #mean-median-mode-page header,
@@ -131,9 +132,10 @@ h2 {
   }
 }
 
+#install,
 #previous,
 #next,
-button[data-name='go-up-button'] {
+button[aria-label='go up'] {
   width: 3em;
   height: 3em;
   display: flex;
@@ -150,9 +152,9 @@ button[data-name='go-up-button'] {
   box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.5);
   position: absolute;
   cursor: pointer;
+  transition: 0.35s;
 
   &[data-state='hidden'] {
-    transform: scale(0);
     display: none;
   }
 
@@ -163,6 +165,28 @@ button[data-name='go-up-button'] {
   &:focus {
     border-color: rgb(255, 255, 255) !important;
     border-style: solid !important;
+  }
+}
+
+#install {
+  left: 1.25rem;
+  bottom: calc(2rem + 3em);
+  background: green;
+  border-color: #20a520;
+  font-size: 1.3rem;
+  height: 2.5em;
+  min-height: 2.5em !important;
+  width: 2.5em !important;
+  transform: translateX(calc(-1.2rem - 4em));
+  transition: 0.35s;
+
+  &[data-state='visible'] {
+    transform: translateX(0);
+  }
+
+  span {
+    border-bottom: 0.125em solid;
+    min-width: 1rem;
   }
 }
 
@@ -186,7 +210,7 @@ button[data-name='go-up-button'] {
   }
 }
 
-button[data-name='go-up-button'] {
+button[aria-label='go up'] {
   right: 1.25rem;
   bottom: calc(2rem + 3em);
   background: red;
@@ -194,7 +218,12 @@ button[data-name='go-up-button'] {
   height: 2.5em;
   min-height: 2.5em !important;
   width: 2.5em !important;
-  transform: scale(0);
+  transition: 0.35s;
+  transform: scale(1);
+
+  &[disabled] {
+    transform: scale(0);
+  }
 }
 
 #go-up-1 {

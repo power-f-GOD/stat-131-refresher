@@ -1,7 +1,13 @@
+
+
 @import './welcome.scss';
 @import './explanations.scss';
 @import './solution.scss';
 @import './animation.scss';
+
+body {
+  font-family: 'PT Sans', Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif !important;
+}
 
 #welcome-page,
 #mean-median-mode-page,
@@ -103,5 +109,11 @@ sub {
   &::-webkit-scrollbar-thumb {
     background: rgb(255, 74, 42);
     border-radius: 0.5em;
+  }
+}
+
+@media all and (display-mode: standalone) {
+  #install {
+    display: none !important;
   }
 }

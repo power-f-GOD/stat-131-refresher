@@ -25,15 +25,15 @@ export function loadPageNavScript() {
     function handleKeyboardNavEvent(e) {
         var key = e.keyCode || e.which;
         if (key == 39 && j != numOfPages - 1)
-            gotoNextPage();
+            nextButton.click();
         else if (key == 37 && j !== 0)
-            gotoPreviousPage();
+            previousButton.click();
     }
     signOutButton.onclick = function () {
         signOutButton.textContent = 'Signing out...';
         rememberMeCheckbox.checked = false;
         rememberMe = false;
-        goUpButtons[2].className = 'scale-down';
+        goUpButtons[2].disabled = true;
         if (navigator.cookieEnabled) {
             if (localStorage.userId)
                 username = localStorage.userId;
@@ -45,8 +45,9 @@ export function loadPageNavScript() {
             Q('#buttons-wrapper').className = 'slide-down-controls';
             pageTitleBar.dataset.state = 'hidden';
             previousButton.className = 'scale-down';
-            previousButton.dataset.state = 'hidden';
-            goUpButtons[2].dataset.state = 'hidden';
+            nextButton.className = 'scale-down';
+            previousButton.disabled = true;
+            goUpButtons[2].disabled = true;
             delay(1000).then(function () {
                 furtherDiscussion.className = 'custom-scroll-bar translate-out-left';
                 signInPage.dataset.state = 'visible';
@@ -64,8 +65,7 @@ export function loadPageNavScript() {
     var nextOrPrevPage;
     var currentGoUpButton;
     var nextOrPrevGoUpButton;
-    nextButton.onclick = gotoNextPage;
-    function gotoNextPage() {
+    nextButton.onclick = function () {
         if (i == 0 && j == 0) {
             i = 0;
             j++;
@@ -87,11 +87,10 @@ export function loadPageNavScript() {
             currentPage.className = 'custom-scroll-bar translate-out-left';
             nextOrPrevPage.className = 'custom-scroll-bar translate-in';
             pageTitleBar.dataset.state = 'visible';
+            displayNavigationButtons();
         });
-        displayNavigationButtons();
-    }
-    previousButton.onclick = gotoPreviousPage;
-    function gotoPreviousPage() {
+    };
+    previousButton.onclick = function () {
         if (i - j == -1) {
             i = j;
             j--;
@@ -108,9 +107,9 @@ export function loadPageNavScript() {
         delay(5).then(function () {
             currentPage.className = 'custom-scroll-bar translate-out-right';
             nextOrPrevPage.className = 'custom-scroll-bar translate-in';
+            displayNavigationButtons();
         });
-        displayNavigationButtons();
-    }
+    };
     var startCoord = 0;
     var swipeCoord = 0;
     var endCoord = 0;
@@ -130,7 +129,7 @@ export function loadPageNavScript() {
         el.addEventListener('touchend', addSwipeListeners);
     });
     function displayNavigationButtons() {
-        if (j == 2) {
+        if (j == 2 && !intervalInput.value) {
             var interval = localStorage.interval, frequencies = localStorage.frequencies;
             if (interval && !intervalInput.value)
                 intervalInput.value = interval;
@@ -139,96 +138,74 @@ export function loadPageNavScript() {
         }
         pageNumber.textContent = j + 1 + " / " + numOfPages;
         if (j == numOfPages - 1) {
-            previousButton.dataset.state = 'visible';
+            nextButton.disabled = true;
+            previousButton.disabled = false;
         }
         else if (j == 0) {
-            nextButton.dataset.state = 'visible';
+            nextButton.disabled = false;
+            previousButton.disabled = true;
         }
         else {
-            previousButton.dataset.state = 'visible';
-            nextButton.dataset.state = 'visible';
+            nextButton.disabled = false;
+            previousButton.disabled = false;
         }
-        delay(5).then(function () {
-            if (j == numOfPages - 1) {
-                nextButton.className = 'scale-down';
-                previousButton.className = 'scale-up';
-            }
-            else if (j == 0) {
-                nextButton.className = 'scale-up';
-                previousButton.className = 'scale-down';
-            }
-            else {
-                nextButton.className = 'scale-up';
-                previousButton.className = 'scale-up';
-            }
-            if (j == 0) {
-                goUpButtons[j].className = 'scale-down';
-                pageTitleBar.dataset.state = 'hidden';
-            }
-            else if (j == 1 && i == 0) {
-                pageTitles[numOfPages - 2].dataset.state = 'hidden';
-                pageTitles[j - 1].dataset.state = 'visible';
-            }
-            else {
-                pageTitles[i - 1].dataset.state = 'hidden';
-                pageTitles[j - 1].dataset.state = 'visible';
-            }
-            delay(5).then(function () {
-                displayGoUpButton();
-            });
-        });
+        if (j == 0) {
+            goUpButtons[j].disabled = true;
+            pageTitleBar.dataset.state = 'hidden';
+        }
+        else if (j == 1 && i == 0) {
+            pageTitles[numOfPages - 2].dataset.state = 'hidden';
+            pageTitles[j - 1].dataset.state = 'visible';
+        }
+        else {
+            pageTitles[i - 1].dataset.state = 'hidden';
+            pageTitles[j - 1].dataset.state = 'visible';
+        }
+        displayGoUpButton();
     }
     function displayGoUpButton() {
         if (j == 0)
             return;
         var scrollPosition = pages[j].scrollTop;
-        currentGoUpButton = goUpButtons[j == 0 ? j : j - 1];
+        currentGoUpButton = goUpButtons[j - 1];
         nextOrPrevGoUpButton = goUpButtons[i == 0 ? 0 : i - 1];
         if (scrollPosition > 1000) {
-            currentGoUpButton.dataset.state = 'visible';
+            currentGoUpButton.disabled = false;
         }
-        delay(5).then(function () {
-            if (scrollPosition <= 1000 &&
-                currentGoUpButton.className == 'scale-down') {
-                nextOrPrevGoUpButton.className = 'scale-down';
-                return;
+        if (scrollPosition <= 1000 && currentGoUpButton.disabled) {
+            nextOrPrevGoUpButton.disabled = true;
+            return;
+        }
+        if (scrollPosition > 1000) {
+            if (i == 0 && j == 1) {
+                goUpButtons[numOfGoUpButtons - 1].disabled = true;
+                currentGoUpButton.disabled = false;
             }
-            if (scrollPosition > 1000) {
-                if (i == 0 && j == 1) {
-                    goUpButtons[numOfGoUpButtons - 1].className = 'scale-down';
-                    currentGoUpButton.className = 'scale-up';
-                }
-                else if (j - i < 1) {
-                    nextOrPrevGoUpButton.className = 'scale-down';
-                    currentGoUpButton.className = 'scale-up';
-                }
-                else if (j - i == 1) {
-                    nextOrPrevGoUpButton.className = 'scale-down';
-                    currentGoUpButton.className = 'scale-up';
-                }
-                else if (j == numOfGoUpButtons - 1 && i != 0) {
-                    currentGoUpButton.className = 'scale-down';
-                    nextOrPrevGoUpButton.className = 'scale-up';
-                }
+            else if (j - i < 1) {
+                nextOrPrevGoUpButton.disabled = true;
+                currentGoUpButton.disabled = false;
             }
-            else {
-                currentGoUpButton.className = 'scale-down';
+            else if (j - i == 1) {
+                nextOrPrevGoUpButton.disabled = true;
+                currentGoUpButton.disabled = false;
             }
-        });
+            else if (j == numOfGoUpButtons - 1 && i != 0) {
+                currentGoUpButton.disabled = true;
+                nextOrPrevGoUpButton.disabled = false;
+            }
+        }
+        else {
+            currentGoUpButton.disabled = true;
+        }
     }
     function addSwipeListeners() {
-        if (nextOrPrevPage)
-            delay(300).then(function () {
-                nextOrPrevPage.addEventListener('touchstart', touchStart);
-                nextOrPrevPage.addEventListener('touchend', swipe);
-            });
+        nextOrPrevPage.addEventListener('touchstart', touchStart);
+        delay(100).then(function () { return nextOrPrevPage.addEventListener('touchend', swipe); });
         hideElastic();
     }
     function removeSwipeListeners() {
-        if (nextOrPrevPage) {
-            nextOrPrevPage.removeEventListener('touchstart', touchStart);
-            nextOrPrevPage.removeEventListener('touchend', swipe);
-        }
+        nextOrPrevPage.removeEventListener('touchstart', touchStart);
+        delay(100).then(function () { return nextOrPrevPage.removeEventListener('touchend', swipe); });
         hideElastic();
     }
     function touchStart(event) {
@@ -237,6 +214,8 @@ export function loadPageNavScript() {
     function swipe(event) {
         endCoord = event.changedTouches[0].clientX;
         swipeCoord = endCoord - startCoord;
+        if (event.touches.length > 1)
+            return;
         if (Math.abs(swipeCoord) > 25)
             if (j == 0 && swipeCoord > 0) {
                 leftElastic.style.width = '10rem';
@@ -245,12 +224,10 @@ export function loadPageNavScript() {
                 rightElastic.style.width = '10rem';
             }
         hideElastic();
-        if (event.touches.length > 1)
-            return;
-        if (swipeCoord < -50 && j != numOfPages - 1)
-            gotoNextPage();
-        else if (swipeCoord > 50 && j != 0)
-            gotoPreviousPage();
+        if (swipeCoord < -30 && j != numOfPages - 1)
+            nextButton.click();
+        else if (swipeCoord > 30 && j != 0)
+            previousButton.click();
     }
     function hideElastic() {
         delay(600).then(function () {
@@ -262,10 +239,10 @@ export function loadPageNavScript() {
         if (j == 3) {
             furtherDiscussion.className = 'custom-scroll-bar translate-out-right';
             pageTitles[2].dataset.state = 'hidden';
-            goUpButtons[2].className = 'scale-down';
+            goUpButtons[2].disabled = true;
             j = 2;
             i = 1;
-            gotoPreviousPage();
+            previousButton.click();
         }
     };
     Q('#semi-interquartile-range-ref').onclick = classSizeRef;
@@ -274,6 +251,45 @@ export function loadPageNavScript() {
     Q('#link-to-median').onclick = classSizeRef;
     Q('#take-example').onclick = function (e) {
         e.preventDefault();
-        gotoNextPage();
+        nextButton.click();
     };
+    var deferredPrompt;
+    window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        delay(2000).then(function () {
+            installButton.disabled = false;
+            installButton.dataset.state = 'visible';
+            installButton.addEventListener('click', function () {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(function (choiceResult) {
+                    if (choiceResult.outcome == 'accepted') {
+                        installButton.disabled = true;
+                        installButton.dataset.state = 'invisible';
+                    }
+                    deferredPrompt = null;
+                });
+            });
+            window.addEventListener('appinstalled', function () {
+                return alert('STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether offline or online.');
+            });
+        });
+    });
+    window.addEventListener('visibilitychange', function () {
+        if (document.visibilityState == 'hidden') {
+            if (cookieEnabled) {
+                var index_1 = 0;
+                var activePage = Array.prototype.find.call(pages, function (page, i) {
+                    if (page.dataset.state == 'visible') {
+                        index_1 = i;
+                        return true;
+                    }
+                    return false;
+                });
+                localStorage.activePageId = activePage.id;
+                localStorage.activePageIndex = index_1;
+                localStorage.activePageScrollTop = activePage.scrollTop;
+            }
+        }
+    });
 }

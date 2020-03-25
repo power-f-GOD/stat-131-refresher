@@ -10,6 +10,7 @@ let usernameInput: HTMLInputElement;
 let signInButton: HTMLButtonElement;
 let rememberMeCheckbox: HTMLInputElement;
 let signInStatus: HTMLSpanElement;
+let installButton: HTMLButtonElement;
 let nextButton: HTMLButtonElement;
 let previousButton: HTMLButtonElement;
 let welcomePage: HTMLDivElement;
@@ -25,21 +26,25 @@ let furtherDiscussion: HTMLDivElement;
 let username: string;
 let rememberMe: boolean;
 
-const _requestAnimationFrame = _requestAnimationFrameWrapper();
-const _cancelAnimationFrame = _cancelAnimationFrameWrapper();
+let _requestAnimationFrame: Function;
+let _cancelAnimationFrame: Function;
 
 this.addEventListener('load', () => {
+  _requestAnimationFrame = _requestAnimationFrameWrapper();
+  _cancelAnimationFrame = _cancelAnimationFrameWrapper();
+
   pages = QAll('[data-role="page"]') as any;
   numOfPages = pages.length;
   pageTitleBar = Q('#page-title-bar') as HTMLDivElement;
   pageTitles = QAll('.page-title');
-  goUpButtons = QAll('button[data-name="go-up-button"]');
+  goUpButtons = QAll('button[aria-label="go up"]');
   numOfGoUpButtons = goUpButtons.length;
   signInPage = Q('#sign-in-page') as HTMLDivElement;
   usernameInput = Q('#username') as HTMLInputElement;
   signInButton = Q('#sign-in') as HTMLButtonElement;
   rememberMeCheckbox = Q('#remember-me') as HTMLInputElement;
   signInStatus = Q('#sign-in-status') as HTMLSpanElement;
+  installButton = Q('#install') as HTMLButtonElement;
   nextButton = Q('#next') as HTMLButtonElement;
   previousButton = Q('#previous') as HTMLButtonElement;
   welcomePage = Q('#welcome-page') as HTMLDivElement;
@@ -55,9 +60,7 @@ this.addEventListener('load', () => {
       let classNames = /translate-in|welcome-page-fade-in|scale-up|slide-down|slide-up-controls|title-bar|page-title/;
 
       if (!classNames.test(target.className))
-        delay(200).then(() => {
           target.dataset.state = 'hidden';
-        });
     });
   });
 
@@ -65,7 +68,9 @@ this.addEventListener('load', () => {
   let isMobile = /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i;
   if (!isMobile.test(window.navigator.userAgent))
     document.body.classList.add('desktop');
-  else document.body.classList.remove('desktop');
+  else {
+    document.body.classList.remove('desktop');
+  }
 
   const usernameElements = QAll('.username');
 
@@ -86,7 +91,7 @@ this.addEventListener('load', () => {
 
   if (!userExists)
     alert(
-      `Hi, there! Good day. \n\nOk. This offline web-app was made to serve as a refresher for the upcoming STAT131 test. And it also may serve as a study guide for our colleagues who just joined us, because they were the ones I target and had in mind before embarking on creating this, so they be not oblivious of the topics herein but have a comprehension of them and fare well in the test for short is the time. \n\nAlso, if you don't fully/really understand this topic, I urge you to follow, carefully, through the explanations and elaborations and try to understand the concepts for thy profiting. ;) \n\nPS: The contents of this app may be subject to mistakes, errors and flaws and that's why I now advise that you authenticate whatever you read herein with a good Stats Text or the recommended one. \n\nAlright. Godspeed. ;) \n\nDon't forget to forward or share this web-app to any of your friends who offers or offer STAT131 and just resumed. You could be lending a helping hand. :)`
+      `Hi, there! Good day. \n\nOk. This offline web-app was made to serve as a refresher for the upcoming STAT131 test. And it also may serve as a study guide for our colleagues who just joined us, because they are the ones I target and had in mind before embarking on creating this, so they be not oblivious of the topics herein but have a comprehension of them and fare well in the test to come for short is the time. \n\nAlso, if you don't fully/really understand this topic, I urge you to follow, carefully, through the explanations and elaborations and try to understand the concepts for thy profiting. ;) \n\nPS: The contents of this app may be subject to mistakes, errors and flaws and that's why I now advise that you authenticate whatever you read herein with a good Stats Text or the recommended one. And please, send a message if in case you find or notice any errors. (Link to my Facebook on sign in page)  \n\nAlright. Godspeed. ;) \n\nDon't forget to forward or share this web-app to any of your friends who offers or offer STAT131 and just resumed. You could be lending a helping hand. :)`
     );
 
   //Sign user in when user presses the 'enter' key
@@ -153,8 +158,11 @@ this.addEventListener('load', () => {
 
       if (cookieEnabled) localStorage.userId = username;
 
+      //prevent zoom in and out on mobile for the sake of swipe feature
+      if (isMobile) Q('meta[name="viewport"]')!.content += ", user-scalable=no";
+
       //page slide animation
-      delay(rememberMe ? 500 : 1500).then(() => {
+      delay(rememberMe ? 750 : 1500).then(() => {
         welcomePage.dataset.state = 'visible';
         signInPage.className = 'custom-scroll-bar translate-out-left';
         signInStatus.textContent = '';
@@ -165,10 +173,11 @@ this.addEventListener('load', () => {
 
           delay(800).then(() => {
             Q('#buttons-wrapper')!.className = 'slide-up-controls';
-            nextButton.dataset.state = 'visible';
+            nextButton.disabled = false;
 
             delay(800).then(() => {
               nextButton.className = 'scale-up';
+              previousButton.className = 'scale-up';
               //translate/reposition signInPage to right position in case of sign out in order to slide in from right again
               signInPage.className = 'custom-scroll-bar translate-out-right';
               signInPage.dataset.state = 'hidden';
@@ -182,7 +191,7 @@ this.addEventListener('load', () => {
 
       loadPageNavScript()
         .then(() => loadStatComputerScript())
-        .then(() => {
+        .then(() =>
           delay(1000).then(() => {
             if (cookieEnabled) {
               let { activePageId } = localStorage;
@@ -193,17 +202,17 @@ this.addEventListener('load', () => {
                   let scrollTop = +localStorage.activePageScrollTop;
 
                   if (activePageId != currentPage.id) {
-                    delay((timeout += 500)).then(() => nextButton.click());
+                    delay((timeout += 700)).then(() => nextButton.click());
                   } else {
-                    delay(timeout ? timeout : 2000).then(
+                    delay(timeout ? timeout : 2800).then(
                       () => (Q(`#${activePageId}`)!.scrollTop = scrollTop)
                     );
                     break;
                   }
                 }
             }
-          });
-        });
+          })
+        );
     }
   };
   Q('#my-name')!.textContent = "@Power'f-GOD⚡⚡";
@@ -211,13 +220,13 @@ this.addEventListener('load', () => {
   if (localStorage.userId) usernameInput.value = localStorage.userId;
 
   function loadPageNavScript() {
-    return import('./page-navigation.js').then(module =>
+    return import('./page-navigation.min.js').then(module =>
       module.loadPageNavScript()
     );
   }
 
   function loadStatComputerScript() {
-    return import('./stat-computer.js').then(module =>
+    return import('./stat-computer.min.js').then(module =>
       module.loadStatComputerScript()
     );
   }
@@ -225,34 +234,12 @@ this.addEventListener('load', () => {
   if (cookieEnabled) if (rememberMe) signInButton.click();
 });
 
-//save active page info on close of window or on visibility change; will be used to restore state on app reload
-this.addEventListener('visibilitychange', function(this: any) {
-  if (document.visibilityState == 'hidden') {
-    if (cookieEnabled) {
-      let index = 0;
-      let activePage = Array.prototype.find.call(
-        pages,
-        (page: HTMLElement, i: number) => {
-          if (page.dataset.state == 'visible') {
-            index = i;
-            return true;
-          }
-          return false;
-        }
-      );
-      localStorage.activePageId = activePage.id;
-      localStorage.activePageIndex = index;
-      localStorage.activePageScrollTop = activePage.scrollTop;
-    }
-  }
-});
-
 //The following are timers used throught out app
 
 //optimized somewhat version of window.setTimeout that returns a promise
 function delay(timeout: number) {
   return new Promise((resolve: Function) => {
-    if (!Number(timeout))
+    if (isNaN(timeout))
       throw Error('Expects a time in milliseconds as parameter.');
 
     let start = 0;
@@ -269,7 +256,7 @@ function delay(timeout: number) {
 }
 
 function customTimeout(callback: Function, timeout: number) {
-  if (!Number(timeout))
+  if (isNaN(timeout))
     throw Error('Expects a time in milliseconds as parameter.');
 
   let start = 0;

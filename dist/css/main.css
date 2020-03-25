@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   overflow: auto;
-  background: black;
+  background: #101010;
   will-change: transform;
 }
 
@@ -103,6 +103,7 @@ h2 {
   color: white;
   padding: 0.55rem;
   margin: 0;
+  font-size: 1em;
 }
 
 #mean-median-mode-page header,
@@ -148,9 +149,10 @@ h2 {
   display: none;
 }
 
+#install,
 #previous,
 #next,
-button[data-name='go-up-button'] {
+button[aria-label='go up'] {
   width: 3em;
   height: 3em;
   display: -webkit-box;
@@ -174,27 +176,55 @@ button[data-name='go-up-button'] {
           box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.5);
   position: absolute;
   cursor: pointer;
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
 }
 
+#install[data-state='hidden'],
 #previous[data-state='hidden'],
 #next[data-state='hidden'],
-button[data-name='go-up-button'][data-state='hidden'] {
-  -webkit-transform: scale(0);
-          transform: scale(0);
+button[aria-label='go up'][data-state='hidden'] {
   display: none;
 }
 
+#install:hover,
 #previous:hover,
 #next:hover,
-button[data-name='go-up-button']:hover {
+button[aria-label='go up']:hover {
   border-style: inset;
 }
 
+#install:focus,
 #previous:focus,
 #next:focus,
-button[data-name='go-up-button']:focus {
+button[aria-label='go up']:focus {
   border-color: white !important;
   border-style: solid !important;
+}
+
+#install {
+  left: 1.25rem;
+  bottom: calc(2rem + 3em);
+  background: green;
+  border-color: #20a520;
+  font-size: 1.3rem;
+  height: 2.5em;
+  min-height: 2.5em !important;
+  width: 2.5em !important;
+  -webkit-transform: translateX(calc(-1.2rem - 4em));
+          transform: translateX(calc(-1.2rem - 4em));
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
+}
+
+#install[data-state='visible'] {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+#install span {
+  border-bottom: 0.125em solid;
+  min-width: 1rem;
 }
 
 #previous {
@@ -219,7 +249,7 @@ button[data-name='go-up-button']:focus {
   background-color: #3863e4;
 }
 
-button[data-name='go-up-button'] {
+button[aria-label='go up'] {
   right: 1.25rem;
   bottom: calc(2rem + 3em);
   background: red;
@@ -227,6 +257,13 @@ button[data-name='go-up-button'] {
   height: 2.5em;
   min-height: 2.5em !important;
   width: 2.5em !important;
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+button[aria-label='go up'][disabled] {
   -webkit-transform: scale(0);
           transform: scale(0);
 }
@@ -279,7 +316,7 @@ button[data-name='go-up-button'] {
       flex-basis: 100%;
   padding-bottom: 7.5rem;
   position: absolute;
-  background: black;
+  background: #101010;
   line-height: 1.5em;
   top: 0;
   left: 0;
@@ -339,7 +376,7 @@ button[data-name='go-up-button'] {
   margin: 0.65em 0;
   text-align: center;
   background: skyblue;
-  color: black;
+  color: #101010;
   border-radius: 0.35rem;
   font-style: italic;
   padding: auto;
@@ -450,7 +487,7 @@ a:focus {
 }
 
 .numerator {
-  border-bottom: 0.0625rem solid black;
+  border-bottom: 0.0625rem solid #101010;
 }
 
 .denominator {
@@ -476,9 +513,8 @@ a:focus {
   display: block;
   width: 100%;
   text-align: justify;
-  font-style: italic;
   background: lightpink;
-  color: #111;
+  color: #101010;
 }
 
 .variable-definitions .row:first-child {
@@ -489,12 +525,12 @@ a:focus {
 
 .variable-definitions .variable-U {
   background: none;
-  color: black;
+  color: #101010;
   font-size: 1.075rem;
 }
 
 .variable-definitions .variable-U .numerator {
-  border-bottom-color: black;
+  border-bottom-color: #101010;
 }
 
 .variable-U {
@@ -529,7 +565,7 @@ a:focus {
   height: 100%;
   width: 100%;
   overflow-y: auto;
-  background: black;
+  background: #101010;
   padding: 0;
   padding-bottom: 10rem;
   position: absolute;
@@ -548,7 +584,7 @@ a:focus {
   margin: 1em 0;
   padding: 0.5em 0.7em;
   border: 0.15em solid #666;
-  background: black;
+  background: #101010;
   color: lightgrey;
   outline: none;
   border-radius: 0.25em;
@@ -699,7 +735,7 @@ tfoot {
 #median-solution .variable-definitions,
 #mode-solution .variable-definitions {
   padding: 1.125em 1em;
-  color: black;
+  color: #101010;
   font-style: normal;
   font-family: 'Cambria', 'Times New Roman';
   border-radius: 0.5em;
@@ -833,8 +869,8 @@ tfoot {
 }
 
 .table-slide-in {
-  -webkit-animation: tableSlideIn 0.6s forwards ease;
-          animation: tableSlideIn 0.6s forwards ease;
+  -webkit-animation: tableSlideIn 0.7s forwards ease;
+          animation: tableSlideIn 0.7s forwards ease;
 }
 
 @-webkit-keyframes tableSlideIn {
@@ -859,29 +895,6 @@ tfoot {
   }
 }
 
-.sign-in-page-slide-up {
-  -webkit-animation: signInPageSlideUp 0.5s forwards ease;
-          animation: signInPageSlideUp 0.5s forwards ease;
-}
-
-@-webkit-keyframes signInPageSlideUp {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes signInPageSlideUp {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .table-fade-out {
   opacity: 0 !important;
   -webkit-transition: 0.5s !important;
@@ -900,6 +913,10 @@ tfoot {
           transform: translateY(8rem) !important;
   -webkit-transition: 0.5s !important;
   transition: 0.5s !important;
+}
+
+body {
+  font-family: 'PT Sans', Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif !important;
 }
 
 #welcome-page,
@@ -1003,4 +1020,10 @@ sub {
 .desktop .custom-scroll-bar::-webkit-scrollbar-thumb {
   background: #ff4a2a;
   border-radius: 0.5em;
+}
+
+@media all and (display-mode: standalone) {
+  #install {
+    display: none !important;
+  }
 }

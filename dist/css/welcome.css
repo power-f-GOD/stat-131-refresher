@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   overflow: auto;
-  background: black;
+  background: #101010;
   will-change: transform;
 }
 
@@ -103,6 +103,7 @@ h2 {
   color: white;
   padding: 0.55rem;
   margin: 0;
+  font-size: 1em;
 }
 
 #mean-median-mode-page header,
@@ -148,9 +149,10 @@ h2 {
   display: none;
 }
 
+#install,
 #previous,
 #next,
-button[data-name='go-up-button'] {
+button[aria-label='go up'] {
   width: 3em;
   height: 3em;
   display: -webkit-box;
@@ -174,27 +176,55 @@ button[data-name='go-up-button'] {
           box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.5);
   position: absolute;
   cursor: pointer;
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
 }
 
+#install[data-state='hidden'],
 #previous[data-state='hidden'],
 #next[data-state='hidden'],
-button[data-name='go-up-button'][data-state='hidden'] {
-  -webkit-transform: scale(0);
-          transform: scale(0);
+button[aria-label='go up'][data-state='hidden'] {
   display: none;
 }
 
+#install:hover,
 #previous:hover,
 #next:hover,
-button[data-name='go-up-button']:hover {
+button[aria-label='go up']:hover {
   border-style: inset;
 }
 
+#install:focus,
 #previous:focus,
 #next:focus,
-button[data-name='go-up-button']:focus {
+button[aria-label='go up']:focus {
   border-color: white !important;
   border-style: solid !important;
+}
+
+#install {
+  left: 1.25rem;
+  bottom: calc(2rem + 3em);
+  background: green;
+  border-color: #20a520;
+  font-size: 1.3rem;
+  height: 2.5em;
+  min-height: 2.5em !important;
+  width: 2.5em !important;
+  -webkit-transform: translateX(calc(-1.2rem - 4em));
+          transform: translateX(calc(-1.2rem - 4em));
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
+}
+
+#install[data-state='visible'] {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+#install span {
+  border-bottom: 0.125em solid;
+  min-width: 1rem;
 }
 
 #previous {
@@ -219,7 +249,7 @@ button[data-name='go-up-button']:focus {
   background-color: #3863e4;
 }
 
-button[data-name='go-up-button'] {
+button[aria-label='go up'] {
   right: 1.25rem;
   bottom: calc(2rem + 3em);
   background: red;
@@ -227,6 +257,13 @@ button[data-name='go-up-button'] {
   height: 2.5em;
   min-height: 2.5em !important;
   width: 2.5em !important;
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+button[aria-label='go up'][disabled] {
   -webkit-transform: scale(0);
           transform: scale(0);
 }

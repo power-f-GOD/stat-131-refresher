@@ -1,33 +1,56 @@
 <!doctype html>
-<html>
+<html lang="en-US">
 
-<head lang="en-US">
-  <title>STAT 131</title>
-  <meta />
+<head>
+  <title>STATS 131 Refresher</title>
   <meta name="description"
     content="Author: Power I. Sunday, Desc: A STATS 131 Web App (refresher) for 100 Level Physical Sciences students University of Nigeria Nsukka Nigeria." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel='preconnect' href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" onload="this.onload=null;this.rel='stylesheet';" />
   <link rel="preload" as="style" href="dist/css/main.min.css" onload="this.onload=null;this.rel='stylesheet';" />
-  <script src='dist/js/main.min.js' async></script>
   <!-- sign in page style included here to prevent FOUC (Flash Of Unstyled Content) -->
   <style id='critical-css'>
-    #welcome-page,#mean-median-mode-page,#solve-questions-page,#further-discussion-page{opacity:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-transform:translateX(100%);transform:translateX(100%)}#welcome-page[data-state='hidden'],#mean-median-mode-page[data-state='hidden'],#solve-questions-page[data-state='hidden'],#further-discussion-page[data-state='hidden']{display:none}#welcome-page{opacity:0;z-index:4;-webkit-transform:scale(0.5);transform:scale(0.5)}#sign-in-page{overflow-y:auto;background:black;height:100%;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;position:absolute;padding:2.75rem 1rem;top:0;left:0;z-index:7}#sign-in-page[data-state='hidden']{display:none}#input-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:3.5rem 0;width:100%}#username{width:80%;max-width:22em;margin:1em 0.625rem;padding:0.625em 0.75em;border:0.25em ridge #4271ff;background:royalblue;color:white;outline:none;border-radius:0.25em;-webkit-transition:background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s, border 0.3s;transition:background-color 0.3s, box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s}#username::-webkit-input-placeholder{color:#bbb}#username:-ms-input-placeholder{color:#bbb}#username::-ms-input-placeholder{color:#bbb}#username::placeholder{color:#bbb}#username:focus{border-color:white;background-color:#144eff}#username:focus,#username:hover{-webkit-box-shadow:0 0 1.5rem rgba(20,78,255,0.8);box-shadow:0 0 1.5rem rgba(20,78,255,0.8)}#sign-in,#sign-out{width:auto;min-width:8rem;margin:0.5em;padding:0.55em 2em;border-radius:2em;border-color:tomato;border-width:0.25em;background:#ff4c2c;color:white;-webkit-transition:background-color 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s}#sign-in:hover,#sign-out:hover{border-color:#ff4c2d}#sign-in:focus,#sign-out:focus{border-color:white}#sign-in:hover,#sign-in:focus,#sign-out:hover,#sign-out:focus{background-color:#ff3511;-webkit-box-shadow:0 0 1.5rem rgba(255,77,45,0.6);box-shadow:0 0 1.5rem rgba(255,77,45,0.6)}#remember-me-label{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-style:italic;color:#aaa}#remember-me-label input{margin-right:0.75em}#sign-in-page-footer{padding:1rem;width:100%;text-align:center;background:black}#sign-in-page-footer span{color:#333;display:block;margin:0.25rem}#sign-in-page-footer a{color:#888;text-decoration:underline}#sign-in-page-footer a:hover,#sign-in-page-footer a:focus{color:#ddd;-webkit-transform:scale(1.1);transform:scale(1.1)}#sign-out-wrapper{text-align:center;margin:2.5rem 0}#sign-in-status{font-weight:bold;color:limegreen;padding:0.625rem 1rem;text-align:center}*{-webkit-box-sizing:border-box;box-sizing:border-box;outline:none}html,body{background:black;color:gainsboro;height:100%;margin:0;position:relative;overflow-x:hidden !important;font-size:1.075rem;font-family:Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif}input,button{font-size:inherit !important;font-family:inherit;min-height:3rem}input[disabled],button[disabled]{background:#7e7e7e !important;border-color:#a0a0a0 !important}button{cursor:pointer !important}label{width:100%;text-align:center}
+    #welcome-page,#mean-median-mode-page,#solve-questions-page,#further-discussion-page{opacity:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-transform:translateX(100%);transform:translateX(100%)}#welcome-page[data-state='hidden'],#mean-median-mode-page[data-state='hidden'],#solve-questions-page[data-state='hidden'],#further-discussion-page[data-state='hidden']{display:none}#welcome-page{opacity:0;z-index:4;-webkit-transform:scale(0.5);transform:scale(0.5)}#sign-in-page{overflow-y:auto;background:#101010;height:100%;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;position:absolute;padding:2.75rem 1rem;top:0;left:0;z-index:6}#sign-in-page[data-state='hidden']{display:none}#input-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:3.5rem 0;width:100%}#username{width:80%;max-width:22em;margin:1em 0.625rem;padding:0.625em 0.75em;border:0.25em ridge #2b5df3;background:#1f54f3;color:white;outline:none;border-radius:0.25em;-webkit-transition:background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, border 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s, border 0.3s;transition:background-color 0.3s, box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s}#username::-webkit-input-placeholder{color:#bbb}#username:-ms-input-placeholder{color:#bbb}#username::-ms-input-placeholder{color:#bbb}#username::placeholder{color:#bbb}#username:focus{border-color:white;background-color:#144eff}#username:focus,#username:hover{-webkit-box-shadow:0 0 1rem rgba(20,78,255,0.8);box-shadow:0 0 1rem rgba(20,78,255,0.8)}#sign-in,#sign-out{width:auto;min-width:8rem;margin:0.5em;padding:0.55em 2em;border-radius:2em;border-color:tomato;border-width:0.25em;background:#ff330f;color:white;-webkit-transition:background-color 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, -webkit-box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s;transition:background-color 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s}#sign-in:hover,#sign-out:hover{border-color:#ff4c2d}#sign-in:focus,#sign-out:focus{border-color:white}#sign-in:hover,#sign-in:focus,#sign-out:hover,#sign-out:focus{background-color:#ff3511;-webkit-box-shadow:0 0 1rem rgba(255,77,45,0.6);box-shadow:0 0 1rem rgba(255,77,45,0.6)}#remember-me-label{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;color:#aaa}#remember-me-label input{-webkit-transition:0.25s;transition:0.25s;margin-right:0.75em}#remember-me-label input:focus{-webkit-transform:scale(1.5);transform:scale(1.5)}#sign-in-page-footer{padding:1rem;width:100%;text-align:center}#sign-in-page-footer span{color:#444;display:block;margin:0.25rem}#sign-in-page-footer a{color:#888;text-decoration:underline}#sign-in-page-footer a:hover,#sign-in-page-footer a:focus{color:#ddd;-webkit-transform:scale(1.1);transform:scale(1.1)}#sign-out-wrapper{text-align:center;margin:2.5rem 0}#sign-in-status{font-weight:bold;color:limegreen;border:1px solid transparent;min-height:1.5em;text-align:center}*{-webkit-box-sizing:border-box;box-sizing:border-box;outline:none}html,body{background:#101010;color:gainsboro;height:100%;margin:0;position:relative;overflow-x:hidden !important;font-size:1.025rem;font-family:Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif}input,button{font-size:inherit !important;font-family:inherit;min-height:3rem}input[disabled],button[disabled]{background:#5f5f5f !important;border-color:#959595 !important;opacity:0.6 !important}button{cursor:pointer !important}label{width:100%;text-align:center}
   </style>
+  <link rel="manifest" href="manifest.json">
+  
+  <meta name="theme-color" content="#1f54f3" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="Space Missions" />
+  <meta name="apple-mobile-web-app-title" content="Space Missions" />
+  <meta name="msapplication-navbutton-color" content="#1f54f3" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="msapplication-starturl" content="/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  
+  <link rel="icon" sizes="128x128" href="icons/icon-128x128.png" />
+  <link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128x128.png" />
+  <link rel="icon" sizes="192x192" href="icon-192x192.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192x192.png" />
+  <link rel="icon" sizes="256x256" href="icons/icon-256x256.png" />
+  <link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256x256.png" />
+  <link rel="icon" sizes="384x384" href="icons/icon-384x384.png" />
+  <link rel="apple-touch-icon" sizes="384x384" href="icons/icon-384x384.png" />
+  <link rel="icon" sizes="512x512" href="icons/icon-512x512.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512x512.png" />
+
+  <script src='dist/js/main.min.js' async></script>
 </head>
 
 <body>
   <!-- Animated fixed top div - START -->
-  <header id="page-title-bar" class="title-bar" data-state="hidden" role="heading">
-    <h3 class="sub-heading page-title" data-state='visible'>Mean, Median and Mode</h3>
-    <h3 class="sub-heading page-title" data-state='hidden'>Solve Questions</h4>
-    <h3 class="sub-heading page-title" data-state='hidden'>Quartiles, Deciles and Percentiles</h4>
+  <header id="page-title-bar" class="title-bar" data-state="hidden">
+    <h3 id="heading-1" class="sub-heading page-title" data-state='visible' role="heading" aria-level="1">Mean, Median and Mode</h3>
+    <h3 id="heading-2" class="sub-heading page-title" data-state='hidden' role='heading' aria-level="1">Solve Questions</h4>
+    <h3 id="heading-3" class="sub-heading page-title" data-state='hidden' role='heading' aria-level="1">Quartiles, Deciles and Percentiles</h4>
   </header>
   <!-- Animated fixed top div - START -->
 
   <div id='left-elastic'></div>
   <div id='right-elastic'></div>
   <!-- Sign in page - START -->
-  <div id="sign-in-page" class="custom-scroll-bar" data-state="visible" role="document">
+  <div id="sign-in-page" class="custom-scroll-bar" data-state="visible" role="document" aria-label="document">
     <div id="input-wrapper" class="row" role="form">
       <label>
         <input type="text" id="username" placeholder="Enter first name to sign in" spellcheck="false"
@@ -41,13 +64,12 @@
       <div id="sign-in-status" class="bad-input-feedback"></div>
     </div>
     <!-- Sign-in page footer - START -->
-    <div id="sign-in-page-footer" class="row" role="doc-footnote">
+    <div id="sign-in-page-footer" class="row" role="doc-footnote" aria-label='doc-footnote'>
       <span>MEASURES OF CENTRAL TENDENCY</span>
       <span>STAT131 Refresher for Upcoming Test</span><br />
       <span>Written &amp; Developed By</span>
       <span>
-        <a href="https://m.facebook.com/power.sunday3?refid=8" target="_blank" id="my-name" rel="noreferrer">Sunday
-          Power Inemesit</a>
+        <b><a href="https://m.facebook.com/power.sunday3?refid=8" target="_blank" id="my-name" rel="noreferrer">SundayPower Inemesit</a></b>
       </span>
       <span>Computer Science Dept. <b>&frac34;</b></span>
       <br />
@@ -60,7 +82,7 @@
   <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
   <main>
     <!-- Home page - START -->
-    <section id="welcome-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
+    <section id="welcome-page" class="custom-scroll-bar" data-role='page' role="document" aria-label='document' data-state="hidden">
       <header>
         <h1>MEASURES OF CENTRAL TENDENCY</h1>
         <div class="fixed-top">
@@ -89,9 +111,9 @@
     <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
 
     <!-- PAGE 1 - Formulae Explications - START -->
-    <section id="mean-median-mode-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
+    <section id="mean-median-mode-page" class="custom-scroll-bar" data-role='page' role="document" aria-labelledby='heading-1' data-state="hidden">
       <header id="header1">
-        <h4 class="rider"><i>(Grouped Data)</i></i></h4>
+        <h3 class="rider"><i>(Grouped Data)</i></i></h3>
       </header>
       <h3 class="padded whte-bg page-name"> Formulae Explications:</h3>
       <!-- Quick links - START -->
@@ -493,15 +515,15 @@
     <!-- BREAK BREAK BREAK BREAK BREAK BREAK BREAK -->
 
     <!-- PAGE 2 - Solving Questions - START -->
-    <section id="solve-questions-page" class="custom-scroll-bar" data-role='page' role="document" data-state="hidden">
+    <section id="solve-questions-page" class="custom-scroll-bar" data-role='page' role="document" aria-labelledby='heading-2' data-state="hidden">
       <header id="header2">
-        <h4 class="rider"><i>(Grouped Data)</i></i></h4>
+        <h3 class="rider"><i>(Grouped Data)</i></i></h3>
       </header>
       <h3 class="padded page-name">The Distribution Computer:</h3>
 
       <!-- Input for calculations -->
       <div class="row">
-        <div id="container" class="padded" role="form">
+        <div id="container" class="padded" role="form" aria-label='form'>
           <label>
             <input id="interval" type="text" value="" aria-label="class intervals" aria-describedby="result"
               placeholder="Input limits of only 1st class e.g. 45 50" />
@@ -788,10 +810,9 @@
     </section>
     <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
     <!-- PAGE 3 - Quartiles, Percentiles and Deciles -->
-    <section id="further-discussion-page" class="custom-scroll-bar" data-role='page' role="document"
-      data-state="hidden">
+    <section id="further-discussion-page" class="custom-scroll-bar" data-role='page' role="document" aria-labelledby='heading-3' data-state="hidden">
       <header id="header3">
-        <h4 class="rider"><i>(Grouped Data)</i></i></h4>
+        <h3 class="rider"><i>(Grouped Data)</i></i></h3>
       </header>
       <h3 class="padded page-name">Further Discussion:</h3>
       <!-- Quick links - START -->
@@ -1209,16 +1230,27 @@
     <!-- PAGE 3 - Quartiles, Deciles and Percentiles - END -->
     <!-- BREAK BREAK BREAK BREAK BREAK BREAK -->
   </main>
+
   <!-- Navigation buttons - START -->
-  <nav id="buttons-wrapper" data-state='hidden' role="navigation">
-    <button id="previous" data-state="hidden" aria-label="previous">←</button>
+  <nav id="buttons-wrapper" data-state='hidden' role="navigation" aria-label="navigation">
+    <button id="install" aria-label="install" data-state='invisible' disabled><span>↓</span></button>
+    <button id="previous" aria-label="previous" disabled>←</button>
     <span id="page-num"></span>
-    <button id="next" data-state="hidden" aria-label="next">→</button>
-    <button id="go-up-1" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
-    <button id="go-up-2" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
-    <button id="go-up-3" data-name='go-up-button' class="scale-down" aria-label="go up" data-state="hidden">↑</button>
+    <button id="next" aria-label="next">→</button>
+    <button id="go-up-1" aria-label="go up" disabled>↑</button>
+    <button id="go-up-2" aria-label="go up" disabled>↑</button>
+    <button id="go-up-3" aria-label="go up" disabled>↑</button>
   </nav>
   <!-- Navigation buttons - END -->
+
+  <script>
+    window.onload = function() {
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('service-worker.min.js').then(function(registration) { console.log('Service worker registered.'); }).catch(function(err){ console.error("Could not register service worker: " + err); });
+      }
+    }
+  </script>
+
 </body>
 
 </html>

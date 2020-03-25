@@ -82,8 +82,8 @@
 }
 
 .table-slide-in {
-  -webkit-animation: tableSlideIn 0.6s forwards ease;
-          animation: tableSlideIn 0.6s forwards ease;
+  -webkit-animation: tableSlideIn 0.7s forwards ease;
+          animation: tableSlideIn 0.7s forwards ease;
 }
 
 @-webkit-keyframes tableSlideIn {

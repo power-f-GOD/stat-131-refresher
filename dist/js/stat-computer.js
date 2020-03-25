@@ -314,7 +314,8 @@ export function loadStatComputerScript() {
         }
         Q('#result').className = 'custom-scroll-bar prevent-swipe';
         delay(650).then(function () {
-            Q('#result').innerHTML = "In the input boxes above, for the first, input the class limits of\
+            Q('#result').innerHTML =
+                "In the input boxes above, for the first, input the class limits of\
 				only the first class. You don't have to input the limits for all the classes. And for the\
 				second, input the frequencies of all the classes respectively. Don't forget\
 				to separate the values you input ('23' is not same as \

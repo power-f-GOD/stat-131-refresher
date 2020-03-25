@@ -9,6 +9,7 @@ var usernameInput;
 var signInButton;
 var rememberMeCheckbox;
 var signInStatus;
+var installButton;
 var nextButton;
 var previousButton;
 var welcomePage;
@@ -23,20 +24,23 @@ var frequenciesInput;
 var furtherDiscussion;
 var username;
 var rememberMe;
-var _requestAnimationFrame = _requestAnimationFrameWrapper();
-var _cancelAnimationFrame = _cancelAnimationFrameWrapper();
+var _requestAnimationFrame;
+var _cancelAnimationFrame;
 this.addEventListener('load', function () {
+    _requestAnimationFrame = _requestAnimationFrameWrapper();
+    _cancelAnimationFrame = _cancelAnimationFrameWrapper();
     pages = QAll('[data-role="page"]');
     numOfPages = pages.length;
     pageTitleBar = Q('#page-title-bar');
     pageTitles = QAll('.page-title');
-    goUpButtons = QAll('button[data-name="go-up-button"]');
+    goUpButtons = QAll('button[aria-label="go up"]');
     numOfGoUpButtons = goUpButtons.length;
     signInPage = Q('#sign-in-page');
     usernameInput = Q('#username');
     signInButton = Q('#sign-in');
     rememberMeCheckbox = Q('#remember-me');
     signInStatus = Q('#sign-in-status');
+    installButton = Q('#install');
     nextButton = Q('#next');
     previousButton = Q('#previous');
     welcomePage = Q('#welcome-page');
@@ -49,16 +53,15 @@ this.addEventListener('load', function () {
         target.addEventListener('transitionend', function () {
             var classNames = /translate-in|welcome-page-fade-in|scale-up|slide-down|slide-up-controls|title-bar|page-title/;
             if (!classNames.test(target.className))
-                delay(200).then(function () {
-                    target.dataset.state = 'hidden';
-                });
+                target.dataset.state = 'hidden';
         });
     });
     var isMobile = /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i;
     if (!isMobile.test(window.navigator.userAgent))
         document.body.classList.add('desktop');
-    else
+    else {
         document.body.classList.remove('desktop');
+    }
     var usernameElements = QAll('.username');
     var userExists = false;
     var usernameInputIsValid = true;
@@ -71,7 +74,7 @@ this.addEventListener('load', function () {
         }
     }
     if (!userExists)
-        alert("Hi, there! Good day. \n\nOk. This offline web-app was made to serve as a refresher for the upcoming STAT131 test. And it also may serve as a study guide for our colleagues who just joined us, because they were the ones I target and had in mind before embarking on creating this, so they be not oblivious of the topics herein but have a comprehension of them and fare well in the test for short is the time. \n\nAlso, if you don't fully/really understand this topic, I urge you to follow, carefully, through the explanations and elaborations and try to understand the concepts for thy profiting. ;) \n\nPS: The contents of this app may be subject to mistakes, errors and flaws and that's why I now advise that you authenticate whatever you read herein with a good Stats Text or the recommended one. \n\nAlright. Godspeed. ;) \n\nDon't forget to forward or share this web-app to any of your friends who offers or offer STAT131 and just resumed. You could be lending a helping hand. :)");
+        alert("Hi, there! Good day. \n\nOk. This offline web-app was made to serve as a refresher for the upcoming STAT131 test. And it also may serve as a study guide for our colleagues who just joined us, because they are the ones I target and had in mind before embarking on creating this, so they be not oblivious of the topics herein but have a comprehension of them and fare well in the test to come for short is the time. \n\nAlso, if you don't fully/really understand this topic, I urge you to follow, carefully, through the explanations and elaborations and try to understand the concepts for thy profiting. ;) \n\nPS: The contents of this app may be subject to mistakes, errors and flaws and that's why I now advise that you authenticate whatever you read herein with a good Stats Text or the recommended one. And please, send a message if in case you find or notice any errors. (Link to my Facebook on sign in page)  \n\nAlright. Godspeed. ;) \n\nDon't forget to forward or share this web-app to any of your friends who offers or offer STAT131 and just resumed. You could be lending a helping hand. :)");
     usernameInput.onkeyup = function (e) {
         usernameInputIsValid = !/\W|\d/.test(usernameInput.value.trim());
         if (!usernameInputIsValid)
@@ -124,7 +127,9 @@ this.addEventListener('load', function () {
                 : '';
             if (cookieEnabled)
                 localStorage.userId = username;
-            delay(rememberMe ? 500 : 1500).then(function () {
+            if (isMobile)
+                Q('meta[name="viewport"]').content += ", user-scalable=no";
+            delay(rememberMe ? 750 : 1500).then(function () {
                 welcomePage.dataset.state = 'visible';
                 signInPage.className = 'custom-scroll-bar translate-out-left';
                 signInStatus.textContent = '';
@@ -133,9 +138,10 @@ this.addEventListener('load', function () {
                     Q('#buttons-wrapper').dataset.state = 'visible';
                     delay(800).then(function () {
                         Q('#buttons-wrapper').className = 'slide-up-controls';
-                        nextButton.dataset.state = 'visible';
+                        nextButton.disabled = false;
                         delay(800).then(function () {
                             nextButton.className = 'scale-up';
+                            previousButton.className = 'scale-up';
                             signInPage.className = 'custom-scroll-bar translate-out-right';
                             signInPage.dataset.state = 'hidden';
                         });
@@ -146,7 +152,7 @@ this.addEventListener('load', function () {
             loadPageNavScript()
                 .then(function () { return loadStatComputerScript(); })
                 .then(function () {
-                delay(1000).then(function () {
+                return delay(1000).then(function () {
                     if (cookieEnabled) {
                         var activePageId_1 = localStorage.activePageId;
                         if (activePageId_1 && rememberMe) {
@@ -154,10 +160,10 @@ this.addEventListener('load', function () {
                                 var currentPage = pages[i];
                                 var scrollTop = +localStorage.activePageScrollTop;
                                 if (activePageId_1 != currentPage.id) {
-                                    delay((timeout += 500)).then(function () { return nextButton.click(); });
+                                    delay((timeout += 700)).then(function () { return nextButton.click(); });
                                 }
                                 else {
-                                    delay(timeout ? timeout : 2000).then(function () { return (Q("#" + activePageId_1).scrollTop = scrollTop); });
+                                    delay(timeout ? timeout : 2800).then(function () { return (Q("#" + activePageId_1).scrollTop = scrollTop); });
                                     return out_timeout_1 = timeout, "break";
                                 }
                                 out_timeout_1 = timeout;
@@ -192,26 +198,9 @@ this.addEventListener('load', function () {
         if (rememberMe)
             signInButton.click();
 });
-this.addEventListener('visibilitychange', function () {
-    if (document.visibilityState == 'hidden') {
-        if (cookieEnabled) {
-            var index_1 = 0;
-            var activePage = Array.prototype.find.call(pages, function (page, i) {
-                if (page.dataset.state == 'visible') {
-                    index_1 = i;
-                    return true;
-                }
-                return false;
-            });
-            localStorage.activePageId = activePage.id;
-            localStorage.activePageIndex = index_1;
-            localStorage.activePageScrollTop = activePage.scrollTop;
-        }
-    }
-});
 function delay(timeout) {
     return new Promise(function (resolve) {
-        if (!Number(timeout))
+        if (isNaN(timeout))
             throw Error('Expects a time in milliseconds as parameter.');
         var start = 0;
         var id = _requestAnimationFrame(animate);
@@ -227,7 +216,7 @@ function delay(timeout) {
     });
 }
 function customTimeout(callback, timeout) {
-    if (!Number(timeout))
+    if (isNaN(timeout))
         throw Error('Expects a time in milliseconds as parameter.');
     var start = 0;
     var id = _requestAnimationFrame(animate);

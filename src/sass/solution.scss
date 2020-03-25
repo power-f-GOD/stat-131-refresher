@@ -4,7 +4,7 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
-  background: black;
+  background: #101010;
   padding: 0;
   padding-bottom: 10rem;
   position: absolute;
@@ -22,7 +22,7 @@
     margin: 1em 0;
     padding: 0.5em 0.7em;
     border: 0.15em solid #666;
-    background: black;
+    background: #101010;
     color: lightgrey;
     outline: none;
     border-radius: 0.25em;
@@ -166,7 +166,7 @@ tfoot {
 #median-solution .variable-definitions,
 #mode-solution .variable-definitions {
   padding: 1.125em 1em;
-  color: black;
+  color: #101010;
   font-style: normal;
   font-family: 'Cambria', 'Times New Roman';
   border-radius: 0.5em;

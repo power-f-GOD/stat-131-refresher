@@ -21,7 +21,7 @@
 
 #sign-in-page {
   overflow-y: auto;
-  background: black;
+  background: #101010;
   height: 100%;
   width: 100%;
   display: flex;
@@ -51,8 +51,8 @@
   max-width: 22em;
   margin: 1em 0.625rem;
   padding: 0.625em 0.75em;
-  border: 0.25em ridge #4271ff;
-  background: royalblue;
+  border: 0.25em ridge #2b5df3;
+  background: #1f54f3;
   color: white;
   outline: none;
   border-radius: 0.25em;
@@ -69,7 +69,7 @@
 
   &:focus,
   &:hover {
-    box-shadow: 0 0 1.5rem rgba(20, 78, 255, 0.8);
+    box-shadow: 0 0 1rem rgba(20, 78, 255, 0.8);
   }
 }
 
@@ -82,7 +82,7 @@
   border-radius: 2em;
   border-color: tomato;
   border-width: 0.25em;
-  background: rgb(255, 76, 44);
+  background: rgb(255, 51, 15);
   color: white;
   transition: background-color 0.3s, box-shadow 0.3s;
 
@@ -97,7 +97,7 @@
   &:hover,
   &:focus {
     background-color: rgb(255, 53, 17);
-    box-shadow: 0 0 1.5rem rgba(255, 77, 45, 0.6);
+    box-shadow: 0 0 1rem rgba(255, 77, 45, 0.6);
   }
 }
 
@@ -105,12 +105,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-style: italic;
+  // font-style: italic;
   color: #aaa;
 
-  
   input {
+    transition: 0.25s;
     margin-right: 0.75em;
+
+    &:focus {
+      transform: scale(1.5);
+    }
   }
 }
 
@@ -118,10 +122,9 @@
   padding: 1rem;
   width: 100%;
   text-align: center;
-  background: black;
 
   span {
-    color: #555;
+    color: #444;
     display: block;
     margin: 0.25rem;
   }
@@ -146,7 +149,8 @@
 #sign-in-status {
   font-weight: bold;
   color: limegreen;
-  padding: 0.625rem 1rem;
+  border: 1px solid transparent;
+  min-height: 1.5em;
   text-align: center;
 }
 
@@ -159,13 +163,13 @@
 
 html,
 body {
-  background: black;
+  background: #101010;
   color: gainsboro;
   height: 100%;
   margin: 0;
   position: relative;
   overflow-x: hidden !important;
-  font-size: 1.075rem;
+  font-size: 1.025rem;
   font-family: Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif;
 }
 
@@ -176,8 +180,9 @@ button {
   min-height: 3rem;
 
   &[disabled] {
-    background: rgb(126, 126, 126) !important;
-    border-color: rgb(160, 160, 160) !important;
+    background: rgb(95, 95, 95) !important;
+    border-color: rgb(149, 149, 149) !important;
+    opacity: 0.6 !important;
   }
 }
 

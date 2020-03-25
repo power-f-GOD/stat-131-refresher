@@ -26,7 +26,7 @@
 
 #sign-in-page {
   overflow-y: auto;
-  background: black;
+  background: #101010;
   height: 100%;
   width: 100%;
   display: -webkit-box;
@@ -70,8 +70,8 @@
   max-width: 22em;
   margin: 1em 0.625rem;
   padding: 0.625em 0.75em;
-  border: 0.25em ridge #4271ff;
-  background: royalblue;
+  border: 0.25em ridge #2b5df3;
+  background: #1f54f3;
   color: white;
   outline: none;
   border-radius: 0.25em;
@@ -103,8 +103,8 @@
 }
 
 #username:focus, #username:hover {
-  -webkit-box-shadow: 0 0 1.5rem rgba(20, 78, 255, 0.8);
-          box-shadow: 0 0 1.5rem rgba(20, 78, 255, 0.8);
+  -webkit-box-shadow: 0 0 1rem rgba(20, 78, 255, 0.8);
+          box-shadow: 0 0 1rem rgba(20, 78, 255, 0.8);
 }
 
 #sign-in,
@@ -116,7 +116,7 @@
   border-radius: 2em;
   border-color: tomato;
   border-width: 0.25em;
-  background: #ff4c2c;
+  background: #ff330f;
   color: white;
   -webkit-transition: background-color 0.3s, -webkit-box-shadow 0.3s;
   transition: background-color 0.3s, -webkit-box-shadow 0.3s;
@@ -138,8 +138,8 @@
 #sign-out:hover,
 #sign-out:focus {
   background-color: #ff3511;
-  -webkit-box-shadow: 0 0 1.5rem rgba(255, 77, 45, 0.6);
-          box-shadow: 0 0 1.5rem rgba(255, 77, 45, 0.6);
+  -webkit-box-shadow: 0 0 1rem rgba(255, 77, 45, 0.6);
+          box-shadow: 0 0 1rem rgba(255, 77, 45, 0.6);
 }
 
 #remember-me-label {
@@ -152,23 +152,28 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  font-style: italic;
   color: #aaa;
 }
 
 #remember-me-label input {
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
   margin-right: 0.75em;
+}
+
+#remember-me-label input:focus {
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
 }
 
 #sign-in-page-footer {
   padding: 1rem;
   width: 100%;
   text-align: center;
-  background: black;
 }
 
 #sign-in-page-footer span {
-  color: #555;
+  color: #444;
   display: block;
   margin: 0.25rem;
 }
@@ -192,7 +197,8 @@
 #sign-in-status {
   font-weight: bold;
   color: limegreen;
-  padding: 0.625rem 1rem;
+  border: 1px solid transparent;
+  min-height: 1.5em;
   text-align: center;
 }
 
@@ -204,13 +210,13 @@
 
 html,
 body {
-  background: black;
+  background: #101010;
   color: gainsboro;
   height: 100%;
   margin: 0;
   position: relative;
   overflow-x: hidden !important;
-  font-size: 1.075rem;
+  font-size: 1.025rem;
   font-family: Corbel, 'Trebuchet MS', 'Calibri', 'Tahoma', Arial, sans-serif;
 }
 
@@ -223,8 +229,9 @@ button {
 
 input[disabled],
 button[disabled] {
-  background: #7e7e7e !important;
-  border-color: #a0a0a0 !important;
+  background: #5f5f5f !important;
+  border-color: #959595 !important;
+  opacity: 0.6 !important;
 }
 
 button {

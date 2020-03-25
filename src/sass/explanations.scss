@@ -6,7 +6,7 @@
   flex-basis: 100%;
   padding-bottom: 7.5rem;
   position: absolute;
-  background: black;
+  background: #101010;
   line-height: 1.5em;
   top: 0;
   left: 0;
@@ -66,7 +66,7 @@
   margin: 0.65em 0;
   text-align: center;
   background: skyblue;
-  color: black;
+  color: #101010;
   border-radius: 0.35rem;
   font-style: italic;
   padding: auto;
@@ -166,7 +166,7 @@ a {
 }
 
 .numerator {
-  border-bottom: 0.0625rem solid black;
+  border-bottom: 0.0625rem solid #101010;
 }
 
 .denominator {
@@ -192,9 +192,9 @@ a {
   display: block;
   width: 100%;
   text-align: justify;
-  font-style: italic;
+  // font-style: italic;
   background: lightpink;
-  color: #111;
+  color: #101010;
 
   .row:first-child {
     padding-top: 1em;
@@ -205,12 +205,12 @@ a {
 
 .variable-definitions .variable-U {
   background: none;
-  color: black;
+  color: #101010;
   font-size: 1.075rem;
 }
 
 .variable-definitions .variable-U .numerator {
-  border-bottom-color: black;
+  border-bottom-color: #101010;
 }
 
 .variable-U {
