@@ -205,15 +205,19 @@ export function loadPageNavScript() {
         }
     }
     function addSwipeListeners() {
-        nextOrPrevPage.addEventListener('touchstart', touchStart);
-        delay(200).then(function () { return nextOrPrevPage.addEventListener('touchend', swipe); });
+        if (nextOrPrevPage) {
+            nextOrPrevPage.addEventListener('touchstart', touchStart);
+            delay(200).then(function () { return nextOrPrevPage.addEventListener('touchend', swipe); });
+        }
         hideElastic();
     }
     function removeSwipeListeners() {
-        nextOrPrevPage.removeEventListener('touchstart', touchStart);
-        delay(200).then(function () {
-            return nextOrPrevPage.removeEventListener('touchend', swipe);
-        });
+        if (nextOrPrevPage) {
+            nextOrPrevPage.removeEventListener('touchstart', touchStart);
+            delay(200).then(function () {
+                return nextOrPrevPage.removeEventListener('touchend', swipe);
+            });
+        }
         hideElastic();
     }
     function touchStart(event) {
