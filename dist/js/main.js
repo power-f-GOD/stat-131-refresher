@@ -26,7 +26,8 @@ var username;
 var rememberMe;
 var _requestAnimationFrame;
 var _cancelAnimationFrame;
-this.addEventListener('load', function () {
+this.addEventListener('load', loadAppScript);
+function loadAppScript() {
     _requestAnimationFrame = _requestAnimationFrameWrapper();
     _cancelAnimationFrame = _cancelAnimationFrameWrapper();
     pages = QAll('[data-role="page"]');
@@ -222,7 +223,7 @@ this.addEventListener('load', function () {
     if (cookieEnabled)
         if (rememberMe)
             signInButton.click();
-});
+}
 function delay(timeout) {
     return new Promise(function (resolve) {
         if (isNaN(timeout))

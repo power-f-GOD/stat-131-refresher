@@ -13,7 +13,7 @@ const resources = [
   'icons/icon-384x384.png',
   'icons/icon-512x512.png'
 ];
-const cacheVersion = 'stats-v1';
+const cacheVersion = 'stats-v2';
 
 addEventListener('install', function(e) {
   skipWaiting();

@@ -29,7 +29,9 @@ let rememberMe: boolean;
 let _requestAnimationFrame: Function;
 let _cancelAnimationFrame: Function;
 
-this.addEventListener('load', () => {
+this.addEventListener('load', loadAppScript);
+
+function loadAppScript() {
   _requestAnimationFrame = _requestAnimationFrameWrapper();
   _cancelAnimationFrame = _cancelAnimationFrameWrapper();
 
@@ -266,7 +268,7 @@ this.addEventListener('load', () => {
   }
 
   if (cookieEnabled) if (rememberMe) signInButton.click();
-});
+}
 
 //The following are timers used throught out app
 

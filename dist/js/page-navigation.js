@@ -25,12 +25,13 @@ export function loadPageNavScript() {
     function handleKeyboardNavEvent(e) {
         var key = e.keyCode || e.which;
         if (key == 39 && j != numOfPages - 1)
-            nextButton.click();
+            gotoNextPage();
         else if (key == 37 && j !== 0)
-            previousButton.click();
+            gotoPreviousPage();
     }
     signOutButton.onclick = function () {
         signOutButton.textContent = 'Signing out...';
+        installButton.dataset.state = 'invisible';
         rememberMeCheckbox.checked = false;
         rememberMe = false;
         goUpButtons[2].disabled = true;
@@ -49,7 +50,8 @@ export function loadPageNavScript() {
             previousButton.disabled = true;
             goUpButtons[2].disabled = true;
             delay(1000).then(function () {
-                furtherDiscussion.className = 'custom-scroll-bar prevent-swipe translate-out-left';
+                furtherDiscussion.className =
+                    'custom-scroll-bar prevent-swipe translate-out-left';
                 signInPage.dataset.state = 'visible';
                 delay(500).then(function () {
                     furtherDiscussion.dataset.state = 'hidden';
@@ -65,7 +67,8 @@ export function loadPageNavScript() {
     var nextOrPrevPage;
     var currentGoUpButton;
     var nextOrPrevGoUpButton;
-    nextButton.onclick = function () {
+    nextButton.onclick = gotoNextPage;
+    function gotoNextPage() {
         if (i == 0 && j == 0) {
             i = 0;
             j++;
@@ -84,13 +87,15 @@ export function loadPageNavScript() {
         nextOrPrevPage = pages[j];
         nextOrPrevPage.dataset.state = 'visible';
         delay(5).then(function () {
-            currentPage.className = 'custom-scroll-bar prevent-swipe translate-out-left';
+            currentPage.className =
+                'custom-scroll-bar prevent-swipe translate-out-left';
             nextOrPrevPage.className = 'custom-scroll-bar prevent-swipe translate-in';
             pageTitleBar.dataset.state = 'visible';
             displayNavigationButtons();
         });
-    };
-    previousButton.onclick = function () {
+    }
+    previousButton.onclick = gotoPreviousPage;
+    function gotoPreviousPage() {
         if (i - j == -1) {
             i = j;
             j--;
@@ -105,11 +110,12 @@ export function loadPageNavScript() {
         nextOrPrevPage = pages[j];
         nextOrPrevPage.dataset.state = 'visible';
         delay(5).then(function () {
-            currentPage.className = 'custom-scroll-bar prevent-swipe translate-out-right';
+            currentPage.className =
+                'custom-scroll-bar prevent-swipe translate-out-right';
             nextOrPrevPage.className = 'custom-scroll-bar prevent-swipe translate-in';
             displayNavigationButtons();
         });
-    };
+    }
     var startCoord = 0;
     var swipeCoord = 0;
     var endCoord = 0;
@@ -227,9 +233,9 @@ export function loadPageNavScript() {
             }
         hideElastic();
         if (swipeCoord < -30 && j != numOfPages - 1)
-            nextButton.click();
+            gotoNextPage();
         else if (swipeCoord > 30 && j != 0)
-            previousButton.click();
+            gotoPreviousPage();
     }
     function hideElastic() {
         delay(600).then(function () {
@@ -239,12 +245,13 @@ export function loadPageNavScript() {
     }
     var classSizeRef = function () {
         if (j == 3) {
-            furtherDiscussion.className = 'custom-scroll-bar prevent-swipe translate-out-right';
+            furtherDiscussion.className =
+                'custom-scroll-bar prevent-swipe translate-out-right';
             pageTitles[2].dataset.state = 'hidden';
             goUpButtons[2].disabled = true;
             j = 2;
             i = 1;
-            previousButton.click();
+            gotoPreviousPage();
         }
     };
     Q('#semi-interquartile-range-ref').onclick = classSizeRef;
@@ -253,7 +260,7 @@ export function loadPageNavScript() {
     Q('#link-to-median').onclick = classSizeRef;
     Q('#take-example').onclick = function (e) {
         e.preventDefault();
-        nextButton.click();
+        gotoNextPage();
     };
     window.addEventListener('visibilitychange', function () {
         if (document.visibilityState == 'hidden') {

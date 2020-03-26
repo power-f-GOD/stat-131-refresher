@@ -139,8 +139,8 @@ h2 {
 #previous,
 #next,
 button[aria-label='go up'] {
-  width: 3em;
-  height: 3em;
+  width: 3.2em;
+  height: 3.2em;
   display: flex;
   align-items: center;
   color: white;
@@ -148,7 +148,7 @@ button[aria-label='go up'] {
   background: rgb(31, 84, 243);
   border-color: royalblue;
   border-width: 0.215em;
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-weight: bolder;
   text-align: center;
   border-radius: 50%;
@@ -173,13 +173,13 @@ button[aria-label='go up'] {
 
 #install {
   left: 1.25rem;
-  bottom: calc(2rem + 3em);
+  bottom: calc(2rem + 3.2em);
   background: green;
   border-color: #20a520;
   font-size: 1.3rem;
-  height: 2.5em;
-  min-height: 2.5em !important;
-  width: 2.5em !important;
+  height: 2.7em;
+  min-height: 2.7em !important;
+  width: 2.7em !important;
   transform: translateX(calc(-1.2rem - 4em));
   transition: 0.35s;
 
@@ -215,12 +215,12 @@ button[aria-label='go up'] {
 
 button[aria-label='go up'] {
   right: 1.25rem;
-  bottom: calc(2rem + 3em);
+  bottom: calc(2rem + 3.2em);
   background: red;
   font-size: 1.3rem;
-  height: 2.5em;
-  min-height: 2.5em !important;
-  width: 2.5em !important;
+  height: 2.7em;
+  min-height: 2.7em !important;
+  width: 2.7em !important;
   transition: 0.35s;
   transform: scale(1);
 

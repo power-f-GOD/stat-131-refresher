@@ -38,12 +38,13 @@ export function loadPageNavScript() {
   function handleKeyboardNavEvent(e: any) {
     let key = e.keyCode || e.which;
 
-    if (key == 39 && j != numOfPages - 1) nextButton.click();
-    else if (key == 37 && j !== 0) previousButton.click();
+    if (key == 39 && j != numOfPages - 1) gotoNextPage();
+    else if (key == 37 && j !== 0) gotoPreviousPage();
   }
 
   signOutButton.onclick = () => {
     signOutButton.textContent = 'Signing out...';
+    installButton.dataset.state = 'invisible';
     rememberMeCheckbox.checked = false;
     rememberMe = false;
     goUpButtons[2].disabled = true;
@@ -63,18 +64,20 @@ export function loadPageNavScript() {
       previousButton.className = 'scale-down';
       nextButton.className = 'scale-down';
       previousButton.disabled = true;
-
       goUpButtons[2].disabled = true;
 
       delay(1000).then(() => {
-        furtherDiscussion.className = 'custom-scroll-bar prevent-swipe translate-out-left';
+        furtherDiscussion.className =
+          'custom-scroll-bar prevent-swipe translate-out-left';
         signInPage.dataset.state = 'visible';
 
         delay(500).then(() => {
           furtherDiscussion.dataset.state = 'hidden';
           signInPage.className = 'custom-scroll-bar prevent-swipe translate-in';
           //reset pages positions
-          pages.forEach(page => (page.className = 'custom-scroll-bar prevent-swipe'));
+          pages.forEach(
+            page => (page.className = 'custom-scroll-bar prevent-swipe')
+          );
           signOutButton.textContent = 'Sign Out';
         });
       });
@@ -90,7 +93,9 @@ export function loadPageNavScript() {
   let nextOrPrevGoUpButton: HTMLButtonElement;
 
   //next button click event handler
-  nextButton.onclick = () => {
+  nextButton.onclick = gotoNextPage;
+
+  function gotoNextPage() {
     //conditionals for page slide handling
     if (i == 0 && j == 0) {
       i = 0;
@@ -111,15 +116,18 @@ export function loadPageNavScript() {
 
     //delay for 5ms for page slide animation to work
     delay(5).then(() => {
-      currentPage.className = 'custom-scroll-bar prevent-swipe translate-out-left';
+      currentPage.className =
+        'custom-scroll-bar prevent-swipe translate-out-left';
       nextOrPrevPage.className = 'custom-scroll-bar prevent-swipe translate-in';
       pageTitleBar.dataset.state = 'visible';
       displayNavigationButtons();
     });
-  };
+  }
 
   //previous button click event handler
-  previousButton.onclick = () => {
+  previousButton.onclick = gotoPreviousPage;
+
+  function gotoPreviousPage() {
     //conditionals for page slide handling
     if (i - j == -1) {
       i = j;
@@ -137,11 +145,12 @@ export function loadPageNavScript() {
 
     //delay for 5ms for page slide animation to work
     delay(5).then(() => {
-      currentPage.className = 'custom-scroll-bar prevent-swipe translate-out-right';
+      currentPage.className =
+        'custom-scroll-bar prevent-swipe translate-out-right';
       nextOrPrevPage.className = 'custom-scroll-bar prevent-swipe translate-in';
       displayNavigationButtons();
     });
-  };
+  }
 
   //setting variables for swipe event
   let startCoord = 0;
@@ -284,8 +293,8 @@ export function loadPageNavScript() {
     hideElastic();
 
     //checks to prevent from sliding to next page on page-scroll-Y
-    if (swipeCoord < -30 && j != numOfPages - 1) nextButton.click();
-    else if (swipeCoord > 30 && j != 0) previousButton.click();
+    if (swipeCoord < -30 && j != numOfPages - 1) gotoNextPage();
+    else if (swipeCoord > 30 && j != 0) gotoPreviousPage();
   }
 
   //elastic for when user is on first or last page and tries to swipe right or left
@@ -299,12 +308,13 @@ export function loadPageNavScript() {
   //class size ref onclick event handler
   const classSizeRef = () => {
     if (j == 3) {
-      furtherDiscussion.className = 'custom-scroll-bar prevent-swipe translate-out-right';
+      furtherDiscussion.className =
+        'custom-scroll-bar prevent-swipe translate-out-right';
       pageTitles[2].dataset.state = 'hidden';
       goUpButtons[2].disabled = true;
       j = 2;
       i = 1;
-      previousButton.click();
+      gotoPreviousPage();
     }
   };
 
@@ -316,7 +326,7 @@ export function loadPageNavScript() {
   //'take-example-ref' onclick event handler on page 2
   Q('#take-example')!.onclick = (e: any) => {
     e.preventDefault(); //prevent default to prevent UI deformity
-    nextButton.click();
+    gotoNextPage();
   };
 
   //save current state of user app navigation on change of window or tab for purpose of a reload/relaunch
