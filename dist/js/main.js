@@ -24,7 +24,6 @@ var frequenciesInput;
 var furtherDiscussion;
 var username;
 var rememberMe;
-var appInstalled;
 var _requestAnimationFrame;
 var _cancelAnimationFrame;
 this.addEventListener('load', function () {
@@ -50,14 +49,12 @@ this.addEventListener('load', function () {
     intervalInput = Q('#interval');
     frequenciesInput = Q('#frequencies');
     furtherDiscussion = Q('#further-discussion-page');
-    var deferredPrompt;
+    var deferredPromptForInstall;
     window.addEventListener('beforeinstallprompt', function (e) {
         e.preventDefault();
-        deferredPrompt = e;
+        deferredPromptForInstall = e;
         window.addEventListener('appinstalled', function () {
             return delay(1000).then(function () {
-                if (cookieEnabled)
-                    localStorage.appInstalled = true;
                 alert('STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether online or offline.');
             });
         });
@@ -82,7 +79,6 @@ this.addEventListener('load', function () {
         var _rememberMe = localStorage.rememberMe;
         userExists = !!localStorage.userId;
         rememberMe = _rememberMe ? JSON.parse(_rememberMe) : false;
-        appInstalled = localStorage.appInstalled == 'true';
         if (rememberMe) {
             rememberMeCheckbox.checked = true;
         }
@@ -148,7 +144,8 @@ this.addEventListener('load', function () {
                 signInPage.className = 'custom-scroll-bar translate-out-left';
                 signInStatus.textContent = '';
                 delay(350).then(function () {
-                    welcomePage.className = 'welcome-page-fade-in custom-scroll-bar prevent-swipe';
+                    welcomePage.className =
+                        'welcome-page-fade-in custom-scroll-bar prevent-swipe';
                     Q('#buttons-wrapper').dataset.state = 'visible';
                     delay(800).then(function () {
                         Q('#buttons-wrapper').className = 'slide-up-controls';
@@ -158,17 +155,17 @@ this.addEventListener('load', function () {
                             previousButton.className = 'scale-up';
                             signInPage.className = 'custom-scroll-bar translate-out-right';
                             signInPage.dataset.state = 'hidden';
-                            if (!appInstalled) {
+                            if (deferredPromptForInstall) {
                                 installButton.disabled = false;
                                 installButton.dataset.state = 'visible';
                                 installButton.addEventListener('click', function () {
-                                    deferredPrompt.prompt();
-                                    deferredPrompt.userChoice.then(function (choiceResult) {
+                                    deferredPromptForInstall.prompt();
+                                    deferredPromptForInstall.userChoice.then(function (choiceResult) {
                                         if (choiceResult.outcome == 'accepted') {
                                             installButton.disabled = true;
                                             installButton.dataset.state = 'invisible';
                                         }
-                                        deferredPrompt = null;
+                                        deferredPromptForInstall = null;
                                     });
                                 });
                             }

@@ -25,7 +25,6 @@ let frequenciesInput: HTMLInputElement;
 let furtherDiscussion: HTMLDivElement;
 let username: string;
 let rememberMe: boolean;
-let appInstalled: boolean;
 
 let _requestAnimationFrame: Function;
 let _cancelAnimationFrame: Function;
@@ -56,15 +55,13 @@ this.addEventListener('load', () => {
   furtherDiscussion = Q('#further-discussion-page') as HTMLDivElement;
 
   //install app listener
-  let deferredPrompt: any;
+  let deferredPromptForInstall: any;
   window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault();
-    deferredPrompt = e;
+    deferredPromptForInstall = e;
 
     window.addEventListener('appinstalled', () =>
       delay(1000).then(() => {
-        if (cookieEnabled) localStorage.appInstalled = true;
-
         alert(
           'STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether online or offline.'
         );
@@ -100,7 +97,6 @@ this.addEventListener('load', () => {
 
     userExists = !!localStorage.userId;
     rememberMe = _rememberMe ? JSON.parse(_rememberMe) : false;
-    appInstalled = localStorage.appInstalled == 'true';
 
     if (rememberMe) {
       rememberMeCheckbox.checked = true;
@@ -186,7 +182,8 @@ this.addEventListener('load', () => {
         signInStatus.textContent = '';
 
         delay(350).then(() => {
-          welcomePage.className = 'welcome-page-fade-in custom-scroll-bar prevent-swipe';
+          welcomePage.className =
+            'welcome-page-fade-in custom-scroll-bar prevent-swipe';
           Q('#buttons-wrapper')!.dataset.state = 'visible';
 
           delay(800).then(() => {
@@ -200,20 +197,22 @@ this.addEventListener('load', () => {
               signInPage.className = 'custom-scroll-bar translate-out-right';
               signInPage.dataset.state = 'hidden';
 
-              if (!appInstalled) {
+              if (deferredPromptForInstall) {
                 installButton.disabled = false;
                 installButton.dataset.state = 'visible';
 
                 //add click event for install button after user has signed in
                 installButton.addEventListener('click', () => {
-                  deferredPrompt.prompt();
-                  deferredPrompt.userChoice.then((choiceResult: any) => {
-                    if (choiceResult.outcome == 'accepted') {
-                      installButton.disabled = true;
-                      installButton.dataset.state = 'invisible';
+                  deferredPromptForInstall.prompt();
+                  deferredPromptForInstall.userChoice.then(
+                    (choiceResult: any) => {
+                      if (choiceResult.outcome == 'accepted') {
+                        installButton.disabled = true;
+                        installButton.dataset.state = 'invisible';
+                      }
+                      deferredPromptForInstall = null;
                     }
-                    deferredPrompt = null;
-                  });
+                  );
                 });
               }
             });
