@@ -199,7 +199,7 @@ a:focus {
   font-style: normal;
   display: block;
   padding: 0.5em 0;
-  background: #ce1919;
+  background: #911818;
   color: white;
   border-radius: 0.25rem 0.25rem 0 0;
   font-family: 'Cambria', 'Times New Roman';
@@ -209,7 +209,7 @@ a:focus {
   display: block;
   width: 100%;
   text-align: justify;
-  background: #ffa7b4;
+  background: #ffb6c1;
   color: #101010;
 }
 

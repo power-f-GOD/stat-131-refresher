@@ -51,11 +51,11 @@
   max-width: 22em;
   margin: 1em 0.625rem;
   padding: 0.625em 0.75em;
-  border: 0.25em ridge #2b5df3;
+  border: 0.25em ridge #3366ff;
   background: #1f54f3;
   color: white;
   outline: none;
-  border-radius: 0.25em;
+  border-radius: 0.275em;
   transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
 
   &::placeholder {

@@ -186,7 +186,7 @@ this.addEventListener('load', () => {
         signInStatus.textContent = '';
 
         delay(350).then(() => {
-          welcomePage.className = 'welcome-page-fade-in custom-scroll-bar';
+          welcomePage.className = 'welcome-page-fade-in custom-scroll-bar prevent-swipe';
           Q('#buttons-wrapper')!.dataset.state = 'visible';
 
           delay(800).then(() => {

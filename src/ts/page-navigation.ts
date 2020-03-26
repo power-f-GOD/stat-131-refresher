@@ -67,14 +67,14 @@ export function loadPageNavScript() {
       goUpButtons[2].disabled = true;
 
       delay(1000).then(() => {
-        furtherDiscussion.className = 'custom-scroll-bar translate-out-left';
+        furtherDiscussion.className = 'custom-scroll-bar prevent-swipe translate-out-left';
         signInPage.dataset.state = 'visible';
 
         delay(500).then(() => {
           furtherDiscussion.dataset.state = 'hidden';
-          signInPage.className = 'custom-scroll-bar translate-in';
+          signInPage.className = 'custom-scroll-bar prevent-swipe translate-in';
           //reset pages positions
-          pages.forEach(page => (page.className = 'custom-scroll-bar'));
+          pages.forEach(page => (page.className = 'custom-scroll-bar prevent-swipe'));
           signOutButton.textContent = 'Sign Out';
         });
       });
@@ -111,8 +111,8 @@ export function loadPageNavScript() {
 
     //delay for 5ms for page slide animation to work
     delay(5).then(() => {
-      currentPage.className = 'custom-scroll-bar translate-out-left';
-      nextOrPrevPage.className = 'custom-scroll-bar translate-in';
+      currentPage.className = 'custom-scroll-bar prevent-swipe translate-out-left';
+      nextOrPrevPage.className = 'custom-scroll-bar prevent-swipe translate-in';
       pageTitleBar.dataset.state = 'visible';
       displayNavigationButtons();
     });
@@ -137,8 +137,8 @@ export function loadPageNavScript() {
 
     //delay for 5ms for page slide animation to work
     delay(5).then(() => {
-      currentPage.className = 'custom-scroll-bar translate-out-right';
-      nextOrPrevPage.className = 'custom-scroll-bar translate-in';
+      currentPage.className = 'custom-scroll-bar prevent-swipe translate-out-right';
+      nextOrPrevPage.className = 'custom-scroll-bar prevent-swipe translate-in';
       displayNavigationButtons();
     });
   };
@@ -249,14 +249,14 @@ export function loadPageNavScript() {
 
   function addSwipeListeners() {
     nextOrPrevPage.addEventListener('touchstart', touchStart);
-    delay(100).then(() => nextOrPrevPage.addEventListener('touchend', swipe));
+    delay(200).then(() => nextOrPrevPage.addEventListener('touchend', swipe));
 
     hideElastic();
   }
 
   function removeSwipeListeners() {
     nextOrPrevPage.removeEventListener('touchstart', touchStart);
-    delay(100).then(() =>
+    delay(200).then(() =>
       nextOrPrevPage.removeEventListener('touchend', swipe)
     );
 
@@ -299,7 +299,7 @@ export function loadPageNavScript() {
   //class size ref onclick event handler
   const classSizeRef = () => {
     if (j == 3) {
-      furtherDiscussion.className = 'custom-scroll-bar translate-out-right';
+      furtherDiscussion.className = 'custom-scroll-bar prevent-swipe translate-out-right';
       pageTitles[2].dataset.state = 'hidden';
       goUpButtons[2].disabled = true;
       j = 2;
