@@ -54,11 +54,6 @@ function loadAppScript() {
     window.addEventListener('beforeinstallprompt', function (e) {
         e.preventDefault();
         deferredPromptForInstall = e;
-        window.addEventListener('appinstalled', function () {
-            return delay(1000).then(function () {
-                alert('STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether online or offline.');
-            });
-        });
     });
     QAll('[data-state="hidden"]').forEach(function (target) {
         target.addEventListener('transitionend', function () {

@@ -61,14 +61,6 @@ function loadAppScript() {
   window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault();
     deferredPromptForInstall = e;
-
-    window.addEventListener('appinstalled', () =>
-      delay(1000).then(() => {
-        alert(
-          'STAT 131 Refresher successfully installed. You can now launch app anytime from homescreen whether online or offline.'
-        );
-      })
-    );
   });
 
   //add transition end listeners to set state of non visible pages to 'hidden' after end of transition (animation) for the sake of accessibility and the tab index issue
